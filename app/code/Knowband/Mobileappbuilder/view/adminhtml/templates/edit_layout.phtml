@@ -1,0 +1,664 @@
+<?php
+$id_layout = (int) $this->getRequest()->getParam("id", 0);
+$layout_json_data = $this->getLayoutData();
+$number_of_components = $layout_json_data ? count(json_decode($layout_json_data), true) : 0;
+$settings = $this->getSettings();
+$logo_data = $this->getSettings("knowband/mobileappbuilder/logo");
+?>
+<style>
+    .modal-content{
+        box-shadow: none;
+        border: none;
+    }
+    #feed_item_error_holder {
+        padding-top: 25px;
+    }
+    .modal-popup._inner-scroll .modal-content {
+        margin-top: 20px;
+    }
+
+</style>
+<script>
+    var ajaxaction = '<?php echo $this->getUrl("*/*/layoutAjaxAction"); ?>';
+    
+      var config = {
+        shim: {
+            'Knowband_Mobileappbuilder/layout/CustomScrollbar.min': ['jquery'],
+            'Knowband_Mobileappbuilder/layout/layout': ['jquery','Knowband_Mobileappbuilder/layout/CustomScrollbar.min'],
+            'Knowband_Mobileappbuilder/js/velovalidation': ['jquery']
+        }
+    };
+    require.config(config);
+
+    
+    require(['jquery', 'jquery/ui', 'Knowband_Mobileappbuilder/layout/layout', 'Knowband_Mobileappbuilder/layout/CustomScrollbar.min', 'Knowband_Mobileappbuilder/js/velovalidation'], function ($) {
+        addLayoutComponents(JSON.parse('<?php echo $this->getLayoutData(); ?>'));
+        $(".slides").sortable({
+            placeholder: 'slide-placeholder',
+            axis: "y",
+            revert: 150,
+            start: function (e, ui) {
+
+                placeholderHeight = ui.item.outerHeight();
+                ui.placeholder.height(placeholderHeight + 15);
+                $('<div class="slide-placeholder-animator" data-height="' + placeholderHeight + '"></div>').insertAfter(ui.placeholder);
+
+            },
+            change: function (event, ui) {
+
+                ui.placeholder.stop().height(0).animate({
+                    height: ui.item.outerHeight() + 15
+                }, 300);
+
+                placeholderAnimatorHeight = parseInt($(".slide-placeholder-animator").attr("data-height"));
+
+                $(".slide-placeholder-animator").stop().height(placeholderAnimatorHeight + 15).animate({
+                    height: 0
+                }, 300, function () {
+                    $(this).remove();
+                    placeholderHeight = ui.item.outerHeight();
+                    $('<div class="slide-placeholder-animator" data-height="' + placeholderHeight + '"></div>').insertAfter(ui.placeholder);
+                });
+
+            },
+            stop: function (e, ui) {
+
+                // set position of components
+                var order_component = $(".slides").sortable('toArray');
+                var id_layout = $('#id_layout').val();
+                $.ajax({
+                    url: ajaxaction + "?setComponentOrder=true",
+                    data: {
+                        form_key: window.FORM_KEY,
+                        id_layout: id_layout,
+                        position_array: order_component
+                    },
+                    type: "post",
+                    success: function (data)
+                    {
+//                        var b = JSON.parse(data);
+                    }
+                });
+                // changes over
+                $(".slide-placeholder-animator").remove();
+//                showSuccessMessage(position_update);
+                preview_content();
+
+            },
+        });
+    });
+    var confirm_msg_txt = '<?php echo __("Are you sure?"); ?>';
+    var edit_component_txt = '<?php echo __("Edit Component"); ?>';
+    var close_txt = '<?php echo __("Close"); ?>';
+    var save_txt = '<?php echo __("Save"); ?>';
+    var min_category_limit = '<?php echo __("Need to add value in atleast 4 categories"); ?>';
+    var component_add = '<?php echo __("Component added successfully"); ?>';
+    var limit_reached = '<?php echo __("You can add only 20 components in a layout"); ?>';
+</script>
+<div class="bootstrap">
+    <div id="layout_add_edit_form" class="layout_add_edit_form">
+        <!--        <button type="button" class="btn btn-default btn-block" onclick="showConfigurationForm()" style="float:right; padding:3px 5px; width:12%; ">Cancel</button>-->
+        <div class='row'>
+            <div class="productTabs col-lg-3 col-md-3 col-sm-6">
+                <div class="list-group">
+                    <a id="top_category" class="list-group-item"><?php echo __("Top Categories"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="banner_square" class="list-group-item"><?php echo __("Banner-Square"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="banner_custom" class="list-group-item"><?php echo __("Banner-Custom"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="banner_HS" class="list-group-item"><?php echo __("Banner-Horizontal Sliding"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="banner_grid" class="list-group-item"><?php echo __("Banner-Grid"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="banner_countdown" class="list-group-item"><?php echo __("Banner-With Countdown timer"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="product_square" class="list-group-item"><?php echo __("Products-Square"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="product_HS" class="list-group-item"><?php echo __("Products-Horizontal Sliding"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="product_grid" class="list-group-item"><?php echo __("Products-Grid"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+                    <a id="product_LA" class="list-group-item"><?php echo __("Recent Products"); ?><i class="glyphicon glyphicon-plus trash" style="padding-right:5px"></i></a>
+
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-4 col-sm-6">
+                <div class="panel panel-default" style="min-height:400px;">
+                    <ul class="slides">
+                    </ul>
+                </div>			
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-12">
+                <div class="front_preview" >
+                    <div class="layout_gallery">
+                        <!--Start:changes made by Bhupendra Bisht on 01,May 2020 to make preview changes-->
+                        <div class="topHeader" style="background:<?php echo isset($settings["general_settings"]["app_theme_color"]) ? $settings["general_settings"]["app_theme_color"] : '#ffa620'; ?>;">
+                            <div class="leftmenu">
+                                <span class="toggleMenu"><i class="glyphicon glyphicon-align-justify"></i></span>
+                            </div>
+                            <div class="logo">
+                                <?php if (isset($settings["general_settings"]["enablelogo"]) && $settings["general_settings"]["enablelogo"] && isset($logo_data['image'])) { ?>
+                                    <img src="<?php echo $this->getMediaUrl() . 'Knowband_Mobileappbuilder/' . $logo_data['image']; ?>"> 
+                                <?php } ?>
+                            </div>
+                            <div class="cartSection">
+                                <span class="cartIcon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
+                            </div>
+                            <div class="searchBar">
+                                <span class="searchicon"><i class="glyphicon glyphicon-search"></i></span>
+                            </div>	
+
+                        </div>
+                        <!--{*end:changes made by Bhupendra Bisht on 01,May 2020 to make preview changes*}-->
+                        <div class="iframe_html" >
+                        </div>
+                    </div>
+                </div>			
+            </div>
+
+            <!--Dynamic HTML structure-->
+            <div class="top_category" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Top Categories"); ?></span>
+                    <!--<span class="edit_component_heading" id="top_category_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php // echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>-->
+                    <span class="edit_component" id="top_category_edit_component" onclick="editTopCategoryComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="trash" id="top_category_delete_component" onclick="trashTopcategoryComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        <!--{*Start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+
+                        <div class="topCategories">
+                            <ul>
+                                <li>
+                                    <span class="catSection">
+                                        <img id="top_category_1" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/cat1.jpg"); ?>"/>
+                                        <p id="top_category_text_1"><?php echo __('Category1'); ?></p>
+                                    </span>    
+                                </li>
+                                <li>
+                                    <span class="catSection">
+                                        <img id="top_category_2" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/cat2.jpg"); ?>"/>
+                                        <p id="top_category_text_2"><?php echo __('Category2'); ?></p>
+                                    </span>    
+                                </li>
+                                <li>
+                                    <span class="catSection">
+                                        <img id="top_category_3" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/cat3.jpg"); ?>"/>
+                                        <p id="top_category_text_3"><?php echo __('Category3'); ?></p>
+                                    </span>     
+                                </li>
+                                <li>
+                                    <span class="catSection">
+                                        <img id="top_category_4" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/cat4.jpg"); ?>"/>
+                                        <p id="top_category_text_4"><?php echo __('Category4'); ?></p>
+                                    </span>    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                </li>
+            </div>
+
+            <div class="banner-custom" id="banner_custom_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Banner-Custom"); ?></span>
+                    <span class="edit_component_heading" id="banner_custom_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="edit_component" id="banner_custom_edit_component" onclick="editBannerSquareComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="trash" id="banner_custom_delete_component" onclick="trashBannerSquareComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        
+                        <div class="bannerCustom">
+                            <p id="bannerCustom_comp_heading" class="comp_heading"><?php echo __("Banner-Custom"); ?></p>
+                            <div class="bannerCustomList" id="bannerSList">
+                                <span class="BSSection">
+                                    <img id="bannerCustomBannerimg" class="bannerCustomBannerimg" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/square_banner.jpg"); ?>"/>
+                                    <p id="bannerCustomBanner_elem_heading" class="elem_heading"><?php echo __("Banner-Custom"); ?></p>
+                                </span>    
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </div>
+            
+
+            <div class="banner-slide" id="banner_slider_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Banner-Square"); ?></span>
+                    <span class="edit_component_heading" id="banner_square_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="edit_component" id="banner_square_edit_component" onclick="editBannerSquareComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="trash" id="banner_square_delete_component" onclick="trashBannerSquareComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                    <!--<img class="banner_preview_image" src="<?php // echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/banner_square.jpg");  ?>"/>-->
+                        <!--{*Start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                        <div class="bannerSquare">
+                            <p id="bannerSquare_comp_heading" class="comp_heading"><?php echo __("Banner-Square"); ?></p>
+                            <div class="bannerSquareList" id="bannerSList">
+                                <span class="BSSection">
+                                    <img id="bannerSquareBannerimg" class="bannerSquareBannerimg" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/square_banner.jpg"); ?>"/>
+                                    <p id="bannerSquareBanner_elem_heading" class="elem_heading"><?php echo __("Banner-Square"); ?></p>
+                                </span>    
+                            </div>
+
+                        </div>
+                        <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                    </div>
+                </li>
+            </div>
+
+
+            <div class="Hbanner-slide" id="banner_horizontal_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Banner-Horizontal Sliding"); ?></span>
+                    <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                    <span class="edit_component_heading" id="banner_horizontal_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="edit_component" id="banner_horizontal_edit_component" onclick="editBannerSquareComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                    <span class="trash" id="banner_horizontal_delete_component" onclick="trashBannerHorizontalComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        <!-- {*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                        <div class="bannerHorizontalSlide">
+                            <h4 class="comp_heading" id="bannerHorizontalSlide_comp_heading"><?php echo __("Banner-Horizontal Sliding"); ?></h4>
+                            <div class="slidingBannersScroll">
+                                <div class="slidingBanners" id="slidingBList">
+                                    <div class="bannerHorizontalSlideList" id="bannerHorizontalSlideList1">
+                                        <span class="BHSSection">    
+                                            <img id="bannerHorizontalSlideimg1" class="bannerHorizontalSlideimg1" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/BHS1.jpg"); ?>"/>
+                                            <p class="elem_heading" id="bannerHorizontalSlide_elem_heading1"><?php echo __("Horizontal Banner"); ?></p>
+                                        </span>
+                                    </div>
+                                    <div class="bannerHorizontalSlideList" id="bannerHorizontalSlideList2">
+                                        <span class="BHSSection">    
+                                            <img id="bannerHorizontalSlideimg2" class="bannerHorizontalSlideimg2" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/BHS2.jpg"); ?>"/>
+                                            <p class="elem_heading" id="bannerHorizontalSlide_elem_heading2"><?php echo __("Horizontal Banner"); ?></p>
+                                        </span>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                    </div>
+                </li>
+            </div>
+
+
+            <div class="banner-grid" id="banner_grid_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Banner-Grid"); ?></span>
+                    <span class="edit_component_heading" id="banner_grid_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <!--{*Start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                    <span class="edit_component" id="banner_grid_edit_component" onclick="editBannerSquareComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                    <span class="trash" id="banner_grid_delete_component" onclick="trashBannerGridComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->
+                        <div class="bannerGrid">						
+                            <h4 class="comp_heading" id="bannerGrid_comp_heading"><?php echo __("Banner-Grid"); ?></h4>
+                            <div class="bannerGridRow" id="bannerGRow1">
+                                <div class="bannerGridList">
+                                    <span class="BGSection">
+                                        <img id="bannerGridimg" class="bannerGridimg1" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/BS1.jpg"); ?>"/>
+                                        <p class="elem_heading"  id="bannerGrid_elem_heading1"><?php echo __("Banner-Grid 1"); ?></p>
+                                    </span>    
+                                </div>
+                                <div class="bannerGridList">
+                                    <span class="BGSection">
+                                        <img id="bannerGridimg" class="bannerGridimg2" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/BS2.jpg"); ?>"/>
+                                        <p class="elem_heading"  id="bannerGrid_elem_heading2"><?php echo __("Banner-Grid 2"); ?></p>
+                                    </span>    
+                                </div>
+                                <div class="bannerGridList">
+                                    <span class="BGSection">
+                                        <img id="bannerGridimg" class="bannerGridimg3" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/BS3.jpg"); ?>"/>
+                                        <p class="elem_heading"  id="bannerGrid_elem_heading3"><?php echo __("Banner-Grid 3"); ?></p>
+                                    </span>    
+                                </div>
+                                <div class="bannerGridList">
+                                    <span class="BGSection">
+                                        <img id="bannerGridimg" class="bannerGridimg4" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/BS4.jpg"); ?>"/>
+                                        <p class="elem_heading"  id="bannerGrid_elem_heading4"><?php echo __("Banner-Grid 4"); ?></p>
+                                    </span>    
+                                </div>
+                            </div>
+                            <div class="bannerGridRow1" id="bannerGRow" style="display:none">
+                                <div class="bannerGridList">
+                                    <span class="BGSection">
+                                        <img id="bannerGridimg1" class="bannerGridimg" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product.jpg"); ?>"/>
+                                        <p class="elem_heading"  id="bannerGrid_elem_heading"><?php echo __("Banner-Grid 1"); ?></p>
+                                    </span>    
+                                </div>
+                            </div>
+                        </div>                                            
+                        <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->    
+                    </div>
+                </li>
+            </div>
+
+
+            <div class="banner-countdown" id="banner_countdown_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Banner-With Countdown timer"); ?></span>
+                    <span class="edit_component_heading" id="banner_countdown_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="edit_component" id="banner_countdown_delete_component" onclick="editBannerCountdownComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="trash" id="banner_countdown_delete_component" onclick="trashBannerCountdownComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->                                    
+                        <h4 class="comp_heading" id="bannerCountdown_comp_heading"><?php echo __("Countdown Banner"); ?></h4>
+                        <div class="countdownlist" id="bannerCountdownList">
+                            <div class="countdownlistContent">
+                                <div class="countdownBackground" id="bannerCountdownimg" style="background:url('<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/flash-sale.jpg"); ?>');background-size: 100%;">
+                                    <div id="days"></div>
+                                    <div class="countDownTimer" style="background:transparent;">
+                                        <span class="timer">23 <?php echo __("Hours"); ?></span>
+                                        <span class="timer">21 <?php echo __("Minutes"); ?></span>
+                                        <span class="timer">49 <?php echo __("Seconds"); ?></span>
+                                    </div>
+                                </div>
+                                <p class="elem_heading" id="bannerCountdown_elem_heading"><?php echo __("Banner-With Countdown timer"); ?></p>
+                            </div>
+                            <div class="countdownlistContentContainer1" style="display:none;">
+                                <div class="countdownlistContent">
+                                    <div class="countdownBackground" id="bannerCountdownimg1" style="background:url(countdown_banner_img_url);background-size: 100%;">
+                                        <div id="days"></div>
+                                        <div class="countDownTimer" style="background:background_color_of_timer_text;color:color_of_timer_text;">                                                           
+                                            <span class="timer">23 <?php echo __("Hours"); ?></span>
+                                            <span class="timer">21 <?php echo __("Minutes"); ?></span>
+                                            <span class="timer">49 <?php echo __("Seconds"); ?></span>
+                                        </div>
+                                    </div>
+                                    <p class="elem_heading" id="bannerCountdown_elem_heading"><?php echo __("Banner-With Countdown timer"); ?></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->        
+                    </div>
+                </li>
+            </div>
+
+            <div class="product-square" id="product_square_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Products-Square"); ?></span>
+                    <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}--> 
+                    <span class="edit_component_heading" id="product_square_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="edit_component" id="product_square_edit_component" onclick="editProductHorizontalComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->   
+                    <span class="trash" id="product_square_delete_component" onclick="trashProductSquareComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->                                       
+                        <div class="productSquare">
+                            <h4 id="productSquare_comp_heading" class="comp_heading"><?php echo __("Products-Square"); ?></h4>
+                            <div class="productSquareList" id="productSList">
+                                <img id="productSquareimg" class="productSquareimg" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product-square.jpg"); ?>"/>
+                                <div class="productContent">
+                                    <div class="productInfo">
+                                        <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                        <h6 id="productPrice" class="productPPrice">$100</h6>
+                                    </div>
+                                    <div class="wishlistProduct">
+                                        <i class="glyphicon glyphicon-heart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="productSquareList1" id="productSList1" style="display:none;">
+                                <img id="productSquareimg1" class="productSquareimg1" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product-square.jpg"); ?>"/>
+                                <div class="productContent">
+                                    <div class="productInfo">
+                                        <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                        <h6 id="productPrice" class="productPPrice">$100</h6>
+                                    </div>
+                                    <div class="wishlistProduct">
+                                        <i class="glyphicon glyphicon-heart"></i>
+                                    </div>
+                                </div>
+                            </div>                        
+
+                        </div>
+                        <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->       
+                    </div>
+                </li>
+            </div>
+
+            <div class="Hproduct-slide" id="product_horizontal_slide_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Products-Horizontal Sliding"); ?></span>
+                    <span class="edit_component_heading" id="product_horizontal_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="edit_component" id="product_horizontal_edit_component" onclick="editProductHorizontalComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="trash" id="product_horizontal_delete_component" onclick="trashProductHorizontalComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->                                     
+                        <div class="slidingBannersScroll">
+                            <h4 class="comp_heading" id="slidingProducts_comp_heading"><?php echo __("Horizontal Products"); ?></h4>
+                            <div class="slidingProducts" id="slidingPRow1">							
+                                <div class="productSlideList" id="productSlideList1">
+                                    <img class="slidingProductsimg" id="slidingProductsimg1" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product1.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="productSlideList" id="productSlideList2">
+                                    <img class="slidingProductsimg" id="slidingProductsimg2" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product2.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="productSlideList" id="productSlideList3">
+                                    <img class="slidingProductsimg" id="slidingProductsimg3" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product3.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slidingProducts" id="slidingPRow" style="display:none;">							
+                                <div class="productSlideList">
+                                    <img class="slidingProductsimg" id="slidingProductsimg" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product1.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 class ="productName" id="ProductName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 class="productPPrice" id="ProductPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                
+                        </div>
+                        <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->     
+                    </div>
+                </li>
+            </div>
+
+
+            <div class="product-grid" id="product_grid_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Products-Grid"); ?></span>
+                    <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->  
+                    <span class="edit_component_heading" id="product_grid_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <span class="edit_component" id="product_grid_edit_component" onclick="editProductHorizontalComponentFunction(this)"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>
+                    <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->  
+                    <span class="trash" id="product_grid_delete_component"  onclick="trashProductGridComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->     					
+                        <div class="productGrid">						
+                            <p class="comp_heading" id="productGrid_comp_heading"><?php echo __("Product Grid"); ?></p>
+
+                            <div class="productGridRow" id="productGRow" style="display:none;">
+                                <div class="productGridList">
+                                    <img id="productGridimg"  src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/pg1.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="productGridRow1" id="productGRow1">
+                                <div class="productGridList" >
+                                    <img id="productGridimg1"  src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/pg1.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="productGridList">
+                                    <img id="productGridimg1"  src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/pg2.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="productGridList">
+                                    <img id="productGridimg1"  src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/pg3.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="productGridList">
+                                    <img id="productGridimg1"  src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/pg4.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->         
+                    </div>
+                </li>
+            </div>
+
+            <div class="product-lastAccess" id="product_last_accessed_id" style="display:none;">
+                <li class="slide" id="component_position">
+                    <span class="slideTitle"><?php echo __("Recent Products"); ?></span>
+<!--                    <span class="edit_component_heading" id="last_access_edit_component_heading" onclick="editComponentHeadingFunction(this)" title="<?php // echo __("Edit Heading"); ?>"><i class='glyphicon glyphicon-pencil' style='padding-right:5px'></i></span>-->
+                    <span class="trash" id="last_access_delete_component" onclick="trashLastAccessComponentFunction(this)"><i class='glyphicon glyphicon-trash' style='padding-right:5px'></i></span>
+                    <div class="banner_preview layout_div" >
+                        <!--{*start:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->                                     
+                        <div class="slidingBannersScroll">
+                            <h4 class="comp_heading" id="slidingRecentProducts_comp_heading"><?php echo __("Recent Products"); ?></h4>
+                            <div class="slidingProducts" id="slidingRecentPRow1">							
+                                <div class="productSlideList" id="productRecentSlideList1">
+                                    <img class="slidingProductsimg" id="slidingRecentProductsimg1" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="productSlideList" id="productRecentSlideList2">
+                                    <img class="slidingProductsimg" id="slidingRecentProductsimg2" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="productSlideList" id="productRecentSlideList3">
+                                    <img class="slidingProductsimg" id="slidingRecentProductsimg3" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 id ="productName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 id="productPrice" class="productPPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slidingProducts" id="slidingRecentPRow" style="display:none;">							
+                                <div class="productSlideList">
+                                    <img class="slidingProductsimg" id="slidingRecentProductsimg" src="<?php echo $block->getViewFileUrl("Knowband_Mobileappbuilder::images/layout_components/product.jpg"); ?>"/>
+                                    <div class="productContent">
+                                        <div class="productInfo">
+                                            <h5 class ="productName" id="ProductName"><?php echo __("Product Name"); ?></h5>
+                                            <h6 class="productPPrice" id="ProductPrice">$100</h6>
+                                        </div>
+                                        <div class="wishlistProduct">
+                                            <i class="glyphicon glyphicon-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                
+                        </div>
+                        <!--{*end:changes made by Bhupendra Singh Bisht on 01,May 2020 to make preview changes*}-->     
+                    </div>
+                </li>
+            </div>
+
+            <!--<input type="hidden" id="number_of_component" value="<?php // echo $number_of_components;  ?>"/>-->
+            <input type="hidden" id="number_of_component" value="<?php echo 0; ?>"/>
+            <input type="hidden" id="id_layout" value="<?php echo $id_layout; ?>"/>
+            <input type="hidden" id="id_component_selected" value="0"/>
+            <input type="hidden" id="id_layout_name_selected" value="0"/>
+        </div>
+    </div>
+    <style>
+        .list-group-item {
+            display: block !important
+        }
+
+        .list-group-item .glyphicon{
+            float: right;
+        }
+
+        .iframe_html .edit_component_heading {
+            display: none !important;
+        }
+
+        .edit_component_heading{
+            cursor: pointer;
+        }
+    </style>
+</div>
+<div id="component_form_popup"></div>

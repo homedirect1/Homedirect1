@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_MasterPassword
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ced" translate="label" sortOrder="150">
+            <label>Cedcommerce</label>
+        </tab>
+        <section id="ced_extensions" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <label>Master Password</label>
+            <tab>ced</tab>
+            <resource>Ced_MasterPassword::ced_extensions</resource>
+            <group id="master_password" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Master Password</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="password" translate="label" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Master Password</label>
+                    <validate>validate-current-password required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                    <comment>Leading and trailing spaces will be truncated</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,30 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<!--@vars {} @-->
+<!--@subject Ticket Notification Ticket Id:{{var ticket_id}}@-->
+{{template config_path="design/email/header_template"}}
+	<div>
+		<p>Dear {{var customer_name}}</p>
+		<p>Greetings!!</p>
+		 <p>Your support ticket has been created with <b>{{var ticket_id}}</b>.Our executive will follow up with you shortly.
+		You can <a href="{{var url}}">track the status</a> of ticket.</p>
+	</div>
+<br>
+<p>{{trans "Thanks,<br>%store_name" store_name=$store.getFrontendName() |raw}}</p>
+{{template config_path="design/email/footer_template"}}

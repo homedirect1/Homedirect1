@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="formkey"/>
+    <head>
+        <css src="Knowband_Mobileappbuilder::layout/layout.css" />
+        <css src="Knowband_Mobileappbuilder::layout/layout_preview.css" />
+        <css src="Knowband_Mobileappbuilder::layout/CustomScrollbar.css" />
+        <css src="Knowband_Mobileappbuilder::css/admin.css" />
+        <css src="Knowband_Mobileappbuilder::css/chosen.min.css" />
+	<css src="Knowband_Mobileappbuilder::css/bootstrap/bootstrap.css" />
+        <css src="jquery/colorpicker/css/colorpicker.css"/>
+        <css src="Knowband_Mobileappbuilder::growl_lib/jquery.growl.css"/>
+    </head>
+    <body>
+    	<referenceBlock name="menu">
+    	    <action method="setActive">
+    	        <argument name="itemId" xsi:type="string">Knowband_Mobileappbuilder::spinwin_backend</argument>
+    	    </action>
+    	</referenceBlock>
+         <referenceBlock name="page.title">
+    	    <action method="setPageTitle">
+    	        <argument name="pageTitle" xsi:type="string" translate="true">Edit Layout</argument>
+    	    </action>
+    	</referenceBlock>
+        <referenceContainer name="left" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Knowband\Mobileappbuilder\Block\Adminhtml\EditLayout" name="mobileappbuilder_editLayout" template="edit_layout.phtml"/>				
+    	</referenceContainer>
+    </body>
+</page>

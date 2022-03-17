@@ -1,0 +1,63 @@
+.five-percent-left-arrow,.five-percent-text
+{
+	float: right;
+}
+.five-percent-text {
+	padding-left: 25px;
+	width: 45%;
+	margin-top: 80px;
+}
+
+.open-time-wrapper {
+	margin: 15px 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+.open-time-wrapper > div {
+	flex: 0 0 33.33%;
+	padding-right: 15px;
+}
+
+.open-time-wrapper > div:last-child {
+	padding-right: 0;
+}
+.days_wrapper .days_title {
+	margin-bottom: 20px;
+}
+.day-label {
+	font-weight: 700;
+	margin-bottom: 5px;
+	display: inline-block;
+	color: #000;
+}
+
+.time-details .admin__field-control + .admin__field-control {
+	margin-top: 0;
+}
+
+.fieldset.admin__fieldset.custom-store-info .admin__legend.legend {
+	margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px)
+{
+	.open-time-wrapper > div {
+		flex: 0 0 100%;
+		padding-right: 0;
+		margin-bottom: 15px;
+	}
+}
+@media only screen and (max-width: 991px)
+{
+	.csstorepickup-storepickup-edit .page-columns {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.csstorepickup-storepickup-edit .page-columns .side-col {
+		order: 1;
+		margin-bottom: 10px;
+	}
+	.csstorepickup-storepickup-edit .page-columns .main-col {
+		order: 2;
+	}
+}

@@ -1,0 +1,129 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<style>
+    ul {
+        list-style-type: none;
+    }
+
+</style>
+<?php
+$configValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/show_attribute');
+$data = (explode(",", $configValue));
+$deptValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/select_dept');
+$priorityValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/allow_priorityallow');
+$escValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/ticket_escalation');
+$ticketModel = $this->_coreRegistry->registry('ced_ticket_data');
+$messages = $this->_coreRegistry->registry('ced_message');
+$value = $ticketModel;
+$customer_id = $ticketModel['customer_id'];
+?>
+<div>
+
+    <h2 class="legend"><?php echo __('Conversations') ?></h2>
+
+    <ul>
+        <li>
+            <div style="clear: both"></div>
+            <?php $totalmsgCount = count($messages);
+
+            if ($totalmsgCount > 10) {
+                $displaylimit = $totalmsgCount - 10;
+                ?>
+                <div> <a href="javascript:void(0)" id="show_all"><b><?php echo __('Show All Messages'); ?></b></a></div>
+                <br><?php
+            } else {
+
+                $displaylimit = 0;
+            }
+            $msgCount = 0;
+            ?>
+
+            <?php foreach ($messages
+
+            as $value){
+            $msgCount++;
+            if ($msgCount <= $displaylimit) {
+                $style = "style='display:none'";
+            } else {
+                $style = "style='display:'";
+            }
+            if ($ticketModel['customer_name'] == $value['from']) { ?>
+            <div id='mess' class="messages" <?php echo $style ?>>
+                    <span>
+                        <b><?php echo $value['from']; ?></b>&nbsp&nbsp&nbsp<h>|&nbsp&nbsp&nbsp</h>
+                    </span>
+                <span> <?php echo __("Create At: ") ?><?php $date = date_create($value['created']);
+                    echo date_format($date, 'g:ia \o\n l jS F Y'); ?>
+                    </span>
+                <?php }elseif ($value['type'] == 'reply'){ ?>
+                <div id='mess2' class="messages" <?php echo $style ?>>
+                    <span>
+                        <b><?php echo $value['from']; ?></b>&nbsp&nbsp&nbsp<h>|&nbsp&nbsp&nbsp</h>
+                    </span>
+                    <span> <?php echo __("Create At: ") ?><?php $date = date_create($value['created']);
+                        echo date_format($date, 'g:ia \o\n l jS F Y'); ?>
+                    </span>
+                    <?php }else{
+                    ?>
+                    <div id='mess2' class="messages" <?php echo $style ?>>
+                    <span>
+                        <span>
+                            <i><?php echo __('Ticket has been assign to') ?></i>
+                        </span>&nbsp&nbsp
+                        <b><?php echo $value['to']; ?></b>&nbsp&nbsp&nbsp<h>|&nbsp&nbsp&nbsp</h>
+                    </span>
+                        <span><?php echo __("At: "); ?><?php $date = date_create($value['created']);
+                            echo date_format($date, 'g:i A \o\n l jS F Y'); ?>
+                    </span>
+                        <span id="from"><b><?php echo $value['from']; ?></b></span>
+                        <?php } ?>
+                        <div id='mesDetail' class="messages" <?php echo $style ?> >
+                            <span><?php echo $value['message']; ?></span>
+                            <?php if ($value['attachment']) { ?>
+                                <?php $attach = explode(",", $value['attachment']); ?>
+                                <div id="attachment">
+                                    <b><?php echo __('Attachments') ?>:</b>
+
+                                    <?php foreach ($attach as $val) {
+                                        $url = $this->getBaseUrl() . 'pub/media/images/helpdesk/' . $customer_id . '/' . $value['ticket_id'] . '/' . $val;
+                                        $image = explode('/', $val);
+                                        ?>
+                                        <div><a href="<?php echo $url; ?>" download
+                                                style="color:red;"> <?php echo $image[1]; ?></a></div>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                    </div>
+                    <div style="clear: both;"></div>
+                    <?php } ?>
+
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    require(["jquery"], function ($) {
+        $("#show_all").click(function () {
+            $(".messages").show();
+            $("#show_all").hide();
+        });
+    });
+</script>
+<?php echo $block->getFormHtml(); ?>

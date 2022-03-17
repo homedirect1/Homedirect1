@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GoogleMap
+ * @author 	    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license     https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\ShippingAddressManagement">
+        <plugin name="ced-google-map-ship-management"
+                type="Ced\GoogleMap\Plugin\Model\ShippingAddressManagement"/>
+    </type>
+    <type name="Magento\Quote\Model\BillingAddressManagement">
+        <plugin name="ced-google-map-bill-management"
+                type="Ced\GoogleMap\Plugin\Model\BillingAddressManagement"/>
+    </type>
+    <type name="Magento\Quote\Model\ShippingMethodManagement">
+        <plugin sortOrder="1" name="ced-google-map-ship-method-management"
+                type="Ced\GoogleMap\Plugin\Model\ShippingMethodManagement"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\CustomAttributeList">
+        <plugin name="ced-google-map-attribute-list"
+                type="Ced\GoogleMap\Plugin\Model\Quote\Address\CustomAttributeList"/>
+    </type>
+    <!--<type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="ced-google-map-quote-address" type="Ced\GoogleMap\Plugin\Model\Quote\Address"/>
+    </type>-->
+</config>

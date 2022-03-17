@@ -1,0 +1,43 @@
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+ 
+@CHARSET "UTF-8";
+
+.affiliate_withdrawl_request .total-balance, .affiliate_withdrawl_request .remaining-balance {
+  background: #f5f5f5 none repeat scroll 0 0;
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 15px 10px;
+  width: 30%;
+}
+.affiliate_withdrawl_request .withdrawl-request-checkbox {
+  margin-bottom: 20px;
+}
+
+.affiliate_withdrawl_request .withdrwal-form {
+  margin-bottom: 25px;
+}
+.affiliate_withdrawl_request .withdrwal-form .amount-value, .affiliate_withdrawl_request .withdrwal-form .request-withrawal {
+  display: inline-block;
+  width: 25%;
+}
+.affiliate_withdrawl_request .withdrwal-form .amount-value input {
+  width: 100%;
+}
+.admin__scope-old .form-inline div:not([class*="fields-group"]) > .field > .label span, .admin__scope-old .form-inline .fieldset > .field > .label span {
+  word-break: normal!important;
+}

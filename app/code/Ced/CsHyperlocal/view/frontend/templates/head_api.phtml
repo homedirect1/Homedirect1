@@ -1,0 +1,281 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+$saveLocation = $this->getUrl('cshyperlocal/filter/savelocation');
+$savedLocationFromSession = $this->helper('Ced\CsHyperlocal\Helper\Data')->getShippingLocationFromSession();
+$popupTitle = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::POPUP_TITLE);
+$filterType = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::FILTER_TYPE);?>
+<?php if ($this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::MODULE_ENABLE)): ?>
+
+
+   <div class="location-popup location-popup-wrapper" style="display: none;">
+        <form action="#" method="POST" id="search-location-form" class="search-location-form-wrapper" role="form">
+            <span id="close-location-popup" class="close-popup">X</span>
+            <div class="popup-heading">
+                <h1 class="title"><?php echo $popupTitle; ?></h1>
+            </div>
+            <div id="cshyperlocal-search-product-form-wrapper" class="cshyperlocal-search-product-form-wrapper">
+                <div class="hyperlocal-form-wrapper-one empty-cart-warpper"><?php echo __('Changing location will reset your cart.'); ?></div>
+                <div class="hyperlocal-form-wrapper-second">
+                    <div class="ced-cshyperlocal-search-form">
+                        <input type="hidden" id="ced-search-city"
+                               value="<?php if (isset($savedLocationFromSession['city'])) echo $savedLocationFromSession['city']; ?>">
+                        <input type="hidden" id="ced-search-state"
+                               value="<?php if (isset($savedLocationFromSession['state'])) echo $savedLocationFromSession['state']; ?>">
+                        <input type="hidden" id="ced-search-country"
+                               value="<?php if (isset($savedLocationFromSession['country'])) echo $savedLocationFromSession['country']; ?>">
+                        <input type="hidden" id="ced-search-zipcode"
+                               value="<?php if (isset($savedLocationFromSession['zipcode'])) echo $savedLocationFromSession['zipcode']; ?>">
+                        <input type="hidden" id="ced-search-latitude"
+                               value="<?php if (isset($savedLocationFromSession['latitude'])) echo $savedLocationFromSession['latitude']; ?>">
+                        <input type="hidden" id="ced-search-longitude"
+                               value="<?php if (isset($savedLocationFromSession['longitude'])) echo $savedLocationFromSession['longitude']; ?>">
+
+                        <?php if ($filterType == 'zipcode') : ?>
+                            <input required type="text" placeholder="<?php echo __('Please enter delivery pincode'); ?>"
+                                   id="ced-search-filter-zipcode"
+                                   name="ced-search-zipcode"
+                                   value="<?php echo isset($savedLocationFromSession['filterZipcode']) ? $savedLocationFromSession['filterZipcode'] : ''; ?>">
+                        <?php else : ?>
+                            <input required type="text"
+                                   value="<?php if (isset($savedLocationFromSession['location'])) echo $savedLocationFromSession['location']; ?>"
+                                   id="ced-search-location">
+                        <?php endif; ?>
+                    </div>
+                    <div class="ced-detect-location">
+                        <span class="apply-icon"></span>
+                        <input class="" id="search-btn" type="submit" value="<?php echo __('Apply'); ?>"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- autodetect city -->
+    <script type="text/javascript">
+        var map = null;
+        function initialize() {
+
+            require([
+                    'jquery',
+                    'Magento_Customer/js/customer-data'
+                ],
+                function ($,customerData) {
+
+                    $('body').addClass('hyperlocal-modal-wrapper');
+
+                    <?php if (!$savedLocationFromSession) : ?>
+
+                        /** auto detect location **/
+                        var geocoder = new google.maps.Geocoder();
+                        var position = new google.maps.LatLng(50.45, 4.45);
+
+                        navigator.geolocation.getCurrentPosition(locationFound, locationNotFound, {
+                            enableHighAccuracy: true,
+                            maximumAge: 10000
+                        });
+
+                        function locationFound(position) {
+                        
+                            var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                            var marker = new google.maps.Marker({
+                                position: location,
+                                map: map,
+                            });
+                            geocodePosition(marker.getPosition(), position.coords.latitude, position.coords.longitude);
+                        
+                        }
+
+                        function locationNotFound(failure) {
+
+                            <?php if (!$savedLocationFromSession) : ?>
+                                $(".location-popup-wrapper").addClass('active');
+                            <?php endif; ?>
+                            //alert(failure.message);
+                        }
+
+                        function geocodePosition(pos, lat, long) {
+                            geocoder.geocode({
+                                latLng: pos
+                            }, function (responses) {
+                                if (responses && responses.length > 0) {
+
+                                    var city = '';
+                                    var state = '';
+                                    var country = '';
+                                    var state = '';
+                                    var location = responses[0].formatted_address;
+                                    var latitude = lat;
+                                    var longitude = long;
+                                    var arrAddress = responses[0].address_components;
+                                    $.each(arrAddress, function (i, address_component) {
+                                        if (address_component.types[0] == "administrative_area_level_2" ||
+                                            address_component.types[0] == "locality" ) {
+                                            city = address_component.long_name;
+                                        }
+                                        if (address_component.types[0] == "administrative_area_level_1") {
+                                            state = address_component.long_name;
+                                        }
+                                        if (address_component.types[0] == "country") {
+                                            country = address_component.long_name;
+                                        }
+                                        if (address_component.types[0] == "postal_code") {
+                                            zipcode = address_component.long_name;
+                                            filterZipcode = address_component.long_name;
+                                        }
+                                    });
+
+                                    /** empty cart **/
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "<?php echo $saveLocation; ?>",
+                                        data: {
+                                            location: location,
+                                            city: city,
+                                            state: state,
+                                            country: country,
+                                            zipcode: zipcode,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                            filterZipcode: filterZipcode
+                                        },
+                                        dataType: "json",
+                                        success: function (res) {
+                                            if (res.status == 'success') {
+                                                var sections = ['cart'];
+                                                customerData.invalidate(sections);
+                                                customerData.reload(sections, true);
+                                                $('body').loader('hide');
+                                                $(".location-popup-wrapper").removeClass('active');
+                                                window.location.reload();
+                                            }
+                                        }
+                                    });
+
+                                } else {
+                                    alert('Cannot determine address at this location.');
+                                }
+                            });
+                        }
+                        /** end of auto detect location **/
+                    <?php endif; ?>
+
+
+                    /** autocomplete search input **/
+                    var selectedLocation = false;
+                    var input = document.getElementById('ced-search-location');
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        selectedLocation = true;
+
+                        var place = autocomplete.getPlace();
+                        if (!place.geometry) {
+
+                            /*$("#search-location-form").submit(function(e){
+                             e.preventDefault(e);
+                             });*/
+                        }
+                        var latitude = place.geometry.location.lat();
+                        var longitude = place.geometry.location.lng();
+
+                        jQuery('#ced-search-latitude').val(latitude);
+                        jQuery('#ced-search-longitude').val(longitude);
+
+                        var arrAddress = place.address_components;
+                        jQuery('#ced-search-city').val('');
+                        jQuery('#ced-search-state').val('');
+                        jQuery('#ced-search-country').val('');
+                        jQuery('#ced-search-zipcode').val('');
+                        jQuery.each(arrAddress, function (i, address_component) {
+                            if (address_component.types[0] == "locality" || address_component.types[0] == "administrative_area_level_2") {
+                                jQuery('#ced-search-city').val(address_component.long_name);
+                            }
+                            if (address_component.types[0] == "administrative_area_level_1") {
+                                jQuery('#ced-search-state').val(address_component.long_name);
+                            }
+                            if (address_component.types[0] == "country") {
+                                jQuery('#ced-search-country').val(address_component.long_name);
+                            }
+                            if (address_component.types[0] == "postal_code") {
+                                jQuery('#ced-search-zipcode').val(address_component.long_name);
+                            }
+                        });
+                    });
+
+                    $('#ced-search-location').on('focus', function () {
+                        selectedLocation = false;
+                    }).on('blur', function () {
+                        if (!selectedLocation) {
+                            $(this).val('');
+                        }
+                    });
+                    /** end of autocomplete search input **/
+
+
+              
+                    $('#close-location-popup').on('click', function () {
+                        $(".location-popup-wrapper").removeClass('active');
+                    });
+
+
+                    /** search button **/
+                    $('#search-btn').click(function () {
+                        $("#search-location-form").submit(function (e) {
+                            e.preventDefault();
+                            var location = $('#ced-search-location').val();
+                            var city = $('#ced-search-city').val();
+                            var state = $('#ced-search-state').val();
+                            var country = $('#ced-search-country').val();
+                            var zipcode = $('#ced-search-zipcode').val();
+                            var latitude = $('#ced-search-latitude').val();
+                            var longitude = $('#ced-search-longitude').val();
+                            var filterZipcode = $('#ced-search-filter-zipcode').val();
+                            $('body').loader('show');
+                            $.ajax({
+                                type: 'POST',
+                                url: "<?php echo $saveLocation; ?>",
+                                data: {
+                                    location: location,
+                                    city: city,
+                                    state: state,
+                                    country: country,
+                                    zipcode: zipcode,
+                                    latitude: latitude,
+                                    longitude: longitude,
+                                    filterZipcode: filterZipcode
+                                },
+                                dataType: "json",
+                                success: function (res) {
+                                    if (res.status == 'success') {
+                                        var sections = ['cart'];
+                                        customerData.invalidate(sections);
+                                        customerData.reload(sections, true);
+                                        $('body').loader('hide');
+                                        $(".location-popup-wrapper").removeClass('active');
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                            return false;
+                        });
+                    });
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+<?php endif; ?>

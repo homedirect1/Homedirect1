@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+//**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="support_ticket">
+        <job name="support_delete_ticket" instance="Ced\HelpDesk\Cron\Cron" method="deleteTicket">
+            <schedule>0 * * * *</schedule>
+        </job>
+        <job name="support_close_ticket" instance="Ced\HelpDesk\Cron\Cron" method="closeTicket">
+            <schedule>0 * * * *</schedule>
+        </job>
+        <job name="support_create_ticket" instance="Ced\HelpDesk\Cron\EmailGateway" method="createTicket">
+            <schedule>*/4 * * * *</schedule>
+        </job>
+        <job name="support_notify_ticket" instance="Ced\HelpDesk\Cron\Cron" method="notifyStaff">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>

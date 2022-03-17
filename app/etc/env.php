@@ -14,7 +14,7 @@ return [
         'connection' => [
             'default' => [
                 'host' => 'localhost',
-                'dbname' => 'mage',
+                'dbname' => 'sample',
                 'username' => 'root',
                 'password' => '',
                 'model' => 'mysql4',

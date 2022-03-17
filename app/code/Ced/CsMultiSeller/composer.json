@@ -1,0 +1,19 @@
+{
+  "name": "ced/module-csmultiseller",
+  "description": "Enables vendor to create product using other vendor's and admin products.",
+  "require": {
+   "php": "~7.3.0|~7.4.0",
+   "magento/magento-composer-installer": "*"
+  },
+  "type": "magento2-module",
+  "version": "0.0.7",
+  "license": [
+   "EULA"
+  ],
+  "autoload": {
+   "files": [ "registration.php" ],
+   "psr-4": {
+    "Ced\\CsMultiSeller\\": ""
+   }
+  }
+ }

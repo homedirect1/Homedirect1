@@ -1,0 +1,86 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsSubAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+// @codingStandardsIgnoreFile
+
+?>
+
+<?php
+//$block->getTree();die;
+/** @var $block \Magento\User\Block\Role\Tab\Edit */
+?>
+<div class="row">
+<div class="col-md-12" style="margin-top: 10px;">
+<div class="row panel panel-default clearfix">
+    <div class="content-header panel-heading col-md-12 col-lg-12 uptransform">
+                        <div style="font-size:17px;line-height:31px; margin-top:6px;" class="col-md-6 panel_product_heading">
+                            <?php echo $this->getHeader() ?>
+                        </div>
+                        <div style="text-align:right;" class="buttons-set col-md-6 buttons_scb">        
+                            <?php echo $this->getChildHtml('back_button'); ?>
+                            <?php echo $this->getChildHtml('send_button'); ?>
+                        </div>
+    </div>
+    <div class="ced-subvendor-request col-md-12 col-lg-12">
+        <form action="<?php echo $this->getUrl('cssubaccount/customer/saveResource');?>" method="post" id="subvendor_resource" role="form">
+                            <input type="hidden" name="resource" id="group_resources" value="" />
+                            <input type="hidden" name="subVendorId" id="subVendorId" value="<?php echo $this->getRequest()->getParam('id');?>" />
+                            <fieldset id="group_resources" class="ced-custom">
+
+    <div class="field">
+        <label class="label" for="all"><span><?php /* @escapeNotVerified */ echo __('Resource Access') ?></span></label>
+
+        <div class="control">
+            <select id="all" name="all" onchange="jQuery('[data-role=tree-resources-container]').toggle()" class="select">
+                <option value="0" <?php echo($block->isEverythingAllowed() ? '' : 'selected="selected"'); ?>><?php /* @escapeNotVerified */ echo __('Custom') ?></option>
+                <option value="1" <?php echo($block->isEverythingAllowed() ? 'selected="selected"' : ''); ?>><?php /* @escapeNotVerified */ echo __('All') ?></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="field<?php if ($block->isEverythingAllowed()):?> no-display<?php endif?>" data-role="tree-resources-container">
+        <label class="label"><span><?php /* @escapeNotVerified */ echo __('Resources') ?></span></label>
+
+        <div class="control">
+            <div class="tree x-tree" data-role="resource-tree" data-mage-init='<?php
+            echo $block->escapeHtml($this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode([
+                'Ced_CsSubAccount/js/roles-tree' => [
+                    "treeInitData" => $block->getTree(),
+                    "treeInitSelectedData" => $block->getSelectedResources(),
+                ],
+            ]));
+            ?>'></div>
+        </div>
+    </div>
+</fieldset>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script>
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+
+    $(".action-save").click(function () {
+        $('#subvendor_resource').submit();
+    });
+
+});
+</script>

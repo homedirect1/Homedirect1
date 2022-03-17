@@ -1,0 +1,104 @@
+<!--
+*
+* CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_DeliveryDate
+* @author 		CedCommerce Core Team <connect@cedcommerce.com>
+* @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+* @license     http://cedcommerce.com/license-agreement.txt
+*-->
+
+<div id="deliveryDate">
+<!--ko if: initialize() -->
+    <style>
+        /*calendar main*/
+        .ui-datepicker{
+            background-color: #ffffff !important;
+            border: transparent;
+        }
+        /*for calendar month+year name*/
+        .ui-datepicker .ui-datepicker-title{
+            background-color: #fff;
+        }
+        /*dates visible part*/
+        .ui-datepicker .ui-datepicker-calendar{
+            border: transparent;
+            background-color: #fff;
+        }
+        .ui-datepicker .ui-datepicker-calendar td{
+            border: transparent;
+            background-color: #fff;
+        }
+        /*active date*/
+        .ui-datepicker .ui-datepicker-calendar .ui-state-active{
+
+        }
+        /*hover date*/
+        .ui-datepicker .ui-datepicker-calendar td .ui-state-hover{
+            background-color: #337ab7;
+            color: #fff;
+        }
+        .ui-datepicker .ui-datepicker-calendar td a{
+            text-align:center;
+        }
+        .ui-state-default .ui-state-highlight{
+            background-color: #337ab7 !important;
+            color:#fff !important;
+        }
+        /*week days*/
+        .ui-datepicker .ui-datepicker-calendar th{
+            background-color: #ffffff !important;
+            border:transparent;
+            padding: 8px !important;
+        }
+        /*active date button*/
+        .ui-state-default .ui-state-active{
+
+        }
+
+    </style>
+    <h2><label class="label"><!-- ko i18n: 'Delivery Date'--><!-- /ko --> </label></h2>
+
+    <h4 class="label"><!-- ko i18n: 'Date'--><!-- /ko --> :</h4>
+    <div class="control">
+
+        <form>
+
+            <input class="input-text"
+                       type="text"
+                       data-bind="datetimepicker: true"
+                       name="delivery_date"
+                       id="delivery_date"
+                       readonly='true'
+                   style="width: 45%"
+                />
+            <button class="close-icon" type="reset">Reset</button>
+        </form>
+        <div data-bind="visible: window.checkoutConfig.shipping.delivery_date.timestamp.length > 0">
+            <select data-bind="options: window.checkoutConfig.shipping.delivery_date.timestamp"
+                    name="timestamp"
+                    id="timestamp"
+                    style="width:48%;"
+            ></select>
+        </div>
+    </div>
+    <div data-bind="text: window.checkoutConfig.shipping.delivery_date.remarks"></div>
+
+    <div data-bind="visible: (window.checkoutConfig.shipping.delivery_date.enableComment == 1)">
+        <h4 class="label"><!-- ko i18n: 'Comment'--><!-- /ko --> :</h4>
+        <div class="control">
+            <textarea name="delivery_comment" id="delivery_comment"></textarea>
+        </div>
+        <div data-bind="text: window.checkoutConfig.shipping.delivery_date.fieldNote"></div>
+        <br/>
+    </div>
+<!--/ko -->
+</div>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_CsStorePickup
+ * @author    CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */ -->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="google" type="host">*.google.com</value>
+                <value id="gstatic" type="host">*.gstatic.com</value>
+                <value id="googleapis" type="host">*.googleapis.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="googleapis" type="host">*.googleapis.com</value>
+                <value id="gstatic" type="host">*.gstatic.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="gstatic" type="host">*.gstatic.com</value>
+                <value id="googleapis" type="host">*.googleapis.com</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="gstatic" type="host">*.gstatic.com</value>
+                <value id="googleapis" type="host">*.googleapis.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="google.com" type="host">*.google.com</value>
+                <value id="googleapis" type="host">*.googleapis.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

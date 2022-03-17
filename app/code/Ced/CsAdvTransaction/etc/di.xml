@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- /**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_CsAdvTransaction
+  * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Ced\CsMarketplace\Observer\OrderCancelAfter" type="Ced\CsAdvTransaction\Observer\OrderCancelAfter"/> 
+    <preference for="Ced\CsMarketplace\Observer\OrderCreditmemoRefund" type="Ced\CsAdvTransaction\Observer\OrderCreditmemoRefund"/> 
+    <preference for="Ced\CsOrder\Block\Adminhtml\Vorders\Grid" type="Ced\CsAdvTransaction\Block\Adminhtml\Vorders\Grid"/>
+    <preference for="Ced\CsMarketplace\Block\Adminhtml\Vorders\Grid" type="Ced\CsAdvTransaction\Block\Adminhtml\Vorders\Grid"/>
+    <preference for="Ced\CsMarketplace\Block\Adminhtml\Vendor\Entity\Edit\Tab\Vorders" type="Ced\CsAdvTransaction\Block\Adminhtml\Vendor\Entity\Edit\Tab\Vorders"/>
+    <preference for="Ced\CsMarketplace\Observer\SetVendorSalesOrder" type="Ced\CsAdvTransaction\Observer\Savepayment" />
+    <preference for="Ced\CsMarketplace\Block\Adminhtml\Vpayments" type="Ced\CsAdvTransaction\Block\Adminhtml\Payments" />
+    <preference for="Ced\CsMarketplace\Block\Adminhtml\Vpayments\Grid" type="Ced\CsAdvTransaction\Block\Adminhtml\Payments\Grid" />
+    <preference for="Ced\CsMarketplace\Block\Vpayments\View" type="Ced\CsAdvTransaction\Block\Payments\View" />
+    <preference for="Ced\CsTransaction\Observer\PrepareItemsForRefund" type="Ced\CsAdvTransaction\Observer\PrepareItemsForRefund"/> 
+    <preference for="Ced\CsOrder\Block\Order\View\Totals" type="Ced\CsAdvTransaction\Block\Order\View\Totals"/>
+     <preference for="Ced\CsMarketplace\Block\Vendor\Dashboard\Info" type="Ced\CsAdvTransaction\Block\Vendor\Dashboard\Info"/>
+</config>

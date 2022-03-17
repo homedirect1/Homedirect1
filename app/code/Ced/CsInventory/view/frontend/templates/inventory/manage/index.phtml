@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Inventory
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+
+?>
+<style>
+    .panel-body{
+        margin-top: 5%;
+        margin-bottom: 3%;
+    }
+    .panel-body input{
+        background-color: #fff;
+        border: 1px solid #adadad;
+        border-radius: 1px;
+        box-shadow: none;
+        color: #303030;
+        font-size: 1.4rem;
+        font-weight: 400;
+        height: auto;
+        line-height: 1.36;
+        padding: 0.6rem 1rem;
+        transition: border-color 0.1s linear 0s;
+        vertical-align: baseline;
+        width: 50%;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12" style="margin-top:10px;"> 
+        <form  action="<?php echo "{$this->getBaseUrl(true)}csinventory/manage/save" ?>" method="post" id="proquant">
+            <div class="panel panel-default">
+                <div class="panel-heading col-md-12 uptransform" style="font-weight:bold;padding:4px 15px;">
+                    <div class="col-md-6 panel_product_heading" style="line-height:31px;font-size:17px;padding-left:0;">
+                        <?php echo __('Inventory')." ".__('Minimum product : ') ?>
+                    </div>
+                    <div class="buttons-set col-md-6 buttons_scb" style="text-align:right;padding-right:0;">
+
+                        <button class="button btn btn-success uptransform product-button" title="Save" type="submit"
+                                onClick="document.getElementById('form-validate').submit();" id="save_butn" style="float: none;">
+                            <span><span><?php echo __('Save') ?></span></span>
+                        </button>
+                    </div>
+                </div>
+                <?php
+                    $data = $block->fieldData();
+                    if (!isset($data[0]['minimum_quantity'])){
+                        $data[0]['minimum_quantity'] = 5;
+                    }
+
+                ?>
+                <!--Needed improvement here for indexing of data and validation also-->
+                <div class="panel-body">
+                    <label>Enter Minumum number : </label>
+                    <input type="number" name="minimum_quantity" value="<?php print_r($data[0]['minimum_quantity'])?>" class="minpro" id="minpro" min="1" max="2000000">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

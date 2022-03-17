@@ -1,0 +1,83 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+
+<?php
+$id = $this->getRequest()->getParam('id');
+if ($id) {
+    $url = $this->getUrl('*/*/save', array('id' => $id));
+} else {
+    $url = $this->getUrl('*/*/save');
+}
+?>
+
+<form id="cshyperlocal-zipcodeform" name="cshyperlocal_shipareaform" method="post" action="<?php echo $url ?>"
+      enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default vendor-profile-edit">
+                <div class="panel-heading col-md-12 uptransform">
+                    <div style="line-height:31px;font-size:17px;" class="col-md-6 col-xs-12  panel_product_heading">
+                        <?php if ($id) echo __('Edit ') . $this->getZipcode(); else echo __('Add New Zipcode'); ?>
+                    </div>
+                    <div style="text-align:right;" class="buttons-set col-md-6  col-xs-12 buttons_scb">
+                        <button class="button btn btn-primary uptransform pull-right" title="Save"
+                                type="submit">
+						<span>
+							<span><?php echo __('Save') ?></span>
+						</span>
+                        </button>
+                        <?php if ($id) { ?>
+                            <a href="<?php echo $this->getUrl('*/*/delete', array('id' => $id, 'location_id' => $this->getRequest()->getParam('location_id'))); ?>"
+                               class="button btn btn-primary uptransform pull-right"
+                               onClick="return confirm('Are you sure you want to delete?')"> <?php echo __('Delete') ?></a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="clear_both"></div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="fieldset">
+                            <ul class="form-list">
+                                <input type="hidden" name="location_id"
+                                       value="<?php echo $this->getRequest()->getParam('location_id'); ?>">
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                        <span><?php echo('Zipcode') ?></span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input required
+                                               class="form-control input-text"
+                                               type="text" name="zipcode"
+                                               value="<?php echo $this->getZipcode(); ?>">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="back-link col-md-6"><a
+                                    href="<?php echo $this->getUrl('*/shiparea/managezipcode', array('id' => $this->getRequest()->getParam('location_id'))); ?>">
+                                <small>&laquo;</small><?php echo __('Back') ?></a></p>
+                        <p class="required col-md-6"><?php echo __('* Required Fields') ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,85 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsAdvTransaction
+ * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+?>
+
+<?php
+
+    $om = \Magento\Framework\App\ObjectManager::getInstance();
+    $currencyCode=$om->get('Magento\Store\Model\StoreManagerInterface')->getStore(null)->getBaseCurrencyCode();
+    $Netamount =0;$Netservice =0;
+?>
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff; padding: 17px; font-family: times new roman, Arial; border-radius: 3px;">
+    <tr>
+        <th style="border-bottom: 1px solid #dddddd; text-align: left; padding:10px; font-size: 14px; text-transform: capitalize; background-color: #efefef;"><?php echo __('OrderId');?></th>
+        <th style="border-bottom: 1px solid #dddddd; text-align: left; padding:10px; font-size: 14px; text-transform: capitalize; background-color: #efefef;"><?php echo __('Grand Total');?></th>
+        <th style="border-bottom: 1px solid #dddddd; text-align: left; padding:10px; font-size: 14px; text-transform: capitalize; background-color: #efefef;"><?php echo __('Commission Fee');?></th>
+        <th style="border-bottom: 1px solid #dddddd; text-align: left; padding:10px; font-size: 14px; text-transform: capitalize; background-color: #efefef;"><?php echo __('Payment Mode');?></th>
+        <th style="border-bottom: 1px solid #dddddd; text-align: left; padding:10px; font-size: 14px; text-transform: capitalize; background-color: #efefef;"><?php echo __('Total Payment');?></th>
+    </tr>
+
+    <tr>
+ 
+    <?php 
+        $row =$this->getId();
+        if(is_array($row)):?>
+            <?php
+                $rowId =$row['vpay_id'] ;
+
+                $description = json_decode($row['amount_desc'],true);
+
+            ?>
+            
+            <?php foreach ($description as $des): ?>
+                <?php
+                    $Netamount = $Netamount+$des['vendor_payment'];
+                  	$Netservice = $Netservice+$des['service_tax'];
+                  	$j= 0;
+                ?>
+                <tr>
+                    <td style="text-align: left; padding:10px; font-size: 14px; background-color: #dbdbdb;">
+                        <a href="<?php echo $this->getUrl('csadvtransaction/pay/view',['order_id'=>$des['order_id'],'vendor_id'=>$row['vendor_id'],'vpayment_id'=>$rowId]);?>"><?php echo $des['order_id']; ?></a>
+                    </td>
+                    <td style="text-align: left; padding:10px; font-size: 14px; background-color: #dbdbdb;">
+                        <?php echo $om->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($des['order_total'],false,2,null,$currencyCode);?>
+                    </td>
+
+                    <?php if(isset($des['commission_fee'])): ?>
+                    <td style="text-align: left; padding:10px; font-size: 14px; background-color: #dbdbdb;">
+                        <?php echo $om->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($des['commission_fee'],false,2,null,$currencyCode);?>
+            
+                    </td>
+                    <?php endif; ?>
+                    <td style="text-align: left; padding:10px; font-size: 14px; background-color: #dbdbdb;">
+                        <?php echo $om->get('Ced\CsAdvTransaction\Helper\Data')->getOrderPaymentType($des['order_id']);?>
+                    </td>
+                    <td style="text-align: left; padding:10px; font-size: 14px; background-color: #dbdbdb;">
+                        <?php echo $om->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($des['vendor_payment'],false,2,null,$currencyCode);?>
+                            
+                    </td>
+                </tr>
+            <?php endforeach;?>
+        <?php endif; ?>
+</table>
+<div class="totalPay">
+<span><b><?php echo __('Total Amount Pay :')?></b></span><span ><?php echo $om->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($Netamount,false,2,null,$currencyCode); ?></span>
+</div>
+<div class="totalPay">
+<span><b><?php echo __('Total Service Tax :')?></b></span><span ><?php echo $om->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($Netservice,false,2,null,$currencyCode); ?></span>
+</div>

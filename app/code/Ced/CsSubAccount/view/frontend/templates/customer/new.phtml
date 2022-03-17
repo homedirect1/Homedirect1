@@ -1,0 +1,115 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsSubAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+?>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="content-header panel-heading col-md-12 uptransform">
+            <div class="col-md-6 panel_product_heading">
+              <?php echo $block->getHeader() ?>
+            </div>
+            <div style="text-align:right;" class="buttons-set col-md-6 buttons_scb">    
+              <?php echo $this->getChildHtml('back_button'); ?>
+              <?php echo $this->getChildHtml('send_button'); ?>
+            </div>
+          </div>
+          <div class="ced-subvendor-request">
+            <form id="subvendor-request" method="post" action="<?php echo $this->getUrl('cssubaccount/customer/send')?>">
+              <div id="ced-customer-email" class="ced-customer-email">
+                <label class="label"><label>Customer Email*</label></label>
+                <label class="label"><label>Message</label></label>
+                <div class="container-fluid">
+                  <div id="user" class="input-box row clearfix">
+                      <div class='email-wrapper col-lg-6 col-md-6 col-sm-6'>
+                        <input id="email" name="email[0]" value="" class="ced-sub input-text validate-email required-entry" type="text"> 
+                      </div> 
+                      <div class="msg-wrapper col-lg-6 col-md-6 col-sm-6">
+                        <input id="msg" name="msg[0]" value="" class="ced-sub input-text" type="text"> 
+                      </div>      
+                  </div>
+                </div>
+              </div>
+              <span class="link" id="add"><a href="#">+ ADD ANOTHER EMAIL</a></span>  
+            </form>  
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<script type="text/x-magento-init">
+    {
+        "#subvendor-request": {
+            "validation": {}
+        }
+    }
+</script>
+<script>
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+
+    var dataForm = $('#subvendor-request');
+    var ignore = null;
+
+    function removediv(id) {
+      $("#user" + id).remove();
+    } 
+
+    $('.action-save').click(function(event) {
+      if($('#subvendor-request').validation('isValid') && $('#subvendor-request').validation()) {
+          $("#subvendor-request").submit();
+      } else {
+          return false;
+      }
+    });
+
+    var guest_count = 5;
+    $(document).ready(function(){
+      var counter = 1;
+      $("#add").click(function () { 
+        var x = document.getElementsByClassName("input-box").length;
+        if(guest_count > x){ 
+          var newTextBoxDiv = $(document.createElement('div')).attr("id", 'user' + counter).attr("class","input-box row clearfix");
+        
+        newTextBoxDiv.html('<br>'+ '<div class="email-wrapper col-lg-6 col-md-6 col-sm-6"><input id="email" value="" class="ced-sub input-text validate-email required-entry" type="text" name="email['+ counter+']"/></div>'+
+            '<div class="msg-wrapper col-lg-6 col-md-6 col-sm-6"><input id="msg" value="" class="ced-sub input-text" type="text" name="msg['+ counter+']"/></div>'+
+        '<a class="removediv" onclick="removediv(' + counter+')"><img src="<?php echo $this->getViewFileUrl('Ced_CsSubAccount::images/ced/subvendor/del_icon.png');?>"></a>'+'<br>');
+          
+        newTextBoxDiv.appendTo("#ced-customer-email");
+        counter++;
+        }
+        else{
+          jced("#add").remove();
+          
+        }
+        
+       });
+
+     
+       
+    });
+
+});
+
+</script>
+<script>
+function removediv(id) {
+      jQuery("#user" + id).remove();
+    } 
+</script>

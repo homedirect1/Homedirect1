@@ -1,0 +1,37 @@
+Id,Id
+"Order #","Order #"
+"Purchased On","Purchased On"
+"Billing To Name","Billing To Name"
+G.T.,G.T.
+"Commission Fee","Commission Fee"
+"Net Earned","Net Earned"
+"Vendor Payment","Vendor Payment"
+"Order Payment<br /> Status","Order Payment<br /> Status"
+"Vendor Payment <br /> Status","Vendor Payment <br /> Status"
+"Order Status","Order Status"
+View,View
+"Reset Filter","Reset Filter"
+Search,Search
+"Confirm Order","Confirm Order"
+"Only pending Orders Can be Confirmed?","Only pending Orders Can be Confirmed?"
+"Cancel Order","Cancel Order"
+"Only pending Orders Can be Cancelled?","Only pending Orders Can be Cancelled?"
+"This will create an offline refund. To create an online refund, open an invoice and create credit memo for it. Do you want to continue?","This will create an offline refund. To create an online refund, open an invoice and create credit memo for it. Do you want to continue?"
+"Credit Memo","Credit Memo"
+"Invoice and Ship","Invoice and Ship"
+Invoice,Invoice
+Confirm,Confirm
+Cancel,Cancel
+Ship,Ship
+"We can't send the invoice email right now.","We can't send the invoice email right now."
+Pending,Pending
+Confirmed,Confirmed
+Cancelled,Cancelled
+"'We can't process your request right now. Sorry, that's all we know.' .","'We can't process your request right now. Sorry, that's all we know.' ."
+"Hello,","Hello,"
+"Thanks,<br>%store_name","Thanks,<br>%store_name"
+"Enable Vendor Sla Addon","Enable Vendor Sla Addon"
+"Vendor SLA System","Vendor SLA System"
+"Auto Cancel Order After","Auto Cancel Order After"
+"Generate Invoice While Order Confirm","Generate Invoice While Order Confirm"
+"Max Time for Dispatch of Product","Max Time for Dispatch of Product"

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add  id="Ced_Affiliate::view" title="Affiliate System" module="Ced_Affiliate" sortOrder="45" resource="Ced_Affiliate::view" />
+        <add  id="Ced_Affiliate::account" title="Manage Account" module="Ced_Affiliate" sortOrder="46" parent="Ced_Affiliate::view" action="affiliate/manage/account" resource="Ced_Affiliate::view" />
+        <add id="Ced_Affiliate::denominations" title="Denominations Rule" module="Ced_Affiliate" sortOrder="47" parent="Ced_Affiliate::view"  action="affiliate/discount/denomination" resource="Ced_Affiliate::denominations" />
+        <add  id="Ced_Affiliate::banner" title="Manage Banners" module="Ced_Affiliate" sortOrder="48" parent="Ced_Affiliate::view" action="affiliate/banner/index" resource="Ced_Affiliate::view" />
+        <add  id="Ced_Affiliate::withdrawl" title="Manage Withdrawal Request" module="Ced_Affiliate" sortOrder="49" parent="Ced_Affiliate::view" action="affiliate/withdrawl/index" resource="Ced_Affiliate::view" />
+        <add id="Ced_Affiliate::affiliate_configuration" title="Affiliate Configuration" module="Ced_Affiliate" sortOrder="50" parent="Ced_Affiliate::view" action="adminhtml/system_config/edit/section/affiliate" resource="Ced_Affiliate::affiliate_configuration"/>
+    </menu>
+</config>

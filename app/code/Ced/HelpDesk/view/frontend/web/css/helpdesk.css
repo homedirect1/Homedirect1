@@ -1,0 +1,97 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+@CHARSET "UTF-8";
+#pri{
+	color:black;	
+ 	border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    padding: 1px 5px;
+}
+
+#selectedFiles{
+	float:left;
+}
+
+#mess{
+	width: 100% !important;
+}
+
+
+.welcome_msg {
+  color: #7b7b7b;
+  display: block;
+  font-size: 14px;
+  line-height: 27px;
+  margin-bottom: 35px;
+  margin-top: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.new-ticket-wrap {
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+.new-ticket-wrap {
+  background: #e9e9e9 none repeat scroll 0 0;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.new-ticket-wrap.check-ticket-wrap {
+  background: #fff none repeat scroll 0 0;
+}
+.new-ticket-wrap .pull-right {
+  float: right;
+}
+.new-ticket-wrap .pull-left {
+  float: left;
+}
+.clear {
+  clear: both;
+}
+.new-ticket-wrap .image-section, .new-ticket-wrap .content-section {
+  width: 50%;
+}
+.image-section {
+  text-align: center;
+}
+.image-section img {
+  display: inline-block;
+  width: auto;
+}
+.new-ticket-wrap .front-page-button a {
+  background: #0e3f21 none repeat scroll 0 0;
+  color: #fff;
+  display: inline-block;
+  margin-top: 35px;
+  padding: 14px 15px;
+}
+.new-ticket-wrap .content-section h3 {
+  background: #0e3f21 none repeat scroll 0 0;
+  color: #fff;
+  line-height: 40px;
+  margin-bottom: 30px;
+  padding: 5px 8px;
+}
+.user-create-ticket .form-list {
+  padding: 0;
+}
+.user-create-ticket li {
+  display: block;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,137 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsSubAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+$vendor_info = $this->_vendor->create()->load($this->getVendorId());
+$subVendor = $block->getSubVendor();
+
+if ($subVendor['profile_image']) {
+    $pub_path = $this->storeManager
+        ->getStore()
+        ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $url = $pub_path . $subVendor['profile_image'];
+} else {
+    $pub_path = $this->storeManager
+        ->getStore()
+        ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_STATIC);
+    $url = $this->getViewFileUrl('Ced_CsMarketplace::images/ced/csmarketplace/vendor/placeholder/logo.jpg');
+}
+
+?>
+
+<div class="row">
+    <div class="col-md-12" style="margin-top:10px;">
+        <div class="panel panel-default">
+            <div class="panel-heading col-md-12 uptransform"
+                 style="line-height:31px;font-weight:bold;padding:4px 15px;font-size:17px;">
+                <?php echo __('Sub-Vendor Profile View') ?>
+                <button style="line-height: 1.2em; float: right;" class="button btn btn-primary uptransform"
+                        onclick="window.location='<?php echo $this->getUrl('cssubaccount/customer/profileedit', array('_secure' => true)); ?>';"
+                        title="Edit" type="button">
+				<span>
+					<span><?php echo __('Edit') ?></span>
+				</span>
+                </button>
+            </div>
+            <div style="clear:both"></div>
+            <div class="panel-body">
+                <div class="welcome-msg">
+                    <p class="hello col-md-12">
+                        <strong class="col-md-6"><?php echo __('Hello') ?>
+                            ,<?php echo ' ' . $subVendor['first_name'] . " " . $subVendor['last_name'] ?>!</strong>
+                        <span class="approved_vendor col-md-6" title="Approved Sub-Vendor!"><i
+                                    class="fa fa-check-square-o"></i>
+                            <?php echo __('Approved Sub-Vendor!') ?>
+                        </span>
+                    </p>
+                </div>
+                <div class="my-account">
+                    <div class="col-1 addresses-primary col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading col-md-12 uptransform item"
+                                 style="font-weight:bold;padding:4px 15px;"><?= __("General Information") ?>
+                            </div>
+                            <div class="panel-body">
+                                <div class="general-wrapper">
+                                    <div class="col-md-12 profileimage sub-vendor">
+                                        <a class="profilepic" onclick="imagePreview('profile_picture'); return false;"
+                                           href="<?php echo $url ?>">
+                                            <img style="display: inline;" class="small-image-preview v-middle"
+                                                 alt="Profile Picture" title="Profile Picture" id="profile_picture"
+                                                 src="<?php echo $url ?>" width="50%">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 profile-info sub-vendor">
+                                        <p>
+                                            <strong><?= __("Created At") ?>:</strong>
+                                            <span class="attribute-value">
+                                                <?php echo $subVendor['created_at']; ?>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <strong><?= __("Status") ?>:</strong>
+                                            <span class="attribute-value">
+                                                <?= __("Approved") ?>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <strong><?= __("First Name") ?>:</strong>
+                                            <span class="attribute-value">
+                                                <?php echo $subVendor['first_name']; ?>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <strong><?= __("Last Name") ?>:</strong>
+                                            <span class="attribute-value">
+                                                <?php echo $subVendor['last_name']; ?>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <strong><?= __("Parent Vendor") ?>:</strong>
+                                            <span class="attribute-value">
+                                                <?php echo $vendor_info->getName(); ?>
+                                            </span>
+                                        </p>
+                                      <p>
+                                          <strong><?= __("Email") ?>:</strong>
+                                          <span class="attribute-value">
+                                              <?php echo $subVendor['email']; ?>
+                                          </span>
+                                      </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons-set col-md-12">
+                    <p class="back-link col-md-12">
+                        <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>">
+                            <small>&laquo;</small><?php echo __('Back') ?>
+                        </a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .sub-vendor {
+        width: 50%;
+        margin-top: 10px;
+    }
+</style>

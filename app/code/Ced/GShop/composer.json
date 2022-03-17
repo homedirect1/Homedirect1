@@ -1,0 +1,19 @@
+{
+    "name": "ced/google-shopping-feed-mageto2-free-integration",
+    "description": "Google Shopping Feed Magento2 integration",
+    "require": {
+        "ced/integrator": "*",
+        "google/apiclient": "^2.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.6",
+    "license": [
+        "EULA"
+    ],
+    "autoload": {
+    "files": [ "registration.php" ],
+        "psr-4": {
+            "Ced\\GShop\\": ""
+        }
+    }
+}

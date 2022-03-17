@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_Customnumbers
+  * @author   CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <ced_customnumbers>										  <!--  section name -->
+          	<general>									            <!--  group name -->
+          		  <activation>1</activation>	        <!--  field name -->     
+            </general>
+            <order>
+                <activation>1</activation>
+                <default>0</default>
+                <prefix>ORD</prefix>
+                <format>{{var y}}-{{var D}}-{{var n}}</format>
+                <padding>8</padding>
+                <counter>1</counter>
+                <increment>1</increment>
+                <reset>0</reset>
+            </order>
+            <invoice>
+              <activation>1</activation>
+              <default>0</default>
+              <same-value-order>0</same-value-order>
+              <prefix>INV</prefix>
+              <format>{{rand 6}}</format>
+              <padding>8</padding>
+              <counter>1</counter>
+              <increment>1</increment>
+              <reset>0</reset>
+            </invoice>
+            <shipment>
+              <activation>1</activation>
+              <default>0</default>
+              <same-value-order>0</same-value-order>
+              <prefix>SHI</prefix>
+              <format>{{var y}}-{{var D}}-{{var n}}</format>
+              <padding>8</padding>
+              <counter>1</counter>
+              <increment>1</increment>
+              <reset>y-m-d</reset>
+            </shipment>
+            <creditmemo>
+              <activation>1</activation>
+              <default>0</default>
+              <same-value-order>0</same-value-order>
+              <prefix>CRD</prefix>
+              <format>{{var y}}-{{var D}}-{{var n}}</format>
+              <padding>8</padding>
+              <counter>1</counter>
+              <increment>1</increment>
+              <reset>y-m-d</reset>
+            </creditmemo>
+        </ced_customnumbers>
+    </default>
+</config>

@@ -1,0 +1,20 @@
+{
+    "name": "ced/module-csvendorproductattribute",
+    "description": "N/A",
+    "require": {
+        "php": "~7.3.0|~7.4.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.3",
+    "license": [
+        "EULA"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ced\\CsVendorProductAttribute\\": ""
+        }
+    }
+}

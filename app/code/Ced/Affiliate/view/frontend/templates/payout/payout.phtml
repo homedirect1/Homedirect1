@@ -1,0 +1,68 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license     https://cedcommerce.com/license-agreement.txt
+ */
+$earnedAmount = $block->pendingamount();
+$amount = $this->_scopeConfig->getValue('affiliate/referfriend/referral_reward_denomination_range');
+
+if($amount == 0){
+    $amount = 1;
+}
+$gap = intval($earnedAmount / $amount);
+for ($i = 1; $gap >= $i; $i++) {
+    $options[] = $amount * $i;
+}
+
+$currencyCode = $this->_storeManager->getStore()->getCurrentCurrencyCode();
+$symbol = $this->localeCurrency->getCurrency($currencyCode)->getSymbol();
+
+?>
+<div class="col-md-12" style="background-color:#009933; color:#FFFFFF">
+    <div class="panel-red">
+        <div class="panel-heading" style="padding-top:5%; padding-left:25%">
+            <div class="info-heading" style="height:25px">
+                <center><b><?php echo __('Your Current Balance: ') ?><?php echo $symbol . '' . $earnedAmount ?></b>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <form action="<?php echo $this->getUrl('affiliate/customer/save') ?>" method="post" id="form-validate" class="form">
+        <fieldset class="fieldset" data-hasrequired="* Required Fields">
+            <legend class="legend"><span>Generate Discount Coupon</span></legend>
+            <br/>
+            <?php if (isset($options)): ?>
+                <div class="field firstname required">
+                    <label for="discount_coupon" class="label">Discount Coupon</label>
+                    <div class="control">
+                        <select name="discount_coupon">
+                            <?php foreach ($options as $key => $value): ?>
+                                <option value="<?php echo $value ?>"><?php echo $symbol . '' . $value ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <button name="submit" class="action primary" type="submit"><span>Submit</span></button>
+                </div>
+            <?php else: ?>
+                <label>You did not reached the Payout Limit: <?php echo $amount ?></label>
+            <?php endif ?>
+
+        </fieldset>
+    </form>
+</div>

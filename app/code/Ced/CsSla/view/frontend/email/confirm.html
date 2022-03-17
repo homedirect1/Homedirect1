@@ -1,0 +1,23 @@
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject SLA Mail@-->
+<!--@vars {} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>Hello {{var name}}</p>
+<br>
+
+<p>
+     <br>  {{var answer}}
+           <br>  If you have any query please feel free to ask us.
+                        
+</p>
+<br>
+
+<p>{{trans "Thanks,<br>%store_name" store_name=$store.getFrontendName() |raw}}</p>
+
+{{template config_path="design/email/footer_template"}}

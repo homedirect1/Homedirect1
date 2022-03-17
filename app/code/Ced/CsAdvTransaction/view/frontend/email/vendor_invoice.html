@@ -1,0 +1,38 @@
+<!-- /**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsAdvTransaction
+ * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */ -->
+<!--@vars {} @-->
+<!--@subject Payment Email@-->
+{{template config_path="design/email/header_template"}}
+	<div>
+		<p>Hi {{var vendor_name}}</p>
+		
+	<p>We are sharing the invoice of marketplace fees for the placed orders of your products</p>
+		
+		{{block class='Magento\\Framework\\View\\Element\\Template' area='frontend' template='Ced_CsAdvTransaction::vendor_invoice.phtml' id=$id}}
+<p>Thank you for selling with us
+Your feedback is  valuable to us
+</p>
+
+	</div>
+	<div>
+	</div>
+	
+<br>
+
+
+
+{{template config_path="design/email/footer_template"}}

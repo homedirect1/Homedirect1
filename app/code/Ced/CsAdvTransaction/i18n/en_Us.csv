@@ -1,0 +1,139 @@
+"Delete Fee","Delete Fee"
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Eligible Orders","Eligible Orders"
+Continue,Continue
+Id,Id
+"Created At","Created At"
+"Order Id","Order Id"
+"Order State","Order State"
+"Order Payment Mode","Order Payment Mode"
+"Order Total","Order Total"
+"Commission Fee","Commission Fee"
+"Paid Amount to Vendor","Paid Amount to Vendor"
+"Vendor Shipping","Vendor Shipping"
+"Payable Amount","Payable Amount"
+"Add New","Add New"
+"Transaction Details","Transaction Details"
+"Vendor Name","Vendor Name"
+"Payment Method","Payment Method"
+"Beneficiary Details","Beneficiary Details"
+"Transaction ID#","Transaction ID#"
+"Transaction Date","Transaction Date"
+"Transaction Mode","Transaction Mode"
+"Transaction Type","Transaction Type"
+"Credit Type","Credit Type"
+"Debit Type","Debit Type"
+Amount,Amount
+"Adjustment Amount","Adjustment Amount"
+"Net Amount","Net Amount"
+Notes,Notes
+Action,Action
+View,View
+Delete,Delete
+"Are you sure?","Are you sure?"
+"Transaction Order View","Transaction Order View"
+"Request Information","Request Information"
+"order Details","order Details"
+Vendor,Vendor
+"Payment Mode","Payment Mode"
+"Grand total","Grand total"
+"Shipping Fee of order","Shipping Fee of order"
+"fee Details","fee Details"
+"Shipping Amount","Shipping Amount"
+"Payable Amount to Vendor","Payable Amount to Vendor"
+"Payable Amount to Admin","Payable Amount to Admin"
+"Paid Amount","Paid Amount"
+"Vendor Order Total","Vendor Order Total"
+"Vendor Payment","Vendor Payment"
+"Order Payment State","Order Payment State"
+"Pay All","Pay All"
+PostPaid,PostPaid
+PrePaid,PrePaid
+"Pay Offline","Pay Offline"
+"Credit Amount","Credit Amount"
+"Transaction Information","Transaction Information"
+Test,Test
+"Readonly field","Readonly field"
+" "," "
+Other,Other
+"Enter adjustment amount in +/- (if any)","Enter adjustment amount in +/- (if any)"
+,
+"Order #","Order #"
+"Purchased On","Purchased On"
+"Billing To Name","Billing To Name"
+G.T.,G.T.
+"Net Earned","Net Earned"
+"Order Payment<br /> Status","Order Payment<br /> Status"
+"Vendor Payment <br /> Status","Vendor Payment <br /> Status"
+"Reset Filter","Reset Filter"
+Search,Search
+"Confirm Order","Confirm Order"
+"Only pending Orders Can be Confirmed?","Only pending Orders Can be Confirmed?"
+"Cancel Order","Cancel Order"
+"Only pending Orders Can be Cancelled?","Only pending Orders Can be Cancelled?"
+"Total Shipping Amount","Total Shipping Amount"
+Tax,Tax
+Enable,Enable
+"Amount in %","Amount in %"
+"You Deleted ' . . ' Successfully","You Deleted ' . . ' Successfully"
+"This Request no longer exists.","This Request no longer exists."
+"Edit Field","Edit Field"
+"Add Fee","Add Fee"
+"Please correct the data sent.","Please correct the data sent."
+"Something Went Wrong","Something Went Wrong"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"You Saved field_label Successfully","You Saved field_label Successfully"
+"You Updated field_label Successfully","You Updated field_label Successfully"
+"Field Code already exist","Field Code already exist"
+CsMarketplace,CsMarketplace
+"Manage Vendor Transactions","Manage Vendor Transactions"
+"Pay to vendor","Pay to vendor"
+"Pay For Orders","Pay For Orders"
+"Payment is successfully saved","Payment is successfully saved"
+"View Order Details","View Order Details"
+"Requsted Transaction","Requsted Transaction"
+"View Transaction Details","View Transaction Details"
+" Vendor Pending Payment"," Vendor Pending Payment"
+SubTotal,SubTotal
+"Shipping & Handling","Shipping & Handling"
+"Grand Total (Earned)","Grand Total (Earned)"
+"Marketplace Fees","Marketplace Fees"
+"Service Tax ","Service Tax "
+"Total Amount to Pay","Total Amount to Pay"
+"Service Tax","Service Tax"
+"Order Description","Order Description"
+OrderId,OrderId
+"Grand Total","Grand Total"
+"Total Payment","Total Payment"
+"Total Amount Pay :","Total Amount Pay :"
+"Total Service Tax :","Total Service Tax :"
+"Order Information","Order Information"
+"Fee Details","Fee Details"
+"Total Amount","Total Amount"
+"Request For Payment","Request For Payment"
+"Order Details","Order Details"
+Back,Back
+"Enable Vendor Advance Transaction System","Enable Vendor Advance Transaction System"
+"Vendor Advance Transaction System","Vendor Advance Transaction System"
+"Refund Policy Date","Refund Policy Date"
+"Pay for Shipping to Vendor","Pay for Shipping to Vendor"
+"Payment Cycle Time","Payment Cycle Time"
+"Postpaid Payment Methods","Postpaid Payment Methods"
+"Vendor Tax","Vendor Tax"
+"Fee Information","Fee Information"
+Save,Save
+Status,Status
+"Add New Fee","Add New Fee"
+"All Store Views","All Store Views"
+"Store View","Store View"
+"Delete items","Delete items"
+"Delete selected items?","Delete selected items?"
+ID,ID
+"Fee Code","Fee Code"
+"Fee Label","Fee Label"
+Type,Type
+Value,Value
+System,System
+Transactions,Transactions
+"Request Payment","Request Payment"
+"View All Transaction","View All Transaction"

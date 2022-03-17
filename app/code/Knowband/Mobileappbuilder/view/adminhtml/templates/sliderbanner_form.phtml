@@ -1,0 +1,166 @@
+<?php
+    $helper = \Magento\Framework\App\ObjectManager::getInstance()->get('Knowband\Mobileappbuilder\Helper\Data');
+    $data = $helper->getBannerSliderDetails($this->getRequest()->getParam('id'));
+    $categories = $helper->getCategories();
+    $products = $helper->getProductCollection();
+?>
+<form action="<?php echo $this->getFormActionUrl(); ?>" method="post" enctype="multipart/form-data" id="form_save_banner">
+    <input type="hidden" id="form_key" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <fieldset class="admin__fieldset"> 
+        <div class="admin__field">
+            <label class="admin__field-label" for="status">
+                <span>
+                    <span class="vss_required">*</span> <?php echo __("Status"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='banner_slider[status]' id="banner_slider-status" class='admin__control-select'>
+                        <option value='0' <?php if ($data['status'] == '0') echo 'selected="selected"'; ?> ><?php echo __("Disable"); ?></option>
+                        <option value='1' <?php if ($data['status'] == '1') echo 'selected="selected"'; ?> ><?php echo __("Enable"); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label" for="image_type">
+                <span>
+                    <span class="vss_required">*</span> <?php echo __("Select Image Type"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='banner_slider[image_type]' id="image_type" class='admin__control-select'>
+                        <option value='0' selected="selected" ><?php echo __("Select an option"); ?></option>
+                        <option value='url' <?php if ($data['image_type'] == 'url') echo 'selected="selected"'; ?>><?php echo __("URL"); ?></option>
+                        <option value='image' <?php if ($data['image_type'] == 'image') echo 'selected="selected"'; ?>><?php echo __("Upload"); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec" style="display: none;">
+            <label class="admin__field-label" for="image_upload">
+                <span><span class="vss_required">*</span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <img id="upload_image_preview" src="<?php echo $data['image_url']? $data['image_url']:$this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;width: 200px;height: 200px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <input id="remove-button" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onclick="removeImage('image_upload_sec');" type="button" value="<?php echo __('Remove Image'); ?>">
+                    </div>
+                    <input name="banner_slider[image_upload]" id="image_upload" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                    <input name="is_removed" id="is_removed" type="hidden" value="0"/>
+                    <input name="is_uploaded" id="is_uploaded" type="hidden" value="0"/>
+                </div>
+                <div class="vss_info">
+                        <?php echo __("Only .png or .jpg file format accepted. File size should not be more than 2 MB.")?>
+                    </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_url_sec" style="display: none;">
+            <label class="admin__field-label" for="image_url">
+                <span><span class="vss_required">*</span>
+                    <?php echo __("Image Url")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <img id="url_image_preview" src="<?php echo $data['image_url']? $data['image_url']:$this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;width: 200px;height: 200px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <input id="remove-button" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onclick="removeImage('image_url_sec');" type="button" value="<?php echo __('Remove Image'); ?>">
+                    </div>
+                    <input name="banner_slider[image_url]" id="image_url" value="<?php echo $data['image_url']; ?>" placeholder="<?php echo __('Enter URL'); ?>" type="url" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="redirect_activity">
+                <span>
+                    <span class="vss_required">*</span> <?php echo __("Select Redirect Activity"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='banner_slider[redirect_activity]' id="redirect_activity" class='admin__control-select'>
+                        <option value='home' <?php if ($data['redirect_activity'] == 'home') echo 'selected="selected"'; ?>" ><?php echo __("Home"); ?></option>
+                        <option value='category' <?php if ($data['redirect_activity'] == 'category') echo 'selected="selected"'; ?>><?php echo __("Category"); ?></option>
+                        <option value='product' <?php if ($data['redirect_activity'] == 'product') echo 'selected="selected"'; ?>><?php echo __("Product"); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field category_sec" style="display: none;">
+            <label class="admin__field-label" for="category_id">
+                <span>
+                    <span class="vss_required">*</span> <?php echo __("Select Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='banner_slider[category_id]' id="category_id" class='admin__control-select'>
+                        <?php foreach($categories as $cat_data) { ?>
+                            <option value='<?php echo $cat_data['value']; ?>' <?php if ($data['category_id'] == $cat_data['value']) echo 'selected="selected"'; ?>><?php echo $cat_data['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field product_sec" style="display: none;">
+            <label class="admin__field-label" for="product_id">
+                <span>
+                    <span class="vss_required">*</span> <?php echo __("Select Product"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='banner_slider[product_id]' id="product_id" class='admin__control-select'>
+                        <option value="0"><?php echo __('--Select Product--'); ?></option>
+                        <?php
+                            foreach ($products as $product) {
+                                    $entity_id = $product->getId();
+                                    $name = $product->getName(); ?>
+                                    <option value="<?php echo $entity_id; ?>" <?php if ($data['product_id'] == $entity_id) echo 'selected="selected"'; ?>><?php echo $name; ?></option>
+                        <?php } ?>	
+                    </select>
+                    <input type="hidden" name="product_name" id="product_name" value="<?php echo $data['product_name']; ?>"/>
+                    <input type="hidden" name="category_name" id="category_name" value="<?php echo $data['category_name']; ?>"/>
+                    <input id="banner_slider_id" name="banner_slider[banner_slider_id]" type="hidden" value="<?php echo $data['kb_banner_id'] ?>" />
+                    <input id="banner_slider_type" name="banner_slider[type]" type="hidden" value="<?php echo $data['type'] ?>" />
+                </div>
+            </div>
+        </div>
+        <div id="show_error"></div>
+    </fieldset>
+</form>
+<script>
+    require(['jquery'], function(jQuery){
+        var default_image_type = jQuery("#banner_popup #image_type").val();
+        var default_redirect_activity = jQuery("#banner_popup #redirect_activity").val();
+        if (default_image_type == 'url') {
+            jQuery('#banner_popup .image_url_sec').show();
+            jQuery('#banner_popup .image_upload_sec').hide();
+        } else if (default_image_type == 'image') {
+            jQuery('#banner_popup .image_url_sec').hide();
+            jQuery('#banner_popup .image_upload_sec').show();
+        } else {
+            jQuery('#banner_popup .image_url_sec').hide();
+            jQuery('#banner_popup .image_upload_sec').hide();
+        }
+
+        if (default_redirect_activity == 'category') {
+            jQuery('#banner_popup .category_sec').show();
+            jQuery('#banner_popup .product_sec').hide();
+        } else if (default_redirect_activity == 'product') {
+            jQuery('#banner_popup .category_sec').hide();
+            jQuery('#banner_popup .product_sec').show();
+        } else {
+            jQuery('#banner_popup .category_sec').hide();
+            jQuery('#banner_popup .product_sec').hide();
+        }
+   });
+</script>

@@ -1,0 +1,73 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsDeliveryDate
+ * @author     CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+
+?>
+<div id="ship_items_container">
+    <?php /*Vendor Delivery Date Method */ ?>
+    <?php
+    $shipment = $this->registry->registry('current_shipment');
+    $vendorId = $this->session->getData('vendor_id');
+    $orderId = $shipment->getOrder()->getData('entity_id');
+    $data = $this->itemCollectionFactory->create()
+        ->addFieldToFilter('order_id', $orderId)->addFieldToFilter('vendor_id', $vendorId);
+    $orderData = [];
+    if (!empty($data->getData())):
+
+
+        foreach ($data->getData() as $key => $value) {
+            if ($value['product_type'] == 'simple') {
+                $orderData[$key]['name'] = $value['name'];
+                $orderData[$key]['cs_deliverydate'] = $value['cs_deliverydate'];
+                $orderData[$key]['cs_deliverycomment'] = $value['cs_deliverycomment'];
+                $orderData[$key]['cs_timestamp'] = $value['cs_timestamp'];
+            }
+        }
+
+        ?>
+        <div class="admin__page-section-item order-shipping-method" style="width:100%;">
+            <div class="admin__page-section-item-title">
+                        <span class="title"><?php /* @escapeNotVerified */
+                            echo __('Delivery Date Information') ?></span>
+            </div>
+            <table class="data-table admin__table-primary edit-order-table">
+                <thead>
+                <tr class="headings">
+                    <th class="col-product"><span>Product Name</span></th>
+                    <th class="col-status"><span>DeliveryDate</span></th>
+                    <th class="col-price"><span>Timestamp</span></th>
+                    <th class="col-price-original"><span>Delivery Comment</span></th>
+                </tr>
+                </thead>
+                <tbody class="even">
+
+                <?php foreach ($orderData as $key => $value): ?>
+                    <tr>
+                        <td class="col-product"><?php echo __($value['name']); ?></td>
+                        <td class="col-product"><?php echo __($value['cs_deliverydate']); ?></td>
+                        <td class="col-product"><?php echo __($value['cs_timestamp']); ?></td>
+                        <td class="col-product"><?php echo __($value['cs_deliverycomment']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
+
+
+
+</div>

@@ -1,0 +1,205 @@
+<style>
+    .modal-content{
+        box-shadow: none;
+        border: none;
+    }
+    #feed_item_error_holder {
+        padding-top: 25px;
+    }
+    .modal-popup._inner-scroll .modal-content {
+            margin-top: 20px;
+    }
+</style>
+<script type="text/javascript">
+    var a = 'aaaa';
+    </script>
+<script type="text/javascript">
+    require(['jquery'], function(jQuery){
+        jQuery('#new_noti_popup').on('change', "#image_type", function(){
+            jQuery('#new_noti_popup .image_upload_sec').hide();
+            jQuery('#new_noti_popup .image_url_sec').hide();
+            if(this.value == 'url'){
+                jQuery('#new_noti_popup .image_url_sec').css('display', 'block');
+            }else if(this.value == 'image'){
+                jQuery('#new_noti_popup .image_upload_sec').show('slow');
+            }
+        });
+        jQuery("#redirect_activity").on('change', function() {
+            jQuery('#new_noti_popup .product_sec').hide('slow');
+            jQuery('#new_noti_popup .category_sec').hide('slow');
+            if(this.value == 'product'){
+                jQuery('#new_noti_popup .product_sec').show('slow');
+            }else if(this.value == 'category'){
+                jQuery('#new_noti_popup .category_sec').show('slow');
+            }
+        });
+        jQuery('#new_noti_popup').on('change', "#product_id", function(){
+            jQuery('#new_noti_popup #product_name').val(jQuery('#new_noti_popup #product_id option:selected').text());
+        });
+        jQuery('#new_noti_popup').on('change', '#category_id', function(){
+            jQuery('#new_noti_popup #category_name').val(jQuery('#new_noti_popup #category_id option:selected').text());
+        });
+
+        jQuery("#image_url").on('blur', function() {
+            check_url = velovalidation.checkUrl(jQuery('#new_noti_popup #image_url'));
+            if (check_url != true) {
+                is_error = true;
+                jQuery('#new_noti_popup #image_url').addClass('kb_error_field');
+                jQuery('#new_noti_popup #image_url').after('<span class="kb_error_message">' + check_url + '</span>');
+            }else
+            {
+                    jQuery('#new_noti_popup .image_url_sec #url_image_preview').attr('src', jQuery(this).val());
+                    jQuery('#new_noti_popup .image_url_sec #remove-button').show();
+            }
+        });
+    });
+    function removeImage(ele) {
+        require(['jquery'], function(jQuery){
+            if(confirm('<?php echo __("Are your sure?"); ?>')){
+                var default_image = '<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>';
+
+
+                if(ele == 'image_url_sec'){
+                    jQuery('#new_noti_popup #image_url').val("");
+                    ele1 = 'url_image_preview';
+                }else{
+                    jQuery('#new_noti_popup #is_uploaded').val('0');
+                    jQuery('#new_noti_popup #image_upload').val('');
+                    ele1 = 'upload_image_preview';
+                }
+                jQuery('#new_noti_popup .'+ele+' #'+ele1).attr('src', default_image);
+                jQuery('#new_noti_popup .'+ele+' #'+ele1).hide();
+                jQuery('#new_noti_popup .'+ele+' #'+ele1).fadeIn(650);
+                jQuery('#new_noti_popup .'+ele+' #remove-button').hide();
+            }
+        });
+    }
+function openNewPushNotificationForm()
+{
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '<?php echo __("Send New Push Notification");?>',
+                buttons: [
+                    {
+                        text: '<?php echo __('Send'); ?>',
+                        class: 'button_submit_form btn btn-success',
+                        id: 'send_notification',
+                        click: function () {
+                            validatePushNotifcationForm();
+                        }
+                    },
+                    {
+                        text: '<?php echo __('Cancel'); ?>',
+                        class: 'hidden_element btn btn-warning new_noti_popup_close',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }
+                ]
+            };
+            $.ajax({
+                type: "POST",
+                showLoader: true,
+                url: '<?php echo $this->getUrl('*/*/saveAndSendPushNotification'); ?>',
+                data:
+                {
+                    form_key : window.FORM_KEY, method : 'form'
+                },
+                success: function (output) {
+                    
+                    if(output == "0")
+                    {
+                        alert("<?php echo __("Something went wrong. Please try again.");?>");;
+                    }
+                    else
+                    {
+                        var popup = modal(options, $('#new_noti_popup'));
+                        $("#new_noti_popup").html(output).modal("openModal");
+                        
+                        jQuery("#redirect_activity").on('change', function() {
+			    jQuery('#new_noti_popup .product_sec').hide('slow');
+			    jQuery('#new_noti_popup .category_sec').hide('slow');
+			    if(this.value == 'product'){
+				jQuery('#new_noti_popup .product_sec').show('slow');
+			    }else if(this.value == 'category'){
+				jQuery('#new_noti_popup .category_sec').show('slow');
+			    }
+			});
+                    }
+                }
+
+            });
+        }
+    );
+}
+function viewNotificationDetials(url)
+{
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '<?php echo __("View Push Notification");?>',
+                buttons: [
+                    {
+                        text: '<?php echo __('Close'); ?>',
+                        class: 'hidden_element btn btn-warning new_noti_popup_close',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }
+                ]
+            };
+            $.ajax({
+                type: "POST",
+                showLoader: true,
+                url: url,
+                data:
+                {
+                    form_key : window.FORM_KEY, method : 'view'
+                },
+                success: function (output) {
+                    
+                    if(output == "0")
+                    {
+                        alert("<?php echo __("Something went wrong. Please try again.");?>");;
+                    }
+                    else
+                    {
+                        var popup = modal(options, $('#new_noti_popup'));
+                        $("#new_noti_popup").html(output).modal("openModal");
+                    }
+                }
+
+            });
+        }
+    );
+}
+var send_push_ajax_url = '<?php echo $this->getUrl('*/*/saveAndSendPushNotification'); ?>';
+</script>
+<div id="new_noti_popup"></div>
+
+<div><a class="btn btn-primary" style="float: right;" href="javascript:void(0)" onclick="openNewPushNotificationForm()"><?php echo __('Send New Notification'); ?></a></div>
+<?php echo $this->getLayout()
+    ->createBlock("Knowband\Mobileappbuilder\Block\Adminhtml\Tab\PushNotificationHistory")
+    ->toHtml();
+?>

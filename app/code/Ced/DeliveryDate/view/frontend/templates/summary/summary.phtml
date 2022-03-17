@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_DeliveryDate
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+$data = $this->deliveryDateData();
+?>
+<script>
+
+    var deliveryDate =  <?php echo \Zend_Json::encode($data['deliveryDate']); ?>;
+    var deliveryComment =  <?php echo \Zend_Json::encode($data['deliveryComment']); ?>;
+    var timestamp =  <?php echo \Zend_Json::encode($data['timestamp']); ?>;
+
+    if(deliveryDate == '0000-00-00 00:00:00'){  deliveryDate = ' ';}
+    if(!deliveryComment){ deliveryComment = 'No Comment or Messages';}
+    if(!timestamp){ timestamp = 'No Timestamp Selected';}
+
+    var baseurl = '<?php echo $this->getBaseUrl();?>';
+//    window.checkoutConfig.shipping.baseurl = baseurl;
+</script>

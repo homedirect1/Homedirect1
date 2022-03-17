@@ -1,0 +1,157 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+@CHARSET "UTF-8";
+#ticEsc
+{
+  width:33%;
+}
+
+#buts
+{
+  padding-left:15px; 
+}
+
+#dept
+{
+  width:130px;
+  float:left;
+}
+.first-li
+{
+  float: left;
+}
+.second-li
+{
+  float: right;
+  width: 60%;
+}
+#spanColor {
+   border: 1px solid rgba(0, 0, 0, 0.3);
+   border-radius: 4px;
+   padding: 1px 5px;
+   font-weight: bold;
+   padding: 1px 5px;
+}
+#six > #dept {
+  margin-bottom: 15px;
+  margin-top: 2px;
+}
+
+#mess {
+   background-color:#d9ffd2;
+   margin-bottom:10px;
+   border:1px solid gray;
+   font-size:13px;
+   padding:10px;
+   border-radius:5px;
+   width:85%;
+    float: left;
+}
+
+#mess2 {
+   background-color:#b9b3ff;
+   margin-bottom:10px;
+   border:1px solid gray;
+   font-size:13px;
+   padding:10px;
+   border-radius:5px;
+   width:85%;
+   float: right;
+}
+
+#mess2 #from{
+  float:right;
+  background-color:#b9b3ff;
+}
+
+#id
+{
+  background-color: #edfaff;
+}
+
+#from {
+    background-color: #fff;
+}
+
+#messDetail
+{
+  background-color: #FFFFCC;
+}
+
+#back
+{
+  padding-top: 10px;
+}
+
+#backA
+{
+  text-decoration:none;
+}
+
+.ticket {
+    /*clear: both;
+    margin-top: 25px;*/
+}
+
+.one, .two, .three, .four {
+    /*float: left;*/
+    margin-bottom: 25px !important;
+    /*width: 25%;*/
+}
+.one .ticket, .two .ticket, .three .ticket, .four .ticket
+{
+  float: left;
+}
+.clear
+{
+  clear: both;
+}
+
+#five {
+    clear: both;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.fieldset {
+    margin: 25px auto;
+}
+
+#from h2 {
+    color: #383838;
+}
+
+#mess > div {
+    clear: both;
+}
+
+#mess #from h2 {
+    float: left;
+}
+
+#mess #from > span {
+    line-height: 27px;
+    margin-left: 10px;
+}
+#attachment{
+  background-color:#d8ebc4;
+  margin-top:5px;
+  padding:6px;
+  border-radius:10px;
+}

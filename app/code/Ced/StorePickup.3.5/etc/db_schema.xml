@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_StorePickup
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="ced_store_pickup" resource="default" engine="innodb" comment="Store Pickup Information">
+        <column xsi:type="int" name="pickup_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Store Pickup ID"/>
+        <column xsi:type="int" name="vendor_id" nullable="false" comment="Vendor ID"/>
+        <column xsi:type="varchar" name="store_name" nullable="false" length="255" comment="Store Name"/>
+        <column xsi:type="varchar" name="store_manager_name" nullable="false" length="255" comment="Store Manager Name"/>
+        <column xsi:type="varchar" name="store_manager_email" nullable="false" length="255" comment="Store Manager Email"/>
+        <column xsi:type="varchar" name="store_address" nullable="false" length="255" comment="Store Address"/>
+        <column xsi:type="varchar" name="store_city" nullable="false" length="255" comment="Store City"/>
+        <column xsi:type="varchar" name="store_country" nullable="false" length="255" comment="Store Country"/>
+        <column xsi:type="varchar" name="store_state" nullable="false" length="255" comment="Store State/Province"/>
+        <column xsi:type="int" name="store_zcode" nullable="false" comment="Store Zip Code"/>
+        <column xsi:type="varchar" name="latitude" nullable="false" length="255" comment="Store Latitude"/>
+        <column xsi:type="varchar" name="longitude" nullable="false" length="255" comment="Store Longitude"/>
+        <column xsi:type="int" name="store_phone" nullable="false" comment="Contact No."/>
+        <column xsi:type="datetime" name="created_at" default="CURRENT_TIMESTAMP"
+                on_update="true" nullable="true" comment="Creation Time"/>
+        <column xsi:type="datetime" name="updated_at" default="CURRENT_TIMESTAMP"
+                on_update="true" nullable="true" comment="Modification Time"/>
+        <column xsi:type="smallint" name="is_active" padding="5" unsigned="true" nullable="false"
+                comment="Enable/Disable"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pickup_id"/>
+        </constraint>
+    </table>
+
+    <table name="ced_store_pickup_hour" resource="default" engine="innodb" comment="Store Pickup Hours Information">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="pickup_id" nullable="false" comment="Store Pickup ID"/>
+        <column xsi:type="varchar" name="days" nullable="false" length="255" comment="Days"/>
+        <column xsi:type="varchar" name="start" nullable="false" length="255" comment="Start"/>
+        <column xsi:type="varchar" name="end" nullable="false" length="255" comment="End"/>
+        <column xsi:type="int" name="interval" nullable="false" comment="Time Interval"/>
+        <column xsi:type="datetime" name="created_at" default="CURRENT_TIMESTAMP"
+                on_update="true" nullable="true" comment="Creation Time"/>
+        <column xsi:type="datetime" name="updated_at" default="CURRENT_TIMESTAMP"
+                on_update="true" nullable="true" comment="Modification Time"/>
+        <column xsi:type="smallint" name="status" padding="5" unsigned="true" nullable="false"
+                comment="Enable/Disable"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="quote" resource="checkout" comment="Sales Flat Quote">
+        <column xsi:type="varchar" name="store_pickup_data" nullable="true" length="550"
+                comment="Store Pickup Data"/>
+    </table>
+
+    <table name="sales_order" resource="sales" comment="Sales Flat Order">
+        <column xsi:type="varchar" name="store_pickup_data" nullable="true" length="550"
+                comment="Store Pickup Data"/>
+    </table>
+
+</schema>

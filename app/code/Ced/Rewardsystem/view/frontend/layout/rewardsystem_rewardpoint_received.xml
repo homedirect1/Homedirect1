@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <css src="Ced_Rewardsystem::css/reward.css"/>
+        <css src="mage/calendar.css"/>
+        <css src="Ced_Rewardsystem::bower_components/font-awesome/css/font-awesome.min.css"/>
+        <css src="Ced_Rewardsystem::css/reward_invite.css" />
+    </head>
+    <body>
+        <referenceContainer name="page.main.title">
+            <block class="Ced\Rewardsystem\Block\Reward\Points"
+                   name="reward_point_grid" template="Ced_Rewardsystem::reward/rewardpoint.phtml" cacheable="false" />
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Html\Links" name="reward.links" before="-">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">items order-links</argument>
+                </arguments>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="reward.received.links">
+                    <arguments>
+                        <argument name="path" xsi:type="string">rewardsystem/rewardpoint/received</argument>
+                        <argument name="label" xsi:type="string" translate="true">Received</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="reward.due.links">
+                    <arguments>
+                        <argument name="path" xsi:type="string">rewardsystem/rewardpoint/due</argument>
+                        <argument name="label" xsi:type="string" translate="true">Due</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="reward.used.links">
+                    <arguments>
+                        <argument name="path" xsi:type="string">rewardsystem/rewardpoint/used</argument>
+                        <argument name="label" xsi:type="string" translate="true">Used</argument>
+                    </arguments>
+                </block>
+            </block>
+            <block class="Ced\Rewardsystem\Block\Reward\Received"
+                   name="reward_point_received" template="Ced_Rewardsystem::reward/receivedpoint.phtml" cacheable="false" >
+            </block>
+            <block class="Ced\Rewardsystem\Block\Referral\Invite" name="reward_invite_users"
+                   template="invites/index.phtml" cacheable="false" ifconfig="reward/referral/referral_enable"/>
+        </referenceContainer>
+    </body>
+</page>

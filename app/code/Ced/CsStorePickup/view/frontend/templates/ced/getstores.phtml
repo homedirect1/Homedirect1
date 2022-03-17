@@ -1,0 +1,127 @@
+<?php 
+$gmapApiKey = $this->helper('Ced\StorePickup\Helper\Data')->getStoreConfig('carriers/storepickupshipping/map_apikey');
+$src = "https://maps.googleapis.com/maps/api/js?key=".$gmapApiKey;
+?>
+
+<script>
+var flag = false;
+
+    var  url = "<?php echo $src?>";
+    var scripts = document.getElementsByTagName('script');
+    for (var i = scripts.length; i--;) {
+        if (scripts[i].src == url){
+        	flag = true;
+        	break;
+            }
+       
+    }
+  if(!flag){
+	  var s = document.createElement("script");
+	  s.type = "text/javascript";
+	  s.src = url;
+	  jQuery("body").append(s);
+  }
+</script>
+
+
+<?php 
+$stores = $block->getStores();
+$vendorId = $this->getRequest()->getParam('vendor_id');
+?>
+<select id ="ced_stores_list_<?php echo $this->getRequest()->getParam('vendor_id') ?>" class="ced_stores_list">
+<option value =""><?php echo __('---Select Stores---')?></option>
+<?php foreach($stores as $_stores):?>
+<option value ="<?php echo $_stores->getId()?>"><?php echo $_stores->getStoreName()?></option>
+<?php endforeach;?>
+
+</select>
+<input type="hidden" name ="vendor_id" value ="<?php echo $vendorId?>" class="seller_data">
+<a href="javascript:void(0)" id ="store_view_map_<?php echo $this->getRequest()->getParam('vendor_id')?>">Click here to view</a>
+	    <div id="oneValues_<?php echo $this->getRequest()->getParam('vendor_id')?>">
+	    </div>
+	    <div id="mapValues_<?php echo $this->getRequest()->getParam('vendor_id')?>">
+	    </div>
+<input type ="hidden" name ="store-pickup-data" value="">
+<script>
+
+
+	require(
+			[
+				'jquery',
+				'Magento_Ui/js/modal/modal'
+
+		     	], function($,modal) {
+
+		$("#checkout-step-shipping_method").on('change', '#ced_stores_list_<?php echo $this->getRequest()->getParam('vendor_id')?>',function(){
+
+	   var storeId = $(this).val();
+	   var vendorId = $(this).parents('dd').find('.seller_data').val();
+      /* console.log(storeId);
+      console.log(vendorId); */
+
+	   /* if($(this).parents('dd').find('#oneValues').length){
+		   $(this).parents('dd').find('#oneValues').empty();
+       } */
+       var response =  $(this).parents('dd').find('#oneValues_<?php  echo $this->getRequest()->getParam('vendor_id')?>');
+
+      
+      var newUrl = '<?php echo $this->getUrl('csstorepickup/getmap/view/');?>'+'storeId/'+storeId+'/vendor_id/'+vendorId;
+              $.ajax({
+                      method: 'GET',
+                      dataType: 'html',
+                      url: newUrl,
+                      showLoader:true,
+                  }).success(function (result) {
+                      if(response.length){
+                    	  response.empty();
+                      }
+                      response.append(result);
+                      
+                  }); 
+                  
+      /* $('#div-calendar').show();
+      var storevalue = $('#carrier-store-lists').val(); */
+		});
+
+
+		$("#checkout-step-shipping_method").on('click', '#store_view_map_<?php echo $this->getRequest()->getParam('vendor_id')?>',function(){
+
+			var vendorId = $(this).parents('dd').find('.seller_data').val();
+
+			var mapurl = '<?php echo $this->getUrl('csstorepickup/getmap/showmap/')?>'+'vendor_id/'+vendorId;
+	        var overlay = $('<div id="overlay" style=" position: fixed; top: 0; left: 0; width: 100%; height: 100%;background-color: #000; filter:alpha(opacity=50); -moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5; z-index: 10000; display: block;"> </div>');
+	        overlay.appendTo(document.body);
+	        $.ajax({
+	                    method: 'GET',
+	                    dataType: 'html',
+	                    url: mapurl,
+	                    showLoader:true,
+	                }).success(function (result) {
+	                      overlay.remove();
+	                        if ($('#new').length) {
+	                            $('#new').remove();
+	                            } 
+	                        var newDivThingy = document.createElement("div");
+	                          newDivThingy.id  = 'new'; 
+	                          document.getElementById('contentarea').appendChild(newDivThingy);
+	                          $('#new').append(result);
+	                          var options = {
+	                    type: 'popup',
+	                    responsive: true,
+	                    innerScroll: true,
+	                    title: 'Map View'
+	                };
+	                var popup = modal(options, $('#new'));
+	                    $('#new').modal('openModal');
+	                });
+
+			
+		});
+
+		
+	});
+
+
+</script>
+
+<?php die;?>

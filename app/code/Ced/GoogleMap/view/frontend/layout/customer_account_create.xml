@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Ced\GoogleMap\Block\Customer\Address\Register"
+                   name="ced_autofill_customer_address_register"
+                   template="Ced_GoogleMap::customer/address/register.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="affiliate-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <head>
+   <!--  <css src="Ced_TeamMember::css/teammember.css" />  -->
+    </head>
+    <body>
+        <attribute name="class" value="account"/>
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Framework\View\Element\Html\Links" name="teammember_account_navigation" before="-" template="Ced_Affiliate::account/navigation.phtml">
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-balance-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Balance</argument>
+                        <argument name="path" xsi:type="string">teammember/vendor/index</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-banners-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Banners And Links</argument>
+                        <argument name="path" xsi:type="string">teammember/customer/index</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="teammember-account-navigation-referfriends-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Refer Friends</argument>
+                        <argument name="path" xsi:type="string">teammember/admin/chat</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-comission-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Commission</argument>
+                        <argument name="path" xsi:type="string">teammember/admin/chat</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="teammember-account-navigation-withdrawls-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Withdrawals</argument>
+                        <argument name="path" xsi:type="string">teammember/admin/chat</argument>
+                    </arguments>
+                </block>
+                
+            </block>
+        </referenceContainer>
+    </body>
+</page>

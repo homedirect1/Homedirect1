@@ -1,0 +1,274 @@
+<?php use Ced\GroupBuying\Helper\Data;
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GroupBuying
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+use Ced\GroupBuying\Block\Registry;
+use Ced\GroupBuying\Model\Session;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Escaper;
+
+/**
+ * @var Registry $block
+ * @var Escaper $escaper
+ * @var Session $groupBuyingSession
+ */
+$groupBuyingSession = $block->groupBuyingSession;
+?>
+<style>
+    ul{
+        list-style-type:none;
+    }
+    em{
+        color:red;
+    }
+</style>
+<script type="text/javascript">
+    bkLib.onDomLoaded(function () {
+        new nicEditor({fullPanel: true}).panelInstance('short_description');
+    });
+</script>
+<?php
+$helper = $this->helper(Data::class);
+$allowed_guest = 5;
+$data = $this->getRequest()->getParams('Data');
+if (!$groupBuyingSession->getProductPrice()) {
+    $id = $this->getRequest()->getParam('id');
+    try {
+        $product = $block->getProductById($id);
+        $data['product'] = $id;
+        $data['price'] = $product->getFinalPrice();
+    } catch (NoSuchEntityException $e) {
+    }
+}
+if ($data['product']) :
+    if ($groupBuyingSession->getProductPrice()) {
+        $data['price'] = $groupBuyingSession->getProductPrice();
+    }
+    $_storeBaseUrl = str_replace('index.php/', '', $this->getBaseUrl());
+
+    if ($block->getCustomerGroupCount() >= $helper->getConfig(Data::CONFIG_GROUP_SIZE)) {
+        "The maximum group limit is reached for " . $block->getCustomerEmail() . ".\n Please contact admin to increase limit!";
+    }
+    ?>
+    <form id="myform" action="" method="post" data-hasrequired="<?= $this->escapeHtml(__('* Required Fields')) ?>" data-mage-init='{"validation":{}}'>
+        <div class="fieldset">
+            <h2 class="legend"><?= $this->escapeHtml(__('Invite Friends !')) ?></h2>
+            <ul class="form-list">
+                <input type="hidden" name="original_product_id" value="<?= $this->escapeHtml($data['product']) ?>">
+                <input type="hidden" name="price" value="<?= $this->escapeHtml(trim($data['price'])) ?>">
+                <li class="fields">
+                    <label class="required" for="receiver_name"><em>*</em><?= $this->escapeHtml(__(' Group Admin Name')) ?></label>
+                    <div class="input-box">
+                        <input id="receiver_name" class="required-entry" type="text" name="receiver_name" value=""  maxlength="100">
+                    </div>
+                </li>
+                <li class="fields" >
+                    <label> <?= $this->escapeHtml(__('Group Admin Email')) ?></label>
+                    <div class="input-box" id="gift_email_suggets">
+                        <input id="gift_receiver_email" class="input-text validate-email" type="text" name="gift_receiver_email" value=""  autocomplete="off" />
+                    </div>
+                </li>
+                <li class="control">
+                    <div class="input-box">
+                        <input id="notify_customer" class="checkbox" type="checkbox" value="1" title="Notify Receiver" name="notify_customer">
+                    </div>
+                    <label for="notify_customer"> <?= $this->escapeHtml(__('Notify Admin')) ?></label>
+                </li>
+                <li class="fields">
+                    <label class="required" for="show_contribution_to_guest"><em>*</em><?= $this->escapeHtml(__('Show Contribution To Friends')) ?></label>
+                    <div class="input-box">
+                        <select id="show_contribution_to_guest" class="required-entry" name="show_contribution_to_guest">
+                            <option value="0"><?= $this->escapeHtml(__('No')) ?></option>
+                            <option value="1"><?= $this->escapeHtml(__('Yes')) ?></option>
+                        </select>
+                    </div>
+                </li>
+
+                <li class="fields" >
+                    <label class="required"> <em>*</em><?= $this->escapeHtml(__('Group Size')) ?></label>
+                    <div class="input-box" id="group-size">
+                        <input id="group_size_input" class="input-text validate-number" type="text" name="group_size" value="0"  autocomplete="off" />
+                    </div>
+                </li>
+
+                <li class="fields" >
+                    <label class="required"> <em>*</em><?= $this->escapeHtml(__('Group Start Date')) ?></label>
+                    <div class="input-start-date" id="group-start-date">
+                        <input id="group_start_input" class="mDatePicker" type="text" name="start_date" required="required" />
+                    </div>
+                </li>
+
+                <li class="fields" >
+                    <label class="required"> <em>*</em><?= $this->escapeHtml(__('Group End Date')) ?></label>
+                    <div class="input-end-date" id="group-end-date">
+                        <input id="group_end_input" class="mDatePicker" type="text" name="end_date" required="required" />
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="fieldset">
+            <h2 class="legend"><?= $this->escapeHtml(__('Invite The Guest ')) ?></h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div id="TextBoxesGroup">
+                        <div id="user" class="guest_count">
+                            <span><?= $this->escapeHtml(__('Name')) ?></span>
+                            <input type="text" name="uname[]" />
+                            <span><?= $this->escapeHtml(__('Email Address')) ?></span>
+                            <input type="text" name="email[]" class="validate-email"/>
+                        </div>
+                    </div>
+                    <br>
+                    <span id="add">+ ADD ANOTHER EMAIL</span>
+                    <br>
+                </li>
+                <li class="fields">
+                    <label for="gift_msg"><?= $this->escapeHtml(__('Group Invitation Message')) ?></label>
+                    <div class="input-box" style="width: 300px;">
+                        <textarea  id="short_description" class="input-text short_description textarea" cols="5" rows="2" name="gift_msg" ></textarea>
+                    </div>
+                </li>
+            </ul>
+            <button class="button"><span><?= $this->escapeHtml(__('Submit')) ?></span></button>
+            <div id="display_msg" style="color:green;"></div>
+        </div>
+    </form>
+<?php else: ?>
+    <div><?= $this->escapeHtml(__('You have not select any product for Group Buy. Please Select product')) ?> </div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+    "#myform": {
+    "validation": {}
+    }
+    }
+</script>
+
+<script>
+    require(["jquery", "mage/calendar"],
+        function($){
+            $(".mDatePicker").datepicker({
+                dateFormat:'mm/dd/yy',
+                changeMonth: true,
+                changeYear: true,
+                showMonthAfterYear: false,
+            })
+
+    });
+</script>
+
+<script>
+
+    require([
+        "jquery",
+        'mage/mage'
+    ], function (gGift) {
+        var dataForm = jQuery('#myform');
+        var guest_count = '<?= $this->escapeHtml($allowed_guest) ?>';
+        var counter = 1;
+        gGift("#add").click(function () {
+            var x = document.getElementsByClassName("guest_count").length;
+            if (guest_count > x) {
+                var newTextBoxDiv = gGift(document.createElement('div')).attr("id", 'user' + counter).attr("class", "guest_count");
+
+                newTextBoxDiv.html('<br>' + '<span>Name </span> ' + '<input type="text" name="uname[]" />'
+                        + ' <span>Email Address </span> ' + '<input type="text" name="email[]" />' +
+                        '<a onclick="removeDiv(' + counter + ')"><img src="<?= $this->escapeHtml($this->getViewFileUrl('Ced_GroupBuying::images/new/del_icon.png')) ?>"></a>' + '<br>');
+
+                newTextBoxDiv.appendTo("#TextBoxesGroup");
+                counter++;
+            } else {
+                alert('Maximum allowed guest are ' + guest_count);
+            }
+
+        });
+
+        var req = null;
+        gGift("#gift_receiver_email").keyup(function () {
+            var string = gGift("#gift_receiver_email").val();
+            if (req != null)
+                req.abort();
+            if (string.length > 2) {
+                req = gGift.ajax({
+                    type: "POST",
+                    url: "<?= $this->escapeHtml($this->getBaseUrl() . 'groupgift/registry/getcustomer') ?>",
+                    data: {email: string},
+                    success: function (html) {
+                        gGift(".eml_sugg").remove();
+                        var newDiv = gGift(document.createElement('div')).attr("class", "eml_sugg").attr("style", "border: 1px solid #bbafa0;");
+                        newDiv.html(html);
+                        newDiv.appendTo("#gift_email_suggets");
+                    }
+                });
+            } else {
+                gGift(".eml_sugg").remove();
+            }
+        });
+
+        gGift('#myform').submit(function (event) {
+
+            var innerPane = document.getElementById('display_msg');
+            //nicEditors.findEditor('short_description').saveContent();
+            if (jQuery('#myform').validation('isValid') && jQuery('#myform').validation()) {
+                gGift('button').attr('disabled', 'disabled');
+                innerPane.innerHTML = "Your Data is Being processed..";
+                var formData = gGift(this).serializeArray();
+                event.preventDefault();
+                gGift.ajax({
+                    type: 'POST',
+                    url: '<?= $this->escapeHtml($this->getBaseUrl() . 'groupbuying/registry/submit') ?>',
+                    data: formData,
+                })
+                        .success(function (result) {
+                            location.reload();
+                        });
+            } else {
+                return false;
+            }
+        });
+
+
+    });
+
+
+    function removeDiv(id) {
+        jQuery("#user" + id).remove();
+    }
+
+    function pickval(id) {
+        jQuery("#gift_receiver_email").val(id);
+        jQuery(".eml_sugg").remove();
+    }
+
+</script>
+<script>
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+//    $(".modal-footer").hide();
+        var dataForm = $('#myform');
+        var ignore = null;
+
+        dataForm.mage('validation', {
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+        }).find('input:text').attr('autocomplete', 'off');
+
+    });
+</script>

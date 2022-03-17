@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_DeliveryDate
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var $block \Magento\Shipping\Block\Adminhtml\View */ ?>
+<?php $order = $block->getOrder() ?>
+<?php if ($order->getIsVirtual()) : return '';endif; ?>
+
+<?php /* Shipping Method */ ?>
+<div class="admin__page-section-item order-shipping-method">
+    <div class="admin__page-section-item-title">
+        <span class="title"><?php echo __('Shipping &amp; Handling Information') ?></span>
+    </div>
+    <div class="admin__page-section-item-content">
+        <?php  if ($order->getTracksCollection()->count()) : ?>
+            <p><a href="#" id="linkId" onclick="popWin('<?php echo $this->helper('Magento\Shipping\Helper\Data')->getTrackingPopupUrlBySalesModel($order) ?>','trackorder','width=800,height=600,resizable=yes,scrollbars=yes')" title="<?php echo __('Track Order') ?>"><?php echo __('Track Order') ?></a></p>
+        <?php endif; ?>
+        <?php if ($order->getShippingDescription()): ?>
+            <strong><?php echo $block->escapeHtml($order->getShippingDescription()) ?></strong>
+
+            <?php if ($this->helper('Magento\Tax\Helper\Data')->displayShippingPriceIncludingTax()): ?>
+                <?php $_excl = $block->displayShippingPriceInclTax($order); ?>
+            <?php else: ?>
+                <?php $_excl = $block->displayPriceAttribute('shipping_amount', false, ' '); ?>
+            <?php endif; ?>
+            <?php $_incl = $block->displayShippingPriceInclTax($order); ?>
+
+            <?php echo $_excl; ?>
+            <?php if ($this->helper('Magento\Tax\Helper\Data')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                (<?php echo __('Incl. Tax'); ?> <?php echo $_incl; ?>)
+            <?php endif; ?>
+        <?php else: ?>
+            <?php echo __('No shipping information available'); ?>
+        <?php endif; ?>
+    </div>
+</div>
+
+<?php /* Delivery Date Method */ ?>
+<div class=" ">
+     <?php
+        $deliveryComment = $order->getData('cedDeliveryComment');
+        $deliveryTimestamp = $order->getData('cedTimestamp');
+        $deliveryDate = $block->formatDate(
+            $order->getData('cedDeliveryDate'),
+            \IntlDateFormatter::MEDIUM,
+            true
+        );
+    ?>
+    <div class=" ">
+
+        <?php if(isset($deliveryDate)):?>
+            <p>
+                <strong><?php echo(__('Delivery Date : ')); ?></strong>
+                <span><?php echo(__($deliveryDate)); ?></span>
+            </p>
+        <?php endif; ?>
+        <?php if(isset($deliveryTimestamp)):?>
+            <p>
+                <strong><?php echo(__('Delivery Timestamp : ')); ?></strong>
+                <span><?php echo(__($deliveryTimestamp)); ?></span>
+            </p>
+        <?php endif; ?>
+        <?php if(isset($deliveryComment)):?>
+            <p>
+                <strong><?php echo(__('Delivery Comment : ')); ?></strong>
+                <span><?php echo(__($deliveryComment)); ?></span>
+            </p>
+        <?php endif; ?>
+
+    </div>
+</div>

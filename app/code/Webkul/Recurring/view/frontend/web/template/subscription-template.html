@@ -1,0 +1,61 @@
+<!-- /**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Recurring
+ * @author    Webkul
+ * @copyright Copyright (c) Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */ -->
+<html>
+    <input type="hidden" name="plan_id" id="plan_id" data-bind=" value : planId" value="" />
+    <input type="hidden" name="term_id" id="term_id" data-bind=" value : termId" value="" />
+    <input type="hidden" name="start_date" id="start_date" data-bind=" value : startDate" value="" />
+    <input type="hidden" name="initial_fee" id="initial_fee" data-bind=" value : initialFee" value="" />
+    <input type="hidden" name="subscription_charge" id="subscription_charge" data-bind=" value : subscriptionsCharge" value="" />
+    <div  class="field planslist wkmodal">
+        <div class="wkmodal-content">
+            <div class="wk-content content" data-bind = "foreach : allPlansList"> 
+                <input type="hidden" data-bind="value : entity_id,attr: { name : 'plan'+entity_id }" />
+                <div class="wk-row">
+                    <div class="plan-details">
+                        <div class="select-button left-container">
+                            <h2><span data-bind="text : durationTitle"></span></h2>
+                            <h3><span data-bind="text : name"></span></h3>
+                        </div>
+                        <div class="select-button wk-right right-container">
+                            <button  data-bind="attr : {
+                                    plan_id : entity_id,
+                                    initial_fee : initial_fee,
+                                    subscription_charge : subscription_charge
+                                }" type="button" class="action primary selected-ubscription">
+                                <span class="wk-select" data-bind="i18n: 'Subscribe Now'"></span>
+                            </button>                        
+                        </div>
+                        <div class="wk-description">
+                            <span data-bind="text : description"></span>
+                        </div>
+                        <div class="left-container" >                            
+                            <div class="wk-terms-details">
+                                <input type="hidden" class="current-term required-entry" name="subscriptiontype" data-bind="value : entity_id"/>
+                                <b><span data-bind="i18n: 'Start Date'"></span></b>
+                                <input type="text" data-bind="attr :{placeholder : $t('Select Start Date'),id : 'startDate'+ entity_id}" class="wk-date wk-terminput-text"/>
+                                <button type="button" class="wkstyle ui-datepicker-trigger v-middle"><span>Select Date</span></button>
+                            </div>
+                        </div>
+                        <div class="right-container">
+                            <div class="wk-initialfee">
+                                <b><span class="wk-subhead" data-bind="i18n: 'Inital Fee :'"></span></b>
+                                <span data-bind="text : initial_fee_formatted"></span>
+                            </div>
+                            <div class="wk-subscriptions-charge">
+                                <b><span class="wk-subhead" data-bind="i18n: 'Subscriptions Charge :'"></span></b>
+                                <span data-bind="text : subscription_charge_formatted"></span>
+                            </div>
+                       </div> 
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

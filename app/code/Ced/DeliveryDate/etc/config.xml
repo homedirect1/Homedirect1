@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<!--
+ *
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_DeliveryDate
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ *-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <deliverydate>
+                <deliverydate_general>
+                <deliverydate_config>1</deliverydate_config>
+                <sameDayDelivery>1</sameDayDelivery>
+                <remarks> Note: Time Picking shows approx time of delivery Not Exact time.</remarks>
+            </deliverydate_general>
+
+            <delivery>
+                <maxDate>20</maxDate>
+                <allDayDelivery>1</allDayDelivery>
+                <enableTimeSelection>1</enableTimeSelection>
+                <allDayDelivery>1</allDayDelivery>
+                <weekDays>1,2,3,4,5</weekDays>
+                <sameDayDelivery_hourMin>8</sameDayDelivery_hourMin>
+                <sameDayDelivery_hourMax>18</sameDayDelivery_hourMax>
+                <dateFormat>1</dateFormat>
+                <enableComment>1</enableComment>
+                <fieldNote>Note: Delivery Note If you want to note something important.</fieldNote>
+            </delivery>
+        </deliverydate>
+    </default>
+</config>

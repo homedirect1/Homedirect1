@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <!-- <block class="Ced\CsReport\Block\Adminhtml\Sales" template="sales/grid/container.phtml" name="csreport.vsales.grid"> -->
+            <block class = "Ced\CsReport\Block\Adminhtml\Sales" name="csreport.vsales.grid" />
+            
+        </referenceContainer>
+    </body>
+</page>

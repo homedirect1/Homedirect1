@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="affiliate-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <head>
+     <css src="Ced_Affiliate::css/affiliate.css" />
+     <css src="Ced_Affiliate::css/font-awesome.css" />
+    </head>
+    <body>
+        <attribute name="class" value="account"/>
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Framework\View\Element\Html\Links" name="affiliate_account_navigation" before="-" template="Ced_Affiliate::account/navigation.phtml" ifconfig="affiliate/general/activation">
+
+				<block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-dashboard-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Dashboard</argument>
+                        <argument name="path" xsi:type="string">affiliate/account</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-banners-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Banners And Links</argument>
+                        <argument name="path" xsi:type="string">affiliate/banner/links</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-referfriends-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Invite Friends</argument>
+                        <argument name="path" xsi:type="string">affiliate/referral</argument>
+                    </arguments>
+                </block>
+
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="account-navigation-referfriends-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Referral Reports</argument>
+                        <argument name="path" xsi:type="string">affiliate/referral/lists</argument>
+                    </arguments>
+                </block>
+                
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="account-navigation-payout-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Redeem Coupon</argument>
+                        <argument name="path" xsi:type="string">affiliate/referral/payout</argument>
+                    </arguments>
+                </block>
+                
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="account-navigation-reftranscation-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Referral Transaction List</argument>
+                        <argument name="path" xsi:type="string">affiliate/referral/summary</argument>
+                    </arguments>
+                </block>
+                
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-comission-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Commission</argument>
+                        <argument name="path" xsi:type="string">affiliate/comission</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-payment-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Payment Settings</argument>
+                        <argument name="path" xsi:type="string">affiliate/paymentsetting</argument>
+                    </arguments>
+                </block>
+                
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-wallet-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Request Withdrawal</argument>
+                        <argument name="path" xsi:type="string">affiliate/wallet</argument>
+                    </arguments>
+                </block>
+                
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="teammember-account-navigation-withdrawls-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Pending Withdrawal</argument>
+                        <argument name="path" xsi:type="string">affiliate/withdrawl</argument>
+                    </arguments>
+                </block>
+                
+                 <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-account-navigation-transaction-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate Completed Withdrawal</argument>
+                        <argument name="path" xsi:type="string">affiliate/transaction</argument>
+                    </arguments>
+                </block>
+                
+                <!-- <block class="Magento\Framework\View\Element\Html\Link\Current" name="teammember-account-navigation-traffic-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Traffic</argument>
+                        <argument name="path" xsi:type="string">teammember/admin/chat</argument>
+                    </arguments>
+                </block> -->
+                
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="teammember-account-navigation-logout-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Sign Out</argument>
+                        <argument name="path" xsi:type="string">affiliate/account/logout</argument>
+                    </arguments>
+                </block>
+                
+            </block>
+        </referenceContainer>
+    </body>
+</page>

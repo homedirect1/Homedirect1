@@ -1,0 +1,37 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+
+<div class="affiliate-login-container login-container affiliate-logout">
+  <div class="block-title">
+        <strong id="block-customer-login-heading" role="heading" aria-level="2"><?php echo __('Logged Out')?></strong>
+    </div>
+	<div class="block-content">
+		<p><?php /* @escapeNotVerified */ echo __('You have signed out and will go to our homepage in 5 seconds.') ?></p>
+	</div>
+</div>
+<script>
+require([
+    "jquery",
+    "mage/mage"
+], function($){
+
+    $($.mage.redirect("<?php /* @escapeNotVerified */ echo $block->getUrl() ?>", "assign", 5000));
+
+});
+</script>

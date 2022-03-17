@@ -1,0 +1,49 @@
+<?php
+$mobileappbuilder_webview = $this->getRequest()->getParam('mobileappbuilder_webview', '');
+if(isset($mobileappbuilder_webview) && !empty($mobileappbuilder_webview)){
+//var_dump($mobileappbuilder_webview);die;    
+?>
+<script>
+    require([
+    'jquery'
+], function (jQuery) {
+
+    jQuery(document).ready(triggerPaymentStep);
+    function triggerPaymentStep() {
+        if (jQuery('#shipping-method-buttons-container > div > button').is(':visible')) { 
+            jQuery("#shipping-method-buttons-container > div > button").trigger("click");
+        } else {
+            setTimeout(triggerPaymentStep, 50); //wait 50 ms, then try again
+        }
+    }
+});
+
+
+</script>
+
+<style>
+    header.page-header {
+    display: none !important;
+} 
+
+.minicart-wrapper {
+    display: none !important;
+}
+
+.payment-option._collapsible.opc-payment-additional.discount-code {
+    display: none !important; 
+}
+
+.checkout-payment-method .payment-method-title .action-help {
+    display: none !important;
+}
+
+ul.opc-progress-bar {
+    display: none !important;
+}
+.page-footer {
+    display: none;
+}
+
+</style>
+<?php } ?>

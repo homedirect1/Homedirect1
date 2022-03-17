@@ -1,0 +1,171 @@
+"Save Agent","Save Agent"
+"Save and Continue Edit","Save and Continue Edit"
+Delete,Delete
+"Edit Post '%1'","Edit Post '%1'"
+"New Agent","New Agent"
+"General Information","General Information"
+"Change Password","Change Password"
+Password,Password
+Role,Role
+Agent,Agent
+"First Name","First Name"
+"Last Name","Last Name"
+"User Name","User Name"
+"Email Id","Email Id"
+Active,Active
+General,General
+"Agent Information","Agent Information"
+"Save Department","Save Department"
+"New Department","New Department"
+"Department Name","Department Name"
+"Department Code","Department Code"
+"Manage Agent","Manage Agent"
+"Head of Department","Head of Department"
+Image,Image
+"Department Information","Department Information"
+Reply,Reply
+"Continue Reply","Continue Reply"
+Manage,Manage
+Description,Description
+Status,Status
+"Attach File","Attach File"
+"Ticket Information","Ticket Information"
+"Ticket Reply","Ticket Reply"
+"Save Priority","Save Priority"
+"Edit Status '%1'","Edit Status '%1'"
+"New Status","New Status"
+"Priority Information","Priority Information"
+"Priority Title","Priority Title"
+"Priority Code","Priority Code"
+"Background Colour","Background Colour"
+Assign,Assign
+"Assign Ticket","Assign Ticket"
+Priority,Priority
+"Save Status","Save Status"
+"Status Information","Status Information"
+"Status Title","Status Title"
+"Status Code","Status Code"
+"Save Ticket","Save Ticket"
+"Customer Name","Customer Name"
+"Customer Email","Customer Email"
+Subject,Subject
+Order,Order
+Department,Department
+Content,Content
+Agents,Agents
+"Agent Deleted Successfully...","Agent Deleted Successfully..."
+"Something wents Wrong...","Something wents Wrong..."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"Save Agent Successfully...","Save Agent Successfully..."
+"Department Deleted Successfully...","Department Deleted Successfully..."
+"Save Department Successfully...","Save Department Successfully..."
+"Please select item(s).","Please select item(s)."
+"Priority Deleted Successfully...","Priority Deleted Successfully..."
+"Save Priority Successfully...","Save Priority Successfully..."
+"Status Deleted Successfully...","Status Deleted Successfully..."
+"Save Status Successfully...","Save Status Successfully..."
+"Replied Successfully...","Replied Successfully..."
+"File not uploaded ","File not uploaded "
+"Save Ticket Successfully...","Save Ticket Successfully..."
+"Customer with this email does not exist...","Customer with this email does not exist..."
+"Ticket Assign Successfully...","Ticket Assign Successfully..."
+"Support System Tickets","Support System Tickets"
+"Please Fill The Message","Please Fill The Message"
+"Please Fill The form","Please Fill The form"
+"'You have Created a Ticket. Your Ticket id is ' .","'You have Created a Ticket. Your Ticket id is ' ."
+"Please Fill All The Fields","Please Fill All The Fields"
+"New Tickets","New Tickets"
+"View Ticket Status","View Ticket Status"
+"Please Check your Details. No Tickets matching with given Email id and Ticket id","Please Check your Details. No Tickets matching with given Email id and Ticket id"
+"View Your Ticket","View Your Ticket"
+"Please Login First.","Please Login First."
+"View Support System Tickets","View Support System Tickets"
+"Ticket Submitted","Ticket Submitted"
+attachment,attachment
+order,order
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thursday,Thursday
+Friday,Friday
+Saturday,Saturday
+Sunday,Sunday
+IMAP,IMAP
+POP3,POP3
+Edit,Edit
+Conversations,Conversations
+"Show All Messages","Show All Messages"
+"Create At: ","Create At: "
+"Ticket has been assign to","Ticket has been assign to"
+"At: ","At: "
+Attachments,Attachments
+"Create New Ticket","Create New Ticket"
+Email,Email
+Name,Name
+Message,Message
+"Add Attachment","Add Attachment"
+"Allowed File Types are ","Allowed File Types are "
+"Submit Ticket","Submit Ticket"
+"Post Reply","Post Reply"
+"Ticket Created At","Ticket Created At"
+"My Tickets","My Tickets"
+"Ticket Id","Ticket Id"
+"Created Time","Created Time"
+Action,Action
+"Create Ticket","Create Ticket"
+N/A,N/A
+"Thanks,<br>%store_name","Thanks,<br>%store_name"
+"The file size should not exceed the limit","The file size should not exceed the limit"
+"Disallowed file type.","Disallowed file type."
+"Insert Widget...","Insert Widget..."
+"Support System","Support"
+"General Configuration","General Configuration"
+"Module Enable","Module Enable"
+"Notify Agent","Notify Agent"
+"Time to notify about ticket","Time to notify about ticket"
+"in hours","in hours"
+"Close Tickets","Close Tickets"
+"Time to auto close the ticket","Time to auto close the ticket"
+"in days","in days"
+"Delete Tickets","Delete Tickets"
+"Auto delete ticket after certain period","Auto delete ticket after certain period"
+"Support Email","Support Email"
+Frontend,Frontend
+"Allow client to select the department","Allow client to select the department"
+"Default department","Default department"
+"Allow client to select the priority","Allow client to select the priority"
+"Maximum upload size(mb)","Maximum upload size(mb)"
+"Show the following attributes","Show the following attributes"
+"Allow the following extensions","Allow the following extensions"
+"Welcome Message","Welcome Message"
+Banner,Banner
+"Welcome Description","Welcome Description"
+"Email Configuration","Email Configuration"
+"Send Email to customer from Support","Send Email to customer from Support"
+"Send Email to Assignee Agent from Support","Send Email to Assignee Agent from Support"
+"Send Email to Head of Department from Support","Send Email to Head of Department from Support"
+"Send Email to admin from Support","Send Email to admin from Support"
+"Email Gateway Configuration","Email Gateway Configuration"
+"Enable Email Gateway","Enable Email Gateway"
+Protocol,Protocol
+"Email Gateway","Email Gateway"
+"Like gmail","Like gmail"
+Port,Port
+"Login Id","Login Id"
+"All Store Views","All Store Views"
+"Store View","Store View"
+ID,ID
+"Assignee Agent","Assignee Agent"
+"Number of Messages","Number of Messages"
+"Create Time","Create Time"
+"Add Agent","Add Agent"
+"Delete items","Delete items"
+"Delete selected items?","Delete selected items?"
+"User Id","User Id"
+"Sync Products","Sync Products"
+Title,Title
+"Add New Department","Add New Department"
+"Add Priority","Add Priority"
+Colour,Colour
+"Add Status","Add Status"
+"Add New Ticket","Add New Ticket"

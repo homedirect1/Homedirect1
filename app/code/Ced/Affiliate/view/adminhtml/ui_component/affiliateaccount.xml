@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">affiliateaccount.affiliateaccount_data_source</item>
+            <item name="deps" xsi:type="string">affiliateaccount.affiliateaccount_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">affiliateaccount_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New Account</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/newAccount</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="affiliateaccount_data_source">
+
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">affiliateaccount_data_source</argument>
+
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+
+        </argument>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <!-- <filterSelect name="store_id">
+                <argument name="optionsProvider" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Magento\Store\Ui\Component\Listing\Column\Store\Options</argument>
+                </argument>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="provider" xsi:type="string">${ $.parentName }</item>
+                        <item name="dataScope" xsi:type="string">store_id</item>
+                        <item name="caption" xsi:type="string" translate="true">All Store Views</item>
+                        <item name="label" xsi:type="string" translate="true">Store View</item>
+                    </item>
+                </argument>
+            </filterSelect> -->
+        </filters>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">affiliateaccount.affiliateaccount.affiliateaccount_columns.ids</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Delete selected items?</item>
+                        </item>
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="affiliate/manage/massDelete"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="status">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">status</item>
+                        <item name="label" xsi:type="string" translate="true">Change status</item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="type" xsi:type="string">approve</item>
+                        <item name="label" xsi:type="string" translate="true">Approve</item>
+                        <item name="url" xsi:type="url" path="affiliate/manage/massStatus">
+                            <param name="status">1</param>
+                        </item>
+                    </item>
+                    <item name="1" xsi:type="array">
+                        <item name="type" xsi:type="string">disapprove</item>
+                        <item name="label" xsi:type="string" translate="true">DisApprove</item>
+                        <item name="url" xsi:type="url" path="affiliate/manage/massStatus">
+                            <param name="status">2</param>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="affiliateaccount_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+
+        <column name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Affiliate Name</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                     <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Affiliate Email</item>
+                </item>
+            </argument>
+        </column>
+        <column name="referral_website">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Referral Website</item>
+                </item>
+            </argument>
+        </column>
+
+       <column name="total_balance" class= "Ced\Affiliate\Ui\Component\Listing\Columns\Total">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                     <item name="filter" xsi:type="boolean">false</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Total Balance</item>
+                </item>
+            </argument>
+        </column>
+         <column name="earned_balance" class= "Ced\Affiliate\Ui\Component\Listing\Columns\Available">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                     <item name="filter" xsi:type="boolean">false</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Earned Amount</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="status" class= "Ced\Affiliate\Ui\Component\Listing\Columns\Status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="approve" class= "Ced\Affiliate\Ui\Component\Listing\Columns\ApproveDisapprove">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="label" xsi:type="string" translate="true">Approve</item>
+                </item>
+            </argument>
+        </column>
+
+         <actionsColumn name="actions" class="Ced\Affiliate\Ui\Component\Listing\Columns\Actions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

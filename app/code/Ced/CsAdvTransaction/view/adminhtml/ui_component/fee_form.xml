@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsAdvTransaction
+ * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/Ui/etc/ui_configuration.xsd">
+<argument name="data" xsi:type="array">
+     <item name="js_config" xsi:type="array">
+         <item name="provider" xsi:type="string">fee_form.fee_form_data_source</item>
+         <item name="deps" xsi:type="string">fee_form.fee_form_data_source</item>
+     </item>
+     <item name="label" xsi:type="string" translate="true">Fee Information</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="style" xsi:type="string">display:block</item>
+                <item name="url" xsi:type="string">csadvtransaction/fee/save</item>
+            </item>
+             <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">action-secondary</item>
+                <item name="style" xsi:type="string">display:block</item>
+                <item name="url" xsi:type="string">csadvtransaction/fee/index</item>
+            </item>
+         <item name="delete" xsi:type="string">Ced\CsAdvTransaction\Block\Adminhtml\Edit\DeleteButton</item> 
+        </item>
+</argument>
+ 
+<dataSource name="sampleform_form_data_source">
+     <argument name="dataProvider" xsi:type="configurableObject">
+         <argument name="class" xsi:type="string">Ced\CsAdvTransaction\Ui\FeeformDataProvider</argument>
+         <argument name="name" xsi:type="string">fee_form_data_source</argument>
+         <argument name="primaryFieldName" xsi:type="string">id</argument>
+         <argument name="requestFieldName" xsi:type="string">id</argument>
+          <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                  <item name="validate_url" xsi:type="url" path="*/*/validate"/> 
+                </item>
+            </argument>
+     </argument>
+     <argument name="data" xsi:type="array">
+         <item name="js_config" xsi:type="array">
+             <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+         </item>
+     </argument>
+</dataSource>
+ 
+<fieldset name="fee_fieldset">
+     <argument name="data" xsi:type="array">
+         <item name="config" xsi:type="array">
+             <item name="label" xsi:type="string" translate="true">Fee Details</item>
+         </item>
+         
+     </argument>
+ 
+     <!-- This field represents form id and is hidden -->
+     <field name="entity_id">
+         <argument name="data" xsi:type="array">
+             <item name="config" xsi:type="array">
+                 <item name="visible" xsi:type="boolean">false</item>
+                 <item name="dataType" xsi:type="string">text</item>
+                 <item name="formElement" xsi:type="string">input</item>
+                 <item name="source" xsi:type="string">feeform</item>
+             </item>
+         </argument>
+     </field>
+ 
+    <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">feeform</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </field>
+     <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+     <field name="field_code">
+         <argument name="data" xsi:type="array">
+             <item name="config" xsi:type="array">
+                 <item name="label" xsi:type="string">Fee Code</item>
+                 <item name="visible" xsi:type="boolean">true</item>
+                 <item name="dataType" xsi:type="string">text</item>
+                 <item name="formElement" xsi:type="string">input</item>
+                  <item name="component" xsi:type="string">Ced_CsAdvTransaction/js/form/element/feecode</item>
+                
+                  <item name="source" xsi:type="string">feeform</item>
+                  <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+             </item>
+         </argument>
+     </field>
+     <field name="field_label">
+         <argument name="data" xsi:type="array">
+             <item name="config" xsi:type="array">
+                 <item name="label" xsi:type="string">Fee Label</item>
+                 <item name="visible" xsi:type="boolean">true</item>
+                 <item name="dataType" xsi:type="string">text</item>
+                 <item name="formElement" xsi:type="string">input</item>
+                 <item name="source" xsi:type="string">feeform</item>
+                 <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+             </item>
+         </argument>
+     </field>
+     <!--   <field name="mode">
+         <argument name="data" xsi:type="array">
+         <item name="options" xsi:type="object">Ced\CsAdvTransaction\Model\Source\Mode</item>
+             <item name="config" xsi:type="array">
+                 <item name="label" xsi:type="string">Mode</item>
+                 <item name="visible" xsi:type="boolean">true</item>
+                 <item name="dataType" xsi:type="string">text</item>
+                 <item name="formElement" xsi:type="string">select</item>
+                 <item name="source" xsi:type="string">feeform</item>
+             </item>
+         </argument>
+     </field> -->
+    <!--  <field name="order_state">
+         <argument name="data" xsi:type="array">
+         <item name="options" xsi:type="object">Ced\CsAdvTransaction\Model\Source\State</item>
+             <item name="config" xsi:type="array">
+                 <item name="label" xsi:type="string">Order State</item>
+                 <item name="visible" xsi:type="boolean">true</item>
+                 <item name="dataType" xsi:type="string">text</item>
+                 <item name="formElement" xsi:type="string">select</item>
+                 <item name="source" xsi:type="string">feeform</item>
+             </item>
+         </argument>
+     </field> -->
+  <field name="type">
+         <argument name="data" xsi:type="array">
+         <item name="options" xsi:type="object">Ced\CsAdvTransaction\Model\Source\Type</item>
+             <item name="config" xsi:type="array">
+                 <item name="label" xsi:type="string">Type</item>
+                 <item name="visible" xsi:type="boolean">true</item>
+                 <item name="dataType" xsi:type="string">text</item>
+                 <item name="formElement" xsi:type="string">select</item>
+                 <item name="source" xsi:type="string">feeform</item>
+             </item>
+         </argument>
+     </field>
+     <field name="value">
+         <argument name="data" xsi:type="array">
+             <item name="config" xsi:type="array">
+                 <item name="label" xsi:type="string">Value</item>
+                 <item name="visible" xsi:type="boolean">true</item>
+                 <item name="dataType" xsi:type="string">text</item>
+                 <item name="formElement" xsi:type="string">input</item>
+                 <item name="source" xsi:type="string">feeform</item>
+                 <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                  </item>
+             </item>
+         </argument>
+     </field>
+     
+     <!--  <field name="status">
+         <argument name="data" xsi:type="array">
+         <item name="options" xsi:type="object">Ced\CsAdvTransaction\Model\Source\Enable</item>
+             <item name="config" xsi:type="array">
+                 <item name="label" xsi:type="string">Status</item>
+                 <item name="visible" xsi:type="boolean">true</item>
+                 <item name="dataType" xsi:type="string">text</item>
+                 <item name="formElement" xsi:type="string">select</item>
+                 <item name="source" xsi:type="string">feeform</item>
+             </item>
+         </argument>
+     </field> -->
+     
+     
+     <!-- <field name="field1">
+    <argument name="data" xsi:type="array">
+        <item name="options" xsi:type="object">Namespace\ModuleName\Model\Config\Source\Options</item>
+        <item name="config" xsi:type="array">
+            <item name="label" xsi:type="string" translate="true">Parent Option</item>
+            <item name="component" xsi:type="string">Namespace_ModuleName/js/form/element/options</item>
+            <item name="visible" xsi:type="boolean">true</item>
+            <item name="dataType" xsi:type="string">number</item>
+            <item name="formElement" xsi:type="string">select</item>
+            <item name="source" xsi:type="string">item</item>
+            <item name="dataScope" xsi:type="string">field1</item>
+            <item name="sortOrder" xsi:type="number">210</item>
+            <item name="validation" xsi:type="array">
+                <item name="required-entry" xsi:type="boolean">true</item>
+            </item>
+        </item>
+    </argument>
+</field> -->
+</fieldset>
+ </form>

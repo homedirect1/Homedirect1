@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">cshyperlocal_shiparea_list.cshyperlocal_shiparea_list_data_source</item>
+            <item name="deps" xsi:type="string">cshyperlocal_shiparea_list.cshyperlocal_shiparea_list_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">cshyperlocal_shiparea_list_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add Location</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">cshyperlocal/shiparea/new</item>
+            </item>
+            <item name="vendor-location-" xsi:type="array">
+                <item name="name" xsi:type="string">vendor-location-add</item>
+                <item name="label" xsi:type="string" translate="true">Add Vendor Location</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">cshyperlocal/vendor/shiparea</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="cshyperlocal_shiparea_list_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Ced\CsHyperlocal\Ui\DataProvider\Shiparea</argument>
+            <argument name="name" xsi:type="string">cshyperlocal_shiparea_list_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                        <item name="cacheRequests" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="statefull" xsi:type="array">
+                        <item name="applied" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">cshyperlocal_shiparea_list.cshyperlocal_shiparea_list.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">cshyperlocal_shiparea_list.cshyperlocal_shiparea_list.cshyperlocal_shiparea_list_columns:${ $.index }.visible</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">cshyperlocal_shiparea_list.cshyperlocal_shiparea_list.cshyperlocal_shiparea_list_columns.ids</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">update</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="cshyperlocal/shiparea/massDelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure to delete?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="cshyperlocal_shiparea_list_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="sortOrder" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">id</item>
+                    <item name="label" xsi:type="string" translate="true">Id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="vendor_id" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
+            <settings>
+                <options class="Ced\CsHyperlocal\Ui\Component\Listing\Columns\Vendorlist"/>
+                <filter>text</filter>
+                <dataType>select</dataType>
+                <label translate="true">Vendor</label>
+            </settings>
+        </column>
+        <column name="location">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">location</item>
+                    <item name="label" xsi:type="string" translate="true">Location</item>
+                </item>
+            </argument>
+        </column>
+        <column name="latitude">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">latitude</item>
+                    <item name="label" xsi:type="string" translate="true">Latitude</item>
+                </item>
+            </argument>
+        </column>
+        <column name="longitude">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">longitude</item>
+                    <item name="label" xsi:type="string" translate="true">Longitude</item>
+                </item>
+            </argument>
+        </column>
+        <column name="city">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">city</item>
+                    <item name="label" xsi:type="string" translate="true">City</item>
+                </item>
+            </argument>
+        </column>
+        <column name="country">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">country</item>
+                    <item name="label" xsi:type="string" translate="true">Country</item>
+                </item>
+            </argument>
+        </column>
+        <column name="state">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">state</item>
+                    <item name="label" xsi:type="string" translate="true">State</item>
+                </item>
+            </argument>
+        </column>
+        <column name="status" class="Ced\CsHyperlocal\Ui\Component\Listing\Columns\Status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">status</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="Ced\CsHyperlocal\Ui\Component\Listing\Columns\ShipareaEditAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="urlEntityParamName" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

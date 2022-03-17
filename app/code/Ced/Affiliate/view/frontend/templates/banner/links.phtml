@@ -1,0 +1,120 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+$helper = $block->getHelper('Ced\Affiliate\Helper\Data');?>
+<div class="aff-title">
+        <h2><?php echo __('Banners')?></h2>
+</div>
+<div class="banner_wrapper">
+<div class="affiliate-link">
+
+<span>
+<?php echo __('Affiliate Link');?>
+</span>
+        <a href ="<?php echo $block->getAffiliateLink()->getAffiliateUrl()?>">
+			<?php echo $block->getAffiliateLink()->getAffiliateUrl(); ?>
+		</a>
+    </div>
+<?php foreach($block->getBanners() as $_banners):?>
+	<div class="baneer_content_wrapper">
+	<h2><?php echo $_banners->getBannerName() ?></h2>
+	<div class="banner-inner-wrapper">
+		<div class="banner_data">
+		
+			<dl>
+				<dt><?php echo __('Banner Name:-')?></dt>
+				<dd><?php echo $_banners->getBannerName() ?></dd>
+				<dt><?php echo __('Banner Type:-')?></dt>
+				<dd><?php echo $_banners->getBannerType() ?></dd>
+				<dt><?php echo __('Banner Validity:-')?></dt>
+				<dd><?php echo $_banners->getValidity() ?></dd>
+				<dt><?php echo __('Banner Link:-')?></dt>
+				<dd><a href ="<?php echo $_banners->getBannerLink().'?affiliate='.$block->getAffiliateLink()->getAffiliateId().'&bannerid='.$_banners->getId()?>"><?php echo $_banners->getBannerLink().'?affiliate='.$block->getAffiliateLink()->getAffiliateId().'&bannerid='.$_banners->getId()?></a></dd>
+			</dl>
+		</div>
+		<?php if($_banners->getBannerType()=='image'):?>
+		<div class="banner-image">
+			<a href ="<?php echo $_banners->getBannerLink().'?affiliate='.$block->getAffiliateLink()->getAffiliateId().'&bannerid='.$_banners->getId()?>">
+				<img src ="<?php echo $block->getImageUrl(). $_banners->getBannerData()?>">
+			</a>
+		</div>
+		<?php elseif($_banners->getBannerType()=='video'):?>
+		<div class="banner-video banner-image">
+		
+		 
+		<a href ="<?php echo $_banners->getBannerLink().'?affiliate='.$block->getAffiliateLink()->getAffiliateId().'&bannerid='.$_banners->getId()?>">	
+			<video preload="preload"  id="video" autoplay="autoplay" loop="loop">
+				<source src="<?php echo $block->getImageUrl(). $_banners->getBannerData()?>" type="video/mp4"></source>
+				<source src="<?php echo $block->getImageUrl(). $_banners->getBannerData()?>" type="video/webm"></source>
+			</video>
+			</a>
+		</div>
+		<?php else:?>
+		<div class="banner-text">
+		<textarea class="banner-text"><?php echo $_banners->getBannerData();?></textarea>
+		</div>
+		<?php endif;?>
+		<div class="banner-share">
+	         <p>
+	           <?php echo __('Paste The Link In Your Website Or Forum If You Have.')?>  
+	         </p>
+	         <p>
+		         <textarea readonly="true" onclick="" class="banner-share-url" rows="4" style="width:100%">
+			         <a href="<?php echo $_banners->getBannerLink().'?affiliate='.$block->getAffiliateLink()->getAffiliateId().'&bannerid='.$_banners->getId()?>">
+			         	<?php if($_banners->getBannerType()=='image'):?>
+				         <img src ="<?php echo $block->getImageUrl(). $_banners->getBannerData()?>">
+				         <?php else:?>
+				         <video preload="preload"  id="video" autoplay="autoplay" loop="loop">
+							<source src="<?php echo $block->getImageUrl(). $_banners->getBannerData()?>" type="video/mp4"></source>
+							<source src="<?php echo $block->getImageUrl(). $_banners->getBannerData()?>" type="video/webm"></source>
+						</video>
+							<?php endif;?>
+				      </a>
+			     </textarea>
+	         </p>
+	    </div>
+	    <?php if($block->getCurrentTimestamp()<=strtotime($_banners->getValidity())):?>
+	    <div class="field required">
+	        <label for="social_network" class="label"><span><?php echo __('Refer Via Social Network') ?></span></label>
+	            <div class="control">
+	            <?php if($helper->IsFbEnabled()):?>
+	            <a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode($_banners->getBannerLink().'?affiliate='.$block->getAffiliateLink()->getAffiliateId().'&bannerid='.$_banners->getId())?>" target="_blank">
+        			<img src="<?php echo $block->getViewFileUrl('Ced_Affiliate/images/facebook.png');?>" alt="Facebook" />
+				</a>
+	            <?php endif;?>
+	            <?php if($helper->IsGoogleEnabled()):?>
+	            <a href="https://plus.google.com/share?url=<?php echo $_banners->getBannerLink()."?affiliate=".$block->getAffiliateLink()->getAffiliateId().'&bannerid='.$_banners->getId()?>" target="_blank">
+        			<img src="<?php echo $block->getViewFileUrl('Ced_Affiliate/images/google.png');?>" alt="Google" />
+				</a>
+	            <?php endif;?>
+	             <?php if($helper->IsTwitterEnabled()):?>
+	            <a href="https://twitter.com/share?url=<?php echo $_banners->getBannerLink().'?affiliate='.$block->getAffiliateLink()->getAffiliateId().'&bannerid='.$_banners->getId() ?>&amp;text=Affiliate Banner Url;hashtags=Affiliate" target="_blank">
+        			<img src="<?php echo $block->getViewFileUrl('Ced_Affiliate/images/twitter.png');?>" alt="Twitter" />
+				</a>
+	            <?php endif;?>
+	             
+	        </div>
+	        </div>
+	        <?php endif;?>
+	    </div>
+    </div>
+<?php endforeach;?>
+</div>
+<div class="affiliate-pager">
+ <?php echo $block->getPagerHtml(); ?>
+</div>

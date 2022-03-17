@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Ced\CsMarketplace\Block\Link\Current"
+                type="Ced\CsHyperlocal\Block\Link\Current"/>
+
+    <type name="Ced\CsMarketplace\Controller\Account\CreatePost">
+        <plugin name="CedVendorAccountCreatePostPlugin" type="Ced\CsHyperlocal\Plugin\Vendor\Account\CreatePost"/>
+    </type>
+
+    <type name="Ced\CsMarketplace\Controller\Account\ApprovalPost">
+        <plugin name="CedVendorAccountApprovalPostPlugin" type="Ced\CsHyperlocal\Plugin\Vendor\Account\ApprovalPost"/>
+    </type>
+
+    <!-- product view plugin -->
+     <type name="Magento\Catalog\Controller\Product\View">
+        <plugin name="CedProductViewPlugin" type="Ced\CsHyperlocal\Plugin\Product\View" sortOrder="1"/>
+    </type>
+
+    <!-- vendor profile save plugin -->
+    <type name="Ced\CsMarketplace\Controller\Vendor\Save">
+        <plugin name="CedProductViewPlugin" type="Ced\CsHyperlocal\Plugin\Vendor\Profile\Save" sortOrder="1"/>
+    </type>
+
+   
+
+    <preference for="Ced\CsMarketplace\Block\Vshops\ListBlock"
+                type="Ced\CsHyperlocal\Block\Vshops\ListBlock\ListBlock"/>
+                
+    <preference for="Ced\CsMarketplace\Block\Vshops\Catalog\Product\ListProduct"
+                type="Ced\CsHyperlocal\Block\Vshops\Catalog\Product\ListProduct"/>
+
+    <type name="Magento\CatalogSearch\Model\Search\IndexBuilder">
+        <plugin name="modify_serach" type="Ced\CsHyperlocal\Plugin\CatalogSearch\Model\Search\IndexBuilder" sortOrder="0" />
+    </type>
+
+
+</config>

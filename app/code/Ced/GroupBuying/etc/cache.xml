@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ CedCommerce
+
+ NOTICE OF LICENSE
+
+ This source file is subject to the End User License Agreement (EULA)
+ that is bundled with this package in the file LICENSE.txt.
+ It is also available through the world-wide-web at this URL:
+ https://cedcommerce.com/license-agreement.txt
+
+ @author    CedCommerce Core Team <connect@cedcommerce.com>
+ @copyright Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ @license   https://cedcommerce.com/license-agreement.txt
+
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="cedGroupBuying" translate="label,description" instance="Ced\GroupBuying\Model\Cache\Type\CacheType">
+        <label>Ced Group buying</label>
+        <description>Ced Group buying cache</description>
+    </type>
+</config>

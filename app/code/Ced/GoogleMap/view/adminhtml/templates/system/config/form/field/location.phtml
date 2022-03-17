@@ -1,0 +1,167 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GoogleMap
+ * @author 	    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license     https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+/** @var \Ced\GoogleMap\Block\Adminhtml\System\Config\Form\Field\Location $block */
+?>
+<script>
+    require([
+        'jquery',
+        'uiRegistry'/*,
+        'prototype'*/
+    ], function ($, uiRegistry) {
+        $(function () {
+            let bodySelector = $('body');
+            let sectionName = 'shipping_origin_';
+            var locationInput = bodySelector.find('#' + sectionName + 'location');
+            var latitudeInput = bodySelector.find('#' + sectionName + 'latitude');
+            var longitudeInput = bodySelector.find('#' + sectionName + 'longitude');
+            var citySelector = bodySelector.find('#' + sectionName + 'city');
+            let regionId = sectionName + 'region_id';
+            let regionIdSelector =  bodySelector.find('#' + regionId);
+            let countryIdSelector = bodySelector.find('#' + sectionName + 'country_id');
+            let postCodeSelector = bodySelector.find('#' + sectionName + 'postcode');
+            let region = '';
+
+            console.log(locationInput);
+            console.log(locationInput.val());
+            console.log(latitudeInput);
+            console.log(latitudeInput.val());
+            console.log(longitudeInput);
+            console.log(longitudeInput.val());
+            console.log(citySelector);
+            console.log(citySelector.val());
+            console.log(regionIdSelector);
+            console.log(regionIdSelector.val());
+            console.log(countryIdSelector);
+            console.log(countryIdSelector.val());
+            console.log(postCodeSelector);
+            console.log(postCodeSelector.val());
+
+            var autocomplete = new google.maps.places.Autocomplete(locationInput[0]);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                let place = autocomplete.getPlace();
+                let latitude = place.geometry.location.lat();
+                let longitude = place.geometry.location.lng();
+
+                console.log('place');
+                console.log(place);
+                latitudeInput.val(latitude);
+                longitudeInput.val(longitude);
+
+                let arrAddress = place.address_components;
+                citySelector.val('');
+                regionIdSelector.val('');
+                countryIdSelector.val('');
+                postCodeSelector.val('');
+
+                $.each(arrAddress, function (i, address_component) {
+                    switch (address_component.types[0]) {
+                        /*case "route":
+                            streetAddressSelector.val(address_component.long_name).change();
+                            break;
+
+                        case "sublocality_level_2":
+                            street1Selector.val(address_component.long_name).change();
+                            break;
+
+                        case "sublocality_level_1":
+                            street2Selector.val(address_component.long_name).change();
+                            break;*/
+
+                        case "locality":
+                        case "administrative_area_level_2":
+                            citySelector.val(address_component.long_name);
+                            citySelector.attr('disabled', false);
+                            citySelector.attr('readonly', true);
+                            break;
+
+                        case "country":
+                            countryIdSelector.val(address_component.short_name).change();
+                            countryIdSelector[0].dispatchEvent(new Event('change'));
+                            countryIdSelector.attr('disabled', false);
+                            countryIdSelector.attr('readonly', true);
+                            console.log('countryIdSelector');
+                            console.log(countryIdSelector.val());
+                            break;
+
+                        case "postal_code":
+                            postCodeSelector.val(address_component.long_name);
+                            postCodeSelector.attr('disabled', false);
+                            postCodeSelector.attr('readonly', true);
+                            console.log('postCodeSelector');
+                            console.log(postCodeSelector.val());
+                            break;
+
+                        case "administrative_area_level_1":
+                            console.log('address_component.area');
+                            console.log(address_component.long_name);
+                            region = address_component.long_name;
+                            console.log(region);
+                            console.log(regionIdSelector);
+                            break;
+
+                    }
+                });
+                console.log(locationInput.val());
+                console.log(latitudeInput.val());
+                console.log(longitudeInput.val());
+                console.log(citySelector.val());
+                console.log(regionIdSelector.val());
+                console.log(countryIdSelector.val());
+                console.log(postCodeSelector.val());
+
+                setTimeout(function () {
+                    $('#row_' + regionId + ' td.value').change();
+                }, 500);
+            });
+
+            bodySelector.on('change', '#row_' + regionId + ' td.value', function () {
+                console.log('inside');
+                console.log($(this));
+
+                //if (regionIdSelector) {
+                //search for and select region using text
+                $('#' + regionId + ' option').each(function (i, e) {
+                    console.log('inside .each');
+                    console.log(region);
+                    console.log($.trim($(this).text()));
+                    if ($.trim($(this).text()) == region) {
+                        console.log(e);
+                        $(this).prop('selected', true);
+                        return false;
+                    }
+                });
+                //}
+            });
+
+            locationInput.on('focus', function () {
+                selectedLocation = false;
+            }).on('blur', function () {
+                if (!selectedLocation) {
+                    $(this).val('');
+                }
+            });
+        });
+    });
+
+    function gm_authFailure() {
+        alert("<?= __('There has been an error in map API key, please check the map api key.') ?>");
+    }
+
+</script>

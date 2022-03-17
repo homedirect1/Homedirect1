@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GShop
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cedcommerce" translate="label" sortOrder="1">
+            <label>Cedcommerce</label>
+        </tab>
+        <!-- section start for GShop Configuration Tab in Cedcommerce section -->
+        <section id="gshop_config" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Google Shopping Configuration</label>
+            <tab>cedcommerce</tab>
+            <resource>Ced_GShop::GXpress</resource>
+            <group id="gshop_setting" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Google Shopping Redirect/Account Settings</label>
+                <field id="ru_name" translate="label comment" type="label" sortOrder="10" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Google Shopping Redirect URL name</label>
+                    <frontend_model>Ced\GShop\Block\Adminhtml\Config\Field\GShopUrl</frontend_model>
+                    <comment>
+                        <![CDATA[You need to enter same url in Redirect URI on https://console.cloud.google.com/apis/credentials]]></comment>
+                    <!--                    <tooltip>You need to enter same url in Redirect URI on https://console.cloud.google.com/apis/credentials</tooltip>-->
+                </field>
+
+                <field id="get_dev_details" translate="button_label" sortOrder="30" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <button_label>Create Merchant Account</button_label>
+                    <frontend_model>Ced\GShop\Block\Adminhtml\Config\GetDevDetails</frontend_model>
+                </field>
+                <field id="enable_shopping_api" translate="button_label" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <button_label>Enable Shopping Api</button_label>
+                    <frontend_model>Ced\GShop\Block\Adminhtml\Config\EnableShoppingApi</frontend_model>
+                </field>
+                <field id="primary_account" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Primary Account</label>
+                    <source_model>Ced\GShop\Model\Source\Accounts</source_model>
+                    <tooltip>Selected Account will used for profile creation. If you need to create profile for another
+                        account please select that particular account or leave it black. If this field will blank then
+                        account will be ask at the time of profile creation.
+                    </tooltip>
+                </field>
+            </group>
+            <group id="gshop_cron" translate="label" type="text" sortOrder="40" showInDefault="1">
+                <label>Google Shopping Cron Settings</label>
+                <field id="autoupload_cron" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>AutoUpload Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+            </group>
+            <group id="product_upload" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="0">
+                <label>Google Shopping  Product Upload Setting</label>
+                <field id="chunk_size" translate="label comment" type="text" sortOrder="7" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Product Chunk Size</label>
+                    <comment><![CDATA[Enter the size of a chunk]]></comment>
+                </field>
+
+                <field id="process" translate="label comment" type="select" sortOrder="5"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Upload Format</label>
+                    <source_model>Ced\GShop\Model\Config\UploadFormat</source_model>
+                </field>
+                <field id="debugmode" translate="label comment" type="select" sortOrder="5"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Debug Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="product_price" translate="label" type="select" sortOrder="5" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Product Price</label>
+                    <source_model>Ced\GShop\Model\Config\Selprice</source_model>
+                    <comment><![CDATA[Select to send different product price to <b>shopping.google.com</b>]]></comment>
+                </field>
+                <field id="fix_price" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Modify by Fix Price</label>
+                    <validate>required-entry validate-number</validate>
+                    <depends>
+                        <field id="product_price" separator=",">plus_fixed,min_fixed</field>
+                    </depends>
+                </field>
+                <field id="percentage_price" translate="label" type="text" sortOrder="6" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Modify by Percenctage Price</label>
+                    <validate>required-entry validate-number</validate>
+                    <comment>
+                        <![CDATA[Numeric value Required for <b>Add/subtract % on Magento price</b> 5 for Example: Magento price +/- 5% of Magento price.<b>]]></comment>
+                    <depends>
+                        <field id="product_price" separator=",">plus_per,min_per</field>
+                    </depends>
+                </field>
+                <field id="sale_price" translate="label comment" type="select" sortOrder="11"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sale Price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sale_price_expire" translate="label comment" type="text" sortOrder="12"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sale Price Expires on</label>
+                    <frontend_model>Ced\GShop\Block\Adminhtml\Config\DatePicker</frontend_model>
+<!--                    <validate>required-entry</validate>-->
+                    <depends>
+                        <field id="sale_price">1</field>
+                    </depends>
+                </field>
+                <field id="tax_price" translate="label comment" type="select" sortOrder="14"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Tax Price Settings</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="tax_percentage" translate="label comment" type="text" sortOrder="15"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Tax Percentage Rate</label>
+                    <comment>enter Tax Rates applied on shipping (in %)</comment>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="tax_price">1</field>
+                    </depends>
+                </field>
+                <field id="msi_qty" translate="label" type="select" sortOrder="41" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Use MSI Feature For Inventory</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        <![CDATA[Use MSI feature to send the Inventory to <b>google Adwords</b>, By default : <b>Default Stock</b> is used.]]></comment>
+                </field>
+                <field id="buffer_qty" translate="label" type="select" sortOrder="42" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Use Buffer Quantity For Inventory</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="buffer_attribute" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Buffer Attribute</label>
+                    <source_model>Ced\GShop\Model\Source\Config\MagentoAttributes</source_model>
+                    <validate>required-entry</validate>
+                    <comment> <![CDATA[Map Product Identifier for <b>Adwords</b>]]></comment>
+                    <depends>
+                        <field id="buffer_qty">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+        <!-- section end for GShop Cofiguration Tab in Cedcommerce Tab -->
+    </system>
+</config>

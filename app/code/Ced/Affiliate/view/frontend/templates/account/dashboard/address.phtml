@@ -1,0 +1,56 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Address $block */
+?>
+<div class="block block-dashboard-addresses">
+    <div class="block-title">
+        <strong><?php /* @escapeNotVerified */ echo __('Address Book') ?></strong>
+        <a class="action edit" href="<?php /* @escapeNotVerified */ echo $block->getAddressBookUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Manage Addresses') ?></span></a>
+    </div>
+    <div class="block-content">
+        <div class="box box-billing-address">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Default Billing Address') ?></span>
+            </strong>
+            <div class="box-content">
+                <address>
+                    <?php echo $block->getPrimaryBillingAddressHtml() ?>
+                </address>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?php /* @escapeNotVerified */ echo $block->getPrimaryBillingAddressEditUrl() ?>" data-ui-id="default-billing-edit-link"><span><?php /* @escapeNotVerified */ echo __('Edit Address') ?></span></a>
+            </div>
+        </div>
+        <div class="box box-shipping-address">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Default Shipping Address') ?></span>
+            </strong>
+            <div class="box-content">
+                <address>
+                    <?php echo $block->getPrimaryShippingAddressHtml() ?>
+                </address>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?php /* @escapeNotVerified */ echo $block->getPrimaryShippingAddressEditUrl() ?>" data-ui-id="default-shipping-edit-link"><span><?php /* @escapeNotVerified */ echo __('Edit Address') ?></span></a>
+            </div>
+        </div>
+    </div>
+</div>

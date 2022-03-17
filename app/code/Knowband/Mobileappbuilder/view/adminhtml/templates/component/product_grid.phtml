@@ -1,0 +1,155 @@
+<?php
+    $data = $this->getProductFormData();
+?>
+<form action="" method="post" enctype="multipart/form-data" id="form_save_product_grid_component">
+    <input type="hidden" id="form_key" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <input type="hidden" name="category_prev_products" id="category_prev_products" value="<?php if(isset($data['category_products']) && !empty($data['category_products'])) echo $data['category_products']; ?>" />
+    <input type="hidden" id="component_name" name="component_name" value="<?php echo $data['component_name']; ?>" />
+    <fieldset class="admin__fieldset">
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="product_type">
+                <span>
+                    <?php echo __("Select Product Type"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='product_type' id="product_type" class='admin__control-select' onchange="showHideProductType(this);">
+                        <?php foreach($this->getProductTypes() as $value => $title) { ?>
+                            <option value='<?php echo $value; ?>' <?php if(isset($data['product_type']) && $data['product_type'] == $value) echo " selected"; ?>><?php echo $title; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field" id="category_id_holder" style="display: none;">
+            <label class="admin__field-label" for="category_id">
+                <span>
+                    <?php echo __("Select Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id' id="category_id" class='admin__control-select' onchange="getCategoryproducts(this);">
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($data['category_id']) && $data['category_id'] == $category['value']) echo " selected"; ?> ><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field" id="category_products_holder" style="display: none;">
+            <label class="admin__field-label" for="category_products">
+                <span>
+                    <?php echo __("Select Products from Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_products[]' id="category_products" class='admin__control-multiselect' multiple="">
+                    </select>                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field" id="product_list_holder" style="display: none;">
+            <label class="admin__field-label" for="product_list">
+                <span>
+                    <?php echo __("Select Products"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='product_list[]' id="product_list" class='admin__control-multiselect' multiple="">
+                        <?php foreach ($this->getAllProducts() as $product){ ?>
+                        <option value='<?php echo $product['value']; ?>' <?php if(isset($data['product_list']) && in_array($product['value'], $data['product_list'])) echo " selected"; ?>><?php echo $product['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="number_of_products">
+                <span>
+                    <span class="vss_required">*</span>
+                    <?php echo __("Number of products"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <input value="<?php echo isset($data['number_of_products']) ? $data['number_of_products'] : ""  ?>" class="admin__control-text" type="text" placeholder="" name="number_of_products" id="number_of_products">                        
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="image_content_mode">
+                <span>
+                    <?php echo __("Image Content Mode"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='image_content_mode' id="image_content_mode" class='admin__control-select'>
+                        <option value='scaleAspectFill' <?php if(isset($data['image_content_mode']) && $data['image_content_mode'] == "scaleAspectFill") echo " selected"; ?>><?php echo __("Scale aspect fill"); ?></option>
+                        <option value='scaleAspectFit' <?php if(isset($data['image_content_mode']) && $data['image_content_mode'] == "scaleAspectFit") echo " selected"; ?>><?php echo __("Scale aspect Fit"); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+    </fieldset>
+</form>
+
+<script type="text/javascript">
+    var default_file_size = 2097152;
+    var select_category_txt = '<?php echo __('Please select category.'); ?>';
+    var select_product_txt = '<?php echo __('Please select product.'); ?>';
+    var select_image_type_txt = '<?php echo __('Please select image type'); ?>';
+    var image_url_error_txt = '<?php echo __('Please provide image url'); ?>';
+    var select_category_txt = '<?php echo __('Please select category'); ?>';
+    var provide_product_name_txt = '<?php echo __('Please select product'); ?>';
+    var required_entry_txt = '<?php echo __('Field cannot be empty.'); ?>';
+    var integer_value_txt = '<?php echo __('Only Positive integer is allowed.'); ?>';
+    require(['jquery', 'Knowband_Mobileappbuilder/js/velovalidation'], function($){
+        $(document).ready(function(){
+            $("#product_type").trigger("change");
+            if($("#product_type").val() == "category_products"){
+                $("#category_id").trigger("change");
+            }
+            velovalidation.setErrorLanguage({
+                empty_field: "<?php echo __("Field cannot be empty."); ?>",
+                select_field: "<?php echo __("Please select an option from dropdown."); ?>",
+                number_field: "<?php echo __("You can enter only numbers."); ?>",
+                positive_number: "<?php echo __("Number should be greater than 0."); ?>",
+                maxchar_field: "<?php echo __("Field cannot be greater than {#} characters."); ?>",
+                minchar_field: "<?php echo __("Field cannot be less than {#} character(s)."); ?>",
+                empty_email: "<?php echo __("Please enter Email."); ?>",
+                validate_email: "<?php echo __("Please enter a valid Email."); ?>",
+                invalid_date: "<?php echo __("Invalid date format."); ?>",
+                validate_range: "<?php echo __("Number is not in the valid range. It should be between {1} and {100}"); ?>",
+                valid_amount: "<?php echo __("Field should be numeric."); ?>",
+                valid_decimal: "<?php echo __("Field can have only upto two decimal values."); ?>",
+                max_email: "<?php echo __("Email cannot be greater than {#} characters."); ?>",
+                specialchar_zip: "<?php echo __("Zip should not have special characters."); ?>",
+                valid_percentage: "<?php echo __("Percentage should be in number."); ?>",
+                between_percentage: "<?php echo __("Percentage should be between 0 and 100."); ?>",
+                maxchar_size: "<?php echo __("Size cannot be greater than {#} characters."); ?>",
+                maxchar_color: "<?php echo __("Color could not be greater than {#} characters."); ?>",
+                invalid_color: "<?php echo __("Color is not valid."); ?>",
+                specialchar: "<?php echo __("Special characters are not allowed."); ?>",
+                script: "<?php echo __("Script tags are not allowed."); ?>",
+                style: "<?php echo __("Style tags are not allowed."); ?>",
+                iframe: "<?php echo __("Iframe tags are not allowed."); ?>",
+                not_image: "<?php echo __("Uploaded file is not an image."); ?>",
+                image_size: "<?php echo __("Uploaded file size must be less than #."); ?>",
+                html_tags: "<?php echo __("Field should not contain HTML tags."); ?>",
+                number_pos:  "<?php echo __("You can enter only positive numbers."); ?>",
+            });
+        });
+    })
+</script>

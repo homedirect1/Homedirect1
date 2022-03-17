@@ -1,0 +1,34 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+namespace Ced\HelpDesk\Block\Adminhtml;
+class Ticket extends \Magento\Backend\Block\Widget\Grid\Container
+{
+	protected function _construct()
+	{
+		$this->_controller = 'adminhtml_tickets';
+		$this->_blockGroup = 'Ced_HelpDesk';
+		parent::_construct();
+	}
+	/*
+	 * Check Authorization of current user
+	 * */
+	protected function _isAllowedAction($resourceId)
+	{
+		return $this->_authorization->isAllowed($resourceId);
+	}
+}

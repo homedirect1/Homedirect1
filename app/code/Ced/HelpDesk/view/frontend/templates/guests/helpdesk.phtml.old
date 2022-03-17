@@ -1,0 +1,79 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<?php $welcomeMsg = $block->welcomeMessage();
+if(isset($welcomeMsg) && !empty($welcomeMsg)){?>
+    <h1><center><?php echo $welcomeMsg;?></center></h1>
+<?php }else{?>
+    <h1><center>Welcome to the Support System</center></h1>
+<?php }?>
+ <div class="banner_wrap">
+     <?php $bannerImage = $block->bannerInfo();
+            $url = $block->getBaseUrl();
+     if(isset($bannerImage) && !empty($bannerImage)){?>
+            <img src="<?php echo $url.'pub/media/ced/helpdesk/'.$bannerImage?>" style="width: 100%">
+     <?php }else{?>
+         <img src="<?php echo $url;?>pub/static/frontend/Magento/luma/en_US/Ced_HelpDesk/images/supp.png" alt="image" width="100%" height="200px">
+     <?php }?>
+ </div>
+        <div>
+            <?php $welcomeDesc = $block->welcomeDesc();
+            if(isset($welcomeDesc) && !empty($welcomeDesc)){?>
+            <span class="welcome_msg"><?php echo $welcomeDesc;?></span>
+            <?php }else{?>
+                <span class="welcome_msg">Welcome to the Support Centre of CedCommerce. We at CedCommerce aim to provide the best possible solutions to you for your problems as we consider Customer Satisfaction of utmost importance. In order to avail our 24*7 support services you need to raise a ticket which is a very simple process. Just create a ticket and submit it. Our support team comprising of highly qualified professionals will provide you assistance for all your queries. Moreover, the status of the ticket can also be tracked using the ticket id being generated on raising the ticket. CedCommerce Support System keeps a log of all the queries that have been put up by you till date and also the suggestions given by our team. All this can be viewed either by using the ticket id or simply logging in.<br> At CedCommerce, we are always happy to help our customers !!!<br> </span>
+            <?php }?>
+
+
+            <div class="new-ticket-wrap">
+                <div class="image-section pull-right">
+                    <img src="<?php echo $url;?>pub/static/frontend/Magento/luma/en_US/Ced_HelpDesk/images/check-ticket-status.png" alt="image" width="100%" height="200px">
+                </div>
+                <div id="new_ticket" class="pull-left content-section" style="">
+                    <h3><i class="fa fa-check-square-o"></i>Got Any issue?</h3>
+                    <div class="got_issue_desc">You got any issue? Don't worry we are here to help you :)
+                            Please provide as much detail as possible so we can best assist you without delay. To update a previously submitted ticket, please login.</div>
+                    <div class="front-page-button pull-left">
+                        <p>
+                            <a href="<?php echo $this->getUrl('helpdesk/index/ticket')?>" class="green button"><span>Create a New Ticket</span></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="new-ticket-wrap check-ticket-wrap">
+                <div class="image-section pull-left">
+                    <img src="<?php echo $url;?>pub/static/frontend/Magento/luma/en_US/Ced_HelpDesk/images/support-tickets.png" alt="image" width="100%" height="200px">
+                </div>
+                <div id="check_status" class="content-section pull-right" style="float: right;width:48%">
+                    <h3><i class="fa fa-caret-square-o-right"></i>Check Ticket Status</h3>
+                    <div class="check_status_desc">We have a track record of all your old queries! So to view your old queries please do login or track history with ticket id.</div>
+                     <div class="front-page-button pull-left">
+                        <p>
+                            <a href="<?php echo $this->getUrl('helpdesk/index/view')?>" class="blue button"><span>Check Ticket Status</span></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            
+        </div>
+    </div>
+
+</div>
+

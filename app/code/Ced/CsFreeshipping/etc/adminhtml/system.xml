@@ -1,0 +1,33 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsFreeshipping
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+		<section id="ced_csmarketplace" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+			<group id="csmultishipping" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+				<field id="csfreeshipping" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+				    <label>Enable Vendor Free Shipping</label>
+				    <config_path>ced_csfreeshipping/general/active</config_path>
+				    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				    <comment>Before enabling this please enable free shipping for admin</comment>
+				</field>				
+			</group>
+        	</section>
+	</system>
+</config>

@@ -1,0 +1,156 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * You can check the licence at this URL: https://cedcommerce.com/license-agreement.txt
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/afl-3.0.php
+ *
+ * @category    Ced
+ * @package     Ced_csdeliverydate
+ * @author   CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license     https://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<style>
+
+    .add-action {
+        margin-left: 25%;
+        margin-top: 10px;
+    }
+    #timestamp {
+        display: block;
+        background-color: #fff;
+        width: 45%;
+        margin-left: 25%;
+    }
+
+    #timestamp th, td {
+        padding: 2%;
+        border: 1px solid #efefef;
+        width: 60%;
+    }
+
+    td {
+        border-top: 1px solid #fff;
+    }
+
+    tr td:last-child {
+        width: 40%;
+        border: 1px solid transparent;
+
+    }
+
+    input[type='text'] {
+        width: 40%;
+    }
+
+    .remove {
+        background-color: transparent;
+        color: #000000;
+        cursor: pointer;
+    }
+
+    .error {
+        color: red;
+        font-size: smaller;
+    }
+</style>
+<?php
+$helper = $this->helper('Ced\CsMarketplace\Helper\Data');
+$vendorId = $this->session->getData('vendor_id');
+$vsetting_model = $this->vsettingsCollectionFactory->create()
+    ->addFieldToFilter('vendor_id', $vendorId)->getData();
+?>
+
+<table id="timestamp" method="post">
+    <thead>
+    <tr>
+        <th><?= __('Opening Time') ?></th>
+        <th><?= __('Closing Time') ?></th>
+        <th><?= __('Action') ?></th>
+    </tr>
+    </thead>
+    <tbody id="timestampTable">
+    <tr id="user" class="grid"></tr>
+    </tbody>
+</table>
+
+<input type='button' class="button btn btn-success uptransform product-button" value='Add New' id='add'>
+<p><b>Note:</b> Create Available delivery timestamps</p>
+
+<script type="text/javascript">
+    require([
+            "jquery",
+            "jquery/ui"
+        ],
+        function($){
+            $(document).ready(function () {
+                $('body').on('click', '.remove_div_anchor', function(e) {
+                    let element = $(this);
+                    let id = $(this).data('count');
+                    $("#user" + id).remove();
+                });
+
+                var val = '';
+                <?php
+                foreach($vsetting_model as $key=>$val){
+                foreach($val as $v){
+                if($v == 'csdeliverydate/csdeliverydate/timestamp'){?>
+                val = <?= (is_array(json_decode($val['value'])))?count(json_decode($val['value'])):0 ?>;
+                <?php }
+                }
+                }?>
+                if (val) {
+                    var counter = val;
+                } else {
+                    var counter = 0;
+                }
+                $("#add").click(function () {
+                    var newTextBoxDiv = $(document.createElement('tr')).attr("id", 'user' + counter);
+                    newTextBoxDiv.html(
+                        '<td><input id="openingtime' + counter + '" class="required-entry opening-closing-time" onfocusout="validateHour(this,' + counter + ')"  type="text" name="groups[csdeliverydate][timestamp][' + counter + '][from]" size="2" min="1" max="23" >:00</td>' +
+                        '<td><input id="closingtime' + counter + '"  class="required-entry opening-closing-time"  onfocusout="validateHour(this,' + counter + ')" type="text" name="groups[csdeliverydate][timestamp][' + counter + '][to]" size="2" min="1" max="23">:00</td>' +
+                        '<td class="remove"><a class="remove_div_anchor" data-count="' + counter + '"> <?php echo __('Remove');?></a>' + '</td>' +
+                        '<td class="error"><label class="errormsg' + counter + '"></label></td>');
+                    newTextBoxDiv.appendTo("#timestampTable");
+                    counter += 1;
+                });
+            });
+            var count = 0;
+            <?php
+            $k = 'csdeliverydate/csdeliverydate/timestamp';
+            $key = $helper->getTableKey('key');
+            $vendorKey = $helper->getTableKey('vendor_id');
+            $vsettingModel = $this->vsettingsFactory->create();
+            $values = $vsettingModel->loadByField(array($key, $vendorKey), array($k, $vendorId));
+            $vdata = $values->getData();
+            $dateValues = [];
+            if(!empty(vdata))
+            {
+                $dateValues = $values->getValue();
+            }
+           
+            if(isset($dateValues) && is_array($dateValues)){
+            foreach($dateValues as $key=>$value){
+            $to = $value['to'];
+            $from = $value['from'];
+            ?>
+            var newTextBoxDiv = $(document.createElement('tr')).attr("id", 'user' + count);
+            newTextBoxDiv.html(
+                '<td><input id="openingtime' + count + '" class="required-entry fromopeningtime" onfocusout="validateHour(this,' + count + ')" type="text" value="<?php  echo $from ?>"  name="groups[csdeliverydate][timestamp][' + count + '][from]" size="2" min="1" max="23" >:00</td>' +
+                '<td><input id="closingtime' + count + '" class="required-entry toclosingtime" onfocusout="validateHour(this,' + count + ')"  type="text" value="<?php echo $to ?>" name="groups[csdeliverydate][timestamp][' + count + '][to]" size="2" min="1" max="23">:00</td>' +
+                '<td class="remove"><a class="remove_div_anchor" data-count="' + count + '"> <?php echo __('Remove');?></a>' + '</td>' +
+                '<td class="error"><label class="errormsg' + count + '"></label></td>');
+
+            newTextBoxDiv.appendTo("#timestampTable");
+            count++;
+            <?php }
+            }?>
+        });
+
+</script>

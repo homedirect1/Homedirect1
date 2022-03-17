@@ -1,0 +1,54 @@
+<?php $_order = $block->getOrder();
+$helper = $this->helper('Ced\StorePickup\Helper\Data');
+$isStorePickup = $helper->isStorePickupShipping($_order);
+$pickupDetail = $helper->getStorePickupData($_order);
+?>
+<?php if ($isStorePickup):?>
+    <div class="store-pickup-table-title"><strong>Store Pickup Information</strong></div>
+    <table name="store-information" id="ced_store_info" border="1px">
+        <thead>
+        <tr>
+            <th scope="col" class="col order-item"><?= _('Order Item')?></th>
+            <th scope="col" class="col store-name"><?= _('Store Name')?></th>
+            <th scope="col" class="col store-manager-name"><?= _('Store Manager Name')?></th>
+            <th scope="col" class="col store-contact"><?= _('Store Contact')?></th>
+            <th scope="col" class="col store-address"><?= _('Store Address')?></th>
+            <th scope="col" class="col store-city"><?= _('Store City')?></th>
+            <th scope="col" class="col store-state"><?= _('Store State')?></th>
+            <th scope="col" class="col store-zipcode"><?= _('Store Zipcode')?></th>
+            <th scope="col" class="col store-country"><?= _('Store country')?></th>
+            <th scope="col" class="col pickup-date"><?= _('Pickup date')?></th>
+            <th scope="col" class="col store-timing"><?= _('Store Timing')?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($pickupDetail as $value): ?>
+            <?php
+            $storeInfo = $helper->getPickupStore($value);
+            $countryName = $helper->getCountryName($storeInfo->getStoreCountry());
+            $day = date('l', strtotime($value['pickup_date']));
+            $storeTiming = $helper->getStoreTimings($value['pickup_id'], $day);
+            if ($storeTiming['status']) {
+                $storeTiming = $storeTiming['start'] . ' - ' . $storeTiming['end'];
+            } else {
+                $storeTiming = _('Closed');
+            }
+            ?>
+            <tr>
+                <td class="col order-item"><?= isset($value['item_name']) ? $value['item_name'] : ''?></td>
+                <td class="col store-name"><?= $storeInfo->getStoreName();?></td>
+                <td class="col store-manager-name"><?= $storeInfo->getStoreManagerName();?></td>
+                <td class="col store-contact"><?= $storeInfo->getStorePhone();?></td>
+                <td class="col store-address"><?= $storeInfo->getStoreAddress(); ?></td>
+                <td class="col store-city"><?= $storeInfo->getStoreCity(); ?></td>
+                <td class="col store-state"><?= $storeInfo->getStoreState(); ?></td>
+                <td class="col store-zipcode"><?= $storeInfo->getStoreZcode(); ?></td>
+                <td class="col store-country"><?= $countryName; ?></td>
+                <td class="col pickup-date"><?= isset($value['pickup_date']) ? $value['pickup_date'] : ''?></td>
+                <td class="col store-timing"><?= $storeTiming; ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>

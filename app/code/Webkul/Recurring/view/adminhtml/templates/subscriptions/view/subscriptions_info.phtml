@@ -1,0 +1,90 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_Recurring
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+    $model = $block->getSubscriptions();
+?>
+<div class="fieldset-wrapper subscriptions-information">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?= $block->escapeHtml(__('Subscription Information')) ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+        <?= $block->getChildHtml() ?>
+        <tr>
+            <th><?= $block->escapeHtml(__('Subscription Type :')) ?></th>
+            <td>            
+                <?= /* @noEscape */ $block->getSubscriptionType() ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Start Date :')) ?></th>
+            <td>         
+                <?= /* @noEscape */ $block->getStartDate() ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Initial Order Id :')) ?></th>
+            <td>
+                <a href="<?= /* @noEscape */ $block->getOrderUrl() ?>" target="_blank" >
+                <?= /* @noEscape */ $block->getOrderId() ?>
+                </a>
+            </td>
+        </tr>
+        <?php
+            $product  = $block->getProduct();
+            $customer = $block->getCustomer();
+        ?>
+        <tr>
+            <th><?= $block->escapeHtml(__('Product Name :')) ?></th>
+            <td>
+            <?php if ($product->getId()): ?>
+                <a href="<?= /* @noEscape */ $product->getProductUrl() ?>" target="_blank" >
+                <?= /* @noEscape */ $product->getName() ?>
+                </a>
+            <?php else: ?>
+                <?= /* @noEscape */ $model->getProductName() ?>
+            <?php endif; ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Customer Name :')) ?></th>
+            <td>
+            <?php if ($customer->getId()): ?>
+                <a href="<?= /* @noEscape */ $block->getCustomerUrl($customer->getId()) ?>" target="_blank" >
+                <?= /* @noEscape */ $customer->getFirstname()." ".$customer->getLastname() ?>
+                </a>
+            <?php else: ?>
+                <?= /* @noEscape */ $model->getCustomerName() ?>
+            <?php endif; ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Created At :')) ?></th>
+            <td>         
+                <?= /* @noEscape */ $block->getCreateDate() ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Status :')) ?></th>
+            <td>         
+                <?= /* @noEscape */ $block->getStatus($model->getStatus()) ?>
+            </td>
+        </tr>
+        <?php if ($model->getRefProfileId()): ?>
+        <tr>
+            <th><?= $block->escapeHtml(__('Reference Profile Id :')) ?></th>
+            <td>         
+                <?= /* @noEscape */ $model->getRefProfileId() ?>
+            </td>
+        </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+</div>

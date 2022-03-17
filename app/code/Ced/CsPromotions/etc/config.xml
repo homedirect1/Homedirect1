@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsPromotions
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+   	<default>
+  		<ced_csmarketplace>
+  			<general>
+  				<cspromotions_active>1</cspromotions_active>
+  			</general>
+  		</ced_csmarketplace>
+      <ced>
+          <rewrites>
+            <cspromotions>
+              <promo_catalog>
+                  <all>Adminhtml,Widget,Backend</all>
+              </promo_catalog>
+              <promo_quote>
+                  <all>Adminhtml,Widget,Backend</all>
+              </promo_quote>
+            </cspromotions>
+          </rewrites>
+      </ced>
+      <vendor_acl>
+            <resources>
+              <all>
+                <title>Allow Everything</title>
+              </all> 
+                <vendor>
+                    <title>Vendor Panel</title>
+                    <path>#</path>
+                    <sort_order>1</sort_order>
+                    <children>
+                        <cspromotions>
+                          <title>Promotions</title>
+                          <sort_order>60</sort_order>
+                          <path>#</path>
+                          <children>
+                            <catalog-rules>
+                              <title>Catalog Price Rules</title>
+                              <sort_order>10</sort_order>
+                              <path>cspromotions/promo_catalog/index</path>
+                            </catalog-rules>
+                            <cart-rules>
+                              <title>Shopping Cart Price Rules</title>
+                              <sort_order>20</sort_order>
+                              <path>cspromotions/promo_quote/index</path>
+                            </cart-rules>
+                          </children>
+                        </cspromotions>
+                    </children>
+                </vendor>
+            </resources>
+        </vendor_acl>
+    </default>
+</config>

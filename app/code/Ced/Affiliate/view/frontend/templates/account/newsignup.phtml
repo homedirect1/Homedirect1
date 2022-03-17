@@ -1,0 +1,101 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<div class="my-account ced-newsignup">
+	<form id="signup_affiliate_account_form" role="form" method="post"
+		action="<?php echo $this->getUrl('affiliate/account/save')?>"
+		novalidate="novalidate" enctype="multipart/form-data">
+		<h2 class="signup-header"><?php echo __('Sign up') ?></h2>
+		<div class="affiliate-sginup required required-entry ">
+			<div class="identity-wrapper detail-wrapper">
+				<label for="identity-document"><?php echo __('Upload Identity Information')?></label>
+					<div class="identity-wrapper">
+						<select class="identity" name="identity" class="required required-entry">
+							<option value="driving">Driving License</option>
+							<option value="pan">Pan Card</option>
+							<option value="passport">Passport</option>
+							<option value="other">Other</option>
+						</select>
+						<input type="file" name="identityfile">
+					</div>
+			</div>
+
+			<div class="address-wrapper required required-entry detail-wrapper">
+				<label for="address-document"><?php echo __('Upload Address Document')?></label>
+				<input type="file" name="addressfile" class="required required-entry">
+				<div class="clear"></div>
+			</div>
+
+			<div class="compoany-wrapper detail-wrapper">
+				<label for="company-document"><?php echo __('Upload Company Document(if you own the company)')?></label>
+				<input type="file" name="companyfile" class="">
+				
+			</div>
+
+			<div class="referring_website detail-wrapper">
+				<label for="referring_website">Referring Website</label> <input
+					id="referring_website" placeholder="Referring Website"
+					class="input-text form-control" title="Referring Website"
+					name="referral_website" value="" type="text">
+			</div>
+			
+			<?php if($block->isTermsAndConditionEnable()):?>
+        
+        <div class="form-group required required-entry">
+            <div class="field terms-condition required detail-wrapper">
+                <label class="required" for="terms-condition"><span><?php echo __('Terms and Conditions')?></span><em>*</em></label>
+                	<div class="terms-wrapper">
+		                <div class="textarea">
+		                    <textarea  class="form-control required required-entry" style="height:200px"><?php echo $block->getTermsAndCondition()?></textarea>
+		                </div>
+		                <div class="checkbox">
+		                    <input class="required required-entry" placeholder="Terms and Conditions" name="accept-terms" id="accept-terms" type="checkbox">  I agree to the terms &amp; conditions
+		                </div>
+	                </div>
+            </div>    
+        </div>
+        
+        <?php endif;?>
+			<input type ="hidden" value ="<?php echo $block->getCustomerId()?>" name="customer_id">
+			<p style="float: right" class="required">* Required Fields</p>
+		<div class="buttons-set">
+			<button type="submit" title="Save"
+				class="button button-config action primary">
+				<span><?php echo __('Save')?></span>
+			</button>
+		</div>
+		</div>
+		
+
+	</form>
+</div>
+<script>
+
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+         var dataForm = $('#signup_affiliate_account_form');
+         var ignore = null;
+         dataForm.mage('validation', {
+                 ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+             }).find('input:text').attr('autocomplete', 'off');
+
+     });
+</script>

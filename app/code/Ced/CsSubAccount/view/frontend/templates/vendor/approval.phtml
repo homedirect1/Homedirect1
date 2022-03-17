@@ -1,0 +1,59 @@
+<?php
+/**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_CsSubAccount
+  * @author      CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */
+?>
+<div class="vendor-login-wrapper">
+	<div class="login-panel panel panel-default" style="margin:20px 0;">
+		<div class="panel-body login-form-body-wrap">
+			<?php //echo $block->getMessagesBlock()->getGroupedHtml() ?>	
+			<p class="hello"><strong><?php echo __('Hello, '.$block->getName()) ?></strong></p>
+			
+			<p><?php echo $block->getApprovalMessage(); ?></p>
+			<form id="form-validate" class="scaffold-form form-login" enctype="multipart/form-data" method="post" action="<?php echo $block->_vendorUrl->getApprovalPostUrl(); ?>">
+				<div class="fieldset">
+					<ul class="form-list" style="padding:10px;">
+						<?php echo $block->getChildHtml('vendor_after_reg_form'); ?>
+					</ul>
+				</div>
+				<div class="buttons-set">
+					<div style=" margin-top: 20px;">
+					<div style="float:right" >
+					    <button style="float:right;" type="button" title="<?php echo __('Go to Main Website') ?>" class="btn btn-primary" onclick="location.href = '<?php echo $block->_vendorUrl->getBaseUrl(); ?>'"><?php echo __('Go to Main Website') ?></button>
+						<div class="clear:both"></div>
+					</div>
+			    	<div class="clear:both"></div>
+ 		  			</div>
+				</div>
+			</form>
+		</div>
+		<script>
+				require([
+					'jquery',
+					'mage/mage'
+				], function($){
+
+					var dataForm = $('#form-validate');
+					var ignore = <?php echo 'null'; ?>;
+					
+					dataForm.mage('validation', {
+						ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+					}).find('input:text').attr('autocomplete', 'off');
+
+				});
+				</script>
+	</div>
+</div>

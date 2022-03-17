@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+ -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+	<route url="/V1/affiliate/signin/requiredfields" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\GetRequiredFieldsInterface" method="getRequiredFields"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/account/index/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\DashboardInterface" method="getDashboardInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/banner/index/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\BannerInterface" method="getBannerInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/referral/index/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\ReferralInterface" method="getReferralInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/referral/lists/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\ReferralListInterface" method="getReferralListInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/comission/index/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\ComissionInterface" method="getComissionInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/paymentsetting/index/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\PaymentSettingInterface" method="getPaymentSettingInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/wallet/index/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\WalletInterface" method="getWalletAmount"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/withdrawl/index/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\WithdrawlInterface" method="getWithdrawlInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/transaction/index/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\TransactionInterface" method="getTransactionInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/referral/payout/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\ReferralPayoutInterface" method="getReferralPayoutInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/referral/summary/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\ReferralSummaryInterface" method="getReferralSummaryInformation"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<route url="/V1/affiliate/account/check/:customerId" method="GET">
+		<service class="Ced\Affiliate\Api\Affiliate\AccountCheckInterface" method="accountCheck"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	
+	<!-- <route url="/V1/affiliate/referral/save" method="POST">
+	 	<service class="Ced\Affiliate\Api\Affiliate\ReferralPostInterface" method="saveAffiliateReferral"/>
+		 	<resources>
+		  		<resource ref="anonymous"/>
+		  	</resources>
+	</route> -->
+	
+	<route url="/V1/affiliate/account/createpost/" method="POST">
+	 	<service class="Ced\Affiliate\Api\Affiliate\AffiliateCreateInterface" method="createAffiliate"/>
+		 	<resources>
+		  		<resource ref="anonymous"/>
+		  	</resources>
+		 <!-- <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data> -->
+	</route>
+	
+	<route url="/V1/affiliate/withdrawl/request" method="POST">
+	 	<service class="Ced\Affiliate\Api\Affiliate\WithdrawlRequestInterface" method="withdrawlRequest"/>
+		 	<resources>
+		  		<resource ref="anonymous"/>
+		  	</resources>
+	</route>
+	
+	<route url="/V1/affiliate/referral/sendemail" method="POST">
+	 	<service class="Ced\Affiliate\Api\Affiliate\ReferralInviteInterface" method="sendInvitation"/>
+		 	<resources>
+		  		<resource ref="anonymous"/>
+		  	</resources>
+	</route>
+	
+	<route url="/V1/affiliate/paymentmethod/save" method="POST">
+	 	<service class="Ced\Affiliate\Api\Affiliate\PaymentSettingsSaveInterface" method="savePaymentMethod"/>
+		 	<resources>
+		  		<resource ref="anonymous"/>
+		  	</resources>
+	</route>
+	
+	<route url="/V1/affiliate/coupon/generate" method="POST">
+	 	<service class="Ced\Affiliate\Api\Affiliate\CouponGenerateInterface" method="generateCoupon"/>
+		 	<resources>
+		  		<resource ref="anonymous"/>
+		  	</resources>
+	</route>
+	
+	<route url="/V1/affiliate/account/customeraffiliate" method="POST">
+	 	<service class="Ced\Affiliate\Api\Affiliate\CustomerAffiliateInterface" method="createCustomerAffiliate"/>
+		 	<resources>
+		  		<resource ref="anonymous"/>
+		  	</resources>
+	</route>
+	
+	<!-- <route url="/V1/affiliate/coupon/generate" method="POST">
+	 	<service class="Ced\Affiliate\Api\Affiliate\CouponGenerateInterface" method="generateCoupon"/>
+		 	<resources>
+		  		<resource ref="anonymous"/>
+		  	</resources>
+	</route> -->
+	
+</routes>

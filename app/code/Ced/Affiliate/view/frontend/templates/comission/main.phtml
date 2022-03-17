@@ -1,0 +1,56 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<div class="order-items order-details table-responsive">
+	<table id="my-products-table" class="table table-bordered table-hover table-striped">
+	    <col width="1"/>
+	    <col width="1"/>
+	   	<col width="1"/>
+	    <col width="1"/>
+	    <col width="1"/>
+	    <col width="1"/>
+	    <col width="1"/>
+	    <col width="1"/>
+	    <thead>
+		    <tr style="background-color: #f5f5f5;">
+				<th class="head"><?php echo __('ID') ?></th>
+				<th class="head"><?php echo __('Date') ?></th>
+				<th class="head"><?php echo __('Total Amount') ?></th>
+				<th class="head"><?php echo __('Commission') ?></th>
+				<th class="head"><?php echo __('Customer Type') ?></th>
+				<th class="head"><?php echo __('Customer Email') ?></th>
+				<th class="head"><?php echo __('Status') ?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach($block->getComisssion() as $_comission):?>
+		 <tr>
+            <td  class="col name"><?php /* @escapeNotVerified */ echo $_comission->getId() ?></td>
+            <td  class="col name"><?php /* @escapeNotVerified */ echo $_comission->getCreateAt() ?></td>
+            <td  class="col name"><?php /* @escapeNotVerified */ echo $_comission->getTotalAmount() ?></td>
+            <td  class="col name"><?php /* @escapeNotVerified */ echo $_comission->getComission() ?></td>
+            <td  class="col name"><?php /* @escapeNotVerified */ echo $_comission->getUserType() ?></td>
+            <td  class="col name"><?php /* @escapeNotVerified */ echo $_comission->getCustomerEmail() ?></td>
+            
+            <td  class="col name"><?php /* @escapeNotVerified */ echo $_comission->getStatus() ?></td>
+         </tr>
+		<?php endforeach;?>
+		</tbody>
+	</table>
+</div>
+		

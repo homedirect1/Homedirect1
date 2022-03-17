@@ -1,0 +1,28 @@
+<?php 
+    $component_heading = $this->getComponentHeading((int) $this->getRequest()->getParam("id_component", 0));
+    $componentTypeData = $this->getComponentTypeData();
+?>
+<form action="" method="post" enctype="multipart/form-data" id="form_save_component_heading">
+    <input type="hidden" id="form_key" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <input type="hidden" id="component_name" name="component_name" value="<?=$componentTypeData['component_name']?>" />
+    <fieldset class="admin__fieldset"> 
+        <div class="admin__field">
+            <label class="admin__field-label" for="component_heading">
+                <span><span class="vss_required">*</span>
+                    <?php echo __("Heading of this Component"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <input value="<?php echo $component_heading; ?>" class="admin__control-text" type="text" placeholder="" name="component_heading" id="component_heading">                        
+                </div>
+            </div>
+        </div>
+
+        <div id="show_error"></div>
+    </fieldset>
+</form>
+
+<script type="text/javascript">
+    var required_entry_txt = '<?php echo __('Field cannot be empty.'); ?>';
+</script>

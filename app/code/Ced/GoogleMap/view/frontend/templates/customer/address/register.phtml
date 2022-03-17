@@ -1,0 +1,146 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GoogleMap
+ * @author 	    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license     https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+/** @var \Ced\GoogleMap\Block\Customer\Address\Register $block */
+?>
+
+<?php if ($block->setShowAddressFields()) : ?>
+<?php
+$locationHtml = $block->getLocationHtml();
+$locationHtml = str_replace("\n", '', $locationHtml);
+$locationHtml = str_replace("\r", '', $locationHtml);
+$locationHtml = str_replace("\r\n", '', $locationHtml);
+?>
+
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        let $bodySelector =  $('body');
+        let streetAddressSelector =  $('#street_1');
+        let citySelector =  $('input[name="city"]');
+        let postCodeSelector =  $('input[name="postcode"]');
+        let regionShipId =  'select[name="region_id"]';
+        let regionIdSelector =  $(regionShipId);
+        let regionSelector =  $('input[name="region"]');
+        let countryIdSelector =  $('select[name="country_id"]');
+
+        //append lat and long in form
+
+        $('.field.street').after('<?= $locationHtml ?>');
+
+        let latitudeSelector = $bodySelector.find('#customer-latitude');
+        let longitudeSelector = $bodySelector.find('#customer-longitude');
+
+        /** autocomplete search input **/
+        let selectedLocation = false;
+        streetAddressSelector.on('focus', function () {
+            let autocomplete = new google.maps.places.Autocomplete(streetAddressSelector[0]);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                selectedLocation = true;
+
+                let place = autocomplete.getPlace();
+                console.log('place');
+                console.log(place);
+                let latitude = place.geometry.location.lat();
+                let longitude = place.geometry.location.lng();
+
+                latitudeSelector.val(latitude);
+                longitudeSelector.val(longitude);
+                console.log('latitudeSelector');
+                console.log(latitudeSelector);
+                console.log('longitudeSelector');
+                console.log(longitudeSelector);
+
+                let arrAddress = place.address_components;
+                citySelector.val('');
+                regionSelector.val('');
+                regionIdSelector.val('');
+                countryIdSelector.val('');
+                postCodeSelector.val('');
+
+                console.log('address_component');
+                console.log(arrAddress);
+
+                $.each(arrAddress, function (i, address_component) {
+                    switch (address_component.types[0]) {
+                        /*case "route":
+                            streetAddressSelector.val(address_component.long_name).change();
+                            break;
+
+                        case "sublocality_level_2":
+                            street1Selector.val(address_component.long_name).change();
+                            break;
+
+                        case "sublocality_level_1":
+                            street2Selector.val(address_component.long_name).change();
+                            break;*/
+
+                        case "locality":
+                        case "administrative_area_level_2":
+                            citySelector.val(address_component.long_name).change();
+                            citySelector.attr('readonly', true);
+                            break;
+
+                        case "country":
+                            countryIdSelector.val(address_component.short_name).change();
+                            countryIdSelector.attr('readonly', true);
+                            console.log('countryIdSelector');
+                            console.log(countryIdSelector.val());
+                            break;
+
+                        case "postal_code":
+                            postCodeSelector.val(address_component.long_name).change();
+                            postCodeSelector.attr('readonly', true);
+                            console.log('postCodeSelector');
+                            console.log(postCodeSelector.val());
+                            break;
+
+                        case "administrative_area_level_1":
+                            console.log('address_component.area');
+                            console.log(address_component.long_name);
+                            region = address_component.long_name;
+                            console.log(region);
+                            console.log(regionIdSelector);
+                            setTimeout(function () {
+                                if (regionIdSelector) {
+                                    //search for and select region using text
+                                    $(regionShipId + ' option').each(function (i, e) {
+                                        console.log('inside .each');
+                                        console.log(region);
+                                        if ($.trim($(this).text()) == region) {
+                                            console.log(e);
+                                            $(this).prop('selected', true).change();
+                                            return false;
+                                        }
+                                    });
+                                }
+                            }, 200);
+                            regionSelector.val(region).change();
+                            regionSelector.attr('readonly', true);
+                            break;
+
+                    }
+                });
+            });
+        });
+    });
+</script>
+<?php endif; ?>

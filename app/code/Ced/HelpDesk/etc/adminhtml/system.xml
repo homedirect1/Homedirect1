@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="supportsystem" translate="label" sortOrder="10">
+            <label>Support System</label>
+        </tab>
+        <section id="helpdesk" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Support System</label>
+            <tab>supportsystem</tab>
+            <resource>Ced_HelpDesk::helpdesk_configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="notify_staff" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Notify Agent</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="notify_time" translate="label comment" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Time to notify about ticket</label>
+                    <comment>in hours</comment>
+
+                    <depends> <field id="notify_staff">1</field></depends>
+
+                    <validate>validate-number</validate>
+                </field>
+                <field id="close_ticket" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                       <label>Close Tickets</label>
+                       <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="auto_close" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Time to auto close the ticket</label>
+                        <comment>in days</comment>
+                        
+                         <depends> <field id="close_ticket">1</field></depends>
+                      
+                        <validate>validate-number</validate>
+                </field>
+                <field id="delete_ticket" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                       <label>Delete Tickets</label>
+                       <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                 <field id="auto_delete" translate="label comment" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Auto delete ticket after certain period</label>
+                        <comment>in days</comment>
+                          <depends> <field id="delete_ticket">1</field></depends>
+                        <validate>validate-number</validate>
+                </field>
+                <field id="support_email" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Support Email</label>
+                       
+               </field>
+            </group>
+            <group id="frontend" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Frontend</label>
+                <field id="select_dept" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow client to select the department</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                  <field id="default_dept" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Default department</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                 <field id="allow_priority" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow client to select the priority</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="max_upload" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Maximum upload size(mb)</label>
+                        <validate>validate-number</validate>
+                </field>
+                 <field id="show_attribute" translate="label" type="multiselect" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show the following attributes</label>
+                   <source_model>Ced\HelpDesk\Model\System\Config\Source\Attribute</source_model>
+                </field>
+                <field id="allow_extensions" translate="label comment" type="text" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Allow the following extensions</label>
+                </field>
+                <field id="welcome_msg" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Welcome Message</label>
+                </field>
+                <field id="banner" translate="label" type="image" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Banner</label>
+                    <upload_dir config="system/filesystem/media" scope_info="1">ced/helpdesk</upload_dir>
+                    <base_url type="media" scope_info="1">ced/helpdesk</base_url>
+                    <backend_model>Ced\HelpDesk\Model\System\Config\Backend\Banner</backend_model>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG. Not all browsers support all these formats!</comment>
+                </field>
+                <field id="welcone_desc" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Welcome Description</label>
+                </field>
+            </group>
+            <group id="email" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Email Configuration</label>
+                <field id="mail_customer" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Email to customer from Support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="mail_agent" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Email to Assignee Agent from Support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="mail_head" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Email to Head of Department from Support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="mail_admin" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Email to admin from Support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="gateway" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Email Gateway Configuration</label>
+                <field id="enable_gateway" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Email Gateway</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="protocol" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Protocol</label>
+                    <source_model>Ced\HelpDesk\Model\System\Config\Source\Protocol</source_model>
+                </field>
+                <field id="email_gateway" translate="label comment" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email Gateway</label>
+                    <comment>Like gmail</comment>
+                </field>
+                <field id="port" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Port</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="login_id" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Login Id</label>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="password" translate="label" type="password" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Password</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

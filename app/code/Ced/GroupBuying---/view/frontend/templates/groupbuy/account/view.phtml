@@ -1,0 +1,123 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GroupBuying
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+
+$_gift = $block->getGift();
+$product=$block->getImages();
+$des=$block->getImageUrl();
+$_helper=$block->gethelper();
+$data = $this->getRequest()->getParams('Data');
+$allowed_guest = 5;
+$guest=$block->getGuests();
+
+?>
+<style>
+    ul{
+        list-style-type:none;
+    }
+    em{
+        color:red;
+    }
+</style>
+<div class="page-title">
+    <h1><?= __('Group #' . $_gift->getId()) ?></h1>
+</div>
+<?php
+$isJoiningDatePassed = $block->isJoiningDatePassed();
+if ($isJoiningDatePassed === -1) {
+    ?>
+    <?= __("Sorry! But the start date for joining the group buying is not started yet. Check back on " . date('d-m-y', $block->getStartDate())) ?>
+    <?php
+} else if ($isJoiningDatePassed === 0) {
+    ?>
+    <?= __("Sorry! But the last date for joining group buying was passed on " . date('d-m-y', $block->getEndDate())) ?>
+    <?php
+} else if (!$block->isGroupFull()) {
+    ?>
+    <form id="myform" action="<?= $this->getUrl('groupbuying/account/post', array('gift_id' => $_gift->getId())) ?>" method="post" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>" data-mage-init='{"validation":{}}'>
+        <div>
+            <div class="fieldset">
+                <h2 class="legend"><?= __('Purchased Information'); ?></h2>
+                <ul class="form-list">
+                    <li class="fields">
+                        <div id="TextBoxesGroup">
+
+                            <div class="guest_count"></br>
+                                <span><?= __('Name'); ?><em style="color:red">*</em></span>
+                                <input name="name" type="text" class="required-entry" readonly value=<?= $guest ?> >
+                                <span><?= __('Purchased Quantity'); ?><em style="color:red">*</em></span>
+                                <input type="text" name="qty" class="required-entry" placeholder="Enter Quntity As You Want It "/>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <input  type="submit" value="Submit">
+            </div>
+            <div class="product media" style="border: 2px solid;padding: 20px;
+                  width: 300px;resize: both;overflow: auto;">
+                <div class="gallery-placeholder" data-gallery-role="gallery-placeholder">
+                    <a href="<?= $des; ?>">
+                        <p class="product-image">
+                            <?php
+                                $store = $this->_objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+
+                                $imageUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
+
+                                $_img = '<img src="' . $imageUrl . '" />';
+                                echo $_helper->productAttribute($product, $_img, 'image');
+                            ?>
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+<?php
+}else{
+    ?>
+<span style='color: red'><?=__("Sorry! You cannot join. Group limit reached!")?></span>
+<?php
+}
+?>
+<script type="text/x-magento-init">
+    {
+        "#myform": {
+            "validation": {}
+        }
+    }
+</script>
+<script>
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+
+    var dataForm = $('#myform');
+    var ignore = null;
+
+    dataForm.mage('validation', {
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+        }).find('input:text').attr('autocomplete', 'off');
+
+
+});
+</script>
+
+
+
+

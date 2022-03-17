@@ -1,0 +1,46 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+/** @var $block \Magento\Framework\View\Element\Html\Links */
+?>
+<?php /** @var $block \Magento\Customer\Block\Account\Navigation */ ?>
+<div class="block account-nav block-collapsible-nav ced-affiliate-sidebar">
+	<div class="title block-collapsible-nav-title">
+        <strong><?php echo __('Dashboard')?></strong>
+    </div>
+    <div id="block-collapsible-nav" class="content block-collapsible-nav-content">
+        <nav class="account-nav">
+            <ul class="nav items">
+                <?php echo $block->getChildHtml();?>
+            </ul>
+        </nav>
+    </div>
+</div>
+<script>
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+       $(".block-collapsible-nav-title").click(function(){
+		$(this).toggleClass('active');
+		$(this).siblings(".block-collapsible-nav-content").toggleClass('active');
+    	   
+       });
+
+     });
+</script>

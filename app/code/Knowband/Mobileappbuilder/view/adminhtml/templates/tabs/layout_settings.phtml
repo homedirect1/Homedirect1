@@ -1,0 +1,131 @@
+<style>
+    .modal-content{
+        box-shadow: none;
+        border: none;
+    }
+    #feed_item_error_holder {
+        padding-top: 25px;
+    }
+    .modal-popup._inner-scroll .modal-content {
+            margin-top: 20px;
+    }
+    
+    .layout-action-btn{
+        display: inline-block !important;
+        margin-right: 2px; 
+    }
+</style>
+<script>
+function openAddLayoutForm(url)
+{
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '<?php echo __("Add New Layout");?>',
+                buttons: [
+                    {
+                        text: '<?php echo __('Save'); ?>',
+                        class: 'button_submit_form btn btn-success',
+                        id: 'send_notification',
+                        click: function () {
+                            validateAddLayoutForm();
+                        }
+                    },
+                    {
+                        text: '<?php echo __('Cancel'); ?>',
+                        class: 'hidden_element btn btn-warning new_layout_popup_close',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }
+                ]
+            };
+            $.ajax({
+                type: "POST",
+                showLoader: true,
+                url: url,
+                data:
+                {
+                    form_key : window.FORM_KEY, method : 'form',
+                },
+                success: function (output) {
+                    
+                    if(output == "0")
+                    {
+                        alert("<?php echo __("Something went wrong. Please try again.");?>");;
+                    }
+                    else
+                    {
+                        var popup = modal(options, $('#new_layout_popup'));
+                        $("#new_layout_popup").html(output).modal("openModal");
+                    }
+                }
+
+            });
+        }
+    );
+}
+
+function openDeleteLayoutForm(id_layout)
+{
+    require(
+        [
+            'jquery'
+        ],
+        function(
+            $
+        ) {
+            var confirm_msg = '<?php echo __("Are your sure?") ?>';
+            if(confirm(confirm_msg)){
+                $.ajax({
+                    type: "POST",
+                    showLoader: true,
+                    url: '<?php echo $this->getUrl('*/*/layoutAjaxAction', ['deleteLayout' => true]); ?>',
+                    data:
+                    {
+                        form_key : window.FORM_KEY, method : 'form', id_layout : id_layout,
+                    },
+                    success: function (output) {
+
+                        if(output == "0")
+                        {
+                            alert("<?php echo __("Something went wrong. Please try again.");?>");;
+                        }
+                        else
+                        {
+                            $("#delete-success-msg").html(output.msg);
+                            $("#delete-success-msg").show();
+                            setTimeout(function () {
+                                    $("#delete-success-msg").hide("slow");
+                                },
+                            5000);
+                            AutoswitchLayoutGridJsObject.doFilter();
+                        }
+                    }
+                });
+            }
+        }
+    );
+}
+
+var send_layout_ajax_url = '<?php echo $this->getUrl('*/*/layoutAjaxAction'); ?>';
+</script>
+<div id="new_layout_popup"></div>
+
+<div id="delete-success-msg" class="alert alert-success" role="alert" style="display: none;"></div>
+<div><a class="btn btn-primary" style="float: right;" href="javascript:void(0)" onclick="openAddLayoutForm('<?php echo $this->getUrl('*/*/layoutAjaxAction', ['getAddLayoutForm' => true]); ?>')"><?php echo __('Add New Layout'); ?></a></div>
+<?php echo $this->getLayout()
+    ->createBlock("Knowband\Mobileappbuilder\Block\Adminhtml\Tab\LayoutSettings")
+    ->toHtml();
+?>
+    

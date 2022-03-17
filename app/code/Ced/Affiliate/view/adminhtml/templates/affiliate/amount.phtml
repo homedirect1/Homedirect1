@@ -1,0 +1,109 @@
+<?php  
+ /**
+  * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_Affiliate
+  * @author      CedCommerce Core Team <connect@cedcommerce.com>
+  * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+  * @license     http://cedcommerce.com/license-agreement.txt
+  */
+ 
+ $comission =$block->getAmount();
+if($comission[0]['total_amount'] && $comission[0]['total_amount']>0){
+
+	$comissionAmount = $comission[0]['total_amount'];
+}
+else{
+	$comissionAmount = 0.00;
+}
+?>
+<?php 
+$remainingAmount = $comissionAmount-$block->getAmountHistory()[0]['earned_amount'];
+?>
+<div class="affiliate_withdrawl_request">
+	<div class="total-balance">
+		<strong><?php echo __('Total Balance')?></strong> 
+		<span class="price"><?php echo $block->getFormattedPrice($comissionAmount);?></span>
+	</div>
+	<div class="total-balance">
+		<strong><?php echo __('Total Amount Earned')?></strong> 
+		<span class="price"><?php echo $block->getFormattedPrice($block->getAmountHistory()[0]['earned_amount']);?></span>
+	</div>
+
+	<div class="remaining-balance">
+		<strong><?php echo __('Remaining Amount')?></strong> 
+		<span class="price"><?php echo $block->getFormattedPrice($comissionAmount-$block->getAmountHistory()[0]['earned_amount']);?></span>
+	</div>
+	<div class="withdrawl-request-checkbox">
+	<input type="checkbox" class="checkbox wallet-checkbox" name="checkbox"></input>
+	<span> <label><?php echo __('Pay To Affiliate')?></label>
+	</span>
+</div>
+
+</div>
+<div class="withdrawl_form" style="display: none;">
+	
+		<div class="affiliate_withdrawl_request">
+
+			<input type ="hidden" value ="<?php echo $remainingAmount?>" name="totalamount">
+			<div class="withdrwal-form">
+				<div class="amount-value">
+					<input id="request_amount" class="" name="amount" value=""
+						placeholder="<?php echo __('Enter Amount')?>" type="text">
+				</div>
+				
+				<div class="request-withrawal">
+					<button class="button button-config request-amount action primary"
+						title="Request Withdrawal" type="submit">
+						<span><?php echo __('Proceed')?></span>
+					</button>
+				</div>
+			</div>
+		</div>
+</div>
+<script>
+
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+         var dataForm = $('#form_edit');
+         var ignore = null;
+         dataForm.mage('validation', {
+                 ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+             }).find('input:text').attr('autocomplete', 'off');
+
+     });
+</script>
+<script>
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+	$(".withdrawl-request-checkbox").on('click', '.wallet-checkbox',function(){	
+	if($(this).is(':checked')){
+		$('.withdrawl_form').show();
+		$('#request_amount').addClass('required-entry');
+		 $('#edit_form').attr('action', "<?php echo $this->getUrl('affiliate/balance/pay',array('id'=>$this->getRequest()->getParam('id')))?>");
+		
+	} else {
+		$('#edit_form').attr('action', "<?php echo $this->getUrl('affiliate/manage/save',array('id'=>$this->getRequest()->getParam('id')))?>");
+		$('#request_amount').removeClass('required-entry');
+		$('.withdrawl_form').hide();
+		
+	}  
+	});
+
+	
+ });
+</script>

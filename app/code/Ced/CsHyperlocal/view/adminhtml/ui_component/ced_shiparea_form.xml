@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ced_shiparea_form.ced_shiparea_form_data_source</item>
+            <item name="deps" xsi:type="string">ced_shiparea_form.ced_shiparea_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Ced\CsHyperlocal\Block\Adminhtml\Shiparea\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Ced\CsHyperlocal\Block\Adminhtml\Shiparea\Edit\DeleteButton</item>
+            <item name="save" xsi:type="string">Ced\CsHyperlocal\Block\Adminhtml\Shiparea\Edit\SaveButton</item>
+            <item name="reset" xsi:type="string">Magento\Customer\Block\Adminhtml\Edit\ResetButton</item>
+        </item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="ced_shiparea_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Ced\CsHyperlocal\Model\ShipareaDataProvider</argument>
+            <argument name="name" xsi:type="string">ced_shiparea_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="cshyperlocal/shiparea/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="shiparea_form">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Information</item>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                </item>
+            </argument>
+        </field>
+        <field name="vendor_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">vendor_id</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                </item>
+            </argument>
+        </field>
+        <field name="location">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Location</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="latitude">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Latitude</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+        <field name="longitude">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Longitude</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\CsHyperlocal\Model\Config\Source\ShipareaStatus</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Status</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                </item>
+            </argument>
+        </field>
+        <field name="city">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">city</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+        <field name="state">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">state</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+        <field name="country">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">country</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+        <field name="zipcode_type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ced\CsHyperlocal\Model\Config\Source\ZipcodeType</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Zipcode Type</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                </item>
+            </argument>
+        </field>
+        <field name="zipcode">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Zipcode</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+        <field name="zipcode_import_csv">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Import Zipcode CSV</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">file</item>
+                    <item name="source" xsi:type="string">shiparea_form</item>
+                </item>
+            </argument>
+        </field>
+        <container name="form">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">11</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Ced\CsHyperlocal\Block\Adminhtml\Shiparea\Edit\Tab</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

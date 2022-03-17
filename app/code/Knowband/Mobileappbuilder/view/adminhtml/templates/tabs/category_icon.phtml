@@ -1,0 +1,186 @@
+<?php
+$settings = $this->getSettings();
+
+//print_r($this->toOptionSArray());
+?>
+<div class="fieldset-wrapper" id="google-settings">
+    <h1 class="mobileappbuilder-h1"><?php echo __("Category Icon") ?></h1>
+    <div class="admin__fieldset-wrapper-content">
+        <fieldset class="admin__fieldset">
+            <div class="admin__field">
+                <label class="admin__field-label" for="select_category">
+                    <span>
+                        <span class="vss_required">*</span>
+<?php echo __("Category") ?>
+                        <div class="vss_info">
+                        <?php echo __("Select category to add icon"); ?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <select name="select_category_for_icon" class="admin__control-select" id="select_category_for_icon" data-placeholder='<?php echo __("Select category to add/edit icon."); ?>' style="width:250px">
+                        <option value=""><?php echo __("Please select"); ?></option>
+<?php foreach ($this->toOptionSArray() as $category) { ?>
+                            <option value="<?php echo $category['value']; ?>" ><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="admin__field category_icon_holder" >
+                <label class="admin__field-label" for="category_icon">
+                    <span>
+                        <span class="vss_required">*</span>
+<?php echo __("Category Icon") ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch">
+                        <div class="banner_block">
+                            <img id="category_icon_preview" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;width: 200px;border: 1px solid whitesmoke;" align="absmiddle">
+                        </div>
+                        <input name="category_icon" id="category_icon" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                        <span style="color:red;" id="category_icon_error_message"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin__field category_icon_holder" >
+                <label class="admin__field-label" for="vss_category_icon_save_button">
+
+                </label>
+                <div class="admin__field-control">
+                    <a id="vss_category_icon_save_button" class="btn btn-success">
+                        <span><?php echo __('Save'); ?></span>
+                    </a>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+</div>
+<script  type="text/javascript">
+    require(['jquery', 'jquery/ui'], function (jQuery) {
+
+        jQuery(".category_icon_holder").hide();
+
+        var placeHolderImage = '<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>';
+
+        jQuery("#category_icon").change(function () {
+            validateCategoryIcon(this);
+        });
+
+        jQuery("#select_category_for_icon").on("change", function () {
+            updateCategoryIcon(this);
+        });
+        
+         jQuery("#vss_category_icon_save_button").on("click", function () {
+            saveCategoryIcon();
+        });
+
+
+        function updateCategoryIcon(ele) {
+            
+            var category_id = jQuery(ele).val();
+            if(category_id != "" && category_id != null){
+                jQuery(".category_icon_holder").show();
+            jQuery.ajax({
+                type: "POST",
+                showLoader: true,
+                url: '<?php echo $this->getUrl('*/*/getCategoryIcon'); ?>',
+                data:
+                        {
+                            form_key: window.FORM_KEY, category_id: category_id
+                        },
+                success: function (output) {
+                    categoryData = JSON.parse(output);
+                    console.log(categoryData);
+                    if (categoryData['status'] == 'success' && categoryData['name'] != '') {
+                        jQuery('#category_icon_preview').attr('src', categoryData['media_url'] + categoryData['name']);
+                    } else {
+                        jQuery('#category_icon_preview').attr('src', placeHolderImage);
+                    }
+                }
+            });
+            }else{
+                jQuery(".category_icon_holder").hide();
+            }
+        }
+
+        function saveCategoryIcon() {
+            var canUpload = false;
+            canUpload = validateCategoryIcon();
+            if (canUpload) {
+                var myFormData = new FormData();
+                myFormData.append('kb_category_icon', jQuery('#category_icon')[0].files[0]);
+                myFormData.append('category_id', jQuery("#select_category_for_icon").val());
+                myFormData.append('form_key',  window.FORM_KEY);
+                jQuery.ajax({
+                    type: 'post',
+                    enctype: 'multipart/form-data',
+                    url: "<?php echo $this->getUrl('*/*/saveCategoryIcon') ?>",
+                    data: myFormData,
+                    showLoader: true,
+                    contentType: false,
+                    processData: false,
+                    success: function (output) {
+                        categoryData = JSON.parse(output);
+                        console.log(categoryData);
+                        if (categoryData['status'] == 'success' && categoryData['name'] != '') {
+                            alert("<?php echo __('Category icon saved successfully.'); ?>");
+                        } else {
+                            alert("<?php echo __('Something went wrong, refresh the page.'); ?>");
+                        }
+                    }
+                });
+            }
+        }
+        
+        function validateCategoryIcon(){
+          if (jQuery("#category_icon")[0].files !== undefined && jQuery("#category_icon")[0].files.length > 0)
+        {
+            var files = jQuery("#category_icon")[0].files[0];            
+            var file_mimetypes = [
+                'image/jpeg',
+                'image/png',
+                'image/jpg',
+            ];
+
+            var file_format = false;
+            for (i = 0; i < file_mimetypes.length; i++) {
+                if (files.type == file_mimetypes[i]) {
+                    file_format = true;
+                }
+            }
+
+            if (!file_format)
+            {
+                jQuery('#category_icon_error_message').html("<?php echo __('Invalid File Format, Please select only recommended types..'); ?>");
+                file_error = true;
+
+            } else if (files.size > 1043152) {
+                jQuery('#category_icon_error_message').html("<?php echo __('File size must be less than 1MB');     ?>");
+                file_error = true;
+            } else {
+                file_error = false;
+                 var reader = new FileReader();
+                reader.onload = function (e) {
+                    jQuery('#category_icon_preview').attr('src', e.target.result);
+
+                    jQuery('#category_icon_preview').hide();
+                    jQuery('#category_icon_preview').fadeIn(650);
+                }
+                reader.readAsDataURL(jQuery("#category_icon")[0].files[0]);
+                jQuery('#category_icon_error_message').html('');
+            }
+
+        }
+        else 
+        {
+            jQuery('#logo_image_upload_error_message').html("<?php echo __('Invalid File.'); ?>");
+            file_error = true;
+        }
+        return !file_error;
+    }
+
+    });
+</script>

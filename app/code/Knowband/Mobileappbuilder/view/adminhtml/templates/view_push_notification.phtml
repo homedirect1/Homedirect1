@@ -1,0 +1,69 @@
+<?php
+    $helper = \Magento\Framework\App\ObjectManager::getInstance()->get('Knowband\Mobileappbuilder\Helper\Data');
+    $data = $helper->getNotificationDetails($this->getRequest()->getParam('id'));
+?>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Title'); ?></label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo $data['title'] ?></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Message'); ?></label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo $data['message'] ?></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Image Type'); ?></label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo $data['image_type'] ?></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Preview'); ?></label>
+    <div class="col-sm-8">
+      <div class="row">
+            <div class="col-xs-8 col-md-6">
+              <a href="#" class="thumbnail">
+                <img src="<?php echo $data['image_url'] ?>" alt="...">
+              </a>
+            </div>
+        </div>
+    </div>
+  </div>
+    <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Redirect Activity'); ?></label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo ucfirst($data['redirect_activity']) ?></p>
+    </div>
+  </div>
+    <?php if($data['redirect_activity'] == 'category'){ ?>
+  <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Category'); ?></label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo $data['category_name'] ?></p>
+    </div>
+  </div>
+    <?php }else if($data['redirect_activity'] == 'product'){ ?>
+  <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Product'); ?></label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo $data['product_name'] ?></p>
+    </div>
+  </div>  
+    <?php } ?>
+  <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Device Type'); ?></label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo ucfirst($data['device_type']); ?></p>
+    </div>
+  </div>  
+  <div class="form-group">
+    <label class="col-sm-4 control-label"><?php echo __('Sent Date'); ?></label>
+    <div class="col-sm-8">
+      <p class="form-control-static"><?php echo $data['date_add'] ?></p>
+    </div>
+  </div>  
+</form>

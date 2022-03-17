@@ -1,0 +1,37 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_CsStorePickup
+ * @author    CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+
+<div id="carrier-stores-list-wrapper" data-bind="visible: selectedMethod() == 'vendor_rates_storepickupshipping_storepickupshipping'">
+	    <div data-bind="visible: getStores()">  
+	        <span data-bind="i18n: 'Select pickup store :'"></span>
+	        <select style="width: 40%" id="carrier-store-lists" data-bind="options: getStores(),
+	                                        optionsValue: 'id',
+	                                        optionsText: 'title',
+	                                        optionsCaption: $t('--Select Store--'),
+	                                        value: 'stores',
+	                                        event:{ change: getStoreOffDays}" >  
+	        </select>      
+	    </div>
+	    <a href="#" data-bind="event:{ click: showMap}">Click here to view</a>
+	    <div id="oneValues">
+	    </div>
+	    <div id="mapValues">
+	    </div>
+</div>
+	

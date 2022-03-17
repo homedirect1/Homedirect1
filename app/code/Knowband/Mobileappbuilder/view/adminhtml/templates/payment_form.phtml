@@ -1,0 +1,69 @@
+<?php
+    $helper = \Magento\Framework\App\ObjectManager::getInstance()->get('Knowband\Mobileappbuilder\Helper\Data');
+    $data = $helper->getPaymentMethodDetails($this->getRequest()->getParam('id'));
+    $config_data = json_decode($data['values'],true);
+?>
+<form action="" method="post" enctype="multipart/form-data" id="form_payment_method">
+    <input type="hidden" id="form_key" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <fieldset class="admin__fieldset"> 
+       <div class="admin__field">
+            <label class="admin__field-label" for="payment_method_status">
+                <span>
+                    <span class="vss_required">*</span> <?php echo __("Status"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='payment_method[status]' id="payment_method_status" class='admin__control-select'>
+                        <option value='0' <?php if ($data['status'] == '0') echo 'selected="selected"'; ?> ><?php echo __("Disable"); ?></option>
+                        <option value='1' <?php if ($data['status'] == '1') echo 'selected="selected"'; ?> ><?php echo __("Enable"); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label" for="payment_method_name">
+                <span>
+                    <span class="vss_required">*</span> <?php echo __("Name"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <input type="text" class="admin__control-text" id="payment_method_name" name="payment_method[payment_method_name]" value="<?php echo $data['kb_payment_name']; ?>">
+                </div>
+            </div>
+        </div>
+        <?php if ($data['kb_payment_code'] == 'paypal') { ?>
+            <div class="admin__field">
+                <label class="admin__field-label" for="payment_mode">
+                    <span>
+                        <span class="vss_required">*</span> <?php echo __("Payment Mode"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <select name='payment_method[payment_mode]' id="payment_mode" class='admin__control-select'>
+                            <option value='sandbox' <?php if ($config_data['payment_method_mode'] == 'sandbox') echo 'selected="selected"'; ?> ><?php echo __("Sandbox"); ?></option>
+                            <option value='live' <?php if ($config_data['payment_method_mode'] == 'live') echo 'selected="selected"'; ?> ><?php echo __("Live"); ?></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="client_id">
+                    <span>
+                        <span class="vss_required">*</span> <?php echo __("Client Id"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input type="text" class="admin__control-text" id="client_id" name="payment_method[client_id]" value="<?php echo $config_data['client_id']; ?>">
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <input id="payment_code" name="payment_method[payment_code]" type="hidden" id="payment_code" value="<?php echo $data['kb_payment_code']; ?>" />
+        <input id="kb_payment_id" name="payment_method[payment_id]" type="hidden" value="<?php echo $data['kb_payment_id']; ?>" />
+        <div id="show_error"></div>
+    </fieldset>
+</form>

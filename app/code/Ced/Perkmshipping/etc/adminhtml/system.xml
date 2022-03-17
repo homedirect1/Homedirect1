@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the Academic Free License (AFL 3.0)
+  * You can check the licence at this URL: http://cedcommerce.com/license-agreement.txt
+  * It is also available through the world-wide-web at this URL:
+  * http://opensource.org/licenses/afl-3.0.php
+  *
+  * @category    Ced
+  * @package     Ced_Perkmshipping
+  * @author   CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers">
+            <group id="perkmshipping" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Distnace Based Shipping</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Distance Based Shipping</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Title</label>
+                </field>
+                <field id="method_title" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Method Title</label>
+                </field>
+		<field id="apikey" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API-KEY</label>
+                    <comment>Enter a Google API-Key For Distance Matrix</comment>
+                </field>    
+                <field id="address" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Store Address</label>
+                    <tooltip>Eg. Street, Postalcode, City, Country</tooltip>
+                    <comment>The address of the store</comment>
+                </field>
+                <field id="address_calc" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Address Calculation</label>
+                    <source_model>Ced\Perkmshipping\Model\Source\Method\Address</source_model>
+                </field>
+                <field id="metric" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Metric</label>
+                    <source_model>Ced\Perkmshipping\Model\Source\Method\Metric</source_model>
+                </field>
+                <field id="dist_roundoff" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Distance(Round Off)</label>
+                    <source_model>Ced\Perkmshipping\Model\Source\Method\Round</source_model>
+                </field>
+                <field id="total_price" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Total Price(Round Off)</label>
+                    <source_model>Ced\Perkmshipping\Model\Source\Method\Round</source_model>
+                </field>
+                <field id="minmax" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use Minimum and Maximum Price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="price_min" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Minimal Price</label>
+                    <depends><field id="minmax">1</field></depends>
+                </field>
+                <field id="price_max" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Maximum Price</label>
+                    <depends><field id="minmax">1</field></depends>
+                </field>
+                <field id="shipping_zones" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Shipping Zones</label>
+                    <frontend_model>Ced\Perkmshipping\Block\Adminhtml\System\Config\Form\Zones</frontend_model>
+                    <backend_model>Ced\Perkmshipping\Model\System\Config\Backend\Zones</backend_model> 
+                    <comment>
+		                        <![CDATA[
+		                            <div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
+		                                <p><strong>Distance unit depends on above defined Metric field.</strong></p>
+		                            </div>
+		                        ]]>	
+                 	  		 </comment>     
+                </field>
+                <field id="distance_max" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Maximum Distance (km/miles)</label>
+                </field>
+                <field id="minimum" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Minimum Order Amount</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="minimum_subtotal" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Minimum Order Amount</label>
+                     <validate>validate-number validate-zero-or-greater</validate>
+                     <depends><field id="minimum">1</field></depends>
+                </field>
+                <field id="freeshipping" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Free Shipping</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Minimum Order Amount</label>
+                     <validate>validate-number validate-zero-or-greater</validate>
+                     <depends><field id="freeshipping">1</field></depends>
+                </field>              
+                <field id="sallowspecific" translate="label" type="select" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Applicable Countries</label>
+                    <frontend_class>shipping-applicable-country</frontend_class>
+                    <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show Method if Not Applicable</label>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Displayed Error Message</label>
+                </field>
+                 <field id="sort_order" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sort Order</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

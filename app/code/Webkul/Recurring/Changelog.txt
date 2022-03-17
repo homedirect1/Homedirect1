@@ -1,0 +1,30 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 3.0.2 --------------------------------------
+    + Implemented new stripe checkout process and webhook creation from configuration
+    - Minor Bugs fixed
+
+-------------------------------- Version 3.0.1 --------------------------------------
+    + Added db_schema_whitelist.json
+    - Minor Bugs fixed
+
+-------------------------------- Version 3.0.0 --------------------------------------
+    + Implemented discount feature on subscriptions for paypal recurring
+    - Minor Bugs fixed
+
+-------------------------------- Version 2.1.1 --------------------------------------
+    + It support online Stripe Recurring Payment.
+    - Minor Bug fixed
+    
+-------------------------------- Version 2.1.0 --------------------------------------
+    + Compatible with Magento 2.3
+
+-------------------------------- Version 2.0.0 --------------------------------------
+    + Admin can enable the Recurring Module From Configuration.
+    + It support online Recurring Payment with paypal.
+    + It support Offline Recurring Payment.
+	+ Admin can set subscription Amount and subscription Initial Fee product wise.
+    + Admin can create Subscription Terms/Duration Type.

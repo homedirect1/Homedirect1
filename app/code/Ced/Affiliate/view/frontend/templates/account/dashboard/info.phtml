@@ -1,0 +1,107 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+<?php
+$comission =$block->getAmount();
+if($comission[0]['total_amount'] && $comission[0]['total_amount']>0){
+
+	$comissionAmount = $comission[0]['total_amount'];
+}
+else{
+	$comissionAmount = 0.00;
+}
+
+?>
+<div class="my-account ced-affiliate-wallet ced-affiliate-amount">
+	<div class="block">
+		 <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Balance Summary') ?></strong></div>
+	</div>
+	<div class="affiliate-account-summary">
+		<div class="total_creditlimit credit-limit">
+			<div>
+				<h2 class="title"><?php echo __('Total Amount')?></h2>
+				<span><?php echo __('Your Lifetime Sales Amount is: ')?></span>
+		 		<span class="price"><?php echo $block->getFormattedPrice($comissionAmount);?></span>
+			</div>
+		</div>
+		<div class="uesd_creditlimit credit-limit">
+			<div>
+				<h2 class="title"><?php echo __('Earned Amount')?></h2>
+				<span><?php echo __('Your Earned Amount is: ')?></span>
+				<span class="price"><?php echo $block->getFormattedPrice($block->getAmountHistory()[0]['earned_amount']);?></span>
+			</div>
+		</div>
+		<div class="remaining_creditlimit credit-limit">
+			<div>
+				<h2 class="title"><?php echo __('Remaining Amount')?></h2>
+				<span><?php echo __('Your Remaining Amount is: ')?></span>
+				<span class="price"><?php echo $block->getFormattedPrice($comissionAmount-$block->getAmountHistory()[0]['earned_amount']);?></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="block block-dashboard-info">
+    <div class="block-title"><strong><?php /* @escapeNotVerified */ echo __('Account Information') ?></strong></div>
+    <div class="block-content">
+        <div class="box box-information">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Contact Information') ?></span>
+            </strong>
+            <div class="box-content">
+                <p>
+                    <?php echo $block->escapeHtml($block->getName()) ?><br>
+                    <?php echo $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
+                </p>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?php /* @escapeNotVerified */ echo $block->getUrl('affiliate/account/edit') ?>">
+                    <span><?php /* @escapeNotVerified */ echo __('Edit') ?></span>
+                </a>
+               
+            </div>
+        </div>
+        <?php if ($block->isNewsletterEnabled()): ?>
+            <div class="box box-newsletter">
+                <strong class="box-title">
+                    <span><?php /* @escapeNotVerified */ echo __('Newsletters') ?></span>
+                </strong>
+                <div class="box-content">
+                    <p>
+                        <?php if ($block->getIsSubscribed()): ?>
+                            <?php /* @escapeNotVerified */ echo __('You subscribe to "General Subscription".') ?>
+                        <?php else: ?>
+                            <?php /* @escapeNotVerified */ echo __('You don\'t subscribe to our newsletter.') ?>
+                        <?php endif; ?>
+                    </p>
+                    <?php /* Extensions placeholder */ ?>
+                    <?php echo $block->getChildHtml('customer.account.dashboard.info.extra')?>
+                </div>
+                <div class="box-actions">
+                    <a class="action edit" href="<?php /* @escapeNotVerified */ echo $block->getUrl('newsletter/manage') ?>"><span><?php /* @escapeNotVerified */ echo __('Edit') ?></span></a>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

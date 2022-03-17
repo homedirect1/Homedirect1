@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+//**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsSla
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="cssla_fees">
+        <job name="dispatch_fee" instance="Ced\CsSla\Cron\Fees" method="addDispatchFee">
+            <schedule>* * * * *</schedule>
+        </job> 
+       <job name="auto_cancel" instance="Ced\CsSla\Cron\Fees" method="autoCancel">
+            <schedule>* * * * *</schedule>
+        </job>
+         <job name="max_dispatch" instance="Ced\CsSla\Cron\Fees" method="max_dispatch">
+            <schedule>* * * * *</schedule>
+        </job> 
+        
+        <!-- <job name="send_dispatch_fee_mail" instance="dispatchFees" method="execute">
+            <schedule>*/1 * * * *</schedule>
+        </job> -->
+    </group>
+</config>

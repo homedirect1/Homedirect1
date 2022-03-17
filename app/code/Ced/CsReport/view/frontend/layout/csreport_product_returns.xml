@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="vendorpanel" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="csmarketplace_vendor"/>
+    <body>
+     <block name="require.js" class="Ced\CsMarketplace\Block\Page\RequireJs" template="Ced_CsReport::page/js/require_js.phtml"/>
+        <referenceBlock name="vendor.dashboard.wrapper">
+            <block class="Ced\CsReport\Block\Product\Returns" name="csreport.returnsReport"/>
+        </referenceBlock>
+    </body>
+</page>

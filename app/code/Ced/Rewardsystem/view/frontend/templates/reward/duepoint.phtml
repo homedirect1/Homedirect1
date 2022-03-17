@@ -1,0 +1,63 @@
+<?php $gridrecords = $block->getDuePointCollection(); ?>
+<div class="order-details-items ordered">
+    <div class="order-title">
+        <strong><?= $block->escapeHtml(__('Due')) ?></strong>
+    </div>
+    <?php if (count($gridrecords)>0) {?>
+        <div class="table-wrapper order-items">
+            <table class="data table table-order-items" id="due-point-table" ">
+            <caption class="table-caption"><?php echo __('Due') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?php echo __('Points') ?></th>
+                <th scope="col" class="col title"><?php echo __('Details') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($gridrecords as $gridrecord): ?>
+                <tr>
+                    <td data-th="<?= $block->escapeHtml(__('Points')) ?>" class="col id">
+                        <?php echo $gridrecord->getPoint() ?>
+                    </td>
+                    <td data-th="<?= $block->escapeHtml(__('Details')) ?>" class="col id">
+                        <?php
+                        if ($gridrecord->getOrderId()) {
+                            echo "You placed an order "; ?>
+                            <a href="<?php echo $block->getViewOrderUrl($gridrecord->getOrderId())?>">
+                                <?php echo $gridrecord->getOrderIncrementId() ?>
+                            </a>
+                            <?php
+                            echo " Awaiting order completion.";
+                        } elseif ($gridrecord->getReviewId()) {
+                            echo "You reviewed the product ";
+                            if ($gridrecord->getProductId()) {
+                                $product = $block->getProduct($gridrecord->getProductId());
+                            } ?>
+                            <a href="<?php echo(isset($product['url']) ? $product['url'] : '')?>">
+                                <?php echo(isset($product['name']) ? $product['name'] : '') ?>
+                            </a>
+                            <?php
+                            echo "Awaiting review approval.";
+                        }
+                        ?>
+                        <?php echo $gridrecord->getTitle() ?>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+
+            </table>
+        </div>
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="order-products-toolbar toolbar bottom">
+                <?php echo $block->getPagerHtml(); ?>
+            </div>
+        <?php endif ?>
+    <?php } else {?>
+        <div class="message info empty">
+            <span><?php echo __('No reward point is due.'); ?></span>
+        </div>
+    <?php }?>
+</div>

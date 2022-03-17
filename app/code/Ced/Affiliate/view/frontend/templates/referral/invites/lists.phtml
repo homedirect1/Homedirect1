@@ -1,0 +1,84 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+$referred_list = $block->getTarfficHistory();
+$earnedAmount=$block->pendingamount();
+?>
+<?php echo $this->getChildHtml('user_source') ?>
+<?php
+if(isset($referred_list) && $referred_list->count()>0){?>
+	<div class="data-table-wrapper">
+	<div class="block data-table-block-wrap">
+	<div class="block-title">
+	<strong>
+		<?php echo __('Url Click History')?>
+	</strong>
+	</div>
+	<div class="block-content">
+		<table class="data-table" id="my-orders-table">
+			<thead>
+				<tr>
+					<th><?php echo __('Shared Url');?></th>
+					<th><?php echo __('Clicks');?></th>
+					<th><?php echo __('Google Clicks');?></th>
+					<th><?php echo __('Fb Clicks');?></th>
+					<th><?php echo __('Twitter Clicks');?></th>
+					<th><?php echo __('Email Clicks');?></th>
+				</tr>
+			</thead>
+			<tbody>
+		<?php
+		foreach($referred_list as $value){ ?>
+				<tr>
+						<td><?php echo $value->getSharedUrl() ?></td>
+						<td><?php echo $value->getTotalClick() ?></td>
+						<td><?php echo $value->getGoogleClick() ?></td>
+						<td><?php echo $value->getFacebookClick() ?></td>
+						<td><?php echo $value->getTwitterClick() ?></td>
+						<td><?php echo $value->getEmailClick() ?></td>
+
+			   </tr>
+		<?php }?>
+
+			</tbody>
+		</table>
+		</div>
+		</div>
+	</div>
+
+<?php if ($block->getPagerHtml()): ?>
+<div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+<?php endif; ?>
+<?php }else{?>
+<h3><?php echo __('No Traffic Data To Show.')?></h3>
+<?php }?>
+
+
+<style>
+table thead{
+	background-color: #006BB4;
+}
+table tr th{
+	font-weight: bold;
+	color:white;
+}
+table tr td{
+	width:12%;
+
+}
+</style>

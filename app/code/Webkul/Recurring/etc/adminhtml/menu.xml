@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_Recurring
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webkul_Recurring::recurring" title="Recurring" module="Webkul_Recurring" sortOrder="10" resource="Webkul_Recurring::recurring"/>
+        <add id="Webkul_Recurring::term" title="Manage Duration Type" module="Webkul_Recurring" sortOrder="1" parent="Webkul_Recurring::recurring" action="recurring/duration" resource="Webkul_Recurring::term"/>
+        <add id="Webkul_Recurring::subscriptions" title="Manage Subscriptions" module="Webkul_Recurring" sortOrder="1" parent="Webkul_Recurring::recurring" action="recurring/subscriptions" resource="Webkul_Recurring::subscriptions"/>
+    </menu>
+</config>

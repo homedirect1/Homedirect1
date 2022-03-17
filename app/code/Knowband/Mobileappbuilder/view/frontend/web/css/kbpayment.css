@@ -1,0 +1,19 @@
+header.page-header {
+    display: none !important;
+} 
+
+.minicart-wrapper {
+    display: none !important;
+}
+
+.payment-option._collapsible.opc-payment-additional.discount-code {
+    display: none !important; 
+}
+
+.checkout-payment-method .payment-method-title .action-help {
+    display: none !important;
+}
+
+ul.opc-progress-bar {
+    display: none !important;
+}

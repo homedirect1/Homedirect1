@@ -1,0 +1,52 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<table class="containtable" bgcolor="FFFFFF" cellspacing="2" cellpadding="15" border="0" width="600" style="border:1px solid #E0E0E0; margin: auto;" summary="<?php echo "Transaction Description" ?>">
+  <thead bgcolor="#F6F6F6">
+        <tr class="headings">
+            <th class="no-link"><?php echo "Items"; ?></th>
+            <th class="no-link"><?php echo "Amount"; ?></th>
+        </tr>
+  </thead>
+  <tbody>
+  <tr>
+  	<td align="center">Transaction Date</td>
+  	<td align="center"><?php echo $this->getTransaction()->getCreatedAt() ?></td>
+  </tr>
+  <tr>
+  	<td align="center">Transaction Type</td>
+  	   <td align="center"><?php echo "Credit" ?></td>
+  
+  </tr>
+  <tr>
+  	<td align="center">Amount</td>
+  	<td align="center"><?php echo $this->getTransaction()->getRequestAmount() ?></td>
+  </tr>
+  <tr>
+  	<td align="center">Net Amount</td>
+  	<td align="center"><?php echo $this->getTransaction()->getAmountPaid() ?></td>
+  </tr>
+
+  <tr>
+  	<td align="center">Tax</td>
+
+  	<td align="center"><?php echo $this->getTransaction()->getServiceTax() ?></td>
+    
+  </tr>
+ </tbody> 
+</table>

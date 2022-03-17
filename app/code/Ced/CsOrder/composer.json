@@ -1,0 +1,19 @@
+{
+  "name": "ced/module-csorder",
+  "description": "Advance order functionality for Vendor",
+  "require": {
+   "php": "~7.3.0|~7.4.0",
+   "magento/magento-composer-installer": "*"
+  },
+  "type": "magento2-module",
+  "version": "3.0.2",
+ "license": [
+   "EULA"
+  ],
+  "autoload": {
+   "files": [ "registration.php" ],
+   "psr-4": {
+    "Ced\\CsOrder\\": ""
+   }
+  }
+ }

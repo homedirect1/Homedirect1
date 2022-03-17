@@ -1,0 +1,296 @@
+<?php $settings = $this->getSettings(); ?>
+<div class="fieldset-wrapper" id="menu-settings">
+    <h1 class="mobileappbuilder-h1"><?php echo __("Menu Settings")?></h1>
+    <div class="admin__fieldset-wrapper-content">
+        <fieldset class="admin__fieldset">
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Contact Us Page")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="contact_us_enabled">
+                    <span><?php echo __("Enable")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable Contact Us Page")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="contact_us_enabled" name="vss_mobileappbuilder[menu_settings][contact_us_enabled]" value="1" <?php echo isset($settings["menu_settings"]["contact_us_enabled"])?$settings["menu_settings"]["contact_us_enabled"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="contact_us_enabled">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field contact_us">
+                <label class="admin__field-label" for="contact_us_page_value">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Select Contact Us Page");?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <select name="vss_mobileappbuilder[menu_settings][contact_us_page_value]" class="admin__control-select" id="contact_us_page_value" data-placeholder='<?php echo __("Select Product Carousel Type"); ?>' style="width:250px">
+                            <?php foreach ($this->getCmsPages() as $key => $val) { ?>
+                                        <option value="<?php echo $key; ?>" <?php if (isset($settings["menu_settings"]['contact_us_page_value']) && $key == $settings["menu_settings"]['contact_us_page_value']) echo 'selected="selected"'; ?>><?php echo $val; ?></option>
+                            <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Menu 1")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="menu1_enabled">
+                    <span><?php echo __("Enable")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable Menu")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="menu1_enabled" name="vss_mobileappbuilder[menu_settings][menu1_enabled]" value="1" <?php echo isset($settings["menu_settings"]["menu1_enabled"])?$settings["menu_settings"]["menu1_enabled"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="menu1_enabled">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field menu1">
+                <label class="admin__field-label" for="menu1_title">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Menu Title")?>
+                        <div class="vss_info">
+                            <?php echo __("Enter Tiltle for Menu")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["menu_settings"]["menu1_title"])?$settings["menu_settings"]["menu1_title"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[menu_settings][menu1_title]" id="menu1_title">                        
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field menu1">
+                <label class="admin__field-label" for="menu1_page_value">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Select Page");?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <select name="vss_mobileappbuilder[menu_settings][menu1_page_value]" class="admin__control-select" id="menu1_page_value" data-placeholder='<?php echo __("Select Product Carousel Type"); ?>' style="width:250px">
+                            <?php foreach ($this->getCmsPages() as $key => $val) { ?>
+                                        <option value="<?php echo $key; ?>" <?php if (isset($settings["menu_settings"]['menu1_page_value']) && $key == $settings["menu_settings"]['menu1_page_value']) echo 'selected="selected"'; ?>><?php echo $val; ?></option>
+                            <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Menu 2")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="menu2_enabled">
+                    <span><?php echo __("Enable")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable Menu")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="menu2_enabled" name="vss_mobileappbuilder[menu_settings][menu2_enabled]" value="1" <?php echo isset($settings["menu_settings"]["menu2_enabled"])?$settings["menu_settings"]["menu2_enabled"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="menu2_enabled">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field menu2">
+                <label class="admin__field-label" for="menu2_title">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Menu Title")?>
+                        <div class="vss_info">
+                            <?php echo __("Enter Tiltle for Menu")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["menu_settings"]["menu2_title"])?$settings["menu_settings"]["menu2_title"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[menu_settings][menu2_title]" id="menu2_title">                        
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field menu2">
+                <label class="admin__field-label" for="menu2_page_value">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Select Page");?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <select name="vss_mobileappbuilder[menu_settings][menu2_page_value]" class="admin__control-select" id="menu2_page_value" data-placeholder='<?php echo __("Select Product Carousel Type"); ?>' style="width:250px">
+                            <?php foreach ($this->getCmsPages() as $key => $val) { ?>
+                                        <option value="<?php echo $key; ?>" <?php if (isset($settings["menu_settings"]['menu2_page_value']) && $key == $settings["menu_settings"]['menu2_page_value']) echo 'selected="selected"'; ?>><?php echo $val; ?></option>
+                            <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Menu 3")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="menu3_enabled">
+                    <span><?php echo __("Enable")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable Menu")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="menu3_enabled" name="vss_mobileappbuilder[menu_settings][menu3_enabled]" value="1" <?php echo isset($settings["menu_settings"]["menu3_enabled"])?$settings["menu_settings"]["menu3_enabled"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="menu3_enabled">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field menu3">
+                <label class="admin__field-label" for="menu3_title">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Menu Title")?>
+                        <div class="vss_info">
+                            <?php echo __("Enter Tiltle for Menu")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["menu_settings"]["menu3_title"])?$settings["menu_settings"]["menu3_title"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[menu_settings][menu3_title]" id="menu3_title">                        
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field menu3">
+                <label class="admin__field-label" for="menu3_page_value">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Select Page");?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <select name="vss_mobileappbuilder[menu_settings][menu3_page_value]" class="admin__control-select" id="menu3_page_value" data-placeholder='<?php echo __("Select Product Carousel Type"); ?>' style="width:250px">
+                            <?php foreach ($this->getCmsPages() as $key => $val) { ?>
+                                        <option value="<?php echo $key; ?>" <?php if (isset($settings["menu_settings"]['menu3_page_value']) && $key == $settings["menu_settings"]['menu3_page_value']) echo 'selected="selected"'; ?>><?php echo $val; ?></option>
+                            <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Menu 4")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="menu4_enabled">
+                    <span><?php echo __("Enable")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable Menu")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="menu4_enabled" name="vss_mobileappbuilder[menu_settings][menu4_enabled]" value="1" <?php echo isset($settings["menu_settings"]["menu4_enabled"])?$settings["menu_settings"]["menu4_enabled"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="menu4_enabled">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field menu4">
+                <label class="admin__field-label" for="menu4_title">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Menu Title")?>
+                        <div class="vss_info">
+                            <?php echo __("Enter Tiltle for Menu")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["menu_settings"]["menu4_title"])?$settings["menu_settings"]["menu4_title"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[menu_settings][menu4_title]" id="menu4_title">                        
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field menu4">
+                <label class="admin__field-label" for="menu4_page_value">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Select Page");?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <select name="vss_mobileappbuilder[menu_settings][menu4_page_value]" class="admin__control-select" id="menu4_page_value" data-placeholder='<?php echo __("Select Product Carousel Type"); ?>' style="width:250px">
+                            <?php foreach ($this->getCmsPages() as $key => $val) { ?>
+                                        <option value="<?php echo $key; ?>" <?php if (isset($settings["menu_settings"]['menu4_page_value']) && $key == $settings["menu_settings"]['menu4_page_value']) echo 'selected="selected"'; ?>><?php echo $val; ?></option>
+                            <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script  type="text/javascript">
+    require(['jquery'], function(jQuery){
+        jQuery(window).load(function(){
+//            jQuery('#contact_us_page_value').chosen({ width:"95%" });
+//            jQuery('#menu1_page_value').chosen({ width:"95%" });
+//            jQuery('#menu2_page_value').chosen({ width:"95%" });
+//            jQuery('#menu3_page_value').chosen({ width:"95%" });
+//            jQuery('#menu4_page_value').chosen({ width:"95%" });
+            jQuery('#contact_us_enabled').trigger('change');
+            jQuery('#menu1_enabled').trigger('change');
+            jQuery('#menu2_enabled').trigger('change');
+            jQuery('#menu3_enabled').trigger('change');
+            jQuery('#menu4_enabled').trigger('change');
+        });
+
+        jQuery('#contact_us_enabled').change(function() {
+            if(this.checked) {
+                jQuery('.contact_us').css('display', 'block');
+            }else {
+                jQuery('.contact_us').css('display', 'none');
+            }
+        });
+
+        jQuery('#menu1_enabled').change(function() {
+            if(this.checked) {
+                jQuery('.menu1').css('display', 'block');
+            }else {
+                jQuery('.menu1').css('display', 'none');
+            }
+        });
+        jQuery('#menu2_enabled').change(function() {
+            if(this.checked) {
+                jQuery('.menu2').css('display', 'block');
+            }else {
+                jQuery('.menu2').css('display', 'none');
+            }
+        });
+        jQuery('#menu3_enabled').change(function() {
+            if(this.checked) {
+                jQuery('.menu3').css('display', 'block');
+            }else {
+                jQuery('.menu3').css('display', 'none');
+            }
+        });
+        jQuery('#menu4_enabled').change(function() {
+            if(this.checked) {
+                jQuery('.menu4').css('display', 'block');
+            }else {
+                jQuery('.menu4').css('display', 'none');
+            }
+        });
+    });
+</script>

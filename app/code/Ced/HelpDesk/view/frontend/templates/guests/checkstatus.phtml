@@ -1,0 +1,80 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<style>
+#guestticket {
+    width: 30%;
+    margin: 0;
+}
+</style>
+<div id="content">
+<h1 style="margin-bottom:0px">Check Ticket Status</h1>
+<?php $helper = $this->helper('Ced\HelpDesk\Helper\Data'); ?>
+<form action="<?php echo $this->getUrl('helpdesk/index/viewticket') ?>" method="post" id="guestticket">
+<div>
+    <div>
+        <h3 style="font-size: 20px">Enter Your Details Here</h3>
+        <div>
+              <div>
+	            <label for="email">E-Mail Address:
+	            <input id="email" class="required-entry validate-email" placeholder="e.g. example@example.com" name="email" size="30" value="" type="text"></label>
+             </div>
+             </br>
+	         <div>
+	            <label for="ticketno">Ticket Number:
+	            <input id="ticketno" class="required-entry" name="id" placeholder="e.g. 10000991" size="30" value="" type="text"></label>
+	         </div>
+	         </br>
+             <p>
+               <button class="button " value="View Ticket" type="submit">View Ticket</button>
+             </p>
+        </div>
+    </div>
+    <?php  if(!$helper->isLoggedIn()){?>
+    <div>
+        <div>
+        <span>  
+            <a href="<?php echo $this->getUrl('customer/account/login') ?>">Sign In</a> Or start your journey with us now!  <a href="<?php echo $this->getUrl('customer/account/create') ?>"> Register here </a> to access all your tickets.</span>
+        </div>
+    </div>
+    <?php } ?>
+    <div class="clear"></div>
+</div>
+</form>
+<br>
+<p>
+If this is your first time contacting us or you've lost the ticket number, please <a href="<?php echo $this->getUrl('helpdesk/index/ticket')?>"> open a new ticket </a></p>
+        </div>
+        
+        
+        <script>
+        require([
+          		'jquery',
+          		'mage/mage'
+          	], function($){
+
+          		var dataForm = $('#guestticket');
+          	
+          		dataForm.mage('validation', {
+          		
+          			
+          		}).find('input:text').attr('autocomplete', 'off');
+          		
+
+          	});
+        </script>

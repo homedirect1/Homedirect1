@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+ *
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_DeliveryDate
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ *-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cedcommerce" translate="label" sortOrder="200">
+            <label>CedCommerce</label>
+        </tab>
+        <section id="deliverydate" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Delivery Date Configuration</label>
+            <tab>cedcommerce</tab>
+            <resource>Ced_DeliveryDate::config_deliverydate</resource>
+
+            <group id="deliverydate_general" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+
+                <field id="deliverydate_config" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Delivery Date Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sameDayDelivery" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Current Day on Calendar </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="ddforguest" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Delivery date for guest users : </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Note: Enable Delivery date for guest users</comment>
+                </field>
+
+                <field id="ddshowon" translate="label" type="multiselect" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Delivery Date on :</label>
+                    <source_model>Ced\DeliveryDate\Model\Config\DisplayOn</source_model>
+                    <comment>Note: Display Delivery date on selected field</comment>
+                </field>
+
+                <field id="remarks" translate="label" type="textarea" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delivery date Note for calendar: </label>
+                    <comment>Visible between the callender </comment>
+                </field>
+
+            </group>
+
+            <group id="delivery" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Delivery Date and Time Configuration</label>
+                <attribute type="expanded">1</attribute>
+
+                <field id="maxDate" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Choose Maximum Days To Display :</label>
+                    <validate>required-entry  validate-digits validate-digits-range digits-range-1-365</validate>
+                    <!--<frontend_model>Ced\DeliveryDate\Model\Config\Calendar</frontend_model>-->
+                    <comment>Note: Choose Maximum Days (range 1-365 days)  </comment>
+                </field>
+
+                <field id="allDayDelivery" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>7 Day Delivery</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Note: Enable 7 Day Delivery(Enable This if You are able to ship 7 days)</comment>
+                </field>
+                <field id="weekDays" translate="label" type="multiselect" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1"  >
+                    <label>Select Working Delivery Days :</label>
+                    <source_model>Ced\DeliveryDate\Model\Config\Deliveryweeks</source_model>
+                    <depends>
+                        <field id="allDayDelivery">0</field>
+                    </depends>
+                </field>
+
+                <field id="timestamp" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1"  >
+                    <label>Select Timestamp:</label>
+                    <frontend_model>Ced\DeliveryDate\Block\Adminhtml\System\Timestamp</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Note: Create Available delivery timestamps</comment>
+                </field>
+
+                <field id="enableComment" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Comment On Frontend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Note: Enable Comment On Frontend</comment>
+                </field>
+                <field id="fieldNote" translate="label" type="textarea" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Field Note(For Comment):</label>
+                    <comment>Note: Edit Field Name</comment>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>

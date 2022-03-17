@@ -1,0 +1,65 @@
+<?php $gridrecords = $block->getReceivedCollection(); ?>
+<div class="order-details-items ordered">
+    <div class="order-title">
+        <strong><?= $block->escapeHtml(__('Received')) ?></strong>
+    </div>
+    <?php if (count($gridrecords)>0) {?>
+    <div class="table-wrapper order-items">
+        <table class="data table table-order-items" id="received-point-table" ">
+        <caption class="table-caption"><?php echo __('Received') ?></caption>
+        <thead>
+            <tr>
+                <th scope="col" class="col id"><?php echo __('Points') ?></th>
+                <th scope="col" class="col title"><?php echo __('Details') ?></th>
+            </tr>
+         </thead>
+        <tbody>
+             <?php
+             foreach ($gridrecords as $gridrecord): ?>
+                 <tr>
+                     <td data-th="<?= $block->escapeHtml(__('Points')) ?>" class="col id">
+                     <?php echo $gridrecord->getPoint() ?>
+                     </td>
+                     <td data-th="<?= $block->escapeHtml(__('Details')) ?>" class="col id">
+                         <?php
+                   if ($gridrecord->getOrderId()) {
+                       echo "You made a purchase. Order ID : "; ?>
+                       <a href="<?php echo $block->getViewOrderUrl($gridrecord->getOrderId())?>">
+                           <?php echo $gridrecord->getOrderIncrementId() ?>
+                       </a>.
+                       <?php
+                   } elseif ($gridrecord->getReviewId()) {
+                       echo "You reviewed the product ";
+                       if ($gridrecord->getProductId()) {
+                           $product = $block->getProduct($gridrecord->getProductId());
+                       } ?>
+                         <a href="<?php echo (isset($product['url'])?$product['url']:'')?>">
+                             <?php echo (isset($product['name'])?$product['name']:'') ?>
+                         </a>.
+                  <?php
+                   } else {
+                       echo $gridrecord->getTitle();
+                   }
+                         if ($gridrecord->getExpirationDate()) {
+                             echo __(' Point expire on %1', $block->formatDate($gridrecord->getExpirationDate(), \IntlDateFormatter::MEDIUM));
+                         }
+                          ?>
+                     </td>
+                 </tr>
+            <?php endforeach; ?>
+         </tbody>
+
+        </table>
+    </div>
+     <?php if ($block->getPagerHtml()): ?>
+     <div class="order-products-toolbar toolbar bottom">
+         <?php echo $block->getPagerHtml(); ?>
+     </div>
+         <?php endif ?>
+<?php } else {?>
+    <div class="message info empty">
+        <span><?php echo __('No reward points are available.'); ?></span>
+    </div>
+    <?php }?>
+</div>
+

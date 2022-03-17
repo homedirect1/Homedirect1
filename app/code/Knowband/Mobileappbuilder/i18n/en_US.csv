@@ -1,0 +1,823 @@
+Top Sliders,Top Sliders
+Slider,Slider
+Top Banners,Top Banners
+Banner,Banner
+Special Products,Special Products
+New Arrivals,New Arrivals
+Best Sellers,Best Sellers
+Login Successful.,Login Successful.
+This is a required field.,This is a required field.
+Registration Successful.,Registration Successful.
+Cannot create user account.,Cannot create user account.
+Email Id is required.,Email Id is required.
+Starting at ,Starting at 
+Something went wrong,Something went wrong
+Please select a category.,Please select a category.
+Product not found.,Product not found.
+Product Id is required.,Product Id is required.
+Links,Links
+N/A,N/A
+No,No
+ was added to your shopping cart., was added to your shopping cart.
+Cannot add the item to shopping cart.,Cannot add the item to shopping cart.
+Item has been updated in your cart successfully.,Item has been updated in your cart successfully.
+Quantity has not been set for this product.,Quantity has not been set for this product.
+Cannot update shopping cart.,Cannot update shopping cart.
+Something went wrong.,Something went wrong.
+Quantity,Quantity
+Item has been removed from your cart successfully.,Item has been removed from your cart successfully.
+Cannot remove the item.,Cannot remove the item.
+Prefix,Prefix
+First Name,First Name
+Middle Name/Initial,Middle Name/Initial
+Last Name,Last Name
+Suffix,Suffix
+Company,Company
+Address,Address
+Address 2,Address 2
+City,City
+Country,Country
+State/Province,State/Province
+Zip/Postal Code,Zip/Postal Code
+Telephone,Telephone
+Fax,Fax
+Please select a country.,Please select a country.
+Customer is not looged in,Customer is not looged in
+Address not selected.,Address not selected.
+The customer address is not valid.,The customer address is not valid.
+Cart information loaded successfully,Cart information loaded successfully
+No Shipping Method Required,No Shipping Method Required
+No Shipping Method Available,No Shipping Method Available
+Shipping method was set successfully.,Shipping method was set successfully.
+An error occurred while selecting shipping method.,An error occurred while selecting shipping method.
+Please login to view your addresses.,Please login to view your addresses.
+Address has been updated successfully.,Address has been updated successfully.
+Address has been added successfully.,Address has been added successfully.
+Please login to add/update your addresses.,Please login to add/update your addresses.
+An error occurred while saving billing address.,An error occurred while saving billing address.
+An error occurred while saving shipping address.,An error occurred while saving shipping address.
+No Payment methods is enabled,No Payment methods is enabled
+No Payment methods has been configured,No Payment methods has been configured
+Order created successfully,Order created successfully
+Your information has been updated successfully.,Your information has been updated successfully.
+Invalid email address.,Invalid email address.
+If there is an account associated with your email  you will receive an email with a link to reset your password.,If there is an account associated with your email  you will receive an email with a link to reset your password.
+Please enter your email.,Please enter your email.
+Please login to view your orders.,Please login to view your orders.
+Orders not found.,Orders not found.
+Please login to view your order details.,Please login to view your order details.
+Please select an order.,Please select an order.
+Subtotal,Subtotal
+Shipping & Handling,Shipping & Handling
+Discount,Discount
+Tax,Tax
+Grand Total,Grand Total
+Order created by this cart,Order created by this cart
+Voucher has been applied to your cart successfully.,Voucher has been applied to your cart successfully.
+Coupon code is not valid.,Coupon code is not valid.
+Voucher has been removed from your cart successfully.,Voucher has been removed from your cart successfully.
+Please login to add this product to wishlist.,Please login to add this product to wishlist.
+Please select a product,Please select a product
+Cannot specify product.,Cannot specify product.
+%1$s has been added to your wishlist.,%1$s has been added to your wishlist.
+An error occurred while adding item to wishlist: %s,An error occurred while adding item to wishlist: %s
+Requested wishlist doesn't exist,Requested wishlist doesn't exist
+SKU,SKU
+Wishlist could not be created.,Wishlist could not be created.
+An error occurred while deleting the item from wishlist.,An error occurred while deleting the item from wishlist.
+Wishlist item has been successfully removed.,Wishlist item has been successfully removed.
+An error occurred while deleting the item from wishlist: %s,An error occurred while deleting the item from wishlist: %s
+Item has been successfully added to the cart.,Item has been successfully added to the cart.
+Incl. Tax,Incl. Tax
+Unable to post the review.,Unable to post the review.
+Recent Products,Recent Products
+From ,From 
+ To , To 
+Mobile number and country code is Mandatory.,Mobile number and country code is Mandatory.
+Country Code is Mandatory.,Country Code is Mandatory.
+This mobile number has already been registered with an other account.,This mobile number has already been registered with an other account.
+Shipping Method is disabled.,Shipping Method is disabled.
+Mobile Number is blank,Mobile Number is blank
+Mobile Number already exist,Mobile Number already exist
+Empty Mobile number.,Empty Mobile number.
+Empty Country Code.,Empty Country Code.
+Empty Password.,Empty Password.
+The password has been changed successfully.,The password has been changed successfully.
+Password cannot be updated.,Password cannot be updated.
+An account using this email address does not exists.,An account using this email address does not exists.
+The account has been mapped for the fingerprint login in this device.,The account has been mapped for the fingerprint login in this device.
+The account can not be mapped for the fingerprint login in this device.,The account can not be mapped for the fingerprint login in this device.
+Customer data is not available.,Customer data is not available.
+Your account isn\'t available at this time.,Your account isn\'t available at this time.
+This Unique Id is not linked with the Email id.,This Unique Id is not linked with the Email id.
+This Mobile number is not linked with any account.,This Mobile number is not linked with any account.
+Mobile Number or country code is not available.,Mobile Number or country code is not available.
+Mobile number exists into the database..,Mobile number exists into the database..
+Mobile number does not exists into the database..,Mobile number does not exists into the database..
+Not Mentioned,Not Mentioned
+Marektplace Module is not enabled,Marektplace Module is not enabled
+Seller id is missing,Seller id is missing
+Seller not found,Seller not found
+Please login to write review.,Please login to write review.
+Not able to submit your review. Title or comment is missing.,Not able to submit your review. Title or comment is missing.
+Not able to submit your review. Posting review for this seller is not allowed.,Not able to submit your review. Posting review for this seller is not allowed.
+Thanks! for rating the Seller.,Thanks! for rating the Seller.
+All,All
+Name,Name
+A-Z,A-Z
+Z-A,Z-A
+Price,Price
+Low to High,Low to High
+High to Low,High to Low
+Ascending,Ascending
+Descending,Descending
+All Products,All Products
+Customer already registered.,Customer already registered.
+An error occurred .,An error occurred .
+Success.,Success.
+Last order was not completed.,Last order was not completed.
+Can't apply voucher code on this cart.,Can't apply voucher code on this cart.
+An error occurred while adding item to wishlist: %1,An error occurred while adding item to wishlist: %1
+Your review has been accepted for moderation.,Your review has been accepted for moderation.
+Review by %1,Review by %1
+(Posted on %1),(Posted on %1)
+--Select Category--,--Select Category--
+Order Successfully Created,Order Successfully Created
+Hi Thanks for your interest. Keep shopping with us to become our premium customer.,Hi Thanks for your interest. Keep shopping with us to become our premium customer.
+Order status update,Order status update
+Hi Your order status has been changed to {{STATUS}}.,Hi Your order status has been changed to {{STATUS}}.
+Hurry!,Hurry!
+Hi, Complete your order to get extra benefits on your next order.,Hi, Complete your order to get extra benefits on your next order.
+Best Seller Products,Best Seller Products
+Featured Products,Featured Products
+New Products,New Products
+From a category,From a category
+Custom Products,Custom Products
+Mobile App Builder,Mobile App Builder
+Settings saved successfully.,Settings saved successfully.
+Firebase Server key is not available,Firebase Server key is not available
+Notificaton Send successfully,Notificaton Send successfully
+Data saved successfully.,Data saved successfully.
+Component deleted successfully.,Component deleted successfully.
+Banner data deleted successfully.,Banner data deleted successfully.
+Layout deleted successfully.,Layout deleted successfully.
+Data has been saved successfully.,Data has been saved successfully.
+Settings saved successfully,Settings saved successfully
+Edit Layout,Edit Layout
+Knowband Mobile App Builder is not enabled on this store.,Knowband Mobile App Builder is not enabled on this store.
+Requested API not available,Requested API not available
+Requested Api method not available,Requested Api method not available
+Save Settings,Save Settings
+Edit,Edit
+Edit Name,Edit Name
+Delete,Delete
+View Details,View Details
+Layout ID,Layout ID
+Layout Name,Layout Name
+Action,Action
+Home Page Layout Settings,Home Page Layout Settings
+Title,Title
+URL,URL
+Upload,Upload
+Image Type,Image Type
+Home,Home
+Category,Category
+Product,Product
+Redirect Activity,Redirect Activity
+Disable,Disable
+Enable,Enable
+Status,Status
+Banners Settings,Banners Settings
+ID,ID
+Device Type,Device Type
+Both Android/iOS,Both Android/iOS
+Android,Android
+iOS,iOS
+Sent Date,Sent Date
+Push Notification History,Push Notification History
+Return Statuses,Return Statuses
+Coupon Code,Coupon Code
+Customer Email,Customer Email
+Device,Device
+Coupon Used,Coupon Used
+Yes,Yes
+Coupon Generated On,Coupon Generated On
+Menu Settings,Menu Settings
+Push Notification Settings,Push Notification Settings
+Slider Settings,Slider Settings
+Google Login Settings,Google Login Settings
+Facebook Login Settings,Facebook Login Settings
+General Settings,General Settings
+New Arrival,New Arrival
+Best Seller,Best Seller
+Statistics,Statistics
+Category Icon Settings,Category Icon Settings
+Code,Code
+Payment Method Settings,Payment Method Settings
+Image,Image
+Upto Time,Upto Time
+Background Color,Background Color
+Text Color,Text Color
+Redirect,Redirect
+Category ID,Category ID
+Product ID,Product ID
+Product Name,Product Name
+Sort Order,Sort Order
+Layout Settings,Layout Settings
+Back,Back
+Session has expired. Please try again after Re-login.,Session has expired. Please try again after Re-login.
+Sorry, no quotes are available for this order at this time.,Sorry, no quotes are available for this order at this time.
+Place Order,Place Order
+Heading of this Component,Heading of this Component
+Field cannot be empty.,Field cannot be empty.
+Select Product Type,Select Product Type
+Select Category,Select Category
+Select Products from Category,Select Products from Category
+Select Products,Select Products
+Number of products,Number of products
+Image Content Mode,Image Content Mode
+Scale aspect fill,Scale aspect fill
+Scale aspect Fit,Scale aspect Fit
+Please select category.,Please select category.
+Please select product.,Please select product.
+Please select image type,Please select image type
+Please provide image url,Please provide image url
+Please select category,Please select category
+Please select product,Please select product
+Only Positive integer is allowed.,Only Positive integer is allowed.
+Please select an option from dropdown.,Please select an option from dropdown.
+You can enter only numbers.,You can enter only numbers.
+Number should be greater than 0.,Number should be greater than 0.
+Field cannot be greater than {#} characters.,Field cannot be greater than {#} characters.
+Field cannot be less than {#} character(s).,Field cannot be less than {#} character(s).
+Please enter Email.,Please enter Email.
+Please enter a valid Email.,Please enter a valid Email.
+Invalid date format.,Invalid date format.
+Number is not in the valid range. It should be between {1} and {100},Number is not in the valid range. It should be between {1} and {100}
+Field should be numeric.,Field should be numeric.
+Field can have only upto two decimal values.,Field can have only upto two decimal values.
+Email cannot be greater than {#} characters.,Email cannot be greater than {#} characters.
+Zip should not have special characters.,Zip should not have special characters.
+Percentage should be in number.,Percentage should be in number.
+Percentage should be between 0 and 100.,Percentage should be between 0 and 100.
+Size cannot be greater than {#} characters.,Size cannot be greater than {#} characters.
+Color could not be greater than {#} characters.,Color could not be greater than {#} characters.
+Color is not valid.,Color is not valid.
+Special characters are not allowed.,Special characters are not allowed.
+Script tags are not allowed.,Script tags are not allowed.
+Style tags are not allowed.,Style tags are not allowed.
+Iframe tags are not allowed.,Iframe tags are not allowed.
+Uploaded file is not an image.,Uploaded file is not an image.
+Uploaded file size must be less than #.,Uploaded file size must be less than #.
+Field should not contain HTML tags.,Field should not contain HTML tags.
+You can enter only positive numbers.,You can enter only positive numbers.
+Select Image Type,Select Image Type
+Select an option,Select an option
+Image Url,Image Url
+Enter URL,Enter URL
+Image Upload,Image Upload
+Select Redirect Activity,Select Redirect Activity
+CMS,CMS
+Login,Login
+Search,Search
+Select Product,Select Product
+Banner Width,Banner Width
+Banner Height,Banner Height
+Margin Top,Margin Top
+Margin Bottom,Margin Bottom
+Margin Left,Margin Left
+Margin Right,Margin Right
+Countdown Time Validity,Countdown Time Validity
+Enable Time Background Color,Enable Time Background Color
+Time Background Color,Time Background Color
+Timer Text Color,Timer Text Color
+Select Date,Select Date
+Save,Save
+This field cannot be empty,This field cannot be empty
+Select 1st Category,Select 1st Category
+Upload Image,Upload Image
+Remove image,Remove image
+Select 2nd Category,Select 2nd Category
+Select 3rd Category,Select 3rd Category
+Select 4th Category,Select 4th Category
+Select 5th Category,Select 5th Category
+Select 6th Category,Select 6th Category
+Select 7th Category,Select 7th Category
+Select 8th Category,Select 8th Category
+Are your sure?,Are your sure?
+Are you sure?,Are you sure?
+Edit Component,Edit Component
+Close,Close
+Need to add value in atleast 4 categories,Need to add value in atleast 4 categories
+Component added successfully,Component added successfully
+You can add only 20 components in a layout,You can add only 20 components in a layout
+Top Categories,Top Categories
+Banner-Square,Banner-Square
+Banner-Custom,Banner-Custom
+Banner-Horizontal Sliding,Banner-Horizontal Sliding
+Banner-Grid,Banner-Grid
+Banner-With Countdown timer,Banner-With Countdown timer
+Products-Square,Products-Square
+Products-Horizontal Sliding,Products-Horizontal Sliding
+Products-Grid,Products-Grid
+Edit Heading,Edit Heading
+Category1,Category1
+Category2,Category2
+Category3,Category3
+Category4,Category4
+Horizontal Banner,Horizontal Banner
+Banner-Grid 1,Banner-Grid 1
+Banner-Grid 2,Banner-Grid 2
+Banner-Grid 3,Banner-Grid 3
+Banner-Grid 4,Banner-Grid 4
+Countdown Banner,Countdown Banner
+Hours,Hour
+Minutes,Minute
+Seconds,Second
+Horizontal Products,Horizontal Products
+Product Grid,Product Grid
+Payment Mode,Payment Mode
+Sandbox,Sandbo
+Live,Liv
+Client Id,Client Id
+Please select atleast one country,Please select atleast one country
+Please enter a valid color code,Please enter a valid color code
+Date & Time should be greater than current date time.,Date & Time should be greater than current date time.
+Field cannot be empty,Field cannot be empty
+Total Coupons Generated,Total Coupons Generated
+Total Coupons Unused,Total Coupons Unused
+Total Coupons Used,Total Coupons Used
+`Active Date` cannot be greater than `Expire Date`,`Active Date` cannot be greater than `Expire Date`
+`From` Date cannot be greater than `To` Date,`From` Date cannot be greater than `To` Date
+The sum of Gravity is not in the valid range. It should be betwen 1 and 100. The total is: ,The sum of Gravity is not in the valid range. It should be betwen 1 and 100. The total is: 
+No list exists for this API key.,No list exists for this API key.
+No. of times,No. of times
+Date,Date
+Please upload an image file.,Please upload an image file.
+To percentage should be greater than From percentage.,To percentage should be greater than From percentage.
+Value must be greater than 0,Value must be greater than 0
+Allowed extension is ,Allowed extension is 
+Please provide correct format. Maximum allowed file size is ,Please provide correct format. Maximum allowed file size is 
+Validated successfully,Validated successfully
+Invalid Api Key,Invalid Api Key
+Message,Message
+Select Brodcast Device Type,Select Brodcast Device Type
+Remove Image,Remove Image
+Only .png or .jpg file format accepted. File size should not be more than 2 MB.,Only .png or .jpg file format accepted. File size should not be more than 2 MB.
+--Select Product--,--Select Product--
+Enable/Disable,Enable/Disable
+Facebook App Id,Facebook App Id
+Validate App Id,Validate App Id
+Enable the Extension,Enable the Extension
+This setting will enable/disable entire mobile app functionality.,This setting will enable/disable entire mobile app functionality.
+Redirect on Cart Page when Add To Cart,Redirect on Cart Page when Add To Cart
+This setting will redirect to cart page or keep on the product page when add to cart is clicked.,This setting will redirect to cart page or keep on the product page when add to cart is clicked.
+Display Short Description,Display Short Description
+Enable Request Log Reporting,Enable Request Log Reporting
+This setting will enable/disable error log reporting for every request to Web Services of the module.,This setting will enable/disable error log reporting for every request to Web Services of the module.
+Show App Preview,Show App Preview
+This setting will show/hide the app preview.,This setting will show/hide the app preview.
+Enable Tab Bar,Enable Tab Bar
+This setting will enable/disable the tab bar in the app.,This setting will enable/disable the tab bar in the app.
+Show Spin and Win,Show Spin and Win
+Show spin and win popup on the mobile App.,Show spin and win popup on the mobile App.
+Enable/Disable Fingerprint Login,Enable/Disable Fingerprint Login
+This setting will enable/disable Fingerprint login in Mobile App.,This setting will enable/disable Fingerprint login in Mobile App.
+Enable/Disable Phone Number Registration,Enable/Disable Phone Number Registration
+This setting will enable/disable customer registration and login via phone number verification.,This setting will enable/disable customer registration and login via phone number verification.
+Mandatory Phone number at registration,Mandatory Phone number at registration
+This setting will set the Phone number field as optional or required.,This setting will set the Phone number field as optional or required.
+Select layout for home page,Select layout for home page
+Please select,Please select
+Disabled Shippping Sethods,Disabled Shippping Sethods
+Select shipping methods from the list for which you want to disable this module.You can leave it to empty if you want to enable this module for all shipping methods.,Select shipping methods from the list for which you want to disable this module.You can leave it to empty if you want to enable this module for all shipping methods.
+Select shipping methods,Select shipping methods
+Enable Whatsapp Chat Support,Enable Whatsapp Chat Support
+This setting will enable/disable WHATSAPP chat support option in mobile app.,This setting will enable/disable WHATSAPP chat support option in mobile app.
+Chat Number,Chat Number
+Enter Chat number with Country code as well.,Enter Chat number with Country code as well.
+Enable Live Chat Support,Enable Live Chat Support
+This setting will enable/disable live chat support option in mobile app.,This setting will enable/disable live chat support option in mobile app.
+Chat API Key,Chat API Key
+Enter API Key for Live chat,Enter API Key for Live chat
+Enable Url Encoding Of Image Links,Enable Url Encoding Of Image Links
+This setting will enable/disable Url encoding of all image links.,This setting will enable/disable Url encoding of all image links.
+Look And Feel,Look And Feel
+Enable Logo,Enable Logo
+Upload logo,Upload logo
+Remove logo,Remove logo
+App Button Color,App Button Color
+Select button color of the app.,Select button color of the app.
+App Button Text Color,App Button Text Color
+Select button text color of the app.,Select button text color of the app.
+App Theme Color,App Theme Color
+Select theme color of the app.,Select theme color of the app.
+App Background Color,App Background Color
+Select background color of the app.,Select background color of the app.
+Custom CSS,Custom CSS
+Add custom CSS code that you want to be executed on the app,Add custom CSS code that you want to be executed on the app
+Edit Payment Method Settings,Edit Payment Method Settings
+Something went wrong. Please try again.,Something went wrong. Please try again.
+Edit Settings,Edit Settings
+Upload Google JSON file,Upload Google JSON file
+Only .json file format accepted. File size should not be more than 1 MB.,Only .json file format accepted. File size should not be more than 1 MB.
+Uploaded App Id,Uploaded App Id
+Uploaded Api Key,Uploaded Api Key
+Send New Push Notification,Send New Push Notification
+Send,Send
+Cancel,Cancel
+View Push Notification,View Push Notification
+Send New Notification,Send New Notification
+Contact Us Page,Contact Us Page
+Enable/Disable Contact Us Page,Enable/Disable Contact Us Page
+Select Contact Us Page,Select Contact Us Page
+Select Product Carousel Type,Select Product Carousel Type
+Menu 1,Menu 1
+Enable/Disable Menu,Enable/Disable Menu
+Menu Title,Menu Title
+Enter Tiltle for Menu,Enter Tiltle for Menu
+Select Page,Select Page
+Menu 2,Menu 2
+Menu 3,Menu 3
+Menu 4,Menu 4
+Category Icon,Category Icon
+Select category to add icon,Select category to add icon
+Select category to add/edit icon.,Select category to add/edit icon.
+Category icon saved successfully.,Category icon saved successfully.
+Something went wrong, refresh the page.,Something went wrong, refresh the page.
+Invalid File Format, Please select only recommended types..,Invalid File Format, Please select only recommended types..
+File size must be less than 1MB,File size must be less than 1MB
+Invalid File.,Invalid File.
+Add New Layout,Add New Layout
+Firebase Server Setting,Firebase Server Setting
+Server Key,Server Key
+Enter firebase server key,Enter firebase server key
+New Order Settings,New Order Settings
+Enable/Disable new order push notification,Enable/Disable new order push notification
+Title for new order push notification,Title for new order push notification
+Message for new order push notification,Message for new order push notification
+Order Status Change Settings,Order Status Change Settings
+Enable/Disable order status change push notification,Enable/Disable order status change push notification
+Title for order status change push notification,Title for order status change push notification
+Message for order status change push notification,Message for order status change push notification
+Abandoned Cart Settings,Abandoned Cart Settings
+Enable/Disable abandoned cart push notification,Enable/Disable abandoned cart push notification
+Title for abandoned cart push notification,Title for abandoned cart push notification
+Message for abandoned cart push notification,Message for abandoned cart push notification
+Time Interval,Time Interval
+Time interval to check Abandoned cart(In Hours),Time interval to check Abandoned cart(In Hours)
+Cron Instructions,Cron Instructions
+Add the cron to your store via control panel/putty to send Abandoned cart push notifications according to your settings above. Find below 	the Instruction to add the cron.,Add the cron to your store via control panel/putty to send Abandoned cart push notifications according to your settings above. Find below the Instruction to add the cron.
+URL to Add Cron via Control Panel,URL to Add Cron via Control Panel
+Cron setup via SSH,Cron setup via SSH
+Preview,Preview
+Paypal Mobile,Paypal Mobile
+COD Mobile,COD Mobile
+Invalid File Format.,Invalid File Format.
+File should be less than 2 Mb.,File should be less than 2 Mb.
+Please Upload the Image.,Please Upload the Image.
+Please Upload Image For Category.,Please Upload Image For Category.
+app_text_category_products,Category
+app_text_no_internet,Internet Problem
+app_text_product_image_viewer,Product Image Viewer
+app_text_payment_methods,Payment Methods
+app_text_seller_comments,Seller Comment(s)
+app_text_home,Home
+app_text_category,Categories
+app_text_login,Login
+app_text_logout,Logout
+app_text_login_signup,Login/Sign up
+app_text_account,My Account
+app_text_contact,Contact Us
+app_text_about,About Us
+app_text_add_to_wishlist,Add to Wishlist
+app_text_add_to_cart,Add to Cart
+app_text_off,off
+app_text_all,All
+app_text_languages,Language(s)
+app_text_sort,Sort
+app_text_filter,Filter
+app_text_sort_order,Select Sort Order
+app_text_price_asce,Price: Low to High
+app_text_price_desc,Price: High to Low
+app_text_product,Product
+app_text_select,Select
+app_text_instock,In Stock
+app_text_outstock,Out of Stock
+app_text_product_info,Product Info and Care
+app_text_customization,Product Customization
+app_text_accessories,Accessories
+app_text_view_less,View Less
+app_text_view_more,View More
+app_text_provide_details,Please provide details
+app_text_discount_price,Discount Price
+app_text_discount_percentage,Discount Percentage
+app_text_rating,Rating *
+app_text_bag,Shopping Bag
+app_text_apply_voucher,Apply Voucher
+app_text_entry_voucher_code,Enter voucher code
+app_text_apply,Apply
+app_text_gift,Gift Wrap
+app_text_entry_message,Enter your message
+app_text_available_first,Send available products first
+app_text_continue_shopping,Continue Shopping
+app_text_continue_checkout,Continue To Checkout
+app_text_update_quantity,Update Quantity
+app_text_enter_quantity,Enter quantity
+app_text_empty_cart,Your shipping cart is empty!
+app_text_goto_home,Go to Home Page
+app_text_review_your_order,Review Your Order
+app_text_add_new_shipping_address,Add New Address
+app_text_history,Shipping Details
+app_text_billing_details,Billing Details
+app_text_same_as_shipping_details,Same as Shipping Address
+app_text_summary,Order Summary
+app_text_shipping_methods,Shipping Methods
+app_text_comment,Order Comment
+app_text_payment_summary,Payment Summary
+app_text_proceed,Proceed To Payment
+app_text_make_payment,Make Payment
+app_text_congratulations,Congratulations
+app_text_shipping_addresses,Shipping Address(s)
+app_text_billing_addresses,Billing Address(s)
+app_text_addresses,Address(s)
+app_text_order_detail,Order Detail
+app_text_update_personal,Update Personal Details
+app_text_update_password,Update Password
+app_text_current_password,Current Password
+app_text_new_password,New Password
+app_text_confirm_password,Confirm Password
+app_text_cancel,Cancel
+app_text_save,Save
+app_text_order_ref,Order Reference
+app_text_status,Status
+app_text_placed,Placed On
+app_text_reorder,Reorder
+app_text_order_details,Order Details
+app_text_status_history,Status History
+app_text_shipping_address,Shipping Address
+app_text_billing_address,Billing Address
+app_text_order_summary,Order Summary
+app_text_shipping_method,Shipping Method
+app_text_payment_method,Payment Method
+app_text_gift_wrapping,Gift Wrapping
+app_text_no_shipping_address,No shipping address available!
+app_text_no_order_details,No order details available!
+app_text_signup,Sign Up
+app_text_continue_guest,Continue as Guest
+app_text_email,Email
+app_text_password,Password
+app_text_forgot_password,Forgot Password
+app_text_login_social_account,You can login with social account.
+app_text_login_with_google,Login with Google+
+app_text_login_with_facebook,Login with Facebook
+app_text_signup_with_google,Signup with Google+
+app_text_signup_with_facebook,Signup with Facebook
+app_text_msg_enter_valid_email,Please enter valid email!
+app_text_msg_enter_email,Please enter email!
+app_text_msg_enter_password,Please enter password!
+app_text_msg_password_characters_less_than_3,Please enter password having characters more that or equal to 3!
+app_text_msg_first_name,First Name
+app_text_msg_last_name,Last Name
+app_text_msg_dob,Date of Birth
+app_text_msg_confirm_password,Confirm Password
+app_text_msg_personal_details,Personal Details
+app_text_msg_pass_not_matched,Password and confirm password do not matched!
+app_text_sold_by,Sold By:
+app_text_write_review,Write Review
+app_text_view_review,View Review(s)
+app_text_view_seller_products,View Seller Product(s)
+app_text_wait,Please wait
+app_text_loading,Loading data...
+app_text_msg_went_wrong,Something went wrong. Please try again.
+app_text_msg_no_internet_found,No internet connection found.
+app_text_msg_no_internet_title,No Internet
+app_text_msg_request,Request cannot be process. This might be because of slow internet connection.
+app_text_msg_order_placed_email,Your order has been placed successfully. You will receive an email regarding the same.
+app_text_msg_product_look,You can look for product(s) by their category.
+app_text_msg_search_product,You can search any product in store by text or voice!
+app_text_msg_view_cart,You can view shopping cart with quantity!
+app_text_msg_logout,You are logout successfully!
+app_text_msg_view_product,You can view product in list or grid mode!
+app_text_msg_sort_product,You can sort product by their price!
+app_text_msg_filter_product,You can filter product(s) as per your need!
+app_text_text_next,Next
+app_text_text_okay,Okay
+app_text_required,Required
+app_text_msg_rating,Please select rating
+app_text_msg_add_cart,You can add product to shopping cart by simply clicking on the button \'Add to Cart\'!
+app_text_msg_add_wishlist,You can add product to wishlist by simply clicking on the button \'Add to Wishlist\'!
+app_text_msg_product_price,Product price has been updated!
+app_text_msg_product_not_available,This product is not available for order!
+app_text_msg_combination,This combination does not exist for this product. Please select another combination.
+app_text_msg_product_no_stock,This product is not available in the desired quantity or not in stock!
+app_text_msg_out_stock,Some of the products in the cart are not available in the desired quantity or not in stock. Please remove such product(s) from cart!
+app_text_msg_checkout_products,You can checkout products in shopping cart by simply clicking on the button \'Continue to Checkout\'.
+app_text_msg_apply_voucher,You can apply voucher to shopping cart!
+app_text_msg_update_quantity,You can update quantity of product or remove it from shopping cart!
+app_text_msg_view_details,You can view product details by clicking on product image!
+app_text_msg_success,Success!
+app_text_msg_failure,Failure!
+app_text_msg_enter_quantity,Please enter quantity
+app_text_quantity,Quantity
+app_text_remove,Remove
+app_text_customization_details,Customization Details
+app_text_msg_add_address,You can add new shipping address by clicking on the button!
+app_text_msg_update_address,You can update shipping address!
+app_text_msg_select_address,You can select any shipping address by simply clicking on it!
+app_text_select_address_text,*Please select shipping address to review your order.
+app_text_msg_no_product,No products available!
+app_text_msg_no_comment_available,No comment(s) available!
+app_text_msg_reset_password,You can reset your password by clicking `Forget Password`
+app_text_msg_login,You can login into the store from here!
+app_text_msg_login_fb,You can also login into the store from your Facebook account!
+app_text_msg_login_google,You can also login into the store from your Google account!
+app_text_msg_update_profile,"You can update your profile details,shipping details or view your order details from here!"
+app_text_product_info_and_care,Product Info and Care
+app_text_download,Download
+app_text_minimal_quantity,Minimal Quantity
+app_text_seller_details,Seller Details
+app_text_pack_content,Pack Content
+app_text_submit,Submit
+app_text_msg_forget_password,Enter the e-mail address associated with your account. Click submit to have your password e-mailed to you.
+app_text_enter_your_email,Enter your email
+app_text_reset_password,Reset Password
+app_text_view_selected_filter,You can view your selected filter result by clicking on this image!
+app_text_clear_selected_filter,You can clear the applied filter by clicking on this image!
+app_text_no_filter,No filters
+app_text_phone_number_required,*You must register at least one phone number
+app_text_refresh,Refresh
+app_text_internet_connection_failed,Internet Connection Failed!
+app_text_internet_connection_problem,There might be some problem with your internet connection. Please check.
+app_text_cancel_transaction,Cancel transaction
+app_text_middle_of_payment,You are in the middle of your payment transaction process. Do you really want cancel your transaction?
+app_text_yes,Yes
+app_text_no,No
+app_text_enter_your_comment,Enter your comment
+app_text_msg_shipping_methods_unavailable,"For some product(s), shipping methods are not available. Please remove such product(s) from cart and try again."
+app_text_msg_select_shipping_methods,Please select shipping method
+app_text_share_log,Share Log
+app_text_error_minimum_value,Enter value greater than 0
+app_text_payment_failed_contact_support,Your order could not be processed. Kindly contact support for any queries
+app_text_currency,Currency(s)
+app_text_choose_payment_method,Choose Payment Method
+app_text_no_payment_method,No Payment Method(s) Found!
+app_text_no_payment_currently,There are no payment method currently.
+app_text_no_make_payment,You won\'t be able to make payment as this mobile App is setup for demo purpose.
+app_text_make_payment_after_select,You can make payment after selecting any payment method!
+app_text_title_paypal_payment,PayPal Payment
+app_text_order_total_price,Order Total Price
+app_text_user_cancelled_the_payment,User cancelled the payment
+app_text_invalid_payment_try_again,Invalid payment. Kindly try again
+app_text_text_skip,Skip
+app_text_wishlist_item_removed,Item removed from wishlist.
+app_text_wishlist_item_added,Item Added to Wishlist
+app_text_subject,Hey Check this out!
+app_text_text_extra_share,Available here :
+app_text_share_intent_title,Share
+app_text_error_product_name_url,The product name or url may be empty.
+app_text_tag_error,Error
+app_text_demo_app_user_form,Please fill the details!
+app_text_full_name_demo_app_user,Your Name*
+app_text_email_demo_app_user,Email*
+app_text_store_url_demo_app_user,Store Url*
+app_text_continue_demo_app_user_form,Continue
+app_text_invalid_url,Invalid Store URL!
+app_text_invalid_email,Invalid Email!
+app_text_sellers,Sellers
+app_text_seller,Seller
+app_text_seller_shipping_policy,Shipping Policy
+app_text_seller_return_policy,Return Policy
+app_text_review_title,Title *
+app_text_review_comment,Comment *
+app_text_review_rating,Rating *
+app_text_filter_products,Filter Product(s)
+app_text_select_category,Select Category
+app_text_select_sort,Select Sort
+app_text_clear,Clear
+app_text_edit,Edit
+app_text_cart,Cart
+app_text_move_to_cart,Move to Cart
+app_text_no_shipping_method_available,No Shipping Method Available
+app_text_module_not_installed,Please contact your site administrator to view data on this page.
+app_text_no_data_found,No Data Found!
+app_text_enter_coupon_code,Enter coupon code
+app_text_apply_coupon,Apply Coupon
+app_text_add_more_in_cart,Add more in cart to place this order
+app_text_shipping_details,Shipping Details
+app_text_choose_app_theme,Choose Your App Theme
+app_text_enter_store_url,Enter your store URL
+app_text_sample_store_url,Ex: http://your_store.com/
+app_text_downloads,Downloads
+app_text_done,Done
+app_text_posted_on,Posted On:
+app_text_commented_by,Commented By:
+app_text_seller_comment,Comment:
+app_text_open,Open
+app_text_order_status,Open
+app_text_special_products,Special Products
+app_text_product_information,Product Information
+app_text_featured_products,Feature Products
+app_text_requested_gift_order,You have requested gift wrapping for this order
+app_text_step_one_of_three,step 1/3
+app_text_review_checkout,Review Checkout
+app_text_your_wishlist_is_empty,Your wishlist is empty!
+app_text_no_shipping_method,No Shipping Method Available
+app_text_no_order_found,No Order Found!
+app_text_percent_off,% off
+app_text_coupon_length_validation,Coupon code characters must be greater than or equal to 4.
+app_text_coupon_code_removed,Coupon discount has been removed successfully!
+app_text_facebook_login_cancelled,Facebook login has been cancelled.
+app_text_facebook_login_failure,Facebook Login Failure:
+app_text_login_failed,Login Failed!
+app_text_wrong_url_install_mab,You might have entered wrong URL or you have not install our mobile App builder module.
+app_text_install_module,Install Module
+app_text_text_loading,Loading
+app_text_text_exception,Exception:
+app_text_msg_reset_password_click,You can reset your password by clicking \'Forget Password\'!
+app_text_login_from_here,You can login into the store from here!
+app_text_login_from_facebook_account,You can also login into the store from your Facebook account!
+app_text_login_from_google_account,You can also login into the store from your Google account!
+app_text_text_warning,Warning!
+app_text_update_address_if_exists,You can update shipping address or choose any other address if exists!
+app_text_continue_to_checkout_click_msg,You can checkout products in shopping cart by simply clicking on the button \'Continue to Checkout\'!
+app_text_please_enter_store_url,Please enter store URL
+app_text_product_not_desired_quantity,Some of the products in the cart are not available in the desired quantity or not in stock. Please remove such product(s) from cart!
+app_text_select_shipping_methods,Select Shipping Method(s)
+app_text_send_email,Send email...
+app_text_error_in_google_sign_in,Some error in google login.Please try again.
+app_text_process_payment_problem,Some error occurred while processing the payment. Kindly try again.
+app_text_text_state,State
+app_text_update_address,Update Address
+app_text_unit_price,Unit Price
+app_text_total_price,Total Price
+app_text_text_totals,totals
+app_text_text_success,Success!
+app_text_sale,Sale
+app_text_new,New
+app_text_share_api_log,Share API log
+app_text_report_via_email,Report
+app_text_view_your_store,View Your Store
+app_text_view_demo,View Demo
+app_text_search,Search
+app_text_wishlist,Wishlist
+app_text_select_language,Select language
+app_text_select_font,Select font
+app_text_share_feedback,Share feedback / Custom change request
+app_text_enter_state,Enter state
+app_text_choose_your_app_theme,Choose Your App Theme
+app_text_terms_and_conditions,Terms and Conditions of Use
+app_text_wishlist_only,Wishlist
+app_text_wishlist_remove,Remove from Wishlist
+app_text_state_not_required,State not required for selected country
+app_text_currencies,Currency(s)
+app_text_payment_failed,Some error occurred while processing the payment. Kindly try again
+app_text_entered_wrong_url,You might have entered wrong URL or you have not installed our mobile app builder bodule.
+app_text_fill_all_required_fields,Please fill all the required fields.
+app_text_extra_share,Available here :
+app_text_intent_title,Share
+app_text_ok,OK
+app_text_explore_the_app,Explore the App
+app_text_hour,Hour
+app_text_min,Minutes
+app_text_sec,Seconds
+app_text_install_whatsapp,Whatsapp is not installed on your device
+app_text_no_account_registered,No account is registered for the biometric authentication in this device. Please register an account first.
+app_text_confirm_for_authentication,Confirm your fingerprint or face to authenticate.
+app_text_login_with_fingerprint,Login with Fingerprint
+app_text_register_for_fingerprint,Register for Fingerprint Login
+app_text_biometric_not_available,Biometric authentication is not available for this device.
+app_text_fingerprint_not_recognized,Touch ID does not recognize your fingerprint. Please try again with your enrolled fingerprint.
+app_text_face_not_recognizes,Face ID does not recognize your face. Please try again with your enrolled face.
+app_text_fingerprint_or_face_not_enrolled,No fingerprints/face enrolled in the device.
+app_text_biometry_locked_out,Functionality is locked now because of too many failed attempts.
+app_text_register_for_fingerpring,Register for Fingerprint
+app_text_register_for_fingerprint_details,Do you want to register this account for fingerprint functionality. Once done you can login into this account without using email Id or password just using the fingerprint verification.
+app_text_register,Register
+app_text_verify,Verify
+app_text_get_otp,Get OTP
+app_text_mobile_number,Mobile Number
+app_text_mobile_number_optional,Mobile Number (Optional)
+app_text_error_number_verification,Mobile number could not be verified! Please try again with the correct OTP number!
+app_text_phone_number_already_exists,Phone number is already registered. Please try again with another phone number!
+app_text_number_verification,Number Verification
+app_text_number_verification_description,You need to verify the phone number. Please enter the phone number and submit
+app_text_login_with_phone_number,Login with Phone Number
+app_text_forget_password_description,Enter the e-mail address or phone number associated with your account.
+app_text_enter_email_or_mobile_number,Enter email or mobile number
+app_text_phone_number_change_message,One phone number is already registered with this account. You can only change the contact number. Please enter valid phone number.
+app_text_enter_otp,Enter OTP
+app_text_related_products,Related Products
+app_text_view_reviews,View Reviews
+app_text_write_reviews,Write reviews
+app_text_please_fill_all_details,Please fill all details
+app_text_close,Close
+app_text_add_review,Add Review
+app_text_write_a_review,Write a review
+app_text_nick,Nick
+app_text_title,Title
+app_text_no_reviews,No Reviews for the product
+app_text_number_of_reviews,Number of reviews
+app_text_minimum_rating,Please add minimum rating
+app_text_error,Error
+app_text_no_reviews,No Reviews

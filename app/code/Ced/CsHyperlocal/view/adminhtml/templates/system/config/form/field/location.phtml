@@ -1,0 +1,120 @@
+<?php
+/** @var \Ced\CsHyperlocal\Block\Adminhtml\System\Config\Form\Field\Location $block */
+?>
+<script>
+    require([
+        'jquery',
+        'uiRegistry'
+    ], function ($, uiRegistry) {
+        $(function () {
+            let bodySelector =  $('body');
+            let sectionName = 'ced_cshyperlocal_admin_default_address_';
+            var locationInput = bodySelector.find('#' + sectionName + 'location');
+            var latitudeInput = bodySelector.find('#' + sectionName + 'latitude');
+            var longitudeInput = bodySelector.find('#' + sectionName + 'longitude');
+            var cityInput = bodySelector.find('#' + sectionName + 'city');
+            var stateInput = bodySelector.find('#' + sectionName + 'state');
+            var countryInput = bodySelector.find('#' + sectionName + 'country');
+            var zipcodeInput = bodySelector.find('#' + sectionName + 'zipcode');
+
+            console.log(locationInput);
+            console.log(locationInput.val());
+            console.log(latitudeInput);
+            console.log(latitudeInput.val());
+            console.log(longitudeInput);
+            console.log(longitudeInput.val());
+            console.log(cityInput);
+            console.log(cityInput.val());
+            console.log(stateInput);
+            console.log(stateInput.val());
+            console.log(countryInput);
+            console.log(countryInput.val());
+            console.log(zipcodeInput);
+            console.log(zipcodeInput.val());
+
+
+
+            var autocomplete = new google.maps.places.Autocomplete(locationInput[0]);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                let place = autocomplete.getPlace();
+                let latitude = place.geometry.location.lat();
+                let longitude = place.geometry.location.lng();
+
+                console.log('place');
+                console.log(place);
+                latitudeInput.val(latitude);
+                longitudeInput.val(longitude);
+
+                let arrAddress = place.address_components;
+                cityInput.val('');
+                stateInput.val('');
+                countryInput.val('');
+                zipcodeInput.val('');
+
+                $.each(arrAddress, function (i, address_component) {
+                    switch (address_component.types[0]) {
+                        /*case "route":
+                            streetAddressSelector.val(address_component.long_name).change();
+                            break;
+
+                        case "sublocality_level_2":
+                            street1Selector.val(address_component.long_name).change();
+                            break;
+
+                        case "sublocality_level_1":
+                            street2Selector.val(address_component.long_name).change();
+                            break;*/
+
+                        case "locality":
+                        case "administrative_area_level_2":
+                            cityInput.val(address_component.long_name);
+                            cityInput.attr('readonly', true);
+                            break;
+
+                        case "country":
+                            countryInput.val(address_component.long_name);
+                            console.log('countryInput');
+                            console.log(countryInput.val());
+                            break;
+
+                        case "postal_code":
+                            zipcodeInput.val(address_component.long_name).change();
+                            console.log('zipcodeInput');
+                            console.log(zipcodeInput.val());
+                            break;
+
+                        case "administrative_area_level_1":
+                            console.log('address_component.area');
+                            console.log(address_component.long_name);
+                            stateInput.val(address_component.long_name);
+                            console.log('stateInput.area');
+                            console.log(stateInput.val());
+                            break;
+
+                    }
+                });
+
+                console.log(locationInput.val());
+                console.log(latitudeInput.val());
+                console.log(longitudeInput.val());
+                console.log(cityInput.val());
+                console.log(stateInput.val());
+                console.log(countryInput.val());
+                console.log(zipcodeInput.val());
+            });
+
+            locationInput.on('focus', function () {
+                selectedLocation = false;
+            }).on('blur', function () {
+                if (!selectedLocation) {
+                    $(this).val('');
+                }
+            });
+        });
+    });
+
+    function gm_authFailure() {
+        alert("<?= __('There has been an error in map API key, please check the map api key.') ?>");
+    }
+
+</script>

@@ -1,0 +1,181 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+ -->
+ @CHARSET "UTF-8";
+ #ticEsc
+ {
+   width:33%;
+ }
+
+ #buts
+ {
+   padding-left:15px; 
+ }
+
+ .first-li
+ {
+  float: left;
+}
+.second-li
+{
+  float: right;
+  width: 60%;
+}
+#spanColor {
+ border: 1px solid rgba(0, 0, 0, 0.3);
+ border-radius: 4px;
+ padding: 1px 5px;
+ font-weight: bold;
+ padding: 1px 5px;
+}
+#six > #dept {
+  margin-bottom: 15px;
+  margin-top: 2px;
+}
+
+#mess {
+ background-color:#e579e1;
+ margin-bottom:10px;
+ border:1px solid gray;
+ font-size:13px;
+ padding:10px;
+ border-radius:5px;
+ 
+}
+
+#mess2 {
+ background-color:#6ee5e5;
+ margin-bottom:10px;
+ border:1px solid gray;
+ font-size:13px;
+ padding:10px;
+ border-radius:5px;
+ 
+}
+
+#mess2 #from{
+  float:right;
+  background-color:#6ee5e5;
+}
+
+#id
+{
+	background-color: #edfaff;
+}
+
+#from {
+  background-color: #fff;
+}
+
+#messDetail
+{
+	background-color: #FFFFCC;
+}
+
+#back
+{
+	padding-top: 10px;
+}
+
+#backA
+{
+	text-decoration:none;
+}
+
+.ticket {
+    /*clear: both;
+    margin-top: 25px;*/
+  }
+
+  .one, .two, .three, .four {
+    /*float: left;*/
+    margin-bottom: 25px !important;
+    /*width: 25%;*/
+  }
+  .one .ticket, .two .ticket, .three .ticket, .four .ticket
+  {
+    float: left;
+  }
+  .clear
+  {
+    clear: both;
+  }
+
+  #five {
+    clear: both;
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  .fieldset {
+    margin: 25px auto;
+  }
+
+  #from h2 {
+    color: #383838;
+  }
+
+  #mess > div {
+    clear: both;
+  }
+
+  #mess #from h2 {
+    float: left;
+  }
+
+  #mess #from > span {
+    line-height: 27px;
+    margin-left: 10px;
+  }
+  #attachment{
+   background-color:#d8ebc4;
+   margin-top:5px;
+   padding:6px;
+   border-radius:10px;
+ }
+ .guest-ticket-section-wrap, .guest-ticket-section-wrap ul {
+  padding-left: 0;
+  width: 100% !important;
+}
+.guest-ticket-section-wrap .first-li li {
+  line-height: 30px;
+  margin-bottom: 20px !important;
+  overflow: hidden;
+  position: relative;
+}
+.guest-ticket-section-wrap, .guest-ticket-section-wrap ul > li {
+  overflow: hidden;
+  width: 100%;
+}
+.guest-ticket-section-wrap, .guest-ticket-section-wrap ul #mess {
+  float: right;
+  margin-bottom: 20px;
+  width: 80%;
+}
+.guest-ticket-section-wrap, .guest-ticket-section-wrap ul #mess2 {
+  float: left;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+@media only screen and (max-width: 767px)
+{
+  .ced-ui-draggable-wrap {
+    width: 90%;
+  }
+}

@@ -1,0 +1,116 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<div class="affiliate-withdrawl-wrap">
+    <div class="block">
+        <div class="block-title">
+            <strong><?php echo "Affiliate Detail" ?></strong>
+        </div>
+    </div>
+    <div class="ced-aff-withdrawl-wrap">
+        <div class="field-affiliate-name ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+                <span><?php echo __('Affiliate Name') ?></span>
+            </label>
+            <div class="field-control control">
+                <div id="field-affiliate-name" class="control-value field-value">
+                    <div id="product_detail"><?php echo $this->_customerSession->getCustomer()->getFirstname() ?></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="field-affiliate-email ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+                <span><?php echo __('Affiliate Email') ?></span>
+            </label>
+            <div class="field-control control">
+                <div id="field-affiliate-name" class="control-value field-value">
+                    <div id="product_detail"><?php echo $block->getTransactionSummary()->getCustomerEmail() ?></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+                <span><?php echo __('Requested Amount') ?></span>
+            </label>
+            <div class="field-control control">
+                <div id="field-affiliate-name" class="control-value field-value">
+                    <div id="product_detail"><?php echo $block->getFormattedPrice($block->getTransactionSummary()->getRequestAmount()) ?></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+                <span><?php echo __('Service Tax') ?></span>
+            </label>
+            <div class="field-control control">
+                <div id="field-affiliate-name" class="control-value field-value">
+                    <div id="product_detail"><?php echo $block->getFormattedPrice($block->getTransactionSummary()->getServiceTax()) ?></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+                <span><?php echo __('Payment Mode') ?></span>
+            </label>
+            <div class="field-control control">
+                <div id="field-affiliate-name" class="control-value field-value">
+                    <div id="product_detail"><?php echo ucfirst($block->getTransactionSummary()->getPaymentMode()) ?></div>
+                </div>
+            </div>
+        </div>
+
+        <!--   <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Payable Amount') ?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php //echo $block->getTransactionSummary()->getPayableAmount()?></div>
+        	     </div>                            
+             </div>
+         </div>-->
+
+        <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+                <span><?php echo __('Amount Paid') ?></span>
+            </label>
+            <div class="field-control control">
+                <div id="field-affiliate-name" class="control-value field-value">
+                    <div id="product_detail"><?php echo $block->getFormattedPrice($block->getTransactionSummary()->getAmountPaid()) ?></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+                <span><?php echo __('Status') ?></span>
+            </label>
+            <div class="field-control control">
+                <div id="field-affiliate-name" class="control-value field-value">
+                    <div id="product_detail"><?php echo $block->getTransactionSummary()->getStatus() ?></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

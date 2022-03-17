@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- /**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ced_HelpDesk::helpdesk" title="Support System" module="Ced_HelpDesk" sortOrder="20" resource="Ced_HelpDesk::helpdesk" dependsOnConfig="helpdesk/general/enable"/>
+        <add id="Ced_HelpDesk::helpdesk_menu" title="Manage Support System" module="Ced_HelpDesk" sortOrder="20" parent="Ced_HelpDesk::helpdesk" resource="Ced_HelpDesk::helpdesk_menu" />
+        <add id="Ced_HelpDesk::tickets_info" title="Tickets Information" module="Ced_HelpDesk" sortOrder="30" parent="Ced_HelpDesk::helpdesk_menu" action="helpdesk/tickets/ticketsinfo"  resource="Ced_HelpDesk::tickets_info"/>
+        <add id="Ced_HelpDesk::manage_agents" title="Agents" module="Ced_HelpDesk" sortOrder="40" parent="Ced_HelpDesk::helpdesk_menu" action="helpdesk/agents/agentsinfo"  resource="Ced_HelpDesk::manage_agents"/>
+        <add id="Ced_HelpDesk::manage_dept" title="Manage Department" module="Ced_HelpDesk" sortOrder="50" parent="Ced_HelpDesk::helpdesk_menu" action="helpdesk/dept/deptinfo"  resource="Ced_HelpDesk::manage_dept"/>
+        <add id="Ced_HelpDesk::priority" title="Priority" module="Ced_HelpDesk" sortOrder="60" parent="Ced_HelpDesk::helpdesk_menu" action="helpdesk/priority/priorityinfo"  resource="Ced_HelpDesk::priority"/>
+        <add id="Ced_HelpDesk::status" title="Status" module="Ced_HelpDesk" sortOrder="70" parent="Ced_HelpDesk::helpdesk_menu" action="helpdesk/status/statusinfo"  resource="Ced_HelpDesk::status"/>
+
+        <add id="Ced_HelpDesk::setting" title="Custom Settings" module="Ced_HelpDesk" sortOrder="80" parent="Ced_HelpDesk::helpdesk" resource="Ced_HelpDesk::setting"/>
+
+        <add id="Ced_HelpDesk::configuration" title="Configuration" module="Ced_HelpDesk" sortOrder="90" parent="Ced_HelpDesk::setting" action="adminhtml/system_config/edit/section/helpdesk"  resource="Ced_HelpDesk::configuration"/>
+    </menu> 
+</config>

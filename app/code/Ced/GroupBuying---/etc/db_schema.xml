@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+
+ CedCommerce
+
+ NOTICE OF LICENSE
+
+ This source file is subject to the End User License Agreement (EULA)
+ that is bundled with this package in the file LICENSE.txt.
+ It is also available through the world-wide-web at this URL:
+ https://cedcommerce.com/license-agreement.txt
+
+ @author    CedCommerce Core Team <connect@cedcommerce.com>
+ @copyright Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ @license   https://cedcommerce.com/license-agreement.txt
+
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="group_main_table" resource="default" engine="innodb" comment="group_main_table">
+        <column xsi:type="int" name="group_id" padding="11" unsigned="false" nullable="false" identity="true" comment="group_id"/>
+        <column xsi:type="int" name="owner_customer_id" padding="10" unsigned="true" nullable="false" comment="owner_customer_id"/>
+        <column xsi:type="int" name="show_contribution_to_guest" padding="11" unsigned="false" nullable="true" identity="false" comment="show_contribution_to_guest"/>
+        <column xsi:type="int" name="original_product_id" padding="10" unsigned="true" nullable="false" comment="original_product_id"/>
+        <column xsi:type="int" name="price" padding="11" unsigned="false" nullable="true" identity="false" comment="price"/>
+        <column xsi:type="varchar" name="receiver_name" nullable="true" length="255" comment="receiver_name"/>
+        <column xsi:type="varchar" name="gift_receiver_email" nullable="true" length="255" comment="gift_receiver_email"/>
+        <column xsi:type="varchar" name="gift_msg" nullable="true" length="255" comment="gift_msg"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="int" name="status" padding="11" unsigned="false" nullable="true" identity="false" comment="status" default="0"/>
+        <column xsi:type="int" name="group_size" padding="11" unsigned="true" nullable="true" identity="false" comment="Group Size"/>
+        <column xsi:type="date" name="start_date" comment="Group Buy Start Date"/>
+        <column xsi:type="date" name="end_date" comment="Group Buy End Date"/>
+        <column xsi:type="boolean" name="is_approve" nullable="false" comment="Is approved"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="group_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GRP_CAT_ID"
+                    table="group_main_table" column="original_product_id" referenceTable="catalog_product_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="GRP_CUS_ID"
+                    table="group_main_table" column="owner_customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="guest_information" resource="default" engine="innodb" comment="guest_information">
+        <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="id"/>
+        <column xsi:type="int" name="groupgift_id" padding="11" unsigned="false" nullable="true" identity="false" comment="groupgift_id"/>
+        <column xsi:type="varchar" name="guest_name" nullable="true" length="255" comment="Customer Name"/>
+        <column xsi:type="varchar" name="guest_email" nullable="true" length="255" comment="guest_email"/>
+        <column xsi:type="int" name="request_approval" padding="11" unsigned="false" nullable="true" identity="false" default="0" comment="request_approval"/>
+        <column xsi:type="int" name="quantity" padding="11" unsigned="false" nullable="true" identity="false" comment="quantity"/>
+        <column xsi:type="int" name="pay_status" padding="11" unsigned="false" nullable="true" identity="false" comment="pay_status"/>
+        <column xsi:type="int" name="customer_id" nullable="false" comment="Customer ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GRP_PRD"
+                    table="guest_information" column="groupgift_id" referenceTable="group_main_table"
+                    referenceColumn="group_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="group_log" resource="default" engine="innodb" comment="Group buying Group Logs">
+        <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="int" name="group_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Group ID"/>
+        <column xsi:type="varchar" name="member_name" nullable="true" length="255" comment="Group Memeber Name"/>
+        <column xsi:type="timestamp" name="joined_on" on_update="false" default="CURRENT_TIMESTAMP" comment="Joining Date"/>
+        <column xsi:type="varchar" name="log" nullable="true" length="255" comment="Group Log"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GRP_PRD"
+                    table="guest_information" column="group_id" referenceTable="group_main_table"
+                    referenceColumn="group_id" onDelete="CASCADE"/>
+    </table>
+</schema>

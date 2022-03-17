@@ -1,0 +1,232 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsAdvTransaction
+ * @author     CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+echo $this->getFormHtml();
+
+$currencyCode = $this->_storeManager->getStore(null)->getBaseCurrencyCode();
+$vendorId = $this->getRequest()->getParam('vendor_id', 0);
+
+$postData = $this->getRequest()->getPostValue();
+$eligibleOrders = unserialize($postData['eligible_orders']);
+
+$description = [];
+$feesarray = [];
+$i = 0;
+$PaytoVendor = 0;
+foreach ($eligibleOrders as $orders) {
+    $orIds = [];
+    $orIds[] = $orders['order_id'];
+    $description[$i]['order_id'] = $orders['order_id'];
+    $description[$i]['order_total'] = $orders['order_total'];
+    $description[$i]['commission_fee'] = $orders['shop_commission_fee'];
+
+    $orderFees = $this->orderfeeFactory->create()->getCollection()
+        ->addFieldToFilter('order_id', $orders['order_id'])
+        ->addFieldToFilter('status', 0)
+        ->addFieldToFilter('vendor_id', $vendorId);
+
+    foreach ($orderFees as $Ofees) {
+        $description[$i][$Ofees['fee_id']] = $Ofees['amount'];
+    }
+    if ($orders['payment_state'] == 1) {
+        if ($this->helper('Ced\CsAdvTransaction\Helper\Data')->getOrderPaymentType($orders['order_id']) == "PostPaid") {
+
+            $postPaiddetails = $this->helper('Ced\CsAdvTransaction\Helper\Data')->getPostPaidAmount($orders);
+            $postPaidtoVendor = $postPaiddetails['post_paid'];
+            $vendorEarn = $orders['vendor_earn'];
+            $payShip = $this->_scopeConfig->getValue('ced_csmarketplace/vadvtransaction/pay_shipping');
+            $shipamount = 0;
+            if ($payShip) {
+                $shipamount = $postPaiddetails['ship_amount'];
+                if ($postPaiddetails['ship_type'] == 'admin') {
+                    $shipamount = 0;
+                }
+                $vendorPay = $vendorEarn - $postPaidtoVendor + $shipamount;
+            } else {
+
+                $shipamount = $postPaiddetails['ship_amount'];
+                $vendorPay = $vendorEarn - $postPaidtoVendor;
+            }
+        } else {
+
+            $PaidtoVendor = 0;
+
+            $vendorEarn = $orders['vendor_earn'];
+            $payShip = $this->_scopeConfig->getValue('ced_csmarketplace/vadvtransaction/pay_shipping');
+            $vendorPay = $vendorEarn - $PaidtoVendor;
+            if ($payShip) {
+                $shipping = $this->helper('Ced\CsAdvTransaction\Helper\Data')->getPostPaidAmount($orders);
+                $ship = $shipping['ship_amount'];
+                if ($shipping['ship_type'] == 'admin') {
+                    $ship = 0;
+                }
+                $vendorPay = $vendorPay + $ship;
+            }
+
+
+        }
+
+
+    } elseif ($orders['payment_state'] == 3) {
+        $postPaidtoVendor = 0;
+        $vendorEarn = $orders['vendor_earn'];
+        $vendorPay = $vendorEarn - $postPaidtoVendor;
+
+    }
+    if ($orders['payment_state'] == 4) {
+
+
+        $PaidtoVendor = 0;
+
+        $vendorEarn = $orders['vendor_earn'];
+        $vendorPay = $vendorEarn - $PaidtoVendor;
+
+
+    }
+
+    $serviceTax = $this->helper('Ced\CsAdvTransaction\Helper\Data')->getServiceTax($orIds, $vendorId);
+    $PaytoVendor = $PaytoVendor - $serviceTax;
+    $PaytoVendor = $PaytoVendor + $vendorPay;
+    $ids = [];
+    $ids[] = $orders['order_id'];
+    $serPerOrder = $this->helper('Ced\CsAdvTransaction\Helper\Data')->getServiceTax($ids, $vendorId);
+    $description[$i]['vendor_payment'] = $vendorPay - $serPerOrder;
+
+    $i++;
+}
+
+$keys = [];
+foreach ($description as $k => $v) {
+    foreach ($v as $k1 => $v1) {
+        $keys[] = $k1;
+    }
+}
+$keys = array_unique($keys);
+$fees = $this->feeFactory->create()->getCollection()->addFieldToFilter('field_code', ['in' => $keys])->addFieldToFilter('status', 1);
+?>
+<b> <label class="desc" style="float:left"><?php echo __('Order Description') ?></label></b>
+<table>
+    <tr>
+        <th><?php echo __('OrderId'); ?></th>
+        <th><?php echo __('Grand Total'); ?></th>
+        <th><?php echo __('Commission Fee'); ?></th>
+        <th><?php echo __('Payment Mode'); ?></th>
+        <?php $feeOrders = [];
+        foreach ($fees as $fee) {
+            $feeOrders[] = $fee->getFieldCode();
+            ?>
+
+
+            <?php
+
+        } ?>
+
+        <th><?php echo __('Total Payment'); ?></th>
+    <tr>
+
+        <?php
+
+        foreach ($description
+
+        as $des)
+        {
+        $j = 0;
+
+
+        ?>
+    <tr>
+        <td><a title="Show Calculation Detail" target="_blank"
+               href="<?php echo $this->getUrl('csadvtransaction/pay/view', ['order_id' => $des['order_id'], 'vendor_id' => $vendorId]); ?>"><?php echo $des['order_id']; ?></a>
+        </td><?php
+        ?>
+        <td><?php echo $this->priceCurrency->format($des['order_total'], false, 2, null, $currencyCode); ?></td><?php
+        ?>
+        <td><?php echo $this->priceCurrency->format($des['commission_fee'], false, 2, null, $currencyCode); ?></td><?php
+        ?>
+        <td><?php echo $this->helper('Ced\CsAdvTransaction\Helper\Data')->getOrderPaymentType($des['order_id']); ?></td><?php
+        for ($k = 0; $k < count($feeOrders); $k++) {
+
+            ?><?php
+            $j++;
+        }
+
+
+        ?>
+        <td><?php echo $this->priceCurrency->format($des['vendor_payment'], false, 2, null, $currencyCode);
+            $j++; ?></td>
+    </tr><?php
+
+    }
+
+    ?>
+
+
+</table>
+<div class="totalPay">
+    <span><b><?php echo __('Total Amount Pay :') ?></b></span><span><?php echo $this->priceCurrency->format($PaytoVendor, false, 2, null, $currencyCode); ?></span>
+</div>
+<div class="totalPay">
+    <span><b><?php echo __('Total Service Tax :') ?></b></span><span><?php echo $this->priceCurrency->format($serviceTax, false, 2, null, $currencyCode); ?></span>
+</div>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        margin-left: 178px;
+        width: 53%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .totalPay {
+        margin-left: 176px;
+        margin-top: 14px;
+    }
+</style>
+<script type="text/javascript">
+
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+
+        var dataForm = $('#edit_form');
+
+        dataForm.mage('validation', {}).find('input:text').attr('autocomplete', 'off');
+
+        var form = document.getElementById("edit_form");
+
+        document.getElementById("save").addEventListener("click", function () {
+            var ret = $('#edit_form').valid();
+            if (ret == true) {
+
+                form.submit();
+            }
+        });
+    });
+
+</script>

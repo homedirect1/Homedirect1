@@ -1,0 +1,31 @@
+.limiter, .pages{
+    display: inline-block;
+}
+.webkul th {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #514943;
+    border-color: #8a837f #8a837f #8a837f transparent;
+    border-image: none;
+    border-style: solid;
+    border-width: 0.1rem;
+    color: #fff;
+    font-weight: 600;
+    padding: 7px;
+    padding-left: 1em;
+    text-align: left;
+    vertical-align:middle;
+}
+.admin__table-secondary th{
+    color: #676056;
+    font-weight: 400;
+}.admin__table-secondary tbody tr:nth-child(odd) th, .admin__table-secondary tbody tr:nth-child(odd) td{
+    background-color: #f1f1f1;
+}.wk-mp-btn{
+    float: right;
+    margin : 5px;
+}.wk-mp-fieldset .limiter {
+    float: right;
+}

@@ -1,0 +1,146 @@
+<!-- /**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Recurring
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */ -->
+<html>
+    <div class="field pricelist required">
+		<div class="control">
+            
+		</div>
+		<div class="wk_mp_option-box">
+		<table class="data-grid" id="price_table">
+			<thead>
+				<tr class="wk_mp_headcus ul_first headings">					
+					<th class="data-grid-th"><span>Term Title</span></th>
+					<th class="data-grid-th"><span>Repeat Each</span></th>
+					<th class="data-grid-th"><span>Payment Before days</span></th>
+					<th class="data-grid-th"><span>Price Per Terms</span></th>
+					<th class="data-grid-th"><span>Number Of Terms</span></th>
+					<th class="data-grid-th"><span>Sort order</span></th>
+					<th class="data-grid-th"><span>
+						<button data-bind="click: inserRow" class="button addprice" title="Add" type="button">
+							<span>
+								<span>Add</span>
+							</span>
+						</button>
+					</span></th>
+				</tr>
+			</thead>
+			<tbody class="wk_mp_headcus wk-mp-pricebody" data-bind = "foreach : allPriceList">
+					<tr class="wk-pricebody">
+						<td>
+							<div class="control">
+								<input class="input-text " data-bind="
+								value : id,
+								attr: {
+									name : 'terms[' + id + '][id]'
+								}
+								" type="hidden" >
+								<input class="input-text admin__control-text required-entry " data-bind="
+								value : title,
+								attr: {
+									name : 'terms[' + id + '][title]'
+								}
+								" type="text" >
+							</div>
+						</td>
+						<td>
+							<div class="control repeat-each">
+                                <input data-bind="
+								value : repeat,
+								attr: {
+									name : 'terms[' + id + '][repeat]'
+								}
+								"  
+								class="input-text admin__control-text required-entry repeat-txt" type="text" >
+                                <select data-bind="
+								value : time_span,
+								attr: {
+									name : 'terms[' + id + '][time_span]'
+								}
+								"  class="repeat-slt input-text required-entry" 
+                                            type="text" >
+                                    <option value="1" >Weekly</option>
+                                    <option value="2" >Monthly</option>
+                                    <option value="3" >Yearly</option>
+                                </select>
+							</div>
+						</td>
+						<td>
+							<div class="control">
+                                <select data-bind="
+								value : payment_before_days,
+								attr: {
+									name : 'terms[' + id + '][payment_before_days]'
+								}
+								"  class="input-text admin__control-text required-entry" 
+                                            type="text" 
+                                            >
+                                    <option value="1" >1</option>
+                                    <option value="2" >2</option>
+                                    <option value="3" >3</option>
+                                    <option value="4" >4</option>
+                                    <option value="5" >5</option>
+                                </select>
+							</div>
+						</td>
+						<td>
+							<div class="control repeat-each">
+                                <input data-bind="
+								value : price_per_term,
+								attr: {
+									name : 'terms[' + id + '][price_per_term]'
+								}
+								" class="input-text required-entry validate-number validate-zero-or-greater repeat-txt" type="text" >
+								<select data-bind="
+								value : price_type,
+								attr: {
+									name : 'terms[' + id + '][price_type]'
+								}
+								" class="repeat-txt input-text required-entry">
+									<option value="0">Fixed
+									</option>
+									<option value="1">Percent
+									</option>
+								</select>
+							</div>
+						</td>
+						<td>
+							<div class="control">
+								<input class="input-text required-entry " data-bind="
+								value : no_of_terms,
+								attr: {
+									name : 'terms[' + id + '][no_of_terms]'
+								}
+								" type="text" >
+								<span>set 0 for infinity</span>
+							</div>
+						</td>
+						<td>
+							<div class="control">
+								<input class="input-text required-entry " data-bind="
+								value : sort_order,
+								attr: {
+									name : 'terms[' + id + '][sort_order]'
+								}
+								" type="text" >
+							</div>
+						</td>
+						<td>
+							<button  class="button delete" title="Delete" type="button">
+								<span>
+									<span>Delete</span>
+								</span>
+							</button>
+						</td>		
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</html>

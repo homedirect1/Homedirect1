@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <section id="ced_csmarketplace" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+        	 <group id="csreport" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Vendor Advance Report</label>
+				<field id="activation" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Vendor Advance Report </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Vendor Advance Report</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>    

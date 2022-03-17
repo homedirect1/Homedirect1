@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_ReferralSystem
+ * @author   CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+
+$referred_list = $block->getCollection();
+$view_model = $block->getData('view_model');
+
+?>
+<div class="table-wrapper-1">
+    <legend class="legend">
+        <span><?= /* @noEscape */ __('Transaction Summary'); ?></span>
+    </legend>
+
+    <?php if (isset($referred_list) && $referred_list->count() > 0) : ?>
+        <div class="table_responsive">
+            <div class="table_responsive_inner">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><?= /* @noEscape */ __('Description'); ?></th>
+                            <th><?= /* @noEscape */ __('Amount'); ?></th>
+                            <th><?= /* @noEscape */ __('Transaction Type'); ?></th>
+                            <th class="content-right"><?= /* @noEscape */ __('Date'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($referred_list as $value) : ?>
+                            <tr>
+                                <td><?= /* @noEscape */ $value["description"]  ?></td>
+                                <td><?= /* @noEscape */ $view_model->CurrencyFormatter($value["earned_amount"]); ?></td>
+                                <td>
+                                    <?php if ($value["transaction_type"] == 1) : ?>
+                                        <?= /* @noEscape */ __("CREDIT"); ?>
+                                    <?php else : ?>
+                                        <?= /* @noEscape */ __("DEBIT"); ?>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="content-right"><?= /* @noEscape */ $block->getViewModel()->getDateTime($value["creation_date"]); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <?php if ($block->getPagerHtml()) : ?>
+            <div class="toolbar toolbar-list"><?= /* @noEscape */ $block->getPagerHtml(); ?></div>
+        <?php endif; ?>
+    <?php else : ?>
+        <div class="col-md-12">
+            <label> <?= /* @noEscape */ __('To view transaction details you need to invite some friends first.'); ?></label>
+        </div>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,28 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Recurring
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+/** @var \Magento\Catalog\Block\Adminhtml\Category\AssignProducts $block */
+
+/** @var \Magento\Catalog\Block\Adminhtml\Category\Tab\Product $blockGrid */
+
+$blockGrid = $block->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<style>
+button[title='Submit']{
+    background: #eb5202;
+    border-color:#eb5202;
+    color:#fff;
+}
+</style>
+<?= /* @noEscape */ $block->getGridHtml(); ?>
+
+<input type="hidden" name="products" id="in_adminassign_products" data-form-part="edit_form" value="" />

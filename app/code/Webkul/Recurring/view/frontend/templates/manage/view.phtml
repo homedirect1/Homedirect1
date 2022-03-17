@@ -1,0 +1,141 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_Recurring
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+
+    $model = $block->getSubscriptions();
+?>
+<div class="actions">
+    <?php if ($model->getStatus()): ?>
+    <a
+        class="button primary action wk-mp-btn"
+        title="Back"
+        id ="backButton"
+        onclick="return confirm('<?= $block->escapeHtml(__('Do you want to Unsubscribe?')) ?>')"
+        href="<?= /* @noEscape */ $block->getUnsubscribeUrl() ?>"
+    >
+        <span><span><?= $block->escapeHtml(__("UnSubscribe")) ?></span></span>
+    </a>
+    <?php endif ?>
+    <a
+        class="button primary action wk-mp-btn"
+        title="Back"
+        id ="backButton"
+        href="<?= /* @noEscape */ $block->getBackUrl() ?>"
+    >
+        <span><span><?= $block->escapeHtml(__("Back")) ?></span></span>
+    </a>
+</div>
+<div class="fieldset-wrapper subscriptions-information">
+    <table class="admin__table-secondary">
+        <tbody>
+        <tr>
+            <th><?= $block->escapeHtml(__('Subscription Type :')) ?></th>
+            <td>            
+                    <?= /* @noEscape */ $block->getSubscriptionType() ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Start Date :')) ?></th>
+            <td>         
+                    <?= /* @noEscape */ $block->getStartDate() ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Initial Order Id :')) ?></th>
+            <td>
+                <a href="<?= /* @noEscape */ $block->getOrderUrl() ?>" target='_blank'>
+                    <?= /* @noEscape */ $block->getWKOrderId() ?>
+                </a>
+            </td>
+        </tr>
+        <?php
+            $product  = $block->getProduct();
+            $customer = $block->getCustomer();
+        ?>
+        <tr>
+            <th><?= $block->escapeHtml(__('Product Name :')) ?></th>
+            <td> 
+                <?php if ($product->getName()) {?>
+                <a href="<?= /* @noEscape */ $product->getProductUrl() ?>" target='_blank'>
+                    <?= /* @noEscape */ ($product->getName()) ? $product->getName() : $model->getProductName() ?>
+                </a>
+                <?php } else {
+                    /* @noEscape */ echo $model->getProductName();
+                } ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Customer Name :')) ?></th>
+            <td> 
+                    <?= /* @noEscape */ $model->getCustomerName();?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Created At :')) ?></th>
+            <td>         
+                <?= /* @noEscape */ $block->getCreateDate() ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Status :')) ?></th>
+            <td>         
+                <?= /* @noEscape */ $block->getStatus($model->getStatus()) ?>
+            </td>
+        </tr>
+        <?php if ($model->getRefProfileId()): ?>
+        <tr>
+            <th><?= $block->escapeHtml(__('Reference Profile Id :')) ?></th>
+            <td>         
+                <?= /* @noEscape */ $model->getRefProfileId() ?>
+            </td>
+        </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+<fieldset class="fieldset webkul info wk-mp-fieldset">
+    <div class="grid">
+        <?php if ($block->getGridChildCollection()->getSize() > 2) { ?>
+            <table cellspacing="0" class="border wk-mp-list-table wk-mp-list-container-table">
+                    <thead>
+                        <tr class="wk-content">
+                            <th><span><?= $block->escapeHtml(__('ID')) ?></span></th>
+                            <th><span><?= $block->escapeHtml(__('Order Id')) ?></span></th>
+                            <th><span><?= $block->escapeHtml(__('Created At')) ?></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($block->getGridChildCollection() as $model) {
+                            ?>
+                            <tr class="wk-row-view">
+                                <td class="wk-check-first-td">
+                                    <?= /* @noEscape */ $model->getId(); ?>
+                                </td>
+                                <td class="wk-check-first-td">
+                                    <?= /* @noEscape */ $block->getOrderId($model->getOrderId()); ?>
+                                </td>
+                                <td class="wk-check-first-td">
+                                    <?= /* @noEscape */ $model->getCreatedAt(); ?>
+                                </td>
+                            </tr>
+                        <?php }  ?>
+                    </tbody>
+            </table>
+            <?= /* @noEscape */ $block->getPagerHtml(); ?>
+        <?php }  ?>
+    </div>
+</fieldset>
+<script type="text/x-magento-init">
+{
+    "*" : {
+            "Webkul_Recurring/js/manage": ""
+    }
+}
+</script>

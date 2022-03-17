@@ -1,0 +1,109 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_StorePickup
+ * @author      CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+
+?>
+<?php /** @var $block \Magento\Shipping\Block\Adminhtml\View */ ?>
+<?php $order = $block->getOrder();
+
+$helper = $this->helper('Ced\StorePickup\Helper\Data');
+$pickupDetail = $this->helper('Ced\StorePickup\Helper\Data')->getStoreDetail($order->getData('store_pickup_id'));
+$pickupData = $helper->getStorePickupData($order);
+
+?>
+<?php if ($order->getIsVirtual()) : return '';endif; ?>
+
+<?php /* Shipping Method */ ?>
+<div class="admin__page-section-item order-shipping-method">
+    <div class="admin__page-section-item-title">
+        <span class="title"><?php /* @escapeNotVerified */
+            echo __('Shipping &amp; Handling Information') ?></span>
+    </div>
+    <div class="admin__page-section-item-content">
+        <?php if ($order->getTracksCollection()->count()) : ?>
+            <p><a href="#" id="linkId" onclick="popWin('<?php /* @escapeNotVerified */
+                echo $this->helper('Magento\Shipping\Helper\Data')->getTrackingPopupUrlBySalesModel($order) ?>','trackorder','width=800,height=600,resizable=yes,scrollbars=yes')"
+                  title="<?php /* @escapeNotVerified */
+                  echo __('Track Order') ?>"><?php /* @escapeNotVerified */
+                    echo __('Track Order') ?></a></p>
+        <?php endif; ?>
+        <?php if ($order->getShippingDescription()): ?>
+            <strong><?php echo $block->escapeHtml($order->getShippingDescription()) ?></strong>
+            <?php if ($this->helper('Magento\Tax\Helper\Data')->displayShippingPriceIncludingTax()): ?>
+                <?php $_excl = $block->displayShippingPriceInclTax($order); ?>
+            <?php else: ?>
+                <?php $_excl = $block->displayPriceAttribute('shipping_amount', false, ' '); ?>
+            <?php endif; ?>
+            <?php $_incl = $block->displayShippingPriceInclTax($order); ?>
+
+            <?php /* @escapeNotVerified */
+            echo $_excl; ?>
+            <?php if ($this->helper('Magento\Tax\Helper\Data')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                (<?php /* @escapeNotVerified */
+                echo __('Incl. Tax'); ?><?php /* @escapeNotVerified */
+                echo $_incl; ?>)
+            <?php endif; ?>
+            <?php if ($order->getData('store_pickup_data')): ?>
+            <?php foreach ($pickupData as $pickupDetail) {
+                    $deliveryDate = $pickupDetail['pickup_date'];
+                    $day = date('l', strtotime($deliveryDate));
+                    $storeTiming = $helper->getStoreTimings($order->getData('pickup_id'), $day);
+                    $store = $helper->getPickupStore($pickupDetail); ?>
+                <p>
+                    <span><b><?php __('Store Name'); ?></b></span>
+                    <span><?= $store->getStoreName(); ?></span>
+                </p>
+                <p>
+                    <span><b><?= __('Store Manager Name'); ?></b></span>
+                    <span><?= $store->getStoreManagerName(); ?></span>
+                </p>
+                <p>
+                    <span><b><?= __('Store Address'); ?></b></span>
+                    <span><?= $store->getStoreAddress(); ?></span>
+                </p>
+                <p>
+                    <span><b><?= __('Store City'); ?></b></span>
+                    <span><?= $store->getStoreCity(); ?></span>
+                </p>
+                <p>
+                    <span><b><?= __('Store Country'); ?></b></span>
+                    <span><?= $this->helper('Ced\StorePickup\Helper\Data')
+                            ->getCountryName($store->getStoreCountry()); ?></span>
+                </p>
+                <p>
+                    <span><b><?= __('Store Zip Code'); ?></b></span>
+                    <span><?= $store->getStoreZcode(); ?></span>
+                </p>
+                <p>
+                    <span><b><?= __('Store Contact Number'); ?></b></span>
+                    <span><?= $store->getStorePhone(); ?></span>
+                </p>
+
+                <br>
+                <p>
+                    <span><b><?= __('Store Pickup Date'); ?></b></span>
+                    <span><?= $deliveryDate; ?></span>
+                </p>
+            <?php
+                } ?>
+            <?php endif; ?>
+        <?php else: ?>
+            <?php /* @escapeNotVerified */
+            echo __('No shipping information available'); ?>
+        <?php endif; ?>
+    </div>
+</div>

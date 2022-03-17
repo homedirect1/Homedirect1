@@ -1,0 +1,105 @@
+<script type="text/javascript" src="<?php echo $this->getViewFileUrl('knockoutjs/knockout.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::js/jquery-2.1.1.min.js') ?>"></script>
+<!--<script type="text/javascript">
+    //var payment = new Payment('co-payment-form', '<?php // echo $this->getUrl('mobileappbuilder/index/api/placeorder') ?>');
+</script>-->
+<style>
+.webservice-button {
+    background: #f6846a;
+    display: inline-block;
+    padding: 7px 15px;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: normal;
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+    line-height: 19px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    width:100%;
+}
+.webservice-button:hover{
+    background: #f68460;
+}
+.webservice-hidden{
+    display: none;
+}
+.webservice-hidden.show{
+    display: inline-block;
+}
+.error-message-app{
+    background: rgb(233,30,39);
+    color:#fff;
+    padding: 4px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    display: none;
+}
+</style>
+<?php $imgUrl = $this->getViewFileUrl('Knowband_Mobileappbuilder::images/loading.gif');
+
+$sid = filter_input(INPUT_GET, 'SID');
+
+?>
+<div class="error-message-app">
+</div>
+<form action="<?php echo $this->getUrl('mobileappbuilder/index/api/placeorder') ?>" id="paymentmethods"  type="POST">
+<?php if ($sid == '' || $sid == NULL) { ?>
+<p><?php echo __('Session has expired. Please try again after Re-login.'); ?></p>
+<?php } else if (!$methods = $this->getMethods()) { ?>
+<p><?php echo __('Sorry, no quotes are available for this order at this time.') ?></p>
+<?php } else { ?>
+<dl class="sp-methods" style="background-color:#f4f4f4;">
+<?php foreach ($this->getMethods() as $_code => $_title):  ?>
+    <dt>
+    <?php if( sizeof($this->getMethods()) > 1 ): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" title="<?php echo ($_title) ?>" <?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+    <?php else: ?>
+        <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" /></span>
+    <?php endif; ?>
+        <label for="p_method_<?php echo $_code ?>"><?php echo ($_title) ?> <?php echo $this->getMethodLabelAfterHtml($_code) ?></label>
+    </dt>
+    <?php if ($html = $this->getPaymentMethodFormHtml($_code)): ?>
+    <dd>
+        <?php echo $html; ?>
+    </dd>
+    <?php endif; ?>
+<?php endforeach; ?>
+</dl>
+<button type="button" id="placeorder" title="<?php echo __('Place Order') ?>" class="webservice-button btn-checkout" >
+    <span style="width:16px;position:relative;top:4px;right:4px;"><img id="webservice-loader" class="webservice-hidden" src="<?php echo $imgUrl; ?>" border="0" width="16"/></span>
+    <span><span><?php echo __('Place Order') ?></span></span>
+</button>
+</form>
+<script type="text/javascript">
+        jQuery("#placeorder").click(function(){
+            jQuery("#webservice-loader").addClass("show");
+            jQuery(".error-message-app").hide();
+            jQuery.ajax({
+               url:"<?php echo $this->getUrl('mobileappbuilder/index/api') ?>?version=1.4&method=placeOrder",
+               type:"POST",
+               data:jQuery("#paymentmethods").serialize(),
+               dataType:"json",
+               success:function(response){
+                   if(response["status"] === "failure"){
+                       jQuery(".error-message-app").html(response["message"]);
+                       jQuery(".error-message-app").show();
+                   }else{
+                        if (response["redirect_url"] != "") {
+                            location.href = response["redirect_url"];
+                        } else {
+                            location.href = "<?php echo $this->getUrl('mobileappbuilder/index/api') ?>?version=1.4&method=success&SID=<?php echo $sid ?>";
+                        }
+                   }
+                   jQuery("#webservice-loader").removeClass("show");
+               },
+               error: function(response){
+                   jQuery("#webservice-loader").removeClass("show");
+               }
+
+            });
+        });
+</script>
+<?php } ?>

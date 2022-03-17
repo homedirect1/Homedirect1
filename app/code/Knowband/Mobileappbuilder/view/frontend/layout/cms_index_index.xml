@@ -1,0 +1,8 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+<!--   <head>
+       <meta property="al:android:url" content="https://ma2testing.knowband.com/ma233/"  />
+       <meta property="al:android:package" content="com.velsof.magento2genericapp" />
+       <meta property="al:android:app_name" content="Test Fashion Shopping App" />
+       <meta property="al:web:should_fallback" content="true" />
+   </head>-->
+</page>

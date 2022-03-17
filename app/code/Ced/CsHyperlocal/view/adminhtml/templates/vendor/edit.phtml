@@ -1,0 +1,47 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */ 
+?>
+<script>
+    var selectedLocation = false;
+    google.maps.event.addDomListener(window, 'load', initMap);
+    function initMap() {
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            selectedLocation = true;
+            var place = autocomplete.getPlace();
+            document.getElementById('latitude').value = place.geometry.location.lat();
+            document.getElementById('longitude').value = place.geometry.location.lng();
+        });
+
+        jQuery('#location').on('focus', function() {
+            selectedLocation = false;
+        }).on('blur', function() {
+            if (!selectedLocation) {
+                jQuery(this).val('');
+            }
+        });
+    }
+</script>
+<script>
+    require([
+        'jquery',
+    ], function ($) {
+        $('#distance-range-wrapper').appendTo($('#location').parent());
+    });
+</script>

@@ -1,0 +1,194 @@
+"Paypal Express","Paypal Express"
+"View In details","View In details"
+"Subscription Id","Subscription Id"
+"Initial Order Id","Initial Order Id"
+Product,Product
+"Created At","Created At"
+"Start Date","Start Date"
+"Recurring Profile","Recurring Profile"
+"Manage Duration Type","Manage Duration Type"
+"Add New Duration","Add New Duration"
+Save,Save
+"Edit Terms '%'","Edit Terms '%'"
+"New Terms","New Terms"
+"Duration Type Information","Duration Type Information"
+"Duration Title","Duration Title"
+"Duration (days) ","Duration (days) "
+Status,Status
+"Sort Order","Sort Order"
+Enabled,Enabled
+Disabled,Disabled
+"Duration Data","Duration Data"
+"Duration Information","Duration Information"
+Information,Information
+"Manage Subscription Type","Manage Subscription Type"
+"Add New Subscription Type","Add New Subscription Type"
+"Edit Supplier '%'","Edit Supplier '%'"
+"New Supplier","New Supplier"
+"Subscription Type Information","Subscription Type Information"
+"Subscription Type Name","Subscription Type Name"
+"Subscription Type Description","Subscription Type Description"
+"Duration type","Duration type"
+"Supplier Data","Supplier Data"
+Title,Title
+Type,Type
+"Plans Information","Plans Information"
+"Can Customer Define the Start Date","Can Customer Define the Start Date"
+"Initial Fee Allowed","Initial Fee Allowed"
+"Associated to Website","Associated to Website"
+Fixed,Fixed
+Percent,Percent
+"Initial Fee","Initial Fee"
+Id,Id
+"Order Id","Order Id"
+Orders,Orders
+"Subscriptions Info","Subscriptions Info"
+Subscribed,Subscribed
+UnSubscribed,UnSubscribed
+"Rule Name","Rule Name"
+Description,Description
+"Description ..","Description .."
+"All Products","All Products"
+"Specific Products","Specific Products"
+Plans,Plans
+"New Duration Type","New Duration Type"
+"Duration Type","Duration Type"
+"Subscription Type(s) Can't be Deleted.","Subscription Type(s) Can't be Deleted."
+"Subscription Type(s) deleted successfully.","Subscription Type(s) deleted successfully."
+"Duration Type(s) Disabled successfully.","Duration Type(s) Disabled successfully."
+"Duration Type(s) Enabled successfully.","Duration Type(s) Enabled successfully."
+"This Duration already available","This Duration already available"
+"Record Saved Successfully","Record Saved Successfully"
+"New Subscription Type","New Subscription Type"
+"Subscription Type","Subscription Type"
+"Subscription Type(s) Disabled successfully.","Subscription Type(s) Disabled successfully."
+"Subscription Type(s) Enabled successfully.","Subscription Type(s) Enabled successfully."
+"Subscription Type has been Saved successfully!","Subscription Type has been Saved successfully!"
+"Something went wrong!","Something went wrong!"
+"Subscription Details","Subscription Details"
+"All Subscriptions","All Subscriptions"
+"Invalid profile status for cancel action.","Invalid profile status for cancel action."
+"Future Date Subscription(s).","Future Date Subscription(s)."
+"Subscription(s) Unsubscribed successfully.","Subscription(s) Unsubscribed successfully."
+"Cannot create an invoice.","Cannot create an invoice."
+"Cannot create an invoice without products.","Cannot create an invoice without products."
+"My Subscriptions","My Subscriptions"
+"Illegal Access.","Illegal Access."
+"This record no longer exists.","This record no longer exists."
+"This record is Unsubscribed Successfully.","This record is Unsubscribed Successfully."
+"View Subscription","View Subscription"
+New,New
+Subscription,Subscription
+Alipay,Alipay
+No,No
+Yes,Yes
+Global,Global
+Website,Website
+"Initial fee","Initial fee"
+"You can not add other product with subscription product","You can not add other product with subscription product"
+"Start Date is Invalid for the Subscription. Please Add Again","Start Date is Invalid for the Subscription. Please Add Again"
+Edit,Edit
+View,View
+"Create Configuration","Create Configuration"
+"Edit Configuration","Edit Configuration"
+"Terms Information","Terms Information"
+"Subscription Information","Subscription Information"
+"Subscription Type :","Subscription Type :"
+"Start Date :","Start Date :"
+"Initial Order Id :","Initial Order Id :"
+"Product Name :","Product Name :"
+"Customer Name :","Customer Name :"
+"Created At :","Created At :"
+"Status :","Status :"
+"Reference Profile Id :","Reference Profile Id :"
+"Update Subscription","Update Subscription"
+"Please select valid Date.","Please select valid Date."
+"Update Cart","Update Cart"
+Qty,Qty
+"Login To Subscribe","Login To Subscribe"
+ID,ID
+"Reference Profile Id","Reference Profile Id"
+"Product Name","Product Name"
+Action,Action
+UnSubscribe,UnSubscribe
+"You have Placed No Subscriptions","You have Placed No Subscriptions"
+Back,Back
+"Add to Cart","Add to Cart"
+Subscribe,Subscribe
+Order,Order
+"New recurring order generated, please check order id #%order_id.","New recurring order generated, please check order id #%order_id."
+"You will be redirected to the PayPal website when you place an order.","You will be redirected to the PayPal website when you place an order."
+"Place Order","Place Order"
+" Please select below options to proceed "," Please select below options to proceed "
+" Select Card Expiration Details "," Select Card Expiration Details "
+"Save this card for future payment","Save this card for future payment"
+" Pay With New Card"," Pay With New Card"
+" Pay With AliPay "," Pay With AliPay "
+" Please Enter Publishable Key in the configuration to pay from alipay "," Please Enter Publishable Key in the configuration to pay from alipay "
+Continue,Continue
+Close,Close
+"Please enter valid expiry year.","Please enter valid expiry year."
+"Please enter correct expiry date.","Please enter correct expiry date."
+"Please select/add a card.","Please select/add a card."
+"Not able to process card details , please try again","Not able to process card details , please try again"
+Webkul,Webkul
+"Subscription Configuration","Subscription Configuration"
+"General Settings","General Settings"
+Enable,Enable
+"Subscription Price Scope","Subscription Price Scope"
+"Enable Discount on Subscriptions","Enable Discount on Subscriptions"
+"If set as 'Yes', the discount will be applied on the subscription order","If set as 'Yes', the discount will be applied on the subscription order"
+"Allow Multiple Subscriptions in Cart","Allow Multiple Subscriptions in Cart"
+"If set as 'Yes', multiple subscription products can be added to cart at a time, if their 'Start dates' and 'Duration types' are same.","If set as 'Yes', multiple subscription products can be added to cart at a time, if their 'Start dates' and 'Duration types' are same."
+"Allowed payment methods to buy subscription","Allowed payment methods to buy subscription"
+"Webkul Recurring PayPal Express Checkout Payment Method","Webkul Recurring PayPal Express Checkout Payment Method"
+"Enable this Solution","Enable this Solution"
+"Sandbox Mode","Sandbox Mode"
+"Merchant PayPal ID","Merchant PayPal ID"
+"PayPal API User Name","PayPal API User Name"
+"PayPal API Password","PayPal API Password"
+"PayPal API Signature","PayPal API Signature"
+"Payment from Applicable Countries","Payment from Applicable Countries"
+"Payment from Specific Countries","Payment from Specific Countries"
+"Webkul Recurring Stripe Payment Method","Webkul Recurring Stripe Payment Method"
+"API Publishable Key","API Publishable Key"
+"API Secret Key","API Secret Key"
+"Set Name Display on Form","Set Name Display on Form"
+"Minimum Order Total","Minimum Order Total"
+"Maximum Order Total","Maximum Order Total"
+"Add Duration Type","Add Duration Type"
+Disable,Disable
+Delete,Delete
+"Do you want to delete selected images?","Do you want to delete selected images?"
+Duration,Duration
+Created,Created
+Modified,Modified
+"Add Subscription Type","Add Subscription Type"
+Name,Name
+Unsubscribe,Unsubscribe
+"Do you want to Unsubscribe selected Subscription?","Do you want to Unsubscribe selected Subscription?"
+"Customer Name","Customer Name"
+"Custom Fee","Custom Fee"
+"My Subscription","My Subscription"
+"Manage Subscriptions","Manage Subscriptions"
+"Recurring","Recurring"
+"Subscribe Now","Subscribe Now"
+"Inital Fee :","Inital Fee :"
+"Subscriptions Charge :","Subscriptions Charge :"
+"Select Start Date","Select Start Date"
+"Subscriptions Types","Subscriptions Types"
+"Attention","Attention"
+"You have not selected any card.","You have not selected any card."
+"Select Subscription plan","Select Subscription plan"
+"Subscription Title","Subscription Title"
+"Subscription Description","Subscription Description"
+"Subscription Charge","Subscription Charge",
+"Do you want to Unsubscribe?","Do you want to Unsubscribe?"
+"OK","OK"
+"Cancel","Cancel"
+"Enable Output","Enable Output"
+"Store view","Store view"
+"Something went wrong with the payment.","Something went wrong with the payment."
+"Start dates and Duration types of all added subscriptions must be same","Start dates and Duration types of all added subscriptions must be same"
+"You can not add other product with subscription product","You can not add other product with subscription product"
+"You can not add subscription product with other product","You can not add subscription product with other product"

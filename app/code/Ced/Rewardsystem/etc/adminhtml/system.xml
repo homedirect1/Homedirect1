@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<!-- /**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_Rewardsystem
+  * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="reward" translate="label" sortOrder="300">
+			<label>CEDCOMMERCE</label>
+		</tab>
+		<section id="reward" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Customer Reward System</label>
+			<tab>reward</tab>
+			<resource>Ced_Rewardsystem::config_setting</resource>
+	        <group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+				<field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+					<config_path>reward/setting/enable</config_path>
+					<label>Enable Reward System</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+					<field id="point_value" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
+						<config_path>reward/setting/point_value</config_path>
+						<label>Reward Point Rate</label>
+              			<comment>Price of Unit Reward Point in (Base Currency).</comment>
+						<validate>required-entry validate-digits validate-greater-than-zero</validate>
+						<depends>
+                    		<field id="enable">1</field>
+                    	</depends>
+					</field>
+					<field id="registration_point" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="0">
+						<config_path>reward/setting/registration_point</config_path>
+						<label>Registration Reward Points</label>
+						<comment>We will disable this feature if the value is empty.</comment>
+                    	<validate>validate-digits validate-greater-than-zero</validate>
+                    	<depends>
+                    		<field id="enable">1</field>
+                    	</depends>
+					</field>
+					<field id="point_expiration" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="0">
+						<config_path>reward/setting/point_expiration</config_path>
+						<label>Reward Points Expire in (days)</label>
+						<comment>We will disable this feature if the value is empty.</comment>
+						<validate>validate-digits validate-greater-than-zero</validate>
+						<depends>
+                   			<field id="enable">1</field>
+                    	</depends>
+					</field>
+					<field id="refund_on_cancel" translate="label" type="select" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="0">
+						<config_path>reward/setting/refund_on_cancel</config_path>
+						<label>Refund Points on Order Cancel</label>
+						<comment>If set to Yes, points spent on an order will revert on order cancellation.</comment>
+						<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                  		<depends>
+                          <field id="enable">1</field>
+                    	</depends>
+					</field>
+					<field id="support_email" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+						<config_path>reward/setting/support_email</config_path>
+						<label>Email Sender</label>
+						<source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+						<depends>
+                        	<field id="enable">1</field>
+                    	</depends>
+					</field>
+			</group>
+			<group id="purchase" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase</label>
+				<field id="purchase_enable" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Reward Customer on Purchase</label>
+					<comment>The customer gets the points on order completion.</comment>
+					 <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                          <field id="enable">1</field>
+                    </depends>
+				</field>
+				<field id="reward_calculate_by" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Calculate Reward Point(s) for Orders by</label>
+					 <source_model>Ced\Rewardsystem\Block\Config\Source\CartProductOption</source_model>
+					 <depends>
+                          <field id="enable">1</field>
+						  <field id="purchase_enable">1</field>
+                    </depends>
+				</field>
+				<field id="initial_product_point" translate="label" type="select" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Use Default Reward Point(s) for Products</label>
+					<comment>Default point(s) is applicable only when reward point is not specifically set for a product. Edit a product to set its reward points.</comment>
+					<depends>
+                          <field id="enable">1</field>
+						  <field id="purchase_enable">1</field>
+						  <field id="reward_calculate_by">catalog</field>
+                    </depends>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="initial_point_option" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Apply</label>
+					<depends>
+                          <field id="enable">1</field>
+						  <field id="purchase_enable">1</field>
+						  <field id="reward_calculate_by">catalog</field>
+						  <field id="initial_product_point">1</field>
+                    </depends>
+					<source_model>Ced\Rewardsystem\Block\Config\Source\PointOption</source_model>
+				</field>
+				<field id="initial_point_value" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Point(s)</label>
+					<validate>required-entry</validate>
+					<depends>
+                          <field id="enable">1</field>
+						  <field id="purchase_enable">1</field>
+						  <field id="reward_calculate_by">catalog</field>
+						  <field id="initial_product_point">1</field>
+                    </depends>
+				</field>
+				<field id="product_page_active" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Display Reward Point(s) on Product Page</label>
+					 <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					 <depends>
+							<field id="enable">1</field>
+							<field id="purchase_enable">1</field>
+							<field id="reward_calculate_by">catalog</field>
+                    </depends>
+				</field>
+				<field id="reward_label" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Label</label>
+					<validate>required-entry</validate>
+                    <depends>
+					 	<field id="enable">1</field>
+						 <field id="purchase_enable">1</field>
+                        <field id="product_page_active">1</field>
+						<field id="reward_calculate_by">catalog</field>
+                    </depends>
+                </field>
+				<field id="reward_color" translate="label" type="text" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Colour</label>
+                    <depends>
+						 <field id="enable">1</field>
+						 <field id="purchase_enable">1</field>
+                        <field id="product_page_active">1</field>
+						<field id="reward_calculate_by">catalog</field>
+                    </depends>
+					<frontend_model>Ced\Rewardsystem\Block\Colorpicker\Color</frontend_model>
+                </field>
+		    </group>
+			<group id="review" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Review</label>
+				<field id="review_enable" translate="label" type="select" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Reward Customer on Product Review</label>
+					<comment>The customer gets points for review after Administrator approval.</comment>
+					 <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                          <field id="enable">1</field>
+                    </depends>
+				</field>
+				<field id="review_points" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
+					<depends>
+					    <field id="enable">1</field>
+                        <field id="review_enable">1</field>
+                    </depends>
+					<label>Review Reward Point(s)</label>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
+				</field>
+			</group>
+			<group id="referral" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Referral</label>
+				<field id="referral_enable" translate="label" type="select" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Reward Customer on Referral</label>
+					 <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                          <field id="enable">1</field>
+                    </depends>
+				</field>
+				<field id="signup_point" translate="label" type="text" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="0">
+					<config_path>reward/setting/signup_point</config_path>
+					<label>Referral Conversion Reward Point(s)</label>
+					<comment>Referee customer gets the Points on referral registration.</comment>
+					<validate>required-entry validate-digits validate-greater-than-zero</validate>
+ 					<depends>
+                          <field id="enable">1</field>
+						  <field id="referral_enable">1</field>
+                    </depends>
+				</field>
+				<field id="referal_point" translate="label" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="0">
+					<config_path>reward/setting/referal_point</config_path>
+					<label>Referral Registration Reward Point(s)</label>
+					<comment>Referred customer gets the Points on registration. We will disable this feature if the value is empty.</comment>
+					<validate>validate-digits validate-greater-than-zero</validate>
+                    <depends>
+                          <field id="enable">1</field>
+						  <field id="referral_enable">1</field>
+                    </depends>
+				</field>
+                <field id="referal_email_template" translate="label comment" type="select" sortOrder="29"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Invite Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="referral_enable">1</field>
+                    </depends>
+                </field>
+				<field id="first_ref_purchase" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+					<config_path>reward/setting/first_ref_purchase</config_path>
+					<label>Referral First Purchase Reward Point(s)</label>
+					<comment>Referee customer gets the Points on referred customer's first purchase. We will disable this feature if the value is empty.</comment>
+					<validate>validate-digits validate-greater-than-zero</validate>
+					<depends>
+                        <field id="enable">1</field>
+						<field id="referral_enable">1</field>
+                    </depends>
+				</field>
+				<field id="ref_purchase" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="0">
+					<config_path>reward/setting/ref_purchase</config_path>
+					<label>Referral Successive Purchase Reward Point(s)</label>
+					<comment>Referee customer gets the Points on referred customer's following purchases. We will disable this feature if the value is empty.</comment>
+				    <validate>validate-digits validate-greater-than-zero</validate>
+				    <depends>
+                        <field id="enable">1</field>
+						<field id="referral_enable">1</field>
+                    </depends>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

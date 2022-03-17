@@ -1,0 +1,179 @@
+/**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_CsSubAccount
+  * @author      CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */
+
+.ced-subvendor-request .mage-error {
+  margin: 10px 0;
+}
+
+.cssubaccount-vendor-approval .page-title-wrapper {
+  text-align: center;
+}
+
+.cssubaccount-vendor-approval .vendor-login-wrapper button {
+  float: none !important;
+}
+
+.cssubaccount-vendor-approval .buttons-set div > div {
+  float: none !important;
+  text-align: center;
+}
+
+.cssubaccount-vendor-approval .page-wrapper {
+  background-color: #c1bdba !important;
+  width: 100%;
+  margin:0;
+}
+
+.csmarketplace-account-approval .page-wrapper {
+  background-color: #c1bdba !important;
+}
+
+.cssubaccount-customer-create .page-title-wrapper {
+  text-align: center;
+}
+
+
+
+/*add new customer page css 26/05/2017*/
+.cssubaccount-customer-new .ced-sub.input-text.validate-email.required-entry {
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  color: #555;
+  display: block;
+  font-size: 14px;
+  height: 34px;
+  line-height: 1.42857;
+  margin: 0;
+  padding: 6px 12px;
+  width: 96% !important;
+}
+.cssubaccount-customer-new .msg-wrapper input {
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  color: #555;
+  display: block;
+  font-size: 14px;
+  height: 34px;
+  line-height: 1.42857;
+  margin: 0;
+  padding: 6px 12px;
+  width: 96% !important;
+}
+
+.cssubaccount-customer-new .input-box.row.clearfix {
+  position: relative;
+}
+
+.cssubaccount-customer-new .removediv {
+  position: absolute;
+  right: 0;
+  top: 15px;
+}
+
+.cssubaccount-customer-new .email-wrapper div.mage-error {
+  color: #ff0000;
+}
+
+/*end css customer page*/
+/*=====  End of Isssues section  ======*/
+
+/* vendor sub account issues */
+.cssubaccount-customer-new .panel-heading .panel_product_heading,
+.cssubaccount-customer-view .panel_product_heading{
+	font-size: 15px !important;
+	font-weight: bold;
+	margin: 4px 0;
+}
+.cssubaccount-customer-new  .ced-subvendor-request .ced-customer-email{
+  padding-top: 60px;
+}
+.cssubaccount-customer-index #request_customer[title="Send Request"] {
+	float: right;
+	margin: 15px;
+}
+.cssubaccount-customer-view .ced-subvendor-request{
+  padding-bottom: 15px;
+}
+.cssubaccount-customer-view .buttons-set.buttons_scb {
+  padding-top: 5px;
+  text-align: right;
+}
+.cssubaccount-customer-create.page-layout-vendor-empty .page-wrapper ,
+.cssubaccount-vendor-approval .page-wrapper{
+	margin: 0px !important;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+}
+.cssubaccount-customer-create .vendor-login-wrapper .panel-heading {
+	margin-bottom: 10px;
+}
+.cssubaccount-customer-create .vendor-login-wrapper .form-create-account .panel-body input,
+.cssubaccount-customer-create .vendor-login-wrapper .panel-heading h1 {
+	color: #ffffff;
+}
+.cssubaccount-customer-create .vendor-login-wrapper .form-create-account .field.field-name-lastname.required {
+	padding: 0;
+}
+.cssubaccount-customer-create input[type="text"]::placeholder, 
+.cssubaccount-customer-create input[type="password"]::placeholder, 
+.cssubaccount-customer-create input[type="url"]::placeholder, 
+.cssubaccount-customer-create input[type="tel"]::placeholder, 
+.cssubaccount-customer-create input[type="search"]::placeholder, 
+.cssubaccount-customer-create input[type="number"]::placeholder, 
+.cssubaccount-customer-create input[type="datetime"]::placeholder, 
+.cssubaccount-customer-create input[type="email"]::placeholder {
+  color: #fff !important;
+}
+.cssubaccount-customer-profile .addresses-primary .general-wrapper,
+.cssubaccount-customer-profile .addresses-primary  .welcome-msg {
+  clear: both;
+  content: '';
+  overflow: auto;
+}
+.cssubaccount-customer-profile .welcome-msg span.approved_vendor {
+  font-size: 14px;
+}
+.cssubaccount-customer-profile .addresses-primary .profileimage.sub-vendor a.profilepic {
+  display: block;
+  width: 150px;
+  height: 150px;
+}
+.cssubaccount-customer-profile .addresses-primary .profileimage.sub-vendor a.profilepic  img{
+  margin: 0;
+  width: 100%;
+}
+#ced-customer-email .label {
+     width: 47%;
+     display: inline-block;
+ }
+.ced-sub {
+    width: 47% !important;
+    display: inline-block !important;
+    margin-left: 10px;
+}
+ .link {
+    cursor: pointer;
+    margin: 10px;
+    margin-bottom: 13px;
+    display: block;
+}
+.removediv{
+  margin: 10px;
+}

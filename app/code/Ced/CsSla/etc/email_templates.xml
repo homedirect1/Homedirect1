@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+ * CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* You can check the licence at this URL: http://cedcommerce.com/license-agreement.txt
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+*
+* @category    Ced
+* @package     Ced_CsProductfaq
+* @author      CedCommerce Core Team <connect@cedcommerce.com >
+* @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+* @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
+<template id="ced_csmarketplace_vsla_send_disapatch_email_template" label="Disapatch Email Form" file="dispatch.html" type="html" module="Ced_CsSla" area="frontend"/>
+<template id="ced_csmarketplace_vsla_send_cancel_email_template" label="Cancel Email Form" file="cancel.html" type="html" module="Ced_CsSla" area="frontend"/>
+<template id="ced_csmarketplace_vsla_send_confirm_email_template" label="Confirm Email Form" file="confirm.html" type="html" module="Ced_CsSla" area="frontend"/>
+</config>

@@ -1,0 +1,475 @@
+<?php
+$component_type_data = $this->getComponentTypeData();
+?>
+
+<form action="" method="post" enctype="multipart/form-data" id="form_save_banner_square_component"  >
+    <input type="hidden" id="form_key" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <input type="hidden" id="component_name" name="component_name" value="<?php echo $component_type_data['component_name']; ?>" />
+    <fieldset class="admin__fieldset"> 
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="image_type">
+                <span>
+                    <?php echo __("Select Image Type"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='image_type' id="image_type" class='admin__control-select' onchange="showHideImageType(this);">
+                        <option value><?php echo __("Select an option"); ?></option>
+                        <option value='url'><?php echo __("URL"); ?></option>
+                        <option value='image'><?php echo __("Upload"); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field" id="image_url_sec" style="display: none;">
+            <label class="admin__field-label" for="image_url">
+                <span><span class="vss_required">*</span>
+                    <?php echo __("Image Url") ?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <input name="image_url" id="image_url" value="" placeholder="<?php echo __('Enter URL'); ?>" type="url" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;width: 450px;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field" id="image_url_holder" style="display: none;">
+            <label class="admin__field-label">
+                <span> <?php echo __("Image") ?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <img id="sliderimage" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field" id="image_file_sec" style="display: none;">
+            <label class="admin__field-label" for="slideruploadedfile">
+                <span><span class="vss_required">*</span>
+                    <?php echo __("Image Upload") ?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <input name="slideruploadedfile" id="slideruploadedfile" value="" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="image_content_mode">
+                <span>
+                    <?php echo __("Image Content Mode"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='image_content_mode' id="image_content_mode" class='admin__control-select'>
+                        <option value='scaleAspectFill'><?php echo __("Scale aspect fill"); ?></option>
+                        <option value='scaleAspectFit'><?php echo __("Scale aspect Fit"); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="redirect_activity">
+                <span>
+                    <?php echo __("Select Redirect Activity"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='redirect_activity' id="redirect_activity" class='admin__control-select' onchange="showHideRedirectType(this)">
+                        <option value='home'><?php echo __("Home"); ?></option>
+                        <option value='category'><?php echo __("Category"); ?></option>
+                        <option value='product'><?php echo __("Product"); ?></option>
+                        <?php if (isset($component_type_data['component_name']) && $component_type_data['component_name'] == "banner_custom") { ?>
+                        <option value='cms'><?php echo __("CMS"); ?></option>
+                        <option value='login'><?php echo __("Login"); ?></option>
+                        <option value='search'><?php echo __("Search"); ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field" id="category_id_holder" style="display: none;">
+            <label class="admin__field-label" for="category_id">
+                <span>
+                    <?php echo __("Select Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id' id="category_id" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category) { ?>
+                            <option value='<?php echo $category['value']; ?>'><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field" id="product_id_holder" style="display: none;">
+            <label class="admin__field-label" for="category_id">
+                <span>
+                    <?php echo __("Select Product"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='redirect_banner_product_id' id="redirect_banner_product_id" class='admin__control-select'>
+                        <?php foreach ($this->getAllProducts() as $product) { ?>
+                            <option value='<?php echo $product['value']; ?>'><?php echo $product['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        
+        <?php if (isset($component_type_data['component_name']) && $component_type_data['component_name'] == "banner_custom") { ?>
+        
+            <div class="admin__field">
+                <label class="admin__field-label" for="width_of_banner">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Banner Width"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control-addon" style="width: 30%;">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="width_of_banner" id="width_of_banner">   
+                        <label class="admin__addon-suffix">
+                            <span>%</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="admin__field">
+                <label class="admin__field-label" for="height_of_banner">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Banner Height"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control-addon" style="width: 30%;">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="height_of_banner" id="height_of_banner"> 
+                        <label class="admin__addon-suffix">
+                            <span>%</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="admin__field">
+                <label class="admin__field-label" for="margin_top">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Margin Top"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control-addon" style="width: 30%;">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="margin_top" id="margin_top"> 
+                        <label class="admin__addon-suffix">
+                            <span>px</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="admin__field">
+                <label class="admin__field-label" for="margin_bottom">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Margin Bottom"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control-addon" style="width: 30%;">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="margin_bottom" id="margin_bottom">   
+                        <label class="admin__addon-suffix">
+                            <span>px</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="admin__field">
+                <label class="admin__field-label" for="margin_left">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Margin Left"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control-addon" style="width: 30%;">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="margin_left" id="margin_left">   
+                        <label class="admin__addon-suffix">
+                            <span>px</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="admin__field">
+                <label class="admin__field-label" for="margin_right">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Margin Right"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control-addon" style="width: 30%;">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="margin_right" id="margin_right">   
+                        <label class="admin__addon-suffix">
+                            <span>px</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field" id="background_color_holder" >
+                <label class="admin__field-label" for="background_color">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Background Color"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="" class="admin__control-text" type="color" placeholder="" name="background_color" id="background_color" style="width: 36%;height: 40px;">                        
+                    </div>
+                </div>
+            </div>
+        
+        <script>
+            require(['jquery'], function (jQuery) {
+                jQuery(document).ready(function () {
+                 jQuery('#width_of_banner').on('click change', function(e) {
+                        if (jQuery(this).val() && jQuery('#sliderimage').attr('src')) {
+                            var img = new Image();
+                            img.src = jQuery('#sliderimage').attr('src');
+                            var width = img.width;
+                            var height = img.height;
+                            jQuery('#height_of_banner').val(Math.ceil((height*jQuery('#width_of_banner').val())/width));
+                        }
+                    });
+                });
+                });
+        </script>
+        
+        <?php } ?>
+
+        <!-- HTML for banners countdown type component -->
+        <?php if (isset($component_type_data['component_name']) && $component_type_data['component_name'] == "banners_countdown") { ?>
+            <div class="admin__field">
+                <label class="admin__field-label" for="countdown_validity">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Countdown Time Validity"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="countdown_validity" id="countdown_validity" style="width: auto;">                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin__field">
+                <label class="admin__field-label" for="is_enabled_background_color">
+                    <span><?php echo __("Enable Time Background Color") ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="is_enabled_background_color" name="is_enabled_background_color" value="1" >
+                        <label class="admin__actions-switch-label" for="is_enabled_background_color">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin__field" id="timer_background_color_holder" style="display: none;">
+                <label class="admin__field-label" for="timer_background_color">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Time Background Color"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="timer_background_color" id="timer_background_color" style="width: auto;">                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin__field">
+                <label class="admin__field-label" for="timer_text_color">
+                    <span><span class="vss_required">*</span>
+                        <?php echo __("Timer Text Color"); ?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="" class="admin__control-text" type="text" placeholder="" name="timer_text_color" id="timer_text_color" style="width: auto;">                        
+                    </div>
+                </div>
+            </div>
+            <script>
+                require(['jquery','jquery/ui', "mage/calendar", "jquery/colorpicker/js/colorpicker"], function ($) {
+                    $(document).ready(function () {
+                        $("#is_enabled_background_color").trigger("change");
+                        $("#is_enabled_background_color").change(function(){
+                           if($("#is_enabled_background_color").is(":checked")) {
+                               $("#timer_background_color_holder").show();
+                           } else {
+                               $("#timer_background_color_holder").hide();
+                           }
+                        });
+                        $("#countdown_validity").datetimepicker({
+                            dateFormat: "yy-mm-dd",
+                            timeFormat: "H:m:s",
+                            changeMonth: true,
+                            changeYear: true,
+                            numberOfMonths: 1,
+                            showsTime: true,
+                            buttonText: "<?php echo __('Select Date') ?>",
+                        });
+                
+                        var el = $("#timer_background_color");
+                        var value = '#000000';
+                        el.css("backgroundColor", value);
+                        
+                        // Attach the color picker
+                        el.ColorPicker({
+                            color: value,
+                            onChange: function (hsb, hex, rgb) {
+                                el.css("backgroundColor", "#" + hex).val("#" + hex);
+                            }
+                        });
+                        
+                        var el1 = $("#timer_text_color");
+                        var value1 = '#ffffff';
+                        el1.css("backgroundColor", value1);
+                        
+                        // Attach the color picker
+                        el1.ColorPicker({
+                            color: value1,
+                            onChange: function (hsb, hex, rgb) {
+                                el1.css("backgroundColor", "#" + hex).val("#" + hex);
+                            }
+                        });
+                    });
+                });
+            </script>
+            <style>
+                .colorpicker{
+                    z-index: 99999999;
+                }
+            </style>
+        <?php } ?>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="banner_position">
+                <span><span class="vss_required">*</span>
+                    <?php echo __("Sort Order"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <input value="" class="admin__control-text" type="text" placeholder="" name="banner_position" id="banner_position">                        
+                </div>
+            </div>
+        </div>
+        
+        <div id="show_error"></div>
+        
+        <button class="button_submit_form_component btn btn-success" id="banner-save-btn" onclick="return veloValidateBannerSliderForm(this);" style="float: right;" type="button"><span><?php echo __("Save"); ?></span></button>
+    </fieldset>
+</form>
+
+<script type="text/javascript">
+    var default_file_size = 2097152;
+    var select_image_txt = '<?php __("This field cannot be empty"); ?>';
+    var select_image_type_txt = '<?php echo __('Please select image type'); ?>';
+    var image_url_error_txt = '<?php echo __('Please provide image url'); ?>';
+    var select_category_txt = '<?php echo __('Please select category'); ?>';
+    var provide_product_name_txt = '<?php echo __('Please select product'); ?>';
+    var required_entry_txt = '<?php echo __('Field cannot be empty.'); ?>';
+    var integer_value_txt = '<?php echo __('Only Positive integer is allowed.'); ?>';
+    
+    
+    var invalid_file_format = '<?php echo __('Invalid File Format.'); ?>';
+    
+    var invalid_file_size = '<?php echo __('File should be less than 2 Mb.'); ?>';
+    
+    var file_not_uploaded = '<?php echo __('Please Upload the Image.'); ?>';
+    var integer_value_txt = '<?php echo __('Only Positive integer is allowed.'); ?>';
+    var no_image_url = '<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>';
+    var slider_banner_file_error = false;
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            $('#slideruploadedfile-selectbutton').click(function (e) {
+                $('#slideruploadedfile').trigger('click');
+            });
+
+            $('#slideruploadedfile-name').click(function (e) {
+                $('#slideruploadedfile').trigger('click');
+            });
+
+            $('#slideruploadedfile-name').on('dragenter', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+            $('#slideruploadedfile-name').on('dragover', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+            $('#slideruploadedfile-name').on('drop', function (e) {
+                e.preventDefault();
+                var files = e.originalEvent.dataTransfer.files;
+                $('#slideruploadedfile')[0].files = files;
+                $(this).val(files[0].name);
+            });
+
+            $('#slideruploadedfile').change(function (e) {
+                if ($(this)[0].files !== undefined)
+                {
+                    var files = $(this)[0].files;
+                    var name = '';
+
+                    $.each(files, function (index, value) {
+                        name += value.name + ', ';
+                    });
+
+                    $('#slideruploadedfile-name').val(name.slice(0, -2));
+                }
+                else // Internet Explorer 9 Compatibility
+                {
+                    var name = $(this).val().split(/[\\/]/);
+                    $('#slideruploadedfile-name').val(name[name.length - 1]);
+                }
+            });
+
+            if (typeof slideruploadedfile_max_files !== 'undefined')
+            {
+                $('#slideruploadedfile').closest('form').on('submit', function (e) {
+                    if ($('#slideruploadedfile')[0].files.length > slideruploadedfile_max_files) {
+                        e.preventDefault();
+                        alert('You can upload a maximum of files');
+                    }
+                });
+            }
+        });
+    });
+</script>
+<hr>
+<div id="banners_grid">
+    <?php
+    echo $this->getLayout()
+            ->createBlock("Knowband\Mobileappbuilder\Block\Adminhtml\Layout\Grid\BannerSquare")
+            ->toHtml();
+    ?>
+</div>

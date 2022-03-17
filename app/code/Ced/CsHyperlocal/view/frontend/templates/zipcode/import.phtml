@@ -1,0 +1,148 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+$url = $this->getUrl('*/*/importsave');
+$validateUrl = $this->getUrl('*/shiparea/validate');
+
+?>
+
+<form id="cshyperlocal-zipcodeimportform" name="cshyperlocal_zipcodeimportform" method="post" action="<?php echo $url ?>"
+      enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default vendor-profile-edit">
+                <div class="panel-heading col-md-12 uptransform">
+                    <div style="line-height:31px;font-size:17px;" class="col-md-6 col-xs-12  panel_product_heading">
+                            <?php echo __('Import Zipcode'); ?>
+                    </div>
+                    <div style="text-align:right;" class="buttons-set col-md-6  col-xs-12 buttons_scb">
+                        <button class="button btn btn-primary uptransform pull-right" title="Save"
+                                type="submit">
+						<span>
+							<span><?php echo __('Save') ?></span>
+						</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="clear_both"></div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="fieldset">
+                            <input type="hidden" name="location_id" value="<?php echo $this->getRequest()->getParam('location_id'); ?>">
+                            <ul class="form-list">
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                    <span>
+                                        <?php echo __('Import CSV'); ?>*
+                                    </span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input required id="ced-shipping-zipcode-import-field"
+                                               class="validate-no-html-tags required-entry input-text required-entry _required"
+                                               type="file" accept=".csv" name="zipcode_csv"
+                                               value="">
+                                    </div>
+                                </li>
+                                <li class="wide"
+                                    id="empty-csv-error-message"
+                                    style="display: none">
+                                    <label class="label admin__field-label">
+                                        <span></span>
+                                    </label>
+                                    <div class="input-box">
+                                        <div class="message message-error error shiparea-location-error-msg"><?php echo __('Invalid CSV file.');?></div>
+                                    </div>
+                                </li>
+                                <li style="display: none" class="wide" id="csv-success-message">
+                                    <label class="label admin__field-label">
+                                        <span></span>
+                                    </label>
+                                    <div class="input-box">
+                                        <div class="message message-success success shiparea-location-success-msg"><?php echo __('File uploaded successfully.');?></div>
+                                    </div>
+                                </li>
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                    <span>
+                                        <?php echo __('Export CSV'); ?>
+                                    </span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input id="ced-shipping-csvexport-field"
+                                               type="button" name="export_zipcode_csv"
+                                               class="validate-no-html-tags input-text admin__control-text"
+                                               value="<?php echo __('Export CSV'); ?>"
+                                               onclick="location.href = '<?php echo $this->getUrl('*/shiparea/export',array('id'=>$this->getRequest()->getParam('location_id'))); ?>';">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="back-link col-md-6"><a
+                                    href="<?php echo $this->getUrl('*/shiparea/managezipcode',array('id'=>$this->getRequest()->getParam('location_id'))); ?>">
+                                <small>&laquo;</small><?php echo __('Back') ?></a></p>
+                        <p class="required col-md-6"><?php echo __('* Required Fields') ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+
+        $("#ced-shipping-zipcode-import-field").change(function() {
+            $('body').loader('show');
+            var zipcodeForm = new FormData();
+            zipcodeForm.append('file', this.files[0]);
+            $.ajax({
+                url: "<?php echo $validateUrl; ?>",
+                type: "post",
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: zipcodeForm,
+                success: function(text) {
+                    if(text.error) {
+                        $('#empty-csv-error-message').show();
+                        $('#ced-shipping-zipcode-import-field').val('');
+                        $('#csv-success-message').hide();
+                    } else {
+                        $('#empty-csv-error-message').hide();
+                        $('#csv-success-message').show();
+                    }
+                    $('body').loader('hide');
+                },
+                error: function() {
+                    alert("An error occured, please try again.");
+                    $('body').loader('hide');
+                }
+            });
+        });
+    });
+
+</script>
+
+
+

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="vendorpanel" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+ 	<head>
+        <css src="Ced_CsMarketplace::css/ced/csmarketplace/vpanel-admin.css"/>  
+	</head>
+    <body>
+		<referenceBlock name="csmarketplace_vendor_navigation">
+			     <block class="Ced\CsMarketplace\Block\Link\Current" ifconfig="ced_csmarketplace/csreport/activation" name="vendor_reports_addon" after="vendor_reports">
+			       <arguments>
+			       <argument name="name" xsi:type="string">csreport</argument>
+			       <argument name="label" xsi:type="string">Advance Report</argument>
+			       <argument name="font_awesome" xsi:type="string">fa fa-money fa-fw</argument>
+			       </arguments>
+			       <block class="Ced\CsMarketplace\Block\Links" name="vendor_advance_report_container" as="vendor_advance_report_container">
+							<arguments>
+								<argument name="css_class" xsi:type="string">nav nav-second-level collapse</argument>
+							</arguments>
+							<block class="Ced\CsMarketplace\Block\Link\Current" name="out_of_stock_block" ifconfig="ced_csmarketplace/csreport/activation">
+								<arguments>
+									<argument name="name" xsi:type="string">out_of_stock</argument>
+									<argument name="label" xsi:type="string">Out Of Stock Product(s)</argument>
+									<argument name="path" xsi:type="string">csreport/product/outStock</argument>
+									<argument name="font_awesome" xsi:type="string">fa fa-money fa-fw</argument>
+									<argument name="sort_order" xsi:type="string">10</argument>
+								</arguments>
+							</block>
+							<block class="Ced\CsMarketplace\Block\Link\Current" name="sold_product_block" ifconfig="ced_csmarketplace/csreport/activation">
+								<arguments>
+									<argument name="name" xsi:type="string">sold_product</argument>
+									<argument name="label" xsi:type="string">Sold Product(s)</argument>
+									<argument name="path" xsi:type="string">csreport/product/sold</argument>
+									<argument name="font_awesome" xsi:type="string">fa fa-money fa-fw</argument>
+									<argument name="sort_order" xsi:type="string">10</argument>
+								</arguments>
+							</block>
+							<block class="Ced\CsMarketplace\Block\Link\Current" name="product_views_block" ifconfig="ced_csmarketplace/csreport/activation">
+								<arguments>
+									<argument name="name" xsi:type="string">product_views</argument>
+									<argument name="label" xsi:type="string">Product Views</argument>
+									<argument name="path" xsi:type="string">csreport/product/views</argument>
+									<argument name="font_awesome" xsi:type="string">fa fa-money fa-fw</argument>
+									<argument name="sort_order" xsi:type="string">10</argument>
+								</arguments>
+							</block>
+							<block class="Ced\CsMarketplace\Block\Link\Current" name="sales_block" ifconfig="ced_csmarketplace/csreport/activation">
+								<arguments>
+									<argument name="name" xsi:type="string">sales</argument>
+									<argument name="label" xsi:type="string">Product Sales</argument>
+									<argument name="path" xsi:type="string">csreport/product/sales</argument>
+									<argument name="font_awesome" xsi:type="string">fa fa-money fa-fw</argument>
+									<argument name="sort_order" xsi:type="string">10</argument>
+								</arguments>
+							</block>
+							<block class="Ced\CsMarketplace\Block\Link\Current" name="payment_block" ifconfig="ced_csmarketplace/csreport/activation">
+								<arguments>
+									<argument name="name" xsi:type="string">payment</argument>
+									<argument name="label" xsi:type="string">Payment Report</argument>
+									<argument name="path" xsi:type="string">csreport/product/payment</argument>
+									<argument name="font_awesome" xsi:type="string">fa fa-money fa-fw</argument>
+									<argument name="sort_order" xsi:type="string">10</argument>
+								</arguments>
+							</block>
+							<block class="Ced\CsMarketplace\Block\Link\Current"  name="return_block" ifconfig="ced_csmarketplace/rma_general_group/activation" >
+								<arguments>
+									<argument name="name" xsi:type="string">return</argument>
+									<argument name="label" xsi:type="string">Return Report</argument>
+									<argument name="path" xsi:type="string">csreport/product/returns</argument>
+									<argument name="font_awesome" xsi:type="string">fa fa-money fa-fw</argument>
+									<argument name="sort_order" xsi:type="string">10</argument>
+								</arguments>
+							</block>
+						</block>
+		      </block>
+		</referenceBlock>
+  	</body>
+ </page>
+   

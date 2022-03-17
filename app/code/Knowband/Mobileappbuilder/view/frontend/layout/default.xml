@@ -1,0 +1,11 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="Knowband\Mobileappbuilder\Block\Mobileappbuilder" name="front-exitpopup" as="front-exitpopup" before="-" template="Knowband_Mobileappbuilder::front/custom_css.phtml"/>
+        </referenceContainer>
+        
+         <referenceContainer name="content">
+             <block name="kb_checkout_page_css_and_js" class="Knowband\Mobileappbuilder\Block\Mobileappbuilder"  template="front/webviewjsandcss.phtml"  />
+          </referenceContainer>
+    </body>
+</page>

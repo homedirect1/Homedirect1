@@ -1,0 +1,34 @@
+<!--
+/**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_CsProductReview
+  * @author  	 CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="vendorpanel" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceBlock name="csmarketplace_vendor_navigation">
+			    <block class="Ced\CsMarketplace\Block\Link\Current" name="vendor_product_review_rating" after="vendor_orders" ifconfig="ced_csmarketplace/general/csproductreview">
+			       <arguments>
+					   <argument name="name" xsi:type="string">vendor_product_review_rating</argument>
+					   <argument name="label" xsi:type="string">Product Review And Rating</argument>
+					   <argument name="path" xsi:type="string">productreview/review/index</argument>
+					   <argument name="font_awesome" xsi:type="string">fa fa-star-o</argument>
+			       </arguments>
+			       
+			    </block>
+		</referenceBlock>
+  </body>
+ </page>
+   

@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ *
+ * @category    Ced
+ * @package     Ced_GroupBuying
+ * @author 		CedCommerce Core Team <coreteam@cedcommerce.com>
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+use Ced\GroupBuying\Block\Creategift;
+use Magento\Framework\Escaper;
+use Ced\GroupBuying\Block\Registry;
+
+/**
+ * @var Creategift $block
+ * @var Escaper $escaper
+ */
+if ($block->isLogin()) {
+    if ($block->isGrouped() === true) {
+        if (!$block->isGroupCreated()):
+            $style = "font-weight: bold; color:F249D0;";
+            $url = $this->getUrl('groupbuying/registry/index', ['id' => $block->getId()]);
+            ?>
+            <div id="modal-content">
+                <?= $this->getLayout()->createBlock(Registry::class)->setTemplate("Ced_GroupBuying::groupbuy/registry.phtml")->toHtml() ?>
+            </div>
+            <button id="example-modal-button" data-mage-init='{"newGroupForm-modal": {"target": "#modal-content"}}'>
+                Group Buying
+            </button>
+            <?php
+        else:
+            ?>
+            <button id="example-modal-button" data-mage-init='{"newGroupForm-modal": {"target": "#modal-content"}}' disabled="disabled">
+                Group Buying
+            </button>
+            <?php
+        endif;
+    } else {
+        ?>
+        <strong><?= $this->escapeHtml(__("Group buying is not available for this product!")) ?></strong>
+        <?php
+    }
+}
+?>
+<style>
+    #modal-content {
+        max-height: calc(100vh - 210px);
+        overflow:hidden;
+        overflow-y:scroll;
+        padding-right:0 !important;
+    }
+</style>

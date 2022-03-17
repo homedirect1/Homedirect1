@@ -1,0 +1,342 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+
+<?php
+$filterType = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::FILTER_TYPE);
+
+$id = $this->getRequest()->getParam('id');
+if ($id) {
+    $url = $this->getUrl('*/*/save', array('id' => $id));
+} else {
+    $url = $this->getUrl('*/*/save');
+}
+$validateUrl = $this->getUrl('*/*/validate');
+?>
+
+<form id="cshyperlocal-shipareaform" name="cshyperlocal_shipareaform" method="post" action="<?php echo $url ?>"
+      enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default vendor-profile-edit">
+                <div class="panel-heading col-md-12 uptransform">
+                    <div style="line-height:31px;font-size:17px;" class="col-md-6 col-xs-12  panel_product_heading">
+                        <?php if ($id) echo __('Edit ') . $this->getLocation(); else echo __('Add Location'); ?>
+                    </div>
+                    <div style="text-align:right;" class="buttons-set col-md-6  col-xs-12 buttons_scb">
+                        <button id="save-vlocation" class="button btn btn-primary uptransform pull-right" title="Save"
+                                type="submit">
+						<span>
+							<span><?php echo __('Save') ?></span>
+						</span>
+                        </button>
+                        <?php if ($id) { ?>
+                            <a href="<?php echo $this->getUrl('*/*/delete', array('id' => $id)); ?>"
+                               class="button btn btn-primary uptransform pull-right"
+                               onClick="return confirm('Are you sure you want to delete?')"> <?php echo __('Delete') ?></a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="clear_both"></div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="fieldset">
+                            <ul class="form-list">
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                        <span><?php echo __('Location'); ?>*</span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input required id="ced-shipping-location-field"
+                                               class="validate-no-html-tags required-entry input-text admin__control-text required-entry _required"
+                                               type="text" name="cshyperlocal[location]"
+                                               value="<?php echo $this->getLocation(); ?>">
+                                    </div>
+                                </li>
+                                <input id="ced-shipping-zipcode-type-field"
+                                       class="validate-no-html-tags input-text admin__control-text"
+                                       type="hidden"
+                                       value="<?php echo $this->getZipcodeType() == 'multiple' ? 'multiple' : 'single'; ?>"
+                                       name="cshyperlocal[zipcode_type]">
+
+                                <li class="wide" <?php if ($filterType != 'zipcode' || ($id && $this->getZipcodeType() == 'multiple')) { ?> style="display: none;" <?php } ?>
+                                    id="single-zipcode">
+                                    <label class="label admin__field-label">
+                                        <span><?php echo __('Enter Zipcode') ?></span>
+                                    </label>
+                                    <?php $zipcode = $this->helper('Ced\CsHyperlocal\Helper\Data')->getZipcodeByLocationId($this->getId()); ?>
+                                    <div class="input-box">
+                                        <input readonly id="ced-shipping-zipcode-field"
+                                               class="validate-no-html-tags input-text admin__control-text"
+                                               type="text"
+                                               value="<?php echo $zipcode; ?>"
+                                               name="cshyperlocal[zipcode]">
+                                    </div>
+                                </li>
+                                <?php if ($filterType == 'zipcode') : ?>
+                                    <li class="wide"
+                                        id="multiple-zipcodes" <?php if ($id && $this->getZipcodeType() == 'single' || !$id) { ?> style="display: none;" <?php } ?> >
+                                        <label class="label admin__field-label">
+                                            <span><?php echo __('Import Zipcode CSV') ?></span>
+                                        </label>
+                                        <div class="input-box">
+                                            <input id="ced-shipping-multiple-zipcode-field"
+                                                   class="validate-no-html-tags input-text"
+                                                   type="file" accept=".csv" name="zipcode_csv"
+                                                   value="" <?php if (!$id) : ?> required <?php endif; ?>>
+                                        </div>
+                                    </li>
+                                    <li class="wide shiparea-message"
+                                        id="empty-csv-error-message"
+                                        style="display: none">
+                                        <label class="label admin__field-label">
+                                            <span></span>
+                                        </label>
+                                        <div class="input-box">
+                                            <div class="message message-error error shiparea-location-error-msg"><?php echo __('Invalid CSV file.');?></div>
+                                        </div>
+                                    </li>
+                                    <li style="display: none" class="wide shiparea-message" id="csv-success-message">
+                                        <label class="label admin__field-label">
+                                            <span></span>
+                                        </label>
+                                        <div class="input-box">
+                                            <div class="message message-success success shiparea-location-success-msg"><?php echo __('File uploaded successfully.');?></div>
+                                        </div>
+                                    </li>
+
+                                    <li class="wide"
+                                        id="export-zipcode-csv" <?php if ($id && $this->getZipcodeType() == 'single' || !$id) { ?> style="display: none;" <?php } ?> >
+                                        <label class="label admin__field-label">
+                                            <span><?php echo __('Export Zipcode CSV') ?></span>
+                                        </label>
+                                        <div class="input-box">
+                                            <input id="ced-shipping-multiple-zipcodeexport-field"
+                                                   type="button" name="export_zipcode_csv"
+                                                   value="<?php echo __('Export'); ?>"
+                                                   onclick="location.href = '<?php echo $this->getUrl('*/*/export', array('id' => $id)); ?>';"
+                                                   class="validate-no-html-tags input-text admin__control-text">
+                                        </div>
+                                    </li>
+                                <?php endif; ?>
+
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                        <span><?php echo __('City') ?></span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input readonly type="text"
+                                               class="validate-no-html-tags input-text admin__control-text"
+                                               id="ced-shipping-city-field" name="cshyperlocal[city]"
+                                               value="<?php echo $this->getCity(); ?>">
+                                    </div>
+                                </li>
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                        <span><?php echo('State') ?></span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input readonly type="text"
+                                               class="validate-no-html-tags input-text admin__control-text"
+                                               id="ced-shipping-state-field" name="cshyperlocal[state]"
+                                               value="<?php echo $this->getState(); ?>">
+                                    </div>
+                                </li>
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                        <span><?php echo('Country') ?></span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input readonly type="text"
+                                               class="validate-no-html-tags input-text admin__control-text"
+                                               id="ced-shipping-country-field" name="cshyperlocal[country]"
+                                               value="<?php echo $this->getCountry(); ?>">
+                                    </div>
+                                </li>
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                    <span>
+                                        <?php echo __('Latitude'); ?>
+                                    </span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input readonly
+                                               class="validate-no-html-tags input-text admin__control-text"
+                                               type="text"
+                                               id="ced-shipping-latitude-field"
+                                               name="cshyperlocal[latitude]"
+                                               value="<?php echo $this->getLatitude(); ?>">
+                                    </div>
+                                </li>
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                        <span><?php echo __('Longitude') ?></span>
+                                    </label>
+                                    <div class="input-box">
+                                        <input readonly class="form-control input-text" type="text"
+                                               id="ced-shipping-longitude-field"
+                                               name="cshyperlocal[longitude]"
+                                               value="<?php echo $this->getLongitude(); ?>">
+                                    </div>
+                                </li>
+                                <li class="wide">
+                                    <label class="label admin__field-label">
+                                        <span><?php echo __('Status') ?></span>
+                                    </label>
+                                    <div class="input-box">
+                                        <select class="form-control input-text" required
+                                                name="cshyperlocal[status]">
+                                            <option <?php if ($this->getStatus() == \Ced\CsHyperlocal\Model\Shiparea::STATUS_ENABLED) echo 'selected="selected"'; ?>
+                                                    value="<?php echo \Ced\CsHyperlocal\Model\Shiparea::STATUS_ENABLED ?>"><?php echo __('Enable'); ?></option>
+                                            <option <?php if ($this->getStatus() == \Ced\CsHyperlocal\Model\Shiparea::STATUS_DISABLED) echo 'selected="selected"'; ?>
+                                                    value="<?php echo \Ced\CsHyperlocal\Model\Shiparea::STATUS_DISABLED ?>"><?php echo __('Disable'); ?></option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="back-link col-md-6"><a
+                                    href="<?php echo $this->getUrl('*/*/'); ?>">
+                                <small>&laquo;</small><?php echo __('Back') ?></a></p>
+                        <p class="required col-md-6"><?php echo __('* Required Fields') ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+        var dataForm = $('#cshyperlocal-shipareaform');
+        dataForm.mage('validation', {}).find('input:text').attr('autocomplete', 'off');
+
+        $("#ced-shipping-multiple-zipcode-field").change(function() {
+            $('body').loader('show');
+            var zipcodeForm = new FormData();
+            zipcodeForm.append('file', this.files[0]);
+            $.ajax({
+                url: "<?php echo $validateUrl; ?>",
+                type: "post",
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: zipcodeForm,
+                success: function(text) {
+                    if(text.error) {
+                        $('#empty-csv-error-message').show();
+                        $('#ced-shipping-multiple-zipcode-field').val('');
+                        $('#csv-success-message').hide();
+                    } else {
+                        $('#empty-csv-error-message').hide();
+                        $('#csv-success-message').show();
+                    }
+                    $('body').loader('hide');
+                },
+                error: function() {
+                    alert("An error occured, please try again.");
+                    $('body').loader('hide');
+                }
+            });
+        });
+    });
+
+</script>
+</div>
+
+<script>
+    var selectedLocation = false;
+    google.maps.event.addDomListener(window, 'load', initMap);
+    function initMap() {
+        var input = document.getElementById('ced-shipping-location-field');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            selectedLocation = true;
+            var place = autocomplete.getPlace();
+            document.getElementById('ced-shipping-latitude-field').value = place.geometry.location.lat();
+            document.getElementById('ced-shipping-longitude-field').value = place.geometry.location.lng();
+            var arrAddress = place.address_components;
+            var city = 0;
+            var state = 0;
+            var country = 0;
+            var zipcode = 0;
+            jQuery.each(arrAddress, function (i, address_component) {
+                if (address_component.types[0] == "locality" || address_component.types[0] == "administrative_area_level_2") {
+                    city = 1;
+                    jQuery('#ced-shipping-city-field').val(address_component.long_name);
+                }
+                if (address_component.types[0] == "administrative_area_level_1") {
+                    state = 1;
+                    jQuery('#ced-shipping-state-field').val(address_component.long_name);
+                }
+                if (address_component.types[0] == "country") {
+                    country = 1;
+                    jQuery('#ced-shipping-country-field').val(address_component.long_name);
+                }
+                if (address_component.types[0] == "postal_code") {
+                    zipcode = 1;
+                    jQuery('#ced-shipping-zipcode-type-field').val('single');
+                    jQuery('#multiple-zipcodes').hide();
+                    <?php if ($filterType != 'zipcode') : ?>
+                    jQuery('#single-zipcode').hide();
+                    <?php else : ?>
+                    jQuery('#single-zipcode').show();
+                    <?php endif; ?>
+                    jQuery('#export-zipcode-csv').hide();
+                    jQuery('#ced-shipping-zipcode-field').val(address_component.long_name);
+                }
+
+                if (!city) {
+                    jQuery('#ced-shipping-city-field').val('');
+                }
+
+                if (!state) {
+                    jQuery('#ced-shipping-state-field').val('');
+                }
+
+                if (!country) {
+                    jQuery('#ced-shipping-country-field').val('');
+                }
+
+
+                if (!zipcode) {
+                    jQuery('#ced-shipping-zipcode-type-field').val('multiple');
+                    jQuery('#multiple-zipcodes').show();
+                    jQuery('#single-zipcode').hide();
+                    jQuery('#export-zipcode-csv').show();
+                    jQuery('#ced-shipping-zipcode-field').val('');
+                }
+            });
+        });
+
+        jQuery('#ced-shipping-location-field').on('focus', function () {
+            selectedLocation = false;
+        }).on('blur', function () {
+            if (!selectedLocation) {
+                jQuery(this).val('');
+            }
+        });
+    }
+
+</script>

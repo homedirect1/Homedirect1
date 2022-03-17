@@ -1,0 +1,96 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package    Ced_CsDeliveryDate
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+
+?>
+<style>
+    #csdeliverydate-vddnoteforcalander {
+        height:50px;
+    }
+    #csdeliverydate-weekdays{
+        height:210px;
+    }
+    .legend{
+        display: none;
+    }
+</style>
+<div class="row">
+	<div class="col-md-12" style="margin-top:10px;">
+		<div class="panel panel-default">
+			<div class="panel-heading col-md-12 uptransform" style="font-weight:bold;padding:4px 15px;">
+				<div class="col-md-6 panel_product_heading" style="line-height:31px;font-size:17px;padding-left:0;">
+				<?php echo __('Delivery Date')." ".__('Settings') ?>
+				</div>
+				<div class="buttons-set col-md-6 buttons_scb" style="text-align:right;padding-right:0;">
+                    <button class="button btn btn-success uptransform product-button">
+                        <a href="<?php  echo $this->getBackUrl() ?>"><small>&laquo; </small>
+                            <?php echo __('Back') ?></a>
+                    </button>
+
+					<button class="button btn btn-success uptransform product-button" title="Save" type="submit"
+                            onClick="finalSubmit();" id="save_butn" style="float: none;">
+						<span><span><?php echo __('Save') ?></span></span>
+					</button>
+				</div>
+			</div>
+			<br/>
+			<br/>
+			<div class="panel-body">
+                <?php // print_r($block->getFormHtml()->toHtml()); ?>
+				<?php  echo $block->getFormHtml(); ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+    function finalSubmit(){
+        document.getElementById('form-validate').submit()
+    }
+    require(['jquery'],
+        function(jQuery){
+
+            jQuery.noConflict();
+
+            jQuery('#csdeliverydate-alldaydelivery').change(function(){
+                if(jQuery('#csdeliverydate-alldaydelivery').val() == 1){
+                    jQuery('label[for="csdeliverydate-weekdays"]').hide();
+                    jQuery('#csdeliverydate-weekdays').hide();
+                }else{
+                    jQuery('#csdeliverydate-weekdays').show();
+                }
+            });
+            jQuery(document).ready(function(){
+                if(jQuery('#csdeliverydate-alldaydelivery').val() == 1){
+                    jQuery('label[for="csdeliverydate-weekdays"]').hide();
+                    jQuery('#csdeliverydate-weekdays').hide();
+                }else{
+                    jQuery('#csdeliverydate-weekdays').show();
+                }
+            });
+            function validateHour(item,count){
+                if((parseInt(item.value) != item.value ) || (item.value).length == 0 || item.value === undefined || item.value === null || parseInt(item.value) > 23 || parseInt(item.value) < 0){
+                    jQuery(".errormsg"+count).html('Please Enter Time from 0 to 23');
+                    item.value = '00';
+                }else{
+                    jQuery(".errormsg"+count).html('');
+                }
+            }
+        });
+</script>

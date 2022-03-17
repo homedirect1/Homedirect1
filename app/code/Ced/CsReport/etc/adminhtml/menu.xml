@@ -1,0 +1,8 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Ced_CsReport::view" title = "Vendor Advance Report" module="Ced_CsReport" sortOrder="15" parent="Ced_CsMarketplace::csmarketplace" resource="Ced_CsReport::view" />
+        <add id="Ced_CsReport::cssales" title="Vendor Sales Report" module="Ced_CsReport" sortOrder="10" parent="Ced_CsReport::view" action="csreport/sales/index" resource="Ced_CsReport::sales"/>
+        <add id="Ced_CsReport::payment" title="Payment Report" module="Ced_CsReport" sortOrder="11" parent="Ced_CsReport::view" action="csreport/payment/index" resource="Ced_CsReport::payment"/>
+        <add id="Ced_CsReport::return" title="Return Report"  module="Ced_CsReport" sortOrder="12" parent="Ced_CsReport::view" action="csreport/returns/index" resource="Ced_CsReport::return" dependsOnConfig="ced_csmarketplace/rma_general_group/activation"/>
+    </menu>
+</config>

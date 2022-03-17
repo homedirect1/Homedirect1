@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   <head>
+      <css src="Ced_Affiliate::css/affiliatecustomer.css" />
+     <css src="Ced_Affiliate::css/font-awesome.css" />
+    </head>
+  <body>
+    	<referenceBlock name="customer_account_navigation">
+    		<block class="Magento\Framework\View\Element\Html\Link\Current" name="affliate.customer" ifconfig="affiliate/general/activation">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Affiliate</argument>
+                        <argument name="path" xsi:type="helper" helper="Ced\Affiliate\Helper\Data::checkAffiliate"></argument> 	
+                    </arguments>
+              </block>
+              
+              <block class="Ced\Affiliate\Block\Element\Html\Link\Current" name="transaction_summary_affiliate" ifconfig="affiliate/general/activation">
+                 <arguments>
+                	<argument name="name" xsi:type="string">affiliate</argument>
+                    <argument name="path" xsi:type="string">affiliate/customer/summary</argument>
+                    <argument name="label" xsi:type="string" translate="true">Transaction Summary</argument>
+                   </arguments>
+                
+            </block>
+            <block class="Ced\Affiliate\Block\Element\Html\Link\Current" name="redeem_reward_affiliate" ifconfig="affiliate/general/activation">
+                 <arguments>
+                	<argument name="name" xsi:type="string">affiliate</argument>
+                    <argument name="path" xsi:type="string">affiliate/customer/payout</argument>
+                    <argument name="label" xsi:type="string" translate="true">Payout/Discount Coupons</argument>
+                </arguments>
+            </block>
+          </referenceBlock>
+   </body>
+</page>
+                    

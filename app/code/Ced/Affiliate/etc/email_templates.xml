@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="ced_affiliate_account_creation_email" label="Affiliate Account Creation" file="ced_affiliate/account_creation.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_account_confirmation_email" label="Affiliate Account Confirmation" file="ced_affiliate/account_confirmation.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_account_delete_email" label="Affiliate Account Delete" file="ced_affiliate/account_delete.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_accountcreate_notifyadmin_email" label="Affiliate Account Creation Admin Notify" file="ced_affiliate/accountcreation_notifyadmin.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_admin_notify_accountstatus" label="Affiliate Account Admin Notify" file="ced_affiliate/account_adminnotify_accountstatus.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="affiliate_invitation_referal_email" label="Referral Email" file="ced_affiliate/invitation_email.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_withdrawl_request" label="Affiliate Withdrawal Request" file="ced_affiliate/withdrawl_request.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_withdrawl_request_adminnotify" label="Affiliate Withdrawal Request Admin Notify" file="ced_affiliate/withdrawl_request_adminnotify.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_withdrawl_request_cancel" label="Affiliate Withdrawal Request Cancel" file="ced_affiliate/withdrawl_request_cancel.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_withdrawl_request_cancel_adminnotify" label="Affiliate Withdrawal Request Cancel Admin Notify" file="ced_affiliate/withdrawl_request_cancel_adminnotify.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_payment_transaction" label="Affiliate Withdrawal Payment" file="ced_affiliate/payment_transaction.html" type="html" module="Ced_Affiliate" area="frontend"/>
+    <template id="ced_affiliate_payment_transaction_notifyadmin" label="Affiliate Withdrawal Payment Notify Admin" file="ced_affiliate/payment_transaction_adminnotify.html" type="html" module="Ced_Affiliate" area="frontend"/>
+</config>

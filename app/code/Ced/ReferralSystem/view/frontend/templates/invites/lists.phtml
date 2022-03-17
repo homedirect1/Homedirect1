@@ -1,0 +1,79 @@
+<?php
+/**
+ * CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_ReferralSystem
+* @author 		CedCommerce Core Team <connect@cedcommerce.com>
+* @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+
+$referred_list = $block->getCollection();
+$earnedAmount=$block->pendingamount();
+
+?>
+<div class="col-md-12">
+    <div class="refer-heading">
+        <strong>
+            <?= /* @noEscape */ __('Referrals Acknowledged:')?>
+            <?= /* @noEscape */ $block->registeredreferral() ?>
+        </strong>
+	</div>
+	<div class="refer-heading">
+		<strong>
+            <?= /* @noEscape */ __('Referrals Pending:')?>
+            <?= /* @noEscape */ $block->pendingreferral() ?>
+        </strong>
+	</div>
+    <?= /* @noEscape */ $block->getChildHtml('user_source') ?>
+</div>
+
+
+<div class="table-wrapper-1">
+    <legend class="legend"><span><?= /* @noEscape */ __('Email Invitation Summary'); ?></span></legend>
+    <?php if(isset($referred_list) && $referred_list->count()>0):?>
+            <div class="table_responsive">
+                <div class="table_responsive_inner">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th><?= /* @noEscape */ __('Email Id');?></th>
+                                <th><?= /* @noEscape */ __('Status');?></th>
+                                <th class="content-right"><?= /* @noEscape */ __('Invited Date');?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($referred_list as $value): ?>
+                            <tr>
+                                <td><?= /* @noEscape */ $value["referred_email"] ?></td>
+                                <?php if($value["signup_status"]==2): ?>
+                                    <td><?= /* @noEscape */ __("Pending") ?></td>
+                                <?php else: ?>
+                                    <td><?= /* @noEscape */ __("Joined") ?></td>
+                                <?php endif ?>
+                                <td class="content-right"><?= /* @noEscape */ $block->getViewModel()->getDateTime($value["invite_date"]); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="toolbar toolbar-list"><?= /* @noEscape */ $block->getPagerHtml(); ?></div>
+        <?php endif; ?>
+
+    <?php else: ?>
+        <div class="col-md-12">
+            <label><?= /* @noEscape */ __('You have not send any email invitation yet!'); ?></label>
+        </div>
+    <?php endif; ?>
+</div>
+

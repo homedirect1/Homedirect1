@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_Customnumbers
+  * @author   CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system> 
+        <section id="ced_customnumbers" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Custom Order And Invoice Numbers</label>
+            <tab>csmarketplace</tab>
+            <resource>Ced_Customnumbers::config</resource>
+            
+            <!-- General Configuration -->
+
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="activation" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>      
+            </group>
+
+             <!-- setting for Order Numbers -->
+
+            <group id="order" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Order Settings</label>
+                <field id="activation" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Custom Order Numbers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong>Can be enabled/disabled per website/store view and if enable then other changes will be enabled</strong>]]></comment>
+                </field>
+                <field id="default" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label> Use Default Counter </label>
+                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                     <comment><![CDATA[<strong>When set to yes then increment counter will be default magento and if set to no then counter will work accoding to setting</strong>]]></comment>
+                </field>
+                <field id="prefix" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Prefix</label>
+                    <comment><![CDATA[<strong>Prefix used in Order Format</strong>]]></comment>
+                </field>  
+                <field id="format" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Format for Order Numbers</label>
+                    <depends>
+                        <field id="default">0</field>
+                    </depends>
+                    <comment>
+                        <![CDATA[<strong>Format which can be applied to order numbers<br>Example::ORD-{{var d}} output will be ORD-5-1234 i.e.ORD-{{var d}} is format and 1234 is order<br>
+                        Others formats are:<br>{{var y}}--->A two digit representation of a year<br>
+                        {{var Y}}--->A four digit representation of a year<br>
+                        {{var d}}--->The day of the month (from 01 to 31)<br>
+                        {{var D}}--->A textual representation of a day (three letters Mon)<br>
+                        {{var n}}--->A numeric representation of a month, without leading zeros (1 to 12)<br>
+                        {{var a}}--->Lowercase am or pm<br>
+                        {{var A}}--->Uppercase AM or PM<br>
+                        {{var h}}--->12-hour format of an hour (0 to 12)<br>
+                        {{var H}}--->24-hour format of an hour (0 to 23)<br>
+                        {{var i}}--->Minutes with leading zeros (00 to 59)<br>
+                        {{var s}}--->Seconds, with leading zeros (00 to 59)<br>
+                        {{var l}}--->(capital letter'L')A full textual representation of the day of the week Sunday<br>
+                        {{var F}}--->A full textual representation of a month, such as January<br>
+                        {{id}}--->store id<br>
+                        {{curr}}--->current currency code<br>
+                        {{base}}--->base currency code<<br>
+                        {{def}}--->default currency code<<br>
+                        {{rand n}}--->rand number is generated wehre n=1,2,3....  <br>
+                        {{alphanum n}}--->alphnumeric number is generated wehre n=1,2,3....<br>
+                        </strong>]]>
+                    </comment>
+                </field>
+                <field id="padding" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Order Length</label>
+                    <depends>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+                <field id="counter" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Starting Number</label>
+                    <depends>
+                        <field id="default">0</field>
+                    </depends>
+                    <comment><![CDATA[<strong>Whenever reset counter is set then after reset the increment counter will start with this number</strong>]]></comment>
+                </field>
+                <field id="increment" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Increment for Next Order</label>
+                    <depends>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+                <field id="reset" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label> Reset Custom Counter</label>
+                    <source_model>Ced\Customnumbers\Model\System\Config\Source\Reset</source_model>
+                    <comment><![CDATA[<strong>Can reset counter daily,monthly,yearly basis</strong>]]></comment>
+                    <depends>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- setting for invoice numbers -->
+
+            <group id="invoice" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Invoice Settings</label>
+                <field id="activation" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Custom Invoice Numbers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong>Can be enabled/disabled per website/store view and if enable then other changes will be enabled</strong>]]></comment>
+                </field>  
+                <field id="default" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label> Use Default Counter </label>
+                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    
+                     <comment><![CDATA[<strong>When set to yes then increment counter will be default magento </strong>]]></comment>
+                </field>
+
+                <field id="same_value_order" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Same as Order Number</label>
+                    <depends>
+                        <field id="default">0</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>  
+
+                <field id="prefix" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Prefix</label>
+                    <comment><![CDATA[<strong>Prefix used in Order Format</strong>]]></comment>
+                </field>  
+
+                <field id="format" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Format for Invoice Numbers</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                    </depends>
+                    <comment>
+                        <![CDATA[<strong>Format which can be applied to invoice numbers<br>Example<br>INV-{{var d}} output will be ORD-5-1234 i.e.ORD-{{var d}} is format and 1234 is order<br>
+                        Others formats are:<br>{{var y}}--->A two digit representation of a year<br>
+                        {{var Y}}--->A four digit representation of a year<br>
+                        {{var d}}--->The day of the month (from 01 to 31)<br>
+                        {{var D}}--->A textual representation of a day (three letters)<br>
+                        {{var n}}--->A numeric representation of a month, without leading zeros (1 to 12)<br>
+                        {{var a}}--->Lowercase am or pm<br>
+                        {{var A}}--->Uppercase AM or PM<br>
+                        {{var h}}--->12-hour format of an hour (0 to 12)<br>
+                        {{var H}}--->24-hour format of an hour (0 to 23)<br>
+                        {{var i}}--->Minutes with leading zeros (00 to 59)<br>
+                        {{var s}}--->Seconds, with leading zeros (00 to 59)<br>
+                        {{var l}}--->(capital letter'L')A full textual representation of the day of the week Sunday<br>
+                        {{var F}}--->A full textual representation of a month, such as January<br>
+                        {{id}}--->store id<br>
+                        {{curr}}--->current currency code<br>
+                        {{base}}--->base currency code<<br>
+                        {{def}}--->default currency code<<br>
+                        {{rand n}}--->rand number is generated wehre n=1,2,3....  <br>
+                        {{alphanum n}}--->alphnumeric number is generated wehre n=1,2,3....<br>
+                        </strong>]]>
+                    </comment>
+                </field>
+                <field id="padding" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                    <label>Custom Padding Length</label>
+                </field>
+                <field id="counter" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Starting Number</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                    <comment><![CDATA[<strong>Whenever reset counter is set then after reset the increment counter will start with this number</strong>]]></comment>
+                </field>
+                <field id="increment" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Increment for Next Invoice</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+                <field id="reset" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label> Reset Custom Counter</label>
+                    <source_model>Ced\Customnumbers\Model\System\Config\Source\Reset</source_model>
+                    <comment><![CDATA[<strong>Can reset counter daily,monthly,yearly basis</strong>]]></comment>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- setting for shipment -->
+
+            <group id="shipment" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Shipment Settings</label>
+                <field id="activation" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Custom Shipment Numbers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong>Can be enabled/disabled per website/store view and if enable then other changes will be enabled</strong>]]></comment>
+                </field>  
+                <field id="default" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label> Use Default Counter </label>
+                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                     <comment><![CDATA[<strong>When set to yes then increment counter will be default magento </strong>]]></comment>
+                </field>
+
+                <field id="same_value_order" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Same as Order Number</label>
+                    <depends>
+                        <field id="default">0</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>  
+
+                <field id="prefix" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Prefix</label>
+                    <comment><![CDATA[<strong>Prefix used in Order Format</strong>]]></comment>
+                </field>  
+
+                <field id="format" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Format for Shipment Numbers</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                    </depends>
+                    <comment>
+                        <![CDATA[<strong>Format which can be applied to invoice numbers<br>Example::SHP-{{var d}} output will be SHP-5-1234 i.e.SHP-{{var d}} is format and 1234 is order<br>
+                        Others formats are:<br>{{var y}}--->A two digit representation of a year<br>
+                        {{var Y}}--->A four digit representation of a year<br>
+                        {{var d}}--->The day of the month (from 01 to 31)<br>
+                        {{var D}}--->A textual representation of a day (three letters Mon)<br>
+                        {{var n}}--->A numeric representation of a month, without leading zeros (1 to 12)<br>
+                        {{var a}}--->Lowercase am or pm<br>
+                        {{var A}}--->Uppercase AM or PM<br>
+                        {{var h}}--->12-hour format of an hour (0 to 12)<br>
+                        {{var H}}--->24-hour format of an hour (0 to 23)<br>
+                        {{var i}}--->Minutes with leading zeros (00 to 59)<br>
+                        {{var s}}--->Seconds, with leading zeros (00 to 59)<br>
+                        {{var l}}--->(capital letter'L')A full textual representation of the day of the week Sunday<br>
+                        {{var F}}--->A full textual representation of a month, such as January<br>
+                        {{id}}--->store id<br>
+                        {{curr}}--->current currency code<br>
+                        {{base}}--->base currency code<<br>
+                        {{def}}--->default currency code<<br>
+                        {{rand n}}--->rand number is generated wehre n=1,2,3....  <br>
+                        {{alphanum n}}--->alphnumeric number is generated wehre n=1,2,3....<br>
+                        </strong>]]>
+                    </comment>
+                </field>
+                <field id="padding" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                    <label>Custom Padding Length</label>
+                </field>
+                <field id="counter" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Starting Number</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                    <comment><![CDATA[<strong>Whenever reset counter is set then after reset the increment counter will start with this number</strong>]]></comment>
+                </field>
+                <field id="increment" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Increment for Next Shipment</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+                <field id="reset" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label> Reset Custom Counter</label>
+                    <source_model>Ced\Customnumbers\Model\System\Config\Source\Reset</source_model>
+                    <comment><![CDATA[<strong>Can reset counter daily,monthly,yearly basis</strong>]]></comment>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- setting for creditmemo -->
+
+            <group id="creditmemo" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Creditmemo Settings</label>
+                <field id="activation" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Custom Creditmemo Numbers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong>Can be enabled/disabled per website/store view and if enable then other changes will be enabled</strong>]]></comment>
+                </field>  
+                <field id="default" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label> Use Default Counter </label>
+                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                     <comment><![CDATA[<strong>When set to yes then increment counter will be default magento </strong>]]></comment>
+                </field>
+
+                <field id="same_value_order" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Same as Order Number</label>
+                    <depends>
+                        <field id="default">0</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>  
+
+                <field id="prefix" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Prefix</label>
+                    <comment><![CDATA[<strong>Prefix used in Order Format</strong>]]></comment>
+                </field>  
+
+                <field id="format" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Format for CreditMemo Numbers</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                    </depends>
+                    <comment>
+                        <![CDATA[<strong>Format which can be applied to invoice numbers<br>Example::CRD-{{var d}} output will be CRD-5-1234 i.e.CRD-{{var d}} is format and 1234 is order<br>
+                        Others formats are:<br>{{var y}}--->A two digit representation of a year<br>
+                        {{var Y}}--->A four digit representation of a year<br>
+                        {{var d}}--->The day of the month (from 01 to 31)<br>
+                        {{var D}}--->A textual representation of a day (three letters Mon)<br>
+                        {{var n}}--->A numeric representation of a month, without leading zeros (1 to 12)<br>
+                        {{var a}}--->Lowercase am or pm<br>
+                        {{var A}}--->Uppercase AM or PM<br>
+                        {{var h}}--->12-hour format of an hour (0 to 12)<br>
+                        {{var H}}--->24-hour format of an hour (0 to 23)<br>
+                        {{var i}}--->Minutes with leading zeros (00 to 59)<br>
+                        {{var s}}--->Seconds, with leading zeros (00 to 59)<br>
+                        {{var l}}--->(capital letter'L')A full textual representation of the day of the week Sunday<br>
+                        {{var F}}--->A full textual representation of a month, such as January<br>
+                        {{id}}--->store id<br>
+                        {{curr}}--->current currency code<br>
+                        {{base}}--->base currency code<<br>
+                        {{def}}--->default currency code<<br>
+                        {{rand n}}--->rand number is generated wehre n=1,2,3....  <br>
+                        {{alphanum n}}--->alphnumeric number is generated wehre n=1,2,3....<br>
+                        </strong>]]>
+                    </comment>
+                </field>
+                <field id="padding" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                    <label>Custom Padding Length</label>
+                </field>
+                <field id="counter" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Starting Number</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                    <comment><![CDATA[<strong>Whenever reset counter is set then after reset the increment counter will start with this number</strong>]]></comment>
+                </field>
+                <field id="increment" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Counter Increment for Next CreditMemo</label>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+                <field id="reset" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label> Reset Custom Counter</label>
+                    <source_model>Ced\Customnumbers\Model\System\Config\Source\Reset</source_model>
+                    <comment><![CDATA[<strong>Can reset counter daily,monthly,yearly basis</strong>]]></comment>
+                    <depends>
+                        <field id="same_value_order">0</field>
+                        <field id="default">0</field>
+                    </depends>
+                </field>
+            </group>
+        </section>            
+    </system>
+</config>

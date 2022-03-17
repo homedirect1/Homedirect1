@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--<preference for="Magento\Framework\View\Element\BlockFactory" type="Ced\Affiliate\Model\View\Element\BlockFactory"/>-->
+    <preference for="Magento\SalesRule\Model\RulesApplier" type="Ced\Affiliate\Model\RulesApplier"/>
+    <preference for="Ced\Affiliate\Model\AffiliatePayment" type="Ced\Affiliate\Model\PaymentHide"/>
+
+    <!--<virtualType name="Ced\Affiliate\Model\ResourceModel\AffiliateAccount\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ced_affiliate_account</argument>
+            <argument name="resourceModel" xsi:type="string">Ced\Affiliate\Model\ResourceModel\AffiliateAccount</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="affiliateaccount_data_source" xsi:type="string">Ced\Affiliate\Model\ResourceModel\AffiliateAccount\Collection</item>
+            </argument>
+        </arguments>
+    </type>-->
+
+
+    <!--<virtualType name="Ced\Affiliate\Model\ResourceModel\AffiliateBanner\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ced_affiliate_banner</argument>
+            <argument name="resourceModel" xsi:type="string">Ced\Affiliate\Model\ResourceModel\AffiliateBanner</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="affiliatebanner_data_source" xsi:type="string">Ced\Affiliate\Model\ResourceModel\AffiliateBanner\Collection</item>
+            </argument>
+        </arguments>
+    </type>-->
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="affiliatebanner_data_source" xsi:type="string">
+                    Ced\Affiliate\Model\ResourceModel\AffiliateBanner\Grid\Collection
+                </item>
+                <item name="affiliatewithdrawl_data_source" xsi:type="string">
+                    Ced\Affiliate\Model\ResourceModel\AffiliateWithdrawl\Grid\Collection
+                </item>
+                <item name="affiliateaccount_data_source" xsi:type="string">
+                    Ced\Affiliate\Model\ResourceModel\AffiliateAccount\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--<virtualType name="Ced\Affiliate\Model\ResourceModel\AffiliateWithdrawl\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ced_affiliate_withdrawlrequest</argument>
+            <argument name="resourceModel" xsi:type="string">Ced\Affiliate\Model\ResourceModel\AffiliateWithdrawl</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="affiliatewithdrawl_data_source" xsi:type="string">Ced\Affiliate\Model\ResourceModel\AffiliateWithdrawl\Collection</item>
+            </argument>
+        </arguments>
+    </type>-->
+
+    <preference for="Ced\Affiliate\Api\Affiliate\GetRequiredFieldsInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\RequiredFields"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\DashboardInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\Dashboard"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\BannerInterface" type="Ced\Affiliate\Model\Api\Affiliate\Banner"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\ReferralInterface" type="Ced\Affiliate\Model\Api\Affiliate\Referral"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\ReferralListInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\ReferralList"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\ComissionInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\ComissionInformation"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\PaymentSettingInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\PaymentSetting"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\WalletInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\WalletInformation"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\WithdrawlInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\WithdrawlInformation"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\TransactionInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\TransactionInformation"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\ReferralPayoutInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\ReferralPayout"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\ReferralSummaryInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\ReferralSummary"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\AccountCheckInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\AccountCheck"/>
+    <!-- <preference for="Ced\Affiliate\Api\Affiliate\ReferralPostInterface" type="Ced\Affiliate\Model\Api\Affiliate\ReferralPost"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\Data\ReferralPostInterface" type="Ced\Affiliate\Model\Api\Affiliate\Data\ReferralPost"/> -->
+    <preference for="Ced\Affiliate\Api\Affiliate\AffiliateCreateInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\AffiliateCreate"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\WithdrawlRequestInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\WithdrawlRequest"/>.
+    <preference for="Ced\Affiliate\Api\Affiliate\ReferralInviteInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\ReferralInvite"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\PaymentSettingsSaveInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\PaymentSettingsSave"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\CouponGenerateInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\CouponGenerate"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\CustomerAffiliateInterface"
+                type="Ced\Affiliate\Model\Api\Affiliate\CustomerAffiliate"/>
+    <preference for="Ced\Affiliate\Api\Affiliate\DocumentInterface" type="Ced\Affiliate\Model\Api\Affiliate\Document"/>
+
+</config>

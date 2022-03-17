@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="success_not" instance="Knowband\Mobileappbuilder\Observer\SendOrderCreatedNotification" />
+    </event>
+    <event name="layout_generate_blocks_before">
+        <observer name="app_view" instance="Knowband\Mobileappbuilder\Observer\CheckMobileappbuilderWebview" />
+    </event>
+</config>

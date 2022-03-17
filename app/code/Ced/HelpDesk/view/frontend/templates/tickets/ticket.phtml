@@ -1,0 +1,475 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<style>
+    ul {
+        list-style-type: none;
+    }
+</style>
+<?php
+$configValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/show_attribute');
+$data = (explode(",", $configValue));
+$deptValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/select_dept');
+$priorityValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/allow_priority');
+$escValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/ticket_escalation');
+$ticketModel = $this->ticketModel();
+$value = current($ticketModel);
+$ticketModel = $value;
+?>
+
+<script type="text/javascript">
+    require(["jquery"], function ($) {
+
+        $(".dropdown-toggle").click(function () {
+            $(".dropdown-menu").toggle();
+        });
+
+        $("#cancel").click(function () {
+            document.getElementById('popup').style.display = "none";
+        });
+
+        $("#close").click(function () {
+            document.getElementById('popup').style.display = "";
+        });
+
+        $("#resolved").click(function () {
+            document.getElementById('popup').style.display = "";
+        });
+    });
+
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+
+        var dataForm = $('#post-reply');
+
+        dataForm.mage('validation', {}).find('input:text').attr('autocomplete', 'off');
+
+
+    });
+
+</script>
+<div class="page-heading">
+    <h1><?php echo $ticketModel['customer_name'] . '-' . $ticketModel['ticket_id'];; ?></h1>
+</div>
+
+
+<div>
+<?php //  foreach($ticketModel as $value){?>
+<form id="post-reply"
+    action="<?php echo $this->getUrl('helpdesk/tickets/message', array('id' => $value['ticket_id'])); ?>"
+    method="post" enctype="multipart/form-data">
+    <div class="fieldset">
+    <h2 class="legend"><?php echo __('Post Reply'); ?></h2>
+    <div>
+    <ul class="form-list col2-set guest-ticket-section-wrap">
+        <?php if ($deptValue){ ?>
+        <li class="first-li">
+            <ul>
+                <li class='one'>
+                    <div id='dept'>
+                        <label for="department"><?php echo __('Department') ?>:</label>
+                        <span><?php echo $block->departmentName($value['department']); ?></span>
+                    </div>
+                </li>
+                <?php } ?>
+                <li class='two'>
+                    <?php $bg1 = $this->statusColor($value['status']); ?>
+                    <div id='dept'>
+                        <label for="status"><?php echo __('Status') ?>:</label>
+                        <span id='spanColor' style="color:black; background-color:<?php echo $bg1; ?>;">
+                        <?php echo $value['status']; ?></span>
+                    </div>
+                </li>
+                <?php $dateCreatedAt = date_create($ticketModel['created_time']);
+                    ?>
+                <?php if ($dateCreatedAt) { ?>
+                <li class='three'>
+                    <?php $bg = $this->priorityColor($value['priority']); ?>
+                    <div id='dept' style="width: auto;">
+                        <label for="priority"><?php echo __('Ticket Created At') ?>:</label>
+                        <?php echo date_format($dateCreatedAt, 'g:i A \o\n l jS F Y'); ?>
+                    </div>
+                </li>
+                <?php } ?>
+                <?php foreach ($data as $value) {
+                    if ($value == 'order') { ?>
+                <li class='four'>
+                    <div id='dept'>
+                        <label for="order"><?php echo __('Order') ?>:</label>
+                        <span><?php echo $ticketModel['order']; ?></span>
+                    </div>
+                </li>
+                <?php }
+                    } ?>
+            </ul>
+        </li>
+        <div style="clear:both"></div>
+        <ul id='six'>
+            <div id='dept'>
+            </div>
+        </ul>
+        <div style="clear:both"></div>
+        <div class="dropdown" style="float: right;padding: 0px 10px 10px;">
+            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+            Change Status
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" id="dropdown" style="display: none;" role="menu"
+                aria-labelledby="menu1">
+                <li id="resolved" role="presentation"><a role="menuitem" tabindex="-1" href="#popup">Resolved</a>
+                </li>
+                <li id="close" role="presentation"><a role="menuitem" tabindex="-1" href="#popup">Close</a>
+                </li>
+            </ul>
+        </div>
+        <br/>
+        <br/>
+        <div style="clear: both;"/>
+        <!--Conversation starts  -->
+        <div>
+        <h2 class="legend"><?php echo __('Conversations') ?></h2>
+        <ul>
+            <li>
+                <?php $customer_email = $this->customerEmail();
+                    $customer_id = $block->customerId();
+                    $ticketMessage = $this->messageModel();
+                    
+                    
+                    $totalmsgCount = count($ticketMessage);
+                    
+                    if ($totalmsgCount > 10) {
+                        $displaylimit = $totalmsgCount - 10;
+                        ?>
+                <div> <a href="javascript:void(0)"
+                    id="show_all"><b><?php echo __('Show All Messages'); ?></b></a>
+                </div>
+                </br><?php
+                    } else {
+                    
+                        $displaylimit = 0;
+                    }
+                    $msgCount = 0;
+                    
+                    foreach ($ticketMessage
+                    
+                    as $value){
+                    $msgCount++;
+                    if ($msgCount <= $displaylimit) {
+                        $style = "style='display:none'";
+                    } else {
+                        $style = "style='display:'";
+                    }
+                    if ($ticketModel['customer_name'] == $value['from']) { ?>
+                <div id='mess' class="messages" <?php echo $style ?>>
+                <span>
+                    <b><?php echo $value['from']; ?></b>&nbsp&nbsp&nbsp
+                    <h>|&nbsp&nbsp&nbsp</h>
+                </span>
+                <?php $date = date_create($value['created']);
+                    ?>
+                <span> <?php echo __("Create At: ") ?><?php echo date_format($date, 'g:i A \o\n l jS F Y'); ?>
+                </span>
+                <?php }elseif ($value['type'] == 'reply'){ ?>
+                <div id='mess2' class="messages" <?php echo $style ?>>
+                    <span>
+                        <b><?php echo $value['from']; ?></b>&nbsp&nbsp&nbsp
+                        <h>|&nbsp&nbsp&nbsp</h>
+                    </span>
+                    <?php $date = date_create($value['created']);
+                        ?>
+                    <span> <?php echo __("Create At: ") ?><?php echo date_format($date, 'g:i A \o\n l jS F Y'); ?>
+                    </span>
+                    <?php }else{
+                        ?>
+                    <div id='mess2' class="messages" <?php echo $style ?>>
+                        <span>
+                            <span>
+                            <i><?php echo __('Ticket has been assign to') ?></i>
+                            </span>&nbsp&nbsp
+                            <b><?php echo $value['to']; ?></b>&nbsp&nbsp&nbsp
+                            <h>|&nbsp&nbsp&nbsp</h>
+                        </span>
+                        <span><?php echo __("At: "); ?><?php echo $value['created']; ?>
+                        </span>
+                        <span id="from"><b><?php echo $value['from']; ?></b></span>
+                        <?php } ?>
+                        <div id='mesDetail' class="messages" <?php echo $style ?> >
+                            <span><?php echo $value['message']; ?></span>
+                            <?php if ($value['attachment']) { ?>
+                            <?php $attach = explode(",", $value['attachment']); ?>
+                            <div id="attachment">
+                                <b><?php echo __('Attachments') ?>:</b>
+                                <?php foreach ($attach as $val) {
+                                    $a = explode('/', $val);
+                                    $url = $this->getBaseUrl() . 'pub/media/images/helpdesk/' . $customer_id . '/' . $value['ticket_id'] . '/' . $val;
+                                    ?>
+                                <div><a href="<?php echo $url; ?>" download
+                                    style="color:red;"> <?php echo $a[1]; ?></a></div>
+                                <?php } ?>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <div style="clear: both;"/>
+            </li>
+        </ul>
+        </div>
+        <!-- conversation ends -->
+        <div>
+        <input type="hidden" name='image_count' value="" id="hidden">
+        <input type="hidden" name='upload_image' value="" id="upload_image">
+        <input type="hidden" name='unupload_image' value="" id="unupload_image">
+        <div><b><?php echo __('Reply') ?> :</b></div>
+        <div class='ticket' class="input-box" style="width:100% !important;">
+        <textarea name="message" class='required-entry' id="message"></textarea>
+    </ul>
+    <ul>
+    <?php foreach ($data
+        as $value){
+        if ($value == 'attachment'){
+        ?>
+    <div><a href="javascript:void(0)" id="new_attach"><b><?php echo __('Add Attachment'); ?></b></a>
+    <br>
+    <p style="display: inline-block;"><?php echo __('Allowed File Types are ') . '<b>' . $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/allow_extensions') . '</b>';
+        echo " and maximum uploaded size is " . '<b>' . $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/max_upload') . 'MB</b>'; ?></p>
+    </div>
+    </ul>
+    <ul>
+    <div name="attachment" id="attactments"></div>
+    <?php }
+        } ?>
+    </ul>
+    <ul class='eight'>
+    <div class="actions">
+    <input type="hidden" value="<?php echo $ticketModel['ticket_id']; ?>" name="id">
+    <div class="actions">
+    <button class="button btn-cart" title="Post Reply" name="post" type="submit">
+    <span>
+    <span><?php echo __('Post Reply') ?></span>
+    </span>
+    </button>
+    </div>
+    <div id='back'><a id='backA'
+        href="<?php echo $this->getUrl('helpdesk/tickets/index'); ?>"><?php echo '<<< Back To My Support Tickets'; ?></a>
+    </div>
+    </div>
+    </ul>
+    </ul>
+    </div>
+    </div>
+</form>
+</div>
+
+<div class="dialog draggable ced-ui-draggable" id="popup" style="display: none;">
+    <div class="ced-ui-draggable-wrap">
+        <div id="popup-loading" style="display: none;">
+            <h1 style="margin-bottom: 20px; margin-top: 6.44447px;"><i class="icon-spinner icon-spin icon-large"></i>
+                Loading ...
+            </h1>
+        </div>
+        <div class="body" style="display: block;">
+            <h3>Close Ticket <?php echo $ticketModel['ticket_id']; ?></h3>
+            <b><a class="close" href="#"><i class="icon-remove-circle"></i></a></b>
+            <div class="clear"></div>
+            <div id="ticket-status" style="display:block; margin:5px;">
+                <form method="post" name="status" id="status"
+                    action="<?php echo $this->getUrl('helpdesk/tickets/close', array('id' => $ticketModel['ticket_id'])); ?>">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <span>
+                                        <strong><?php echo _("Status :") ?>&nbsp;</strong>
+                                        <select name="status_id">
+                                            <option value="Resolved" selected="selected">Resolved</option>
+                                            <option
+                                                value="Closed">Closed</option>
+                                        </select>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <span>
+                                    <strong><?php echo _("Comment :") ?>&nbsp;</strong>
+                                    <textarea name="comments" id="comments" cols="50" rows="3" style="width: 100%;"
+                                        class="richtext ifhtml no-bar"
+                                        placeholder="Optional reason for status change (internal note)" dir="ltr"
+                                        wrap="soft"></textarea>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="full-width">
+                        <span class="buttons pull-right">
+                        <input value="Submit" type="submit">
+                        </span>
+                        <span class="buttons pull-left">
+                            <!--   <input value="Reset" type="reset" id="reset"> -->
+                            <input name="cancel" class="close" value="Cancel" id="cancel" type="button">
+                        </span>
+                    </p>
+                </form>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .ced-ui-draggable {
+        background-color: rgba(0, 0, 0, 0.8);
+        height: 100%;
+        left: 0 !important;
+        position: fixed;
+        top: 0 !important;
+        width: 100% !important;
+        z-index: 999;
+    }
+
+    .ced-ui-draggable-wrap {
+        background: #fff none repeat scroll 0 0;
+        box-shadow: 0 0 7px 1px #000;
+        margin: 5% auto;
+        padding: 10px;
+        width: 45%;
+    }
+    #ticket-status span strong + div[unselectable="on"],
+    #ticket-status span strong + div[unselectable="on"] + div,
+    #ticket-status span strong + div[unselectable="on"] + div div 
+    {
+        width: 100% !important;
+    }
+    #ticket-status span strong + div[unselectable="on"] + div div 
+    {
+        min-height: 80px !important;
+    }
+    #ticket-status table tbody tr td {
+        padding: 0 0 15px 0;
+    }
+</style>
+
+<script type="text/javascript">
+    bkLib.onDomLoaded(function () {
+        new nicEditor({fullPanel: true}).panelInstance('message');
+    });
+    bkLib.onDomLoaded(function () {
+        new nicEditor({fullPanel: true}).panelInstance('comments');
+    });
+</script>
+<script>
+    function saveAjax() {
+        var id = document.getElementById('ticket_id').value;
+        var reloadurl = '<?php echo $this->getUrl('helpdesk/tickets/escalation')?>';
+        new Ajax.Request(reloadurl,
+            {
+                method: 'post',
+                parameters: {ticket_id: id},
+                onComplete: function (transport) {
+                    alert('Escalation Mail Send');
+                }
+            });
+    }
+</script>
+<script>
+    counter = 0;
+    img_count = 0;
+    require(["jquery"], function ($) {
+        $("#new_attach").click(function () {
+            var inc_counter = ++img_count;
+            var a = $('#upload_image').val();
+            $('#upload_image').val(a + ',' + inc_counter);
+            $("#attactments").append("<p id='test_" + (inc_counter) + "'><input data-validate='{required:true}' class='required-entry validate-fileUploadsize validate-extensions' type='file' id='files_" + inc_counter + "' name='file" + (inc_counter) + "' ><a class='shikha' id='deleteImage_" + inc_counter + "' onclick='fun(" + inc_counter + ");'>delete</a></p>")
+            $('#hidden').val(++counter);
+        });
+
+        $("#show_all").click(function () {
+            $(".messages").show();
+            $("#show_all").hide();
+        });
+    });
+</script>
+<script>
+    function fun(id) {
+        require(["jquery"], function ($) {
+            var a = $('#unupload_image').val();
+            $('#unupload_image').val(a + ',' + id);
+            $("#test_" + id).remove();
+            $('#hidden').val(--counter);
+        });
+    }
+
+
+    require([
+        'jquery',
+        'jquery/ui',
+        'jquery/validate',
+        'mage/translate'
+    ], function ($) {
+
+
+        $.validator.addMethod(
+            'validate-fileUploadsize', function (v, elm) {
+                var maxSize = <?php echo $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/max_upload'); ?>;
+                maxSize = maxSize * 102400;
+                if (navigator.appName == "Microsoft Internet Explorer") {
+                    if (elm.value) {
+                        var oas = new ActiveXObject("Scripting.FileSystemObject");
+                        var e = oas.getFile(elm.value);
+                        var size = e.size;
+                    }
+                } else {
+                    if (elm.files[0] != undefined) {
+                        size = elm.files[0].size;
+                    }
+                }
+                if (size != undefined && size > maxSize) {
+                    return false;
+                }
+
+                return true;
+            }, $.mage.__('The file size should not exceed the limit'));
+
+
+        $.validator.addMethod(
+            'validate-extensions', function (v, elm) {
+
+                var extn = '<?php echo $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/allow_extensions'); ?>';
+                var extensions = extn.split(",");
+                if (!v) {
+                    return true;
+                }
+                with (elm) {
+                    var ext = value.substring(value.lastIndexOf('.') + 1);
+                    for (i = 0; i < extensions.length; i++) {
+                        if (ext == extensions[i]) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }, $.mage.__('Disallowed file type.'));
+    });
+</script>

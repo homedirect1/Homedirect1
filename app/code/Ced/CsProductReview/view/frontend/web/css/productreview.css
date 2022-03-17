@@ -1,0 +1,192 @@
+.admin__scope-old .fieldset-wrapper, .admin__scope-old .fieldset {
+	background: #fff none repeat scroll 0 0;
+	border: 0 none;
+	margin: 0;
+	padding: 5px 0 38px;
+	position: relative;
+}
+.admin__scope-old .fieldset-wrapper > .fieldset-wrapper-title, .admin__scope-old .fieldset > .legend {
+	border-bottom: 1px solid #cac3b4;
+	box-sizing: border-box;
+	float: left;
+	margin: 0 0 18px;
+	padding: 0;
+	position: static;
+	width: 100%;
+}
+.admin__scope-old .fieldset-wrapper > .fieldset-wrapper-title .title, .admin__scope-old .fieldset > .legend span {
+	color: #303030;
+	display: inline-block;
+	font-size: 1.7rem;
+	font-weight: 600;
+	padding: 7px 0 10px;
+}
+.admin__scope-old .fieldset-wrapper, .admin__scope-old .fieldset {
+	background: #fff none repeat scroll 0 0;
+	border: 0 none;
+	margin: 0;
+	padding: 5px 0 38px;
+	position: relative;
+}
+.admin__scope-old .form-inline div:not([class*="fields-group"]) > .field > .label::before, .admin__scope-old .form-inline .fieldset > .field > .label::before{
+	width: 0px;
+}
+.admin__scope-old .details-content > .field.required > .label::after, .admin__scope-old .fieldset > .field.required > .label::after {
+	content: "";
+}
+.admin__scope-old .form-inline .details-content > .field.required > .label, .admin__scope-old .form-inline .fieldset > .field.required > .label {
+	padding-left: 0;
+}
+.admin__scope-old .form-inline div:not([class*="fields-group"]) > .field > .label, .admin__scope-old .form-inline .fieldset > .field > .label {
+	color: #303030;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 3.2rem;
+	padding: 0 30px 0 0;
+	white-space: nowrap;
+	word-wrap: break-word;
+}
+.admin__scope-old .form-inline .label.admin__field-label {
+	margin-left: 0;
+	padding-right: 30px;
+	padding-top: 0;
+	width: 20%;
+}
+.admin__scope-old .form-inline .details-content > .field.required > .label span::after, .admin__scope-old .form-inline .fieldset > .field.required > .label span::after {
+	left: auto;
+	margin-left: 10px;
+	top: 1.2rem;
+}
+.admin__scope-old .details-content > .field.required > .label span::after, .admin__scope-old .fieldset > .field.required > .label span::after {
+	color: #eb5202;
+	content: "*";
+	display: inline-block;
+	font-size: 1.6rem;
+	font-weight: 500;
+	line-height: 1;
+	margin-left: 10px;
+	margin-top: 0;
+	position: absolute;
+	top: 1.2rem;
+	z-index: 1;
+}
+.admin__scope-old .form-inline div:not([class*="fields-group"]) > .field > .label span, .admin__scope-old .form-inline .fieldset > .field > .label span {
+	display: inline-block;
+	line-height: 1.33;
+	vertical-align: middle;
+	white-space: normal;
+	word-break: break-all;
+}
+.admin__scope-old .form-inline .label ~ .control {
+	margin: 0;
+	width: 60%;
+}
+.admin__scope-old .control > input {
+	padding: 4px 10px;
+	width: 100%;
+}
+.admin__scope-old input[type="text"], 
+.admin__scope-old input[type="password"], 
+.admin__scope-old input[type="datetime"], 
+.admin__scope-old input[type="datetime-local"], 
+.admin__scope-old input[type="date"], 
+.admin__scope-old input[type="month"], 
+.admin__scope-old input[type="time"], 
+.admin__scope-old input[type="week"], 
+.admin__scope-old input[type="number"], 
+.admin__scope-old input[type="range"], 
+.admin__scope-old input[type="email"], 
+.admin__scope-old input[type="url"], 
+.admin__scope-old input[type="search"], 
+.admin__scope-old input.search, 
+.admin__scope-old input[type="tel"], 
+.admin__scope-old input[type="color"], 
+.admin__scope-old textarea, .admin__scope-old select {
+	background-color: #fff;
+	border: 1px solid #adadad;
+	border-radius: 1px;
+	box-sizing: border-box;
+	color: #303030;
+	font-size: 14px;
+	font-weight: 500;
+	height: 33px;
+	padding: 4px;
+}
+.admin__scope-old select[multiple], .admin__scope-old select[size] {
+	height: auto;
+}
+.productreview-review-edit .entry-edit .admin__fieldset legend {
+	margin-left: 0px!important;
+}
+.productreview-review-edit .entry-edit .admin__fieldset > .admin__field > .admin__field-control {
+	float: left!important;
+	margin-left: 5px!important;
+	width: calc(100% * 0.5 - 30px)!important;
+}
+.entry-edit.form-inline .admin__fieldset > .admin__field,.entry-edit.form-inline .admin__fieldset > .admin__field > .admin__field-label {
+	margin-left: 0;
+}
+.productreview-review-edit .entry-edit .fieldset {
+	background: #fff;
+	padding: 15px 20px;
+} 
+.page-wrapper .page.messages .message > div {
+	padding-left: 15px;
+}
+.page-wrapper .required > .admin__field-label > span::after, 
+.page-wrapper ._required > .admin__field-label > span::after
+{
+	margin-left: 5px;
+}
+.admin__legend.legend span {
+	font-weight: 600;
+	font-size: 1.8rem;
+	color: #41362f;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+@media only screen and (max-device-width: 767px) {
+	.entry-edit .admin__fieldset > .admin__field > .admin__field-control,
+	.entry-edit .field-status_id .admin__field-control .admin__control-select{
+		width: 100%!important;
+	}
+	.entry-edit .admin__fieldset .admin__field .admin__field-control {
+		margin-left: 0 !important;
+	}
+	.entry-edit .admin__field-control .admin__field-rating .admin__field-control label {
+		float: left;
+	}
+	.page-layout-vendor-2columns-left .page-columns .side-col,
+	.page-layout-vendor-2columns-left .page-columns .main-col {
+		float: none !important;
+		margin-left: 0;
+		width: 100%;
+	}
+	.page-layout-vendor-2columns-left .page-columns .side-col{
+		padding-bottom: 20px;
+	}
+	.productreview-review-edit .entry-edit .fieldset {
+		padding: 15px 15px;
+	}
+	.productreview-review-edit .entry-edit .admin__fieldset legend, 
+	.entry-edit.form-inline .admin__fieldset > .admin__field
+	{
+		margin-bottom: 15px;
+	}
+	.productreview-review-edit .entry-edit .admin__fieldset > .admin__field > .admin__field-control, 
+	.productreview-review-edit .admin__fieldset > .admin__field > .admin__field-label
+	{
+		margin: 0 !important;
+	}
+	.admin__fieldset .admin__field-value {
+		padding: 0;
+	}
+	.page-wrapper .admin__field:not(.admin__field-option) > .admin__field-label::before
+	{
+		margin-left: 0;
+	}
+	.productreview-review-edit .entry-edit .admin__fieldset > .admin__field > .admin__field-control {
+		float: none !important;
+		margin-left: 0 !important;
+		width: calc(100% - 30px) !important;
+	}
+}

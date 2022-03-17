@@ -1,0 +1,85 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+ $useragent=$_SERVER['HTTP_USER_AGENT'];
+ $helper = $block->getHelper('Ced\Affiliate\Helper\Data');
+?>
+
+<form class="form referral-form" id="custom-form" method="post" autocomplete="off" action="<?php echo $this->getUrl('affiliate/referral/sendinviteemail') ?>" data-mage-init='{"validation": {}}'>
+   <h2><?php echo __('Referral Section')?></h2>
+   <fieldset class="fieldset form-left">
+       <legend class="legend"><span><?php echo __('Referral Url and Code') ?></span></legend>
+       <div class="referral-url-wrapper-left">
+          <div class="field required">
+              <label for="referral_url" class="label"><span><?php echo __('Referral Url') ?></span></label>
+              <div class="control">
+                  <input type="text" name="referral_url" id="referral_url" value="<?php echo $block->generateReferralLink(); ?>" title="<?php echo __('Referral Url') ?>" class="input-text" data-validate="{required:true}" readonly />
+              </div>
+          </div>
+          <div class="field required">
+              <label for="social_network" class="label"><span><?php echo __('Refer Via Social Network') ?></span></label>
+              <div class="control">
+                  <?php if($helper->IsFbEnabled()):?>
+	            <a href="http://www.facebook.com/sharer.php?u=<?php echo urlencode($block->generateFBReferralLink())?>" target="_blank">
+        			<img src="<?php echo $block->getViewFileUrl('Ced_Affiliate/images/facebook.png');?>" alt="Facebook" height="30px" width="30px"/>
+				</a>
+	            <?php endif;?>
+	            <?php if($helper->IsGoogleEnabled()):?>
+	            <a href="https://plus.google.com/share?url=<?php echo $block->generateGoogleReferralLink()?>" target="_blank">
+        			<img src="<?php echo $block->getViewFileUrl('Ced_Affiliate/images/google.png');?>" alt="Google" height="30px" width="30px"/>
+				</a>
+	            <?php endif;?>
+	             <?php if($helper->IsTwitterEnabled()):?>
+	            <a href="https://twitter.com/share?url=<?php echo $block->generateTwitterReferralLink()?>&amp;text=Affiliate Banner Url;hashtags=Affiliate" target="_blank">
+        			<img src="<?php echo $block->getViewFileUrl('Ced_Affiliate/images/twitter.png');?>" alt="Twitter" height="30px" width="30px"/>
+				</a>
+	            <?php endif;?>
+              </div>
+          </div>
+      </div>
+   </fieldset>
+   <fieldset class="fieldset form-right">
+       <legend class="legend"><span><?php echo __('Send Invitation') ?></span></legend><br>
+       <div class="referral-url-wrapper-right">
+         <div class="field required">
+              <label for="email_addresses" class="label"><span><?php echo __('Email addresses, separated by comma') ?></span></label>
+              <div class="control">
+                  <textarea name="emails" cols="60" rows="5" id="email_address" class="input-text" data-validate="{required:true}" ></textarea>
+              </div>
+          </div>
+          <div class="field required">
+              <label for="subject" class="label"><span><?php echo __('Subject') ?></span></label>
+              <div class="control">
+                  <input type="text" name="subject" id="subject" title="<?php echo __('Subject') ?>" value ="<?php echo $block->getDefaultSubject()?>" class="input-text" data-validate="{required:true}" />
+              </div>
+          </div>
+          <div class="field required">
+              <label for="subject" class="label"><span><?php echo __('Message') ?></span></label>
+              <div class="control">
+                  <textarea name="message" cols="60" rows="5" id="message" class="input-text" data-validate="{required:true}" ><?php echo $block->getDefaultMessage()?></textarea>
+              </div>
+          </div>
+          <div class="actions-toolbar">
+              <div class="primary">
+                  <button type="submit" class="action submit primary" title="<?php  echo __('Send') ?>"><span><?php echo __('Send') ?></span></button>
+              </div>
+          </div>
+        </div>
+    </fieldset>
+</form>
+
+<?php echo $block->getChildHtml('invited_users_lists');?>

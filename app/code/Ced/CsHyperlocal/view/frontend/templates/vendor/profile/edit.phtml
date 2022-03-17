@@ -1,0 +1,55 @@
+<?php
+if ($this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::MODULE_ENABLE)):
+    $filterType = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::FILTER_TYPE);
+    ?>
+    <?php $distnace = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::FILTER_RADIUS); ?>
+    <?php $distnaceType = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::DISTANCE_TYPE); ?>
+    <?php if ($filterType == 'distance') : ?>
+    <div class="location-note-wrapper"
+         id="distance-range-wrapper"><?php echo __('Note : You will receive orders within ' . $distnace . $distnaceType . ' from this location') ?></div>
+<?php endif; ?>
+    <script>
+        var selectedLocation = false;
+        google.maps.event.addDomListener(window, 'load', initMap);
+        function initMap() {
+            var input = document.getElementById('location');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                selectedLocation = true;
+                var place = autocomplete.getPlace();
+                document.getElementById('latitude').value = place.geometry.location.lat();
+                document.getElementById('longitude').value = place.geometry.location.lng();
+            });
+
+            jQuery('#location').on('focus', function () {
+                selectedLocation = false;
+            }).on('blur', function () {
+                if (!selectedLocation) {
+                    jQuery(this).val('');
+                }
+            });
+        }
+    </script>
+    <script>
+        require([
+            'jquery',
+        ], function ($) {
+
+            var VendorAttributes = setInterval(function () {
+                if ($('#latitude').length > 0 && $('#longitude').length > 0)
+                {
+                    $('#latitude').attr('readonly', true);
+                    $('#longitude').attr('readonly', true);
+                }
+            });
+
+            var DistanceRangeTitleDiv = setInterval(function () {
+                if ($('#distance-range-wrapper').length > 0)
+                {
+                    $('#distance-range-wrapper').appendTo($('#location').parent());
+                    clearInterval(DistanceRangeTitleDiv);
+                }
+            });
+        });
+    </script>
+<?php endif; ?>

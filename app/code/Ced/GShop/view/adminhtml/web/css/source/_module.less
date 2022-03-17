@@ -1,0 +1,129 @@
+@gxpress-icons-admin__font-name-path: '@{baseDir}Ced_GShop/fonts/gxpress';
+@gxpress-icons-admin__font-name : 'CedGXpress';
+.lib-font-face(
+  @family-name:@gxpress-icons-admin__font-name,
+  @font-path: @gxpress-icons-admin__font-name-path,
+  @font-weight: normal,
+  @font-style: normal
+);
+.admin__menu .item-gxpress.parent.level-0 > a:before {
+  font-family: @gxpress-icons-admin__font-name;
+  content: "\e900";
+  display: block;
+  font-family: "CedGXpress";
+  font-size: 3rem;
+  height: 3rem;
+}
+
+.cedcommerce.actions-li {
+  list-style: none;
+  display: inline;
+}
+
+.cedcommerce.actions {
+  font-size: 0;
+  cursor: pointer;
+}
+
+.cedcommerce.actions.view:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/view.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.delete:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/delete.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.download:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/download.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.edit:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/edit.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.sync:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/sync.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.upload:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/upload.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.validate:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/validate-circle.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.error:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/error.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.authorize:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/authorize.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.unlock:before {
+  display: inline-block;
+  content: url('@{baseDir}Ced_GShop/images/actions/unlock.svg');
+  height:16px;
+}
+
+.cedcommerce.actions.view.disable,
+.cedcommerce.actions.error.disable,
+.cedcommerce.actions.delete.disable,
+.cedcommerce.actions.edit.disable,
+.cedcommerce.actions.sync.disable,
+.cedcommerce.actions.upload.disable,
+.cedcommerce.actions.validate.disable{
+  cursor: not-allowed;
+}
+
+.cedcommerce.errors {
+  border: none !important; margin: 0; padding: 0 0 2px 0; cursor: pointer;
+}
+
+.cedcommerce.errors div {
+  min-width: 100px !important;
+}
+
+
+.admin__menu .item-gxpress .submenu .level-2 a[href="#"] {
+  cursor: default !important;
+  font-weight:bold !important;
+  font-size: 1.7rem !important;
+  color: #bdb4b4 !important;
+}
+
+.admin__menu .item-gxpress .submenu .level-2 a[href="#"]:hover {
+  background-color: transparent !important;
+}
+
+.admin__menu .item-gxpress .submenu .level-1 .submenu-group-title {
+  font-weight:bold !important;
+  text-transform: uppercase !important;
+}
+
+.admin__menu .item-gxpress .submenu li {
+  min-width: 19.8rem !important;
+}
+
+.admin__menu .item-gxpress .submenu .parent {
+  margin-bottom: 2.5rem !important;
+}

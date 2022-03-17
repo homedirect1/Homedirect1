@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.velsof.magento2genericapp",
+    "sha256_cert_fingerprints":
+    ["A1:D8:82:78:4C:D1:74:2D:0A:B8:1D:05:71:97:4C:70:24:81:B2:72:1B:24:06:96:78:F7:9A:4A:1D:E7:E5:F5"]
+  }
+}]

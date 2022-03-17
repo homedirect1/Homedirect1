@@ -1,0 +1,35 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="field gender<?php if ($block->isRequired()) echo ' required' ?>">
+  
+    <div class="control">
+        <select id="<?php /* @escapeNotVerified */ echo $block->getFieldId('gender')?>" name="<?php /* @escapeNotVerified */ echo $block->getFieldName('gender')?>" title="<?php /* @escapeNotVerified */ echo __('Gender') ?>"<?php if ($block->isRequired()):?> class="validate-select" data-validate="{required:true}"<?php endif; ?> <?php /* @escapeNotVerified */ echo $block->getFieldParams() ?>>
+           <option value ='' selected ="selected"><?php echo __('Select gender')?></option>
+            <?php $options = $block->getGenderOptions(); ?>
+            <?php $value = $block->getGender();?>
+            <?php foreach ($options as $option):?>
+            <?php if(!$option->getValue()) continue;?>
+                <option value="<?php /* @escapeNotVerified */ echo $option->getValue() ?>"<?php if ($option->getValue() == $value) echo ' selected="selected"' ?>><?php /* @escapeNotVerified */ echo __($option->getLabel()) ?></option>
+            <?php endforeach;?>
+        </select>
+    </div>
+</div>

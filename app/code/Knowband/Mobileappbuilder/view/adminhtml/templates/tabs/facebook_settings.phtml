@@ -1,0 +1,63 @@
+<?php $settings = $this->getSettings(); ?>
+<div class="fieldset-wrapper" id="facebook-settings">
+    <h1 class="mobileappbuilder-h1"><?php echo __("Facebook Login Settings")?></h1>
+    <div class="admin__fieldset-wrapper-content">
+        <fieldset class="admin__fieldset">
+            <div class="admin__field">
+                <label class="admin__field-label" for="facebook_login_status">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Status")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="facebook_login_status" name="vss_mobileappbuilder[facebook_login_settings][facebook_login_status]" value="1" <?php echo isset($settings["facebook_login_settings"]["facebook_login_status"])?$settings["facebook_login_settings"]["facebook_login_status"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="facebook_login_status">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field facebook_div" >
+                <label class="admin__field-label" for="facebook_app_id">
+                    <span><?php echo __("Facebook App Id")?>
+                        </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["facebook_login_settings"]["facebook_app_id"])?$settings["facebook_login_settings"]["facebook_app_id"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[facebook_login_settings][facebook_app_id]" id="facebook_app_id">                        
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field facebook_div" >
+                <label class="admin__field-label"></label>
+                <div class="admin__field-control">
+                    <a class="action-default scalable action-secondary fb_validate_button" onclick="validateAppId(this)" style="margin-top: 18px;display: inline-block;cursor: pointer">
+                        <span><?php echo __('Validate App Id') ?></span>
+                    </a>
+                </div>
+            </div>
+            
+        </fieldset>
+    </div>
+</div>
+<script  type="text/javascript">
+    require(['jquery'], function(jQuery){
+        jQuery(window).load(function(){
+            jQuery('#facebook_login_status').trigger('change');
+        });
+
+        jQuery('#facebook_login_status').change(function() {
+            if(this.checked) {
+                jQuery('.facebook_div').css('display', 'block');
+            }else {
+                jQuery('.facebook_div').css('display', 'none');
+            }
+        });
+    });
+</script>

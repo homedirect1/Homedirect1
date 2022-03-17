@@ -1,0 +1,19 @@
+{
+    "name": "ced/module-csreport",
+    "description": "Extension to generate vendor wise reports on vendor panel as well as admin panel.",
+    "require": {
+        "php": "~5.5.0|~5.6.0|~7.0.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": [
+        "EULA"
+    ],
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Ced\\CsReport\\": ""
+        }
+    }
+}
+

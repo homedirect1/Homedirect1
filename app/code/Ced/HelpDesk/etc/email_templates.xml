@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
+    <template id="send_admin_email_template" label="Admin Ticket Create" file="adminMail.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+    <template id="send_customer_email_template" label="Customer Ticket Create" file="mailCustomer.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+    <template id="send_guest_customer_email_template" label="Guest Customer Template" file="mailGuestCustomer.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+    <template id="send_agent_email_assign_template" label="Assign Agent Template" file="mailAgentAssign.html" type="html" module="Ced_HelpDesk" area="adminhtml"/>
+    <template id="send_customer_email_ticket_create_by_admin_template" label="Customer Ticket Create By Admin" file="mailCustomerByAdmin.html" type="html" module="Ced_HelpDesk" area="adminhtml"/>
+    <template id="send_customer_email_reply_template" label="Customer Reply Template" file="mailCustomerReply.html" type="html" module="Ced_HelpDesk" area="adminhtml"/>
+    <template id="send_department_head_email_reply_template" label="Department Head Reply Template" file="mailDepartmentHeadReply.html" type="html" module="Ced_HelpDesk" area="adminhtml"/>
+    <template id="send_support_email_template" label="Support Email Template" file="mailSupport.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+    <template id="send_customer_status_closed_resolved_email_template" label="Customer Status Template" file="mailCustomerStatus.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+    <template id="send_agent_status_closed_resolved_email_template" label="Agent Status Template" file="mailAgentStatus.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+    <template id="deleted_ticket_mail" label="Delete Ticket Template" file="deletedTicketMail.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+    <template id="notify_agent_mail" label="Agent Notify Template" file="notifyAgentMail.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+    <template id="send_agent_email_ticket_create_by_admin_template" label="Agent Ticket Create By Admin" file="mailAgentCreateByAdmin.html" type="html" module="Ced_HelpDesk" area="frontend"/>
+</config>

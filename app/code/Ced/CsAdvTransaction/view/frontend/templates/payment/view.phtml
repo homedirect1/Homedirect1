@@ -1,0 +1,144 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsAdvTransaction
+ * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php echo $this->getFormHtml();
+$currencyCode = $this->storeManager->getStore(null)->getBaseCurrencyCode();
+$rowId = $this->getRequest()->getParam('payment_id');
+$row =  $this->vpaymentFactory->create()->load($rowId)->getData();
+$description = json_decode($row['amount_desc'],true);
+$keys =[];
+foreach ($description as $k=>$v)
+{
+    if(is_array($v)){
+        foreach ($v as $k1=>$v1)
+        {
+            $keys[] = $k1;
+        }
+    }
+}
+$keys = array_unique($keys);
+$fees = $this->feeFactory->create()->getCollection()->addFieldToFilter('field_code',['in'=>$keys])->addFieldToFilter('status',1);
+?>
+ 
+<div class="panel-default view-table">
+    <h2 class="panel-heading">
+        <?php echo __('Order Details')?>
+    </h2>
+    <div class="panel-body">
+        <table class="table table-hover table-striped table-bordered">
+            <tr>
+                <th class="head"><?php echo __('OrderId');?></th>
+                <th class="head"><?php echo __('Grand Total');?></th>
+                <th class="head"><?php echo __('Commission Fee');?></th>
+                <th class="head"><?php echo __('Payment Mode');?></th>
+                <?php $feeOrders =[];
+                    foreach ($fees as $fee)
+                    {
+                        $feeOrders[] = $fee->getFieldCode();
+                        ?>
+                <?php
+                    } ?>
+                <th><?php echo __('Total Payment');?></th>
+            <tr>
+                <?php
+                    $Netamount =0;$Netservice =0;
+                    foreach ($description as $des)
+                    {
+                        if(is_array($des)) {
+                            $Netamount = $Netamount+$des['vendor_payment'];
+                            $Netservice = $Netservice+$des['service_tax'];
+                            $j= 0;
+                    
+                            ?> 
+            <tr>
+                <td><a title="Show Calculation Detail" target="_blank" href="<?php echo $this->getUrl('csadvtransaction/pay/view',['order_id'=>$des['order_id'],'vendor_id'=>$row['vendor_id'],'vpayment_id'=>$rowId]);?>"><?php echo $des['order_id']; ?></a></td>
+                <?php
+                    ?>
+                <td><?php echo $this->priceCurrency->format($des['order_total'],false,2,null,$currencyCode);?></td>
+                <?php
+                    if(isset($des['commission_fee'])){
+                        ?>
+                <td><?php echo $this->priceCurrency->format($des['commission_fee'],false,2,null,$currencyCode);?></td>
+                <?php }
+                    ?>
+                <td><?php if(isset($des['order_id'])){echo $this->helper('Ced\CsAdvTransaction\Helper\Data')->getOrderPaymentType($des['order_id']);}?></td>
+                <?php
+                    for ($k=0;$k<count($feeOrders);$k++)
+                    {
+                    
+                        ?><?php
+                    $j++;
+                    }
+                    ?>
+                <td><?php echo $this->priceCurrency->format($des['vendor_payment'],false,2,null,$currencyCode);$j++;?></td>
+            </tr>
+            <?php
+                }
+                
+                }
+                
+                ?>
+        </table>
+    </div>
+    <div class="pay-wrapper">
+        <div class="totalPay">
+        <span><b><?php echo __('Total Amount Pay :')?></b></span><span ><?php echo $this->priceCurrency->format($Netamount,false,2,null,$currencyCode); ?></span>
+    </div>
+    <div class="totalPay">
+        <span><b><?php echo __('Total Service Tax :')?></b></span><span ><?php echo $this->priceCurrency->format($Netservice,false,2,null,$currencyCode); ?></span>
+    </div>
+    </div>
+</div>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        margin-left: 178px;
+        width: 53%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    .view-table .panel-body {
+        background: #fff;
+    }
+    .view-table .panel-body .table-bordered {
+        margin: 0;
+    }
+    .pay-wrapper {
+        margin-top: 15px;
+    }
+    .pay-wrapper > div {
+        margin-bottom: 10px;
+    }
+    .pay-wrapper > div span b {
+        margin-right: 5px;
+        font-family: 'opensans-bold', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    }
+    #payment_details .hor-scroll {
+    padding: 0 0 15px 0;
+}
+</style>

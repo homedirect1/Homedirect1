@@ -1,0 +1,398 @@
+<?php
+    $cat_data = $this->getTopCategoryData();
+?>
+<form action="" method="post" enctype="multipart/form-data" id="form_save_category_component">
+    <input type="hidden" id="form_key" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+    <fieldset class="admin__fieldset"> 
+        <div class="admin__field">
+            <label class="admin__field-label" for="image_content_mode">
+                <span>
+                    <?php echo __("Image Content Mode"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='image_content_mode' id="image_content_mode" class='admin__control-select'>
+                        <option value='scaleAspectFill' <?php if(isset($cat_data['image_content_mode']) && $cat_data['image_content_mode'] == 'scaleAspectFill') echo ' selected';  ?>><?php echo __("Scale aspect fill"); ?></option>
+                        <option value='scaleAspectFit' <?php if(isset($cat_data['image_content_mode']) && $cat_data['image_content_mode'] == 'scaleAspectFit') echo ' selected';  ?>><?php echo __("Scale aspect Fit"); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="category_id_1">
+                <span>
+                    <?php echo __("Select 1st Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id_1' id="category_id_1" onchange="setCategoryId(this)" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($cat_data['category_id_1']) && $cat_data['category_id_1'] == $category['value']) echo ' selected';  ?>><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec">
+            <label class="admin__field-label" for="image_upload">
+                <span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <?php if(isset($cat_data["slideruploadedfile_1"]) && !empty($cat_data["slideruploadedfile_1"])){ ?>
+                            <img id="sliderimage_1" class="category_image_class" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$cat_data["slideruploadedfile_1"]; ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button_1" onclick="removeCatImage('1');" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove image'); ?>">
+                        <?php } else { ?>
+                            <img id="sliderimage_1" class="category_image_class" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                    </div>
+                    <input name="slideruploadedfile_1" id="slideruploadedfile_1" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="category_id_2">
+                <span>
+                    <?php echo __("Select 2nd Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id_2' id="category_id_2" onchange="setCategoryId(this)" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($cat_data['category_id_2']) && $cat_data['category_id_2'] == $category['value']) echo ' selected';  ?>><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec">
+            <label class="admin__field-label" for="image_upload">
+                <span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <?php if(isset($cat_data["slideruploadedfile_2"]) && !empty($cat_data["slideruploadedfile_2"])){ ?>
+                            <img id="sliderimage_2" class="category_image_class" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$cat_data["slideruploadedfile_2"]; ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button_2" onclick="removeCatImage('2');" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove image'); ?>">
+                        <?php } else { ?>
+                            <img id="sliderimage_2" class="category_image_class" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                    </div>
+                    <input name="slideruploadedfile_2" id="slideruploadedfile_2" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="category_id_3">
+                <span>
+                    <?php echo __("Select 3rd Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id_3' id="category_id_3" onchange="setCategoryId(this)" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($cat_data['category_id_3']) && $cat_data['category_id_3'] == $category['value']) echo ' selected';  ?>><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec">
+            <label class="admin__field-label" for="image_upload">
+                <span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <?php if(isset($cat_data["slideruploadedfile_3"]) && !empty($cat_data["slideruploadedfile_3"])){ ?>
+                            <img id="sliderimage_3" class="category_image_class" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$cat_data["slideruploadedfile_3"]; ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button_3" onclick="removeCatImage('3');" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove image'); ?>">
+                        <?php } else { ?>
+                            <img id="sliderimage_3" class="category_image_class" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                    </div>
+                    <input name="slideruploadedfile_3" id="slideruploadedfile_3" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="category_id_4">
+                <span>
+                    <?php echo __("Select 4th Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id_4' id="category_id_4" onchange="setCategoryId(this)" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($cat_data['category_id_4']) && $cat_data['category_id_4'] == $category['value']) echo ' selected';  ?>><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec">
+            <label class="admin__field-label" for="image_upload">
+                <span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <?php if(isset($cat_data["slideruploadedfile_4"]) && !empty($cat_data["slideruploadedfile_4"])){ ?>
+                            <img id="sliderimage_4" class="category_image_class" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$cat_data["slideruploadedfile_4"]; ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button_4" onclick="removeCatImage('4');" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove image'); ?>">
+                        <?php } else { ?>
+                            <img id="sliderimage_4" class="category_image_class" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                    </div>
+                    <input name="slideruploadedfile_4" id="slideruploadedfile_4" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="category_id_5">
+                <span>
+                    <?php echo __("Select 5th Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id_5' id="category_id_5" onchange="setCategoryId(this)" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($cat_data['category_id_5']) && $cat_data['category_id_5'] == $category['value']) echo ' selected';  ?>><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec">
+            <label class="admin__field-label" for="image_upload">
+                <span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <?php if(isset($cat_data["slideruploadedfile_5"]) && !empty($cat_data["slideruploadedfile_5"])){ ?>
+                            <img id="sliderimage_5" class="category_image_class" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$cat_data["slideruploadedfile_5"]; ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button_5" onclick="removeCatImage('5');" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove image'); ?>">
+                        <?php } else { ?>
+                            <img id="sliderimage_5" class="category_image_class" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                    </div>
+                    <input name="slideruploadedfile_5" id="slideruploadedfile_5" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="category_id_6">
+                <span>
+                    <?php echo __("Select 6th Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id_6' id="category_id_6" onchange="setCategoryId(this)" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($cat_data['category_id_6']) && $cat_data['category_id_6'] == $category['value']) echo ' selected';  ?>><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec">
+            <label class="admin__field-label" for="image_upload">
+                <span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <?php if(isset($cat_data["slideruploadedfile_6"]) && !empty($cat_data["slideruploadedfile_6"])){ ?>
+                            <img id="sliderimage_6" class="category_image_class" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$cat_data["slideruploadedfile_6"]; ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button_6" onclick="removeCatImage('6');" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove image'); ?>">
+                        <?php } else { ?>
+                            <img id="sliderimage_6" class="category_image_class" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                    </div>
+                    <input name="slideruploadedfile_6" id="slideruploadedfile_6" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="category_id_7">
+                <span>
+                    <?php echo __("Select 7th Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id_7' id="category_id_7" onchange="setCategoryId(this)" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($cat_data['category_id_7']) && $cat_data['category_id_7'] == $category['value']) echo ' selected';  ?>><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec">
+            <label class="admin__field-label" for="image_upload">
+                <span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <?php if(isset($cat_data["slideruploadedfile_7"]) && !empty($cat_data["slideruploadedfile_7"])){ ?>
+                            <img id="sliderimage_7" class="category_image_class" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$cat_data["slideruploadedfile_7"]; ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button_7" onclick="removeCatImage('7');" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove image'); ?>">
+                        <?php } else { ?>
+                            <img id="sliderimage_7" class="category_image_class" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                    </div>
+                    <input name="slideruploadedfile_7" id="slideruploadedfile_7" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin__field">
+            <label class="admin__field-label" for="category_id_8">
+                <span>
+                    <?php echo __("Select 8th Category"); ?>
+                </span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__control">
+                    <select name='category_id_8' id="category_id_8" onchange="setCategoryId(this)" class='admin__control-select'>
+                        <?php foreach ($this->getCategories() as $category){ ?>
+                            <option value='<?php echo $category['value']; ?>' <?php if(isset($cat_data['category_id_8']) && $cat_data['category_id_8'] == $category['value']) echo ' selected';  ?>><?php echo $category['label']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin__field image_upload_sec">
+            <label class="admin__field-label" for="image_upload">
+                <span>
+                    <?php echo __("Upload Image")?></span>
+            </label>
+            <div class="admin__field-control">
+                <div class="admin__actions-switch">
+                    <div class="banner_block">
+                        <?php if(isset($cat_data["slideruploadedfile_8"]) && !empty($cat_data["slideruploadedfile_8"])){ ?>
+                            <img id="sliderimage_8" class="category_image_class" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$cat_data["slideruploadedfile_8"]; ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button_8" onclick="removeCatImage('8');" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove image'); ?>">
+                        <?php } else { ?>
+                            <img id="sliderimage_8" class="category_image_class" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;max-width: 200px;height: 100px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                    </div>
+                    <input name="slideruploadedfile_8" id="slideruploadedfile_8" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                </div>
+            </div>
+        </div>
+        
+        <div id="show_error"></div>
+    </fieldset>
+</form>
+
+<script type="text/javascript">
+    var default_file_size = 2097152;
+    var blank_category_image = '<?php echo __("Please Upload Image For Category."); ?>';
+    var default_image = '<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>';
+    require(['jquery'], function($){
+	$(document).ready(function(){
+		$('#slideruploadedfile_1-selectbutton').click(function(e) {
+			$('#slideruploadedfile_1').trigger('click');
+		});
+
+		$('#slideruploadedfile_1-name').click(function(e) {
+			$('#slideruploadedfile_1').trigger('click');
+		});
+
+		$('#slideruploadedfile_1-name').on('dragenter', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+		});
+
+		$('#slideruploadedfile_1-name').on('dragover', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+		});
+
+		$('#slideruploadedfile_1-name').on('drop', function(e) {
+			e.preventDefault();
+			var files = e.originalEvent.dataTransfer.files;
+			$('#slideruploadedfile_1')[0].files = files;
+			$(this).val(files[0].name);
+		});
+
+		$('#slideruploadedfile_1').change(function(e) {
+			if ($(this)[0].files !== undefined)
+			{
+				var files = $(this)[0].files;
+				var name  = '';
+
+				$.each(files, function(index, value) {
+					name += value.name+', ';
+				});
+
+				$('#slideruploadedfile_1-name').val(name.slice(0, -2));
+			}
+			else // Internet Explorer 9 Compatibility
+			{
+				var name = $(this).val().split(/[\\/]/);
+				$('#slideruploadedfile_1-name').val(name[name.length-1]);
+			}
+		});
+
+		if (typeof slideruploadedfile_1_max_files !== 'undefined')
+		{
+			$('#slideruploadedfile_1').closest('form').on('submit', function(e) {
+				if ($('#slideruploadedfile_1')[0].files.length > slideruploadedfile_1_max_files) {
+					e.preventDefault();
+					alert('You can upload a maximum of  files');
+				}
+			});
+		}
+	});
+    });
+    
+     function removeCatImage(id){
+        window.input_field_id = id;
+        require(['jquery'], function($){
+           var confirm_msg = '<?php echo __("Are your sure?"); ?>';
+                if(confirm(confirm_msg)){
+                    var default_image = '<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>';
+                    $("#sliderimage_"+window.input_field_id).attr('src', default_image);
+                    $("#sliderimage_"+window.input_field_id).hide();
+                    $("#sliderimage_"+window.input_field_id).fadeIn(650);
+                    $("#remove-button_"+window.input_field_id).hide();
+                } 
+        });
+    }
+</script>

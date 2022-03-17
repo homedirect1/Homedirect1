@@ -1,0 +1,150 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+?>
+
+<?php  $comission =$block->getAmount();
+if($comission[0]['total_amount'] && $comission[0]['total_amount']>0){
+	$comissionAmount = $comission[0]['total_amount'];
+}
+else{
+	$comissionAmount = 0.00;
+} 
+?>
+<div class="aff-title">
+	<h2><? echo __('Commission') ?></h2>
+</div>
+<form id="form_edit" class="form_edit" method="post"
+	action="<?php echo $this->getUrl('affiliate/withdrawl/request',array('affiliateId'=>$block->getAffiliateId())) ?>">
+	<div class="affiliate_withdrawl_request">
+		<div class="block">
+			<div class="block-title">
+				<strong><?php echo __('Balance') ?></strong>
+			</div>
+		</div>
+		<div class="ced-aff-commission-wrap">
+			<div class="affiliate-balance-wrapper">
+				<div class="total-balance ced-balance">
+					<strong><?php echo __('Total Amount')?></strong> <span
+						class="price"><?php echo $block->getFormattedPrice($comissionAmount);?></span>
+				</div>
+
+
+				<div class="total-balance  earned-balance ced-balance">
+					<strong><?php echo __('Total Amount Earned')?></strong> <span
+						class="price"><?php echo $block->getFormattedPrice($block->getAmountHistory()[0]['earned_amount']);?></span>
+				</div>
+
+
+
+				<div class="remaining-balance ced-balance">
+					<strong><?php echo __('Remaining Amount')?></strong> <span
+						class="price"><?php echo $block->getFormattedPrice($comissionAmount-$block->getAmountHistory()[0]['earned_amount']);?></span>
+				</div>
+			</div>
+			<?php if($block->isAllowedForRequest()):?>
+			<input type="hidden"
+				value="<?php echo $comissionAmount-$block->getAmountHistory()[0]['earned_amount']?>"
+				name="totalamount">
+			<div class="withdrwal-form">
+				<div class="amount-value">
+					<input id="request_amount" name="amount" value=""
+						class="required required-entry"
+						placeholder="<?php echo __('Enter Amount')?>"
+						data-validate="{'required-number':true, 'validate-greater-than-zero':true}"
+						type="text">
+				</div>
+				<div class="payment-methods">
+					<!-- <span>
+						<?php //echo __('Select payment Method')?>
+					</span> -->
+					<select id="active-payment"
+						class="active-payment required required-entry"
+						name="payment_method">
+						<?php foreach($block->getActivePayment() as $methodCode=> $_paymentmethod):?>
+						<option value="<?php echo $methodCode?>"><?php echo $_paymentmethod;?></option>
+						<?php endforeach;?>
+					</select>
+				</div>
+				<div class="request-withrawal">
+					<button class="button button-config request-amount action primary"
+						title="Request Withdrawal" type="submit">
+						<span><?php echo __('Request Withdrawal')?></span>
+					</button>
+				</div>
+			</div>
+		
+	<?php endif;?>
+	</div>
+</div>
+</form>
+<div class="withdrawl-request-checkbox">
+	<input type="checkbox" class="checkbox wallet-checkbox" name="checkbox"></input>
+	<span> <label><?php echo __('See Withdrawal Policy')?></label>
+	</span>
+</div>
+<div class="affiliate-withdrawl-view-wrapper" style="display:none;">
+	<div class="block">
+		<div class="block-title">
+			<strong><?php echo __('Withdrawal Policy') ?></strong>
+		</div>
+	</div>
+	<div class="affiliate-withdrawl-policy">
+		<ul>
+			<li>
+				<?php echo __('You can request for withdrawal when you have minimum %1 balance in your account',$block->getMinBalance())?>
+			</li>
+			<li>
+			<?php echo __('You cannot request for another withdrawal until you do not have any pending request')?>
+			</li>
+			<li>
+			<?php echo __('You have a authority to cancel request within %1 days',$block->getDays())?>
+			</li>
+		</ul>
+	</div>
+</div>
+<script>
+
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+         var dataForm = $('#form_edit');
+         var ignore = null;
+         dataForm.mage('validation', {
+                 ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+             }).find('input:text').attr('autocomplete', 'off');
+
+     });
+</script>
+<script>
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+	$(".withdrawl-request-checkbox").on('click', '.wallet-checkbox',function(){	
+	if($(this).is(':checked')){
+		$('.affiliate-withdrawl-view-wrapper').show();
+	} else {
+		$('.affiliate-withdrawl-view-wrapper').hide();
+	}  
+	});
+ });
+</script>

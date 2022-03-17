@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--codes for customer register success-->
+    <event name="customer_register_success">
+        <observer name="Ced_CsSms_Customer_Register_Success" instance="Ced\CsSms\Observer\CustomerRegisterSuccess" />
+    </event>
+    <!--codes for vendor new product creation-->
+    <event name="csmarketplace_vendor_new_product_creation">
+        <observer name="Ced_CsSms_new_vendor_product_creation" instance="Ced\CsSms\Observer\VendorNewProductCreation" />
+    </event>
+    <!--codes for vendor payment succes-->
+    <event name="csmarketplace_vpayments_save_after">
+        <observer name="Ced_CsSms_vendor_payment_save" instance="Ced\CsSms\Observer\NewVendorPaymentSaved" />
+    </event>
+    <!--codes for order confirmation message-->
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="Ced_CsSms_Order_Created" instance="Ced\CsSms\Observer\SendSmsOnOrderCreated" />
+    </event>
+    <event name="customer_register_successfully">
+             <observer name="Ced_CsSms_Vendor_Register_Success" instance="Ced\CsSms\Observer\VendorRegisterSuccess" />
+     </event>
+</config>

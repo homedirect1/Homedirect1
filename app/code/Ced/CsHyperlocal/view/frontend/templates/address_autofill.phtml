@@ -1,0 +1,60 @@
+<?php
+$savedLocationFromSession = $this->helper('Ced\CsHyperlocal\Helper\Data')->getShippingLocationFromSession();
+$countryId = '';
+if(!empty($savedLocationFromSession))
+    $countryId = $this->helper('Ced\CsHyperlocal\Helper\Data')->getCountryId($savedLocationFromSession['country']);
+?>
+<script>
+    require([
+        'jquery',
+    ], function ($) {
+        $(document).ready(function () {
+
+            $("input[name='city']").prop('disabled', true);
+            $("select[name='region_id']").prop('disabled', 'disabled');
+            $("select[name='country_id']").prop('disabled', 'disabled');
+
+            let bodySelector = $('body');
+
+            bodySelector.on("click", "input[name='street[0]']", function () {
+
+                let city = '<?= $savedLocationFromSession['city'] ?>';
+                let state = '<?= $savedLocationFromSession['state'] ?>';
+                let country = '<?= $countryId ?>';
+
+                if (city != null) {
+
+                    $("input[name='city']").val(city);
+                    $("input[name='city']").trigger("change");
+                }
+                if (state != null) {
+
+                    $("input[name='region']").val(state);
+                    $("input[name='region']").trigger("change");
+
+                    if ($("select[name='region_id'] option:contains(" + state + ")")) {
+                        var RegionId = setInterval(function () {
+                            if ($("select[name='region_id'] option:contains(" + state + ")").length > 0) {
+                                $("select[name='region_id'] option:contains(" + state + ")").prop('selected', true);
+                                $("select[name='region_id']").trigger('change');
+                                clearInterval(RegionId);
+                            }
+                        }, 100);
+                    }
+                }
+
+            if (country != null) {
+
+                $("select[name='country_id']").val(country);
+                $("select[name='country_id']").trigger('change');
+
+            }
+
+            $("input[name='city']").prop('disabled', true);
+            $("select[name='region_id']").prop('disabled', 'disabled');
+            $("select[name='country_id']").prop('disabled', 'disabled');
+        });
+    });
+    })
+    ;
+</script>

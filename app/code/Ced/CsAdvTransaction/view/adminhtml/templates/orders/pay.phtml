@@ -1,0 +1,140 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsAdvTransaction
+ * @author     CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<style>
+    .payvendor {
+        float: right;
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+</style>
+<?php
+$vid = $block->getVendorId();
+
+$vendor = $block->getVendor();
+$vname = $vendor->getName();
+?>
+
+<div>
+
+    <?php $eligibleOrders = $block->getVendorEligibleOrders()->getData();
+    $currencyCode = $this->_storeManager->getStore(null)->getBaseCurrencyCode();
+    $PaytoVendor = 0;
+    $serviceTax = 0;
+    foreach ($eligibleOrders as $orders) {
+        $orIds = [];
+        $orIds[] = $orders['order_id'];
+        if ($orders['payment_state'] == 1) {
+            if ($this->helper('Ced\CsAdvTransaction\Helper\Data')->getOrderPaymentType($orders['order_id']) == "PostPaid") {
+
+                $postPaiddetails = $this->helper('Ced\CsAdvTransaction\Helper\Data')->getPostPaidAmount($orders);
+                $postPaidtoVendor = $postPaiddetails['post_paid'];
+                $vendorEarn = $orders['vendor_earn'];
+                $payShip = $this->scopeConfig->getValue('ced_csmarketplace/vadvtransaction/pay_shipping');
+                $shipamount = 0;
+                if ($payShip) {
+
+                    $shipamount = $postPaiddetails['ship_amount'];
+                    if ($postPaiddetails['ship_type'] == 'admin') {
+                        $shipamount = 0;
+                    }
+                    $vendorPay = $vendorEarn - $postPaidtoVendor + $shipamount;
+                } else {
+                    $shipamount = $postPaiddetails['ship_amount'];
+
+                    $vendorPay = $vendorEarn - $postPaidtoVendor;
+                }
+
+
+            } else {
+
+                $PaidtoVendor = 0;
+
+                $vendorEarn = $orders['vendor_earn'];
+                $payShip = $this->scopeConfig->getValue('ced_csmarketplace/vadvtransaction/pay_shipping');
+                $vendorPay = $vendorEarn - $PaidtoVendor;
+                if ($payShip) {
+
+                    $shipping = $this->helper('Ced\CsAdvTransaction\Helper\Data')->getPostPaidAmount($orders);
+                    $ship = $shipping['ship_amount'];
+                    if ($shipping['ship_type'] == 'admin') {
+                        $ship = 0;
+                    }
+                    $vendorPay = $vendorPay + $ship;
+                }
+
+
+            }
+
+
+        } elseif ($orders['payment_state'] == 3) {
+            $postPaidtoVendor = 0;
+            $vendorEarn = $orders['vendor_earn'];
+            $vendorPay = $vendorEarn - $postPaidtoVendor;
+
+        }
+        if ($orders['payment_state'] == 4) {
+
+
+            $PaidtoVendor = 0;
+
+            $vendorEarn = $orders['vendor_earn'];
+            $vendorPay = $vendorEarn - $PaidtoVendor;
+
+
+        }
+        $serviceTax = $this->helper('Ced\CsAdvTransaction\Helper\Data')->getServiceTax($orIds, $vid);
+        $PaytoVendor = $PaytoVendor - $serviceTax;
+        $PaytoVendor = $PaytoVendor + $vendorPay;
+
+    }
+
+    ?>
+</div>
+<form id="transaction_form" action="<?php echo $this->getUrl('csadvtransaction/pay/new', ['vendor_id' => $vid]); ?>"
+      method="post">
+    <input name="form_key" type="hidden" value="<?php echo $this->formKey->getFormKey(); ?>">
+    <label class="label"><span><?php echo __('Total Amount to Pay'); ?>:</span></label>
+
+    <div class="payvendor">
+        <input class="action-secondary " type="submit" value="Continue Payment To Vendor">
+    </div>
+    <span><?php echo $currencyCode; ?></span><input id="csadvtransaction_vendor_total" name="total"
+                                                    class="required-entry input-text validate-greater-than-zero admin__control-text required-entry _required"
+                                                    value="<?php echo $PaytoVendor; ?>" readonly="readonly" type="text">
+    <span><?php echo __('Service Tax') ?>: </span><span><?php echo $currencyCode; ?></span><span><?php echo $serviceTax; ?></span>
+    <input type='hidden' name='eligible_orders' value="<?php echo htmlentities(serialize($eligibleOrders)); ?>"/>
+
+</form>
+<script type="text/javascript">
+
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+
+        var dataForm = $('#transaction_form');
+
+        dataForm.mage('validation', {}).find('input:text').attr('autocomplete', 'off');
+
+        var form = document.getElementById("transaction_form");
+
+
+    });
+
+</script>

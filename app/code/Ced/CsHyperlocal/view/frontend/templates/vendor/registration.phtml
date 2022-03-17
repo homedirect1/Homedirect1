@@ -1,0 +1,246 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php if ($this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::MODULE_ENABLE)): ?>
+    <?php $filterType = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::FILTER_TYPE); ?>
+    <?php $distnace = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::FILTER_RADIUS); ?>
+    <?php $distnaceType = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::DISTANCE_TYPE); ?>
+    <?php if ($filterType == 'distance') :  ?>
+        <div style="display: none" class="location-note-wrapper" id="distance-range-wrapper"><?php echo __('Note : You will receive orders within '.$distnace.$distnaceType.' from this location')?></div>
+    <?php endif; ?>
+
+    <script>
+        require([
+            'jquery',
+        ], function ($) {
+
+            /** Set readonly vendor attribute latitude and longitude **/
+
+            var Fields = setInterval(function () {
+                if ($('#ced-latitude-field').length > 0 && $('#ced-longitude-field').length > 0)
+                {
+                    $('#ced-latitude-field').attr('readonly',true);
+                    $('#ced-longitude-field').attr('readonly',true);
+                    clearInterval(Fields);
+                }
+            });
+
+
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'ced-city-field',
+                name: 'vendor[city]',
+                value: "",
+            }).appendTo('#form-validate');
+
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'ced-state-field',
+                name: 'vendor[state]',
+                value: "",
+            }).appendTo('#form-validate');
+
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'ced-country-field',
+                name: 'vendor[country]',
+                value: "",
+            }).appendTo('#form-validate');
+
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'ced-zipcode-field',
+                name: 'vendor[zipcode]',
+                value: "",
+            }).appendTo('#form-validate');
+
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'ced-zipcode-type-field',
+                name: 'vendor[zipcode_type]',
+                value: "",
+            }).appendTo('#form-validate');
+
+
+            var DistanceRangeDiv = setInterval(function () {
+                if ($('#distance-range-wrapper').length > 0 && $('#ced-location-field').length > 0) {
+                    $('#distance-range-wrapper').appendTo('#ced-location .input-box');
+                    $('#distance-range-wrapper').show();
+                    clearInterval(DistanceRangeDiv);
+                }
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+        var map = null;
+        function initialize() {
+            var geocoder = new google.maps.Geocoder();
+            var position = new google.maps.LatLng(50.45, 4.45);
+
+            navigator.geolocation.getCurrentPosition(locationFound, locationNotFound, {
+                enableHighAccuracy: true,
+                maximumAge: 10000
+            });
+
+            function locationFound(position) {
+
+                var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                });
+                geocodePosition(marker.getPosition());
+
+                document.getElementById('ced-longitude-field').value = position.coords.longitude;
+                document.getElementById('ced-latitude-field').value = position.coords.latitude;
+            }
+
+            function locationNotFound(failure) {
+                //alert(failure.message);
+            }
+
+            function geocodePosition(pos) {
+                geocoder.geocode({
+                    latLng: pos
+                }, function (responses) {
+                    if (responses && responses.length > 0) {
+                        document.getElementById('ced-location-field').value = responses[0].formatted_address;
+                        var arrAddress = responses[0].address_components;
+
+                        jQuery.each(arrAddress, function (i, address_component) {
+                            if (address_component.types[0] == "administrative_area_level_2") {
+                                jQuery('#form-validate').find('#ced-city-field').val(address_component.long_name);
+                            }
+                            if (address_component.types[0] == "administrative_area_level_1") {
+                                jQuery('#form-validate').find('#ced-state-field').val(address_component.long_name);
+                            }
+                            if (address_component.types[0] == "country") {
+                                jQuery('#form-validate').find('#ced-country-field').val(address_component.long_name);
+                            }
+                            if (address_component.types[0] == "postal_code") {
+                                jQuery('#form-validate').find('#ced-zipcode-field').val(address_component.long_name);
+                            }
+                        });
+                        jQuery('#ced-zipcode-type-field').val('single');
+
+
+                        document.getElementById('ced-latitude-field').readOnly = true;
+                        document.getElementById('ced-longitude-field').readOnly = true;
+                    } else {
+                        alert('Cannot determine address at this location.');
+                    }
+                });
+            }
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        function showlocation() {
+            jQuery(".search_form").show();
+            var a = navigator.geolocation.getCurrentPosition(callback);
+            jQuery('.search_form_overlay').show();
+        }
+
+        function callback(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            initMap();
+            var latLong = new google.maps.LatLng(lat, lon);
+
+            var marker = new google.maps.Marker({
+                position: latLong
+            });
+
+            marker.setMap(map);
+
+            map.setZoom(6);
+            map.setCenter(marker.getPosition());
+        }
+
+        google.maps.event.addDomListener(window, 'load', initMap);
+        var selectedLocation = false;
+        function initMap() {
+            var input = document.getElementById('ced-location-field');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                selectedLocation = true;
+                var place = autocomplete.getPlace();
+                document.getElementById('ced-latitude-field').value = place.geometry.location.lat();
+                document.getElementById('ced-longitude-field').value = place.geometry.location.lng();
+                var arrAddress = place.address_components;
+                var zipcode = false;
+                var city = false;
+                var state = false;
+                var country = false;
+                jQuery.each(arrAddress, function (i, address_component) {
+                    if (address_component.types[0] == "administrative_area_level_2") {
+                        city =true;
+                        jQuery('#form-validate').find('#ced-city-field').val(address_component.long_name);
+                    }
+                    if (address_component.types[0] == "administrative_area_level_1") {
+                        state =true;
+                        jQuery('#form-validate').find('#ced-state-field').val(address_component.long_name);
+                    }
+                    if (address_component.types[0] == "country") {
+                        country =true;
+                        jQuery('#form-validate').find('#ced-country-field').val(address_component.long_name);
+                    }
+                    if (address_component.types[0] == "postal_code") {
+                        zipcode =true;
+                        jQuery('#form-validate').find('#ced-zipcode-field').val(address_component.long_name);
+                    }
+                });
+                jQuery('#ced-zipcode-type-field').val('single');
+
+                if (!zipcode)
+                {
+                    jQuery('#form-validate').find('#ced-zipcode-field').val('');
+                }
+
+                if (!city)
+                {
+                    jQuery('#form-validate').find('#ced-city-field').val('');
+                }
+
+                if (!state)
+                {
+                    jQuery('#form-validate').find('#ced-state-field').val('');
+                }
+
+                if (!country)
+                {
+                    jQuery('#form-validate').find('#ced-country-field').val('');
+                }
+
+                document.getElementById('ced-latitude-field').readOnly = true;
+                document.getElementById('ced-longitude-field').readOnly = true;
+            });
+
+            jQuery('#ced-location-field').on('focus', function() {
+                selectedLocation = false;
+            }).on('blur', function() {
+                if (!selectedLocation) {
+                    jQuery(this).val('');
+                }
+            });
+
+
+        }
+
+    </script>
+<?php endif; ?>

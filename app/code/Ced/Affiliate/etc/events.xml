@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">	
+	<event name="cms_page_render">
+        <observer name="ced_affiliate_observer" instance="Ced\Affiliate\Observer\CmsPage" shared="false"/>
+    </event>
+    <event name="checkout_onepage_controller_success_action">
+	        <observer name="set_order_comission" instance="Ced\Affiliate\Observer\SetComission" shared="false"/>
+	 </event>
+	 <event name="sales_order_save_after">
+	        <observer name="change_order_comission_status" instance="Ced\Affiliate\Observer\ChangeStatus" shared="false"/>
+	 </event>
+	<!--  <event name="sales_quote_collect_totals_after">
+        <observer name="set_customermembership_discount" instance="Ced\Affiliate\Observer\ApplyDiscount" shared="false"/>
+	</event>  -->
+	<event name="sales_order_save_before">
+        <observer name="affiliate_sales_order_save_before" instance="Ced\Affiliate\Observer\Discount" shared="false" />
+	</event>
+	<event name="customer_delete_after">
+        <observer name="affiliate_account_delete" instance="Ced\Affiliate\Observer\DeleteAffiliate" shared="false" />
+    </event>
+</config>

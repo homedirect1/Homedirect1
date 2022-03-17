@@ -1,0 +1,55 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+<!-- /**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_CsAdvTransaction
+  * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */ -->
+    <system>
+        <section id="ced_csmarketplace"  showInDefault="1">
+            <group id="general"  showInDefault="1">
+                <field id="csadvtransaction" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Vendor Advance Transaction System</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+           <group id="vadvtransaction" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Vendor Advance Transaction System</label>
+			     <field id="refund_policy" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Refund Policy Date</label>
+                     <comment>In Days</comment>
+                 </field>
+                  <field id="pay_shipping" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Pay for Shipping to Vendor</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This option only valid if vendor has shipping method</comment>
+                </field>
+			     <field id="pay_cycle" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Payment Cycle Time</label>
+                    <comment>In Days</comment>
+                </field>   
+                <field id="postpaid_paymethod" translate="label" type="multiselect" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                   <label>Vendor Pay(Post Paid) Payment Methods</label>
+                    <source_model>Ced\CsAdvTransaction\Model\Source\Paymethods</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <comment>Select Payment Methods for which the whole amount will directly go to vendors.</comment>
+                </field>   
+                <field id="vendor_taxes" translate="label comment tooltip" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor Tax</label>
+                    <frontend_model>Ced\CsAdvTransaction\Block\System\Config\Tax</frontend_model>
+                     <backend_model>Ced\CsAdvTransaction\Model\Backend\Tax</backend_model> 
+               </field>   
+            </group>
+		</section> 
+    </system>
+</config>

@@ -1,0 +1,83 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_Recurring
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+
+?>
+<fieldset class="fieldset info wk-mp-fieldset">
+    <div class="grid">
+        <?php if ($block->getCollection()->getSize() > 0) { ?>
+            <table cellspacing="0" class="data table border wk-mp-list-table wk-mp-list-container-table">
+                    <thead>
+                        <tr class="wk-content">
+                            <th><span><?= $block->escapeHtml(__('ID')) ?></span></th>
+                            <th><span><?= $block->escapeHtml(__('Order Id')) ?></span></th>
+                            <th><span><?= $block->escapeHtml(__('Reference Profile Id')) ?></span></th>
+                            <th><span><?= $block->escapeHtml(__('Product Name')) ?></span></th>
+                            <th><span><?= $block->escapeHtml(__('Subscription Type')) ?></span></th>
+                            <th><span><?= $block->escapeHtml(__('Status')) ?></span></th>
+                            <th><span>&nbsp;<?= $block->escapeHtml(__('Action')) ?></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($block->getCollection() as $model) { ?>
+                            <tr class="wk-row-view">
+                            <td  class="wk-check-first-td">
+                                <?= /* @noEscape */ $model->getId(); ?>
+                            </td>
+                            <td  class="wk-check-first-td">
+                                <?= /* @noEscape */ $block->getOrderId($model->getOrderId()); ?>
+                            </td>
+                            <td  class="wk-check-first-td">
+                                <?= /* @noEscape */ ($model->getRefProfileId()) ? $model->getRefProfileId() : "-"; ?>
+                            </td>
+                            <td  class="wk-check-last-td">
+                                <?= /* @noEscape */ ($block->getProductName($model->getProductId()))
+                                 ? $block->getProductName($model->getProductId())
+                                 : $model->getProductName(); ?>
+                            </td>
+                            <td  class="wk-check-last-td">
+                                <?= /* @noEscape */ $block->getTypeName($model->getPlanId()); ?>
+                            </td>
+                            <td  class="wk-check-last-td">
+                                <?= /* @noEscape */ $block->getStatus($model->getStatus()); ?>
+                            </td>
+                            <td class="wk-check-last-td">
+                                <a href="<?= /* @noEscape */ $block->getRowUrl($model->getId()); ?>">
+                                    <?= $block->escapeHtml(__("View")) ?>
+                                </a>|<?php if ($model->getStatus()): ?>
+                                    <a onclick="return confirm('<?=
+                                            $block->escapeHtml(__('Do you want to Unsubscribe?')) ?>')"
+                                       href="<?= /* @noEscape */ $block->getUnsubscribeUrl().
+                                            'id/'.$model->getId().'/from/manage' ?>">
+                                        <span><span><?= $block->escapeHtml(__("UnSubscribe")) ?></span></span>
+                                    </a>
+                                <?php else: ?>
+                                        <span><span><?= $block->escapeHtml(__("UnSubscribed")) ?></span></span>
+                                <?php endif; ?>
+                            </td>
+                            </tr>
+                        <?php }  ?>
+                    </tbody>
+            </table>
+            <?php /* @noEscape */ $block->getPagerHtml(); ?>
+        <?php } else { ?>
+            <div class="message info empty">
+                <span><?= $block->escapeHtml(__("You have Placed No Subscriptions")) ?></span>
+            </div>
+        <?php } ?>
+    </div>
+</fieldset>
+<script type="text/x-magento-init">
+{
+    "*" : {
+            "Webkul_Recurring/js/manage": ""
+    }
+}
+</script>

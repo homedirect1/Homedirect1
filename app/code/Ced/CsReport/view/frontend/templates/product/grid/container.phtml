@@ -1,0 +1,108 @@
+<?php 
+
+$post = $this->getRequest()->getPost();
+?>
+<form action = '<?php echo $block->getUrl("csreport/sales/index", ["_use_rewrite" => true])?>' method="post" id='filter_form'>
+<div id="base_fieldset" class="fieldset ">
+    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+            <tbody>
+                <tr>
+        <td class="label"><label for="from">From </label></td>
+    <td class="value">
+        <?php 
+            $from = $block->getRequest()->getParam('from');
+            $to = $block->getRequest()->getParam('to');
+        ?>
+        <input type="text" class="text-box validate-date calendarInput" title="From" value="<?= $from?>" id="from" name="from"> 
+        <span class="required"></span>
+        </td>
+    </tr>
+<tr>
+        <td class="label"><label for="to">To</label></td>
+    <td class="value">
+    <?php 
+		$FormKey = $this->helper('Ced\CsReport\Helper\Data');
+	?> 
+    <input type="hidden" name="form_key" value="<?php echo $FormKey->getKey()?>" />
+        <input type="text" class="text-box validate-date calendarInput" title="To" value="<?php echo $to;?>" id="to" name="to">
+         </td>
+    </tr>
+            </tbody>
+        </table>
+            </div>
+        </div>
+    
+     <div></div>
+</form>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $this->getHeaderHtml() ?></td>
+            <td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+
+
+<div>
+    <?php echo $this->getGridHtml() ?>
+</div>
+
+
+<script type="text/javascript">
+    function filter()
+    {
+        //var action = '<?php echo $block->getUrl("csreport/sales/index", ["_use_rewrite" => true]) ?>';
+        var action = '<?php echo $this->getFilterActionUrl(); ?>';
+        var from = document.getElementById('from').value;
+        var to = document.getElementById('to').value;
+        var name = document.getElementById('vendor_id').value;
+        window.location.href = action+'from/'+from+'/to/'+to+'/vendor_id/'+name;
+    }
+    function exportCsv(){
+       // var action = '<?php echo $block->getUrl("csreport/sales/exportCsv", ["_use_rewrite" => true]) ?>';
+       var action = '<?php echo $this->getExportCsvAction(); ?>';
+        var from = '<?= $block->getRequest()->getParam("from")?>';
+        var to = '<?= $block->getRequest()->getParam("to")?>';
+        var vendor_id = '<?= $block->getRequest()->getParam("vendor_id")?>';
+        window.location.href = action+'from/'+from+'/to/'+to+'/vendor_id/'+vendor_id;
+    }
+</script>
+
+<script>
+     require([
+         "jquery",
+         "mage/calendar"
+    ], function($){
+        $("#to").calendar({
+             buttonText:"<?php echo __('Select Date') ?>",
+             dateFormat: 'yy-mm-dd',
+        });
+      });
+    require([
+             "jquery",
+             "mage/calendar"
+        ], function($){
+            $("#from").calendar({
+                 buttonText:"<?php echo __('Select Date') ?>",
+                 dateFormat: 'yy-mm-dd',
+            });
+          });
+</script>
+<style>
+    .form-list{
+        width: 100%;
+    }
+    .text-box {
+        width: 220px;
+        height:37px;
+    }
+    #vendor-name{
+    	height:37px;
+    }
+    .select{
+        width: 220px;
+        height:37px;   
+    }
+</style>

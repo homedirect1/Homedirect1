@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!--
+
+ CedCommerce
+
+ NOTICE OF LICENSE
+
+ This source file is subject to the End User License Agreement (EULA)
+ that is bundled with this package in the file LICENSE.txt.
+ It is also available through the world-wide-web at this URL:
+ https://cedcommerce.com/license-agreement.txt
+
+ @author    CedCommerce Core Team <connect@cedcommerce.com>
+ @copyright Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ @license   https://cedcommerce.com/license-agreement.txt
+
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ced_groupbuying_grid.ced_groupbuying_grid_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>ced_groupbuying_grid_columns</spinner>
+        <deps>
+            <dep>ced_groupbuying_grid.ced_groupbuying_grid_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="ced_groupbuying_grid_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="cacheRequests" xsi:type="boolean">false</param>
+                <param name="indexField" xsi:type="string">group_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Ced\GroupBuying\Ui\Component\Listing\DataProviders\Ced\Groupbuying\Grid" name="ced_groupbuying_grid_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>group_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <columnsControls name="columns_controls"/>
+        <bookmark name="bookmarks"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction"
+                    component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="groupbuying/groupbuyinggrid/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="status">
+                <settings>
+                    <type>status</type>
+                    <label translate="true">Change status</label>
+                    <actions>
+                        <action name="0">
+                            <type>enable</type>
+                            <label translate="true">Approve</label>
+                            <url path="groupbuying/groupbuyinggrid/massStatus">
+                                <param name="status">1</param>
+                            </url>
+                        </action>
+                        <action name="1">
+                            <type>disable</type>
+                            <label translate="true">Disapprove</label>
+                            <url path="groupbuying/groupbuyinggrid/massStatus">
+                                <param name="status">0</param>
+                            </url>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="ced_groupbuying_grid_columns">
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>group_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="group_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="owner_customer_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Group Admin Customer ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="original_product_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Product ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="receiver_name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Admin Name</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="gift_receiver_email">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Admin Email</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="group_size">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Group Capacity</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="start_date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Start Date</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="end_date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">End Date</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="is_approve">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Group Approval Status</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Ced\GroupBuying\Ui\Component\Listing\Column\Cedgroupbuyinggrid\PageActions" sortOrder="200">
+            <settings>
+                <indexField>group_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

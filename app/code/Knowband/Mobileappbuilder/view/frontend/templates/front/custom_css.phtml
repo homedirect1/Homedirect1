@@ -1,0 +1,8 @@
+<style>
+<?php $settings = $this->getSettings(); 
+$mobileappbuilder_webview = $this->getRequest()->getParam('mobileappbuilder_webview', '');    
+if(isset($settings["general_settings"]["customcss"]) && $mobileappbuilder_webview){
+    echo $settings["general_settings"]["customcss"]; 
+}
+?>
+</style>

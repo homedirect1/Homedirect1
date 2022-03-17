@@ -1,0 +1,123 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsSubAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+$request = '';
+if ($request_id = $this->_customerSession->getRequestId()) {
+    $subaccount_status = $this->accountStatusFactory->create()->load($request_id);
+    $request = $subaccount_status->getEmail();
+}
+?>
+<div class="col-md-12">
+    <div class="register-panel panel panel-default">
+        <div class="panel-heading">
+            <h1><?php echo __('Create a Sub-Vendor Account') ?></h1>
+        </div>
+        <div class="panel-body">
+
+            <form class="form create account form-create-account"
+                  action="<?php echo $this->getUrl('cssubaccount/customer/createpost') ?>" method="post"
+                  id="form-validate" autocomplete="off" role="form" data-mage-init='{"validation":{}}'>
+                <fieldset>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><?php echo __('Personal Information') ?></div>
+                        <div class="panel-body clearfix">
+                            <?php echo $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setObject($block->getFormData())->setForceUseCustomerAttributes(true)->setTemplate('Ced_CsMarketplace::customer/widget/name.phtml')->toHtml() ?>
+
+                            <div class="input-box email col-md-12 col-lg-12">
+                                <input placeholder="<?php echo __('Email Address') ?>" type="text" name="email"
+                                       id="email_address"
+                                       value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>"
+                                       title="<?php echo __('Email Address') ?>"
+                                       class="form-control input-text validate-email required-entry"
+                                       data-validate="{required:true, 'validate-email':true}"/>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <?php echo $block->getChildHtml('vendor_reg_form') ?>
+
+                <fieldset>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><?php echo __('Login Information') ?></div>
+                        <div class="panel-body">
+                            <div class="field col-md-6 col-lg-6 enter-password">
+
+                                <div class="input-box">
+                                    <input placeholder="<?php echo __('Password') ?>" type="password" name="password"
+                                           id="password" title="<?php echo __('Password') ?>"
+                                           class="form-control input-text required-entry validate-password"
+                                           data-validate="{required:true, 'validate-password':true}"/>
+                                </div>
+                            </div>
+                            <div class="field col-md-6 col-lg-6 enter-confirm-password">
+
+                                <div class="input-box">
+                                    <input placeholder="<?php echo __('Confirm Password') ?>" type="password"
+                                           name="password_confirmation" title="<?php echo __('Confirm Password') ?>"
+                                           id="confirmation"
+                                           class="form-control input-text required-entry validate-cpassword"
+                                           data-validate="{required:true, equalTo:'#password'}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="content">
+                    <div class="buttons-set">
+                        <button type="submit" id="submit_button_id" title="<?php echo __('Submit') ?>" class="button">
+                            <span><span><?php echo __('Submit') ?></span></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#form-validate": {
+            "validation": {}
+        }
+    }
+
+</script>
+<script>
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+
+        if ('<?php echo $request ?>') {
+            $(document).ready(function () {
+                $('#email_address').val('<?php echo $request ?>');
+                $('#email_address').prop('readonly', true);
+            });
+        }
+
+    });
+</script>
+<style>
+    .vendor-login-tab, .vendor-sign-up-tab {
+        background: #169a77;
+    }
+</style>

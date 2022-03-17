@@ -1,0 +1,136 @@
+<?xml version = "1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+  * @package  Ced_GShop
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+
+<config xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation = "urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id = "Ced_GShop::GXpress"
+             title = "Google Shopping Feed Integration"
+             translate = "title"
+             module = "Ced_GShop"
+             sortOrder = "14"
+             resource = "Ced_GShop::GXpress"
+        />
+        <add id = "Ced_GShop::product"
+             title = "Products"
+             translate = "title"
+             module = "Ced_GShop"
+             sortOrder = "1"
+             parent = "Ced_GShop::GXpress"
+             resource = "Ced_GShop::product"
+        />
+        <add id = "Ced_GShop::gxpress_profile"
+             title = "Profile Manager"
+             translate = "title"
+             module = "Ced_GShop"
+             sortOrder = "1"
+             parent = "Ced_GShop::product"
+             action = "gxpress/profile/index"
+             resource = "Ced_GShop::gxpress_profile"
+        />
+        <add id = "Ced_GShop::gxpress_product"
+             title = "Product Manager"
+             translate = "title"
+             module = "Ced_GShop"
+             sortOrder = "5"
+             parent = "Ced_GShop::product"
+             action = "gxpress/product/index"
+             resource = "Ced_GShop::gxpress_product"
+        />
+
+        <add id = "Ced_GShop::configuration"
+             title = "Configuration"
+             translate = "title"
+             module = "Ced_GShop"
+             sortOrder = "4"
+             parent = "Ced_GShop::GXpress"
+             resource = "Ced_GShop::configuration"
+        />
+        <add id = "Ced_GShop::account"
+             title = "Manage Accounts"
+             module = "Ced_GShop"
+             sortOrder = "1"
+             parent = "Ced_GShop::configuration"
+             action = "gxpress/account/index"
+             resource = "Ced_GShop::account"
+        />
+
+        <add id = "Ced_GShop::developer"
+             title = "Developer"
+             module = "Ced_GShop"
+             sortOrder = "20"
+             parent = "Ced_GShop::GXpress"
+             resource = "Ced_GShop::developer"
+        />
+
+        <add id = "Ced_GShop::gxpress_cron"
+             title = "Cron Logs"
+             module = "Ced_GShop"
+             sortOrder = "5"
+             parent = "Ced_GShop::developer"
+             action = "integrator/cron/index"
+             resource = "Ced_GShop::gxpress_cron"
+        />
+
+        <add id = "Ced_GShop::logs"
+             title = "Activity Logs"
+             translate = "title"
+             module = "Ced_GShop"
+             sortOrder = "40"
+             parent = "Ced_GShop::developer"
+             action = "integrator/log/index"
+             resource = "Ced_GShop::logs"
+        />
+        <add id = "Ced_GShop::gxpress_products_feeds"
+             title = "Product Feeds"
+             module = "Ced_GShop"
+             sortOrder = "20"
+             parent = "Ced_GShop::developer"
+             action = "gxpress/product/feeds"
+             resource = "Ced_GShop::gxpress_products_feeds"
+        />
+
+        <add id = "Ced_GShop::gxpress_configuration"
+             title = "Configuration"
+             module = "Ced_GShop"
+             sortOrder = "10"
+             parent = "Ced_GShop::configuration"
+             action = "adminhtml/system_config/edit/section/gshop_config"
+             resource = "Ced_GShop::gxpress_configuration"
+        />
+
+        <add id = "Ced_GShop::extra"
+             title = "Extras"
+             module = "Ced_GShop"
+             sortOrder = "10"
+             parent = "Ced_GShop::GXpress"
+             resource = "Ced_GShop::extra"
+        />
+        <add id = "Ced_GShop::knowledge_base"
+             title = "Help And Support"
+             module = "Ced_GShop"
+             sortOrder = "2"
+             parent = "Ced_GShop::extra"
+             action = "gxpress/request/help"
+             resource = "Ced_GShop::knowledge_base"
+        />
+
+    </menu>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_delete_before">
+        <observer name="delete_product" instance="Ced\CsMultiSeller\Observer\ProcessProductBeforeDeleteEventObserver" />
+    </event>
+    <event name="csmarketplace_vendor_new_product_creation">
+        <observer name="update_vendor_configuarable_product" instance="Ced\CsMultiSeller\Observer\UpdateProduct"/>
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="ced_productsaveafter_parent_product" instance="Ced\CsMultiSeller\Observer\Productsaveafter" />
+    </event>
+</config>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_Recurring
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">subscriptions_form.subscriptions_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Subscription Information</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Magento\Customer\Block\Adminhtml\Edit\BackButton"/>
+        </buttons>
+        <layout>
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout>
+        <deps>
+            <dep>subscriptions_form.subscriptions_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="subscriptions_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Webkul\Recurring\Model\DataProvider</argument>
+            <argument name="name" xsi:type="string">subscriptions_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <htmlContent name="subscriptions_edit_tab_view_content">
+        <block class="Webkul\Recurring\Block\Adminhtml\Subscriptions\Tab\View" name="subscriptions_edit_tab_view" template="Webkul_Recurring::subscriptions/view.phtml">
+            <arguments>
+                <argument name="sort_order" xsi:type="number">10</argument>
+                <argument name="tab_label" xsi:type="string" translate="true">Subscriptions Info</argument>
+            </arguments>
+            <block class="Webkul\Recurring\Block\Adminhtml\Subscriptions\Tab\View\SubscriptionsInfo" name="subscriptions_info" template="Webkul_Recurring::subscriptions/view/subscriptions_info.phtml"/>
+        </block>
+    </htmlContent>
+    <htmlContent name="child_orders_content">
+        <block  class="Webkul\Recurring\Block\Adminhtml\Subscriptions\Tab\Orders" name="child_orders" />
+    </htmlContent>
+</form>

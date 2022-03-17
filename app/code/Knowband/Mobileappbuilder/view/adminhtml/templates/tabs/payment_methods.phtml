@@ -1,0 +1,67 @@
+<?php echo $this->getLayout()
+    ->createBlock("Knowband\Mobileappbuilder\Block\Adminhtml\Tab\PaymentMethods")
+    ->toHtml();
+?>
+<div id="payment_popup"></div>
+<script>
+function editPaymentMethods(url)
+{
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '<?php echo __("Edit Payment Method Settings");?>',
+                buttons: [
+                    {
+                        text: '<?php echo __('Save'); ?>',
+                        class: 'button_submit_form_payment btn btn-success',
+                        id: 'save_banner',
+                        click: function () {
+                            validatePaymentForm();
+                        }
+                    },
+                    {
+                        text: '<?php echo __('Close'); ?>',
+                        class: 'hidden_element btn btn-warning payment_popup_close',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }
+                ]
+            };
+            $.ajax({
+                type: "POST",
+                showLoader: true,
+                url: url,
+                data:
+                {
+                    form_key : window.FORM_KEY, method : 'edit'
+                },
+                success: function (output) {
+                    
+                    if(output == "0")
+                    {
+                        alert("<?php echo __("Something went wrong. Please try again.");?>");;
+                    }
+                    else
+                    {
+                        var popup = modal(options, $('#payment_popup'));
+                        $("#payment_popup").html(output).modal("openModal");
+                    }
+                }
+
+            });
+        }
+    );
+}
+var save_payment_ajax_url = '<?php echo $this->getUrl('*/*/paymentAjax'); ?>';
+</script>

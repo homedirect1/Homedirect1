@@ -1,0 +1,27 @@
+
+<div class=" field city">
+    <label class="label" for="latitude"><span><?php echo __('Latitude'); ?></span></label>
+    <div class="control">
+        <input type="text"
+               value="<?= $block->getData('latitude') ?>"
+               name="latitude"
+               title="Latitude"
+               class="input-text"
+               id="customer-latitude"
+               readonly>
+    </div>
+</div>
+
+<div class=" field city">
+    <label class="label" for="longitude"><span><?php echo __('Longitude'); ?></span></label>
+    <div class="control">
+        <input type="text"
+               name="longitude"
+               value="<?= $block->getData('longitude') ?>"
+               title="longitude"
+               class="input-text"
+               id="customer-longitude"
+               readonly>
+    </div>
+</div>
+

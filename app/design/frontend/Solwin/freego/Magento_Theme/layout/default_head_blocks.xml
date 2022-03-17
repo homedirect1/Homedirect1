@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <css src="css/print.css" media="print" />
+        <css src="css/style1.css" order="100"/>
+        <script src="js/addtocart.js"></script>
+
+        <!--<css src="css/bootstrap.css" order="101"/>
+        <css src="css/bootstrap.min.css" order="102"/>-->
+        
+         <!--<css src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.1/assets/owl.carousel.css" order="103"/>-->
+         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.1/owl.carousel.js"></script>-->
+        
+        
+    </head>
+</page>

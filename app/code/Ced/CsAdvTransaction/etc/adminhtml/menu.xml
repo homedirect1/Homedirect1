@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- /**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_CsAdvTransaction
+  * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <menu>
+
+        <add id="Ced_CsAdvTransaction::vendor_advtransaction" title="Vendor Advance Transaction" module="Ced_CsAdvTransaction" sortOrder="100" parent="Ced_CsMarketplace::csmarketplace" resource="Ced_CsAdvTransaction::vendor_advtransaction" dependsOnConfig="ced_csmarketplace/general/csadvtransaction" />
+        <add id="Ced_CsAdvTransaction::manage_vendor_advtransaction" title="Add Fees For Vendors" module="Ced_CsAdvTransaction" sortOrder="200" parent="Ced_CsAdvTransaction::vendor_advtransaction" action="csadvtransaction/fee/index/" resource="Ced_CsAdvTransaction::vendor_advtransaction"/>
+        <update id="Ced_CsMarketplace::vendor_transaction_requested" title="Requested Transactions" module="Ced_CsMarketplace" sortOrder="20" parent="Ced_CsMarketplace::managevendor_transaction" action="csadvtransaction/pay/request/" resource="Ced_CsAdvTransaction::vendor_transaction_requested"/>
+        <update id="Ced_CsMarketplace::vendor_order" title="Vendor Orders" module="Ced_CsMarketplace" sortOrder="10" parent="Ced_CsMarketplace::managevendor_order" action="csadvtransaction/vendororder/index/" resource="Ced_CsMarketplace::vendor_order"/>
+    </menu>
+</config>

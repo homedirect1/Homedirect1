@@ -1,0 +1,2207 @@
+/*===================================================
+=            Section comment General css            =
+===================================================*/
+
+.columns {
+  display: block;
+}
+
+.clear{
+  clear:both;
+}
+main.page-main {
+  box-sizing: border-box;
+}
+.data-table{
+  border:1px solid#f0f0f0;
+}
+.data-table tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+}
+.data-table tbody tr:nth-child(2n):hover {
+  background: #f5f5f5 none repeat scroll 0 0;
+}
+.data-table tbody tr:nth-child(2n+1) {
+  background: #f2f2f2 none repeat scroll 0 0;
+}
+
+.data-grid thead tr:first-child span {
+  color: #ffffff;
+}
+
+.data-grid thead tr:first-child {
+  background: #4c515f none repeat scroll 0 0;
+}
+.data-grid thead tr:first-child th:hover {
+  background-color:#5B647F!important;
+}
+.data-grid thead tr:first-child th:hover  span{
+  color:#fff!important;
+}
+
+.admin__data-grid-header-row .action-reset,
+.admin__data-grid-header-row .action-secondary {
+  background: #00ae55 none repeat scroll 0 0!important;
+  border    : medium none;
+  color     : #ffffff;
+}
+.admin__data-grid-header-row .action-reset:hover,
+.admin__data-grid-header-row .action-secondary:hover {
+  background     : #00ae55 none repeat scroll 0 0!important;
+  color          : #ffffff;
+  text-decoration: none;
+  border         :none!important;
+  box-shadow     :none;
+}
+.admin__filter-actions {
+  margin-bottom: 10px;
+}
+.data-grid thead tr:first-child th {
+  border-right: 0.1rem dashed #aaaaaa;
+}
+.page-title-wrapper h1.page-title {
+  display: none!important;
+}
+
+.data-table thead tr {
+  background: #4c515f none repeat scroll 0 0;
+}
+
+.block.data-table-block-wrap {
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+  margin-top: 50px;
+}
+.data-table-wrapper + .toolbar.bottom {
+  margin-top: 20px;
+}
+.data-table-wrapper .block-content {
+  overflow-x: auto;
+}
+.data-table-wrapper .data-table th:last-child {
+  width: 16%;
+}
+.data-table-wrapper + .toolbar.bottom .pages {
+  float: right;
+  position: static;
+  width: auto;
+}
+.primary .action.tocart.primary, .actions-toolbar .action.view {
+  background: #00ae55 none repeat scroll 0 0;
+  border: medium none;
+  color: #ffffff;
+  float: none;
+  font-weight: bold;
+  margin: 5px 0;
+  padding: 7px 10px;
+}
+ .actions-toolbar .action.view{
+  margin:5px!important;
+ }
+  .actions-toolbar .action.view:hover{
+  text-decoration:none;
+ }
+/*=====  End of Section comment General css  ======*/
+
+
+/*==========================================================
+=            Section comment Affiliate page css            =
+==========================================================*/
+
+.affiliate-content .affiiate-title h1 {
+  background   :#f0f0f0;
+  font-family  : arial;
+  font-size    : 25px;
+  margin-bottom: 30px;
+  padding      : 10px;
+}
+.ced-work-coupon-wrap {
+  margin: 40px 0;
+}
+.ced-work-coupon-wrap h3 {
+  background: #4c515f none repeat scroll 0 0;
+  color: #ffffff;
+  font-family: arial;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 20px;
+  padding: 10px;
+}
+.ced-work-coupon-wrap .ced-work-wrap > p,
+.ced-work-coupon-wrap .ced-coupon-wrap > p {
+  min-height: 80px;
+  padding: 10px;
+}
+.affiliate-content .ced-affiliate-program {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+  margin: 60px 0;
+}
+.ced-work-coupon-wrap::after {
+  clear  : both;
+  content: "";
+  display: table;
+}
+.ced-work-coupon-wrap .ced-work-wrap,
+.ced-work-coupon-wrap .ced-coupon-wrap {
+  box-shadow: 0 0 1px 1px #d1d1d1;
+  box-sizing: border-box;
+  float: left;
+  min-height: 140px;
+  width: 48%;
+}
+.ced-work-coupon-wrap .ced-coupon-wrap {
+  float     : right;
+}
+.section-item-content .navigation {
+  background: unset;
+}
+
+.affiliateplus-account-bottom .col-button {
+  text-align: center;
+}
+
+.ced-program-foo-one > h3 {
+  background: #4c515f none repeat scroll 0 0;
+  color: #ffffff;
+  font-family: arial;
+  font-size: 25px;
+  font-weight: normal;
+  margin-bottom: 40px;
+  margin-top: 0;
+  padding: 10px;
+}
+.ced-affiliate-program .ced-program-foo-two {
+  padding: 10px;
+}
+
+.ced-program-foo-two dl {
+  margin-bottom: 40px;
+  padding-left: 20px;
+  position: relative;
+}
+.ced-program-foo-two dl::after {
+  background: #00ae55 none repeat scroll 0 0;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 5px;
+}
+.affiliateplus-account-bottom button {
+  background: #00ae55 none repeat scroll 0 0;
+  border: medium none;
+  color: #ffffff;
+}
+
+.ced-program-foo-two dt {
+  float      : left;
+  font-size  : 14px;
+  line-height: 26px;
+}
+
+.ced-program-foo-two dd {
+  line-height : 25px;
+  padding-left: 175px;
+}
+
+.affiliate-content .ced-affiliate-account-info {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+}
+.affiliate-content .ced-affiliate-account-info .affiiate-title h1 {
+  background: #4c515f none repeat scroll 0 0;
+  color: #ffffff;
+  font-family: arial;
+  margin: 0;
+}
+.affiliate-content .ced-affiliate-account-info .ced-aff-account-wrap {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/*=====  End of Section comment Affiliate page css  ======*/
+
+
+
+/*============================================================
+=            Section comment block Sidebar design            =
+============================================================*/
+
+.block-collapsible-nav.ced-affiliate-sidebar .content {
+  background: #3c3f48 none repeat scroll 0 0;
+}
+
+.block-collapsible-nav.ced-affiliate-sidebar .content .nav a,
+.block-collapsible-nav.ced-affiliate-sidebar .content .nav strong {
+  border-left: 3px solid rgba(0, 0, 0, 0);
+  color      : #d1d5d8;
+  display    : block;
+  font-size  : 15px;
+  padding    : 11px 18px 11px 40px;
+  position   : relative;
+}
+.block-collapsible-nav.ced-affiliate-sidebar .content .nav.items a::before,
+.block-collapsible-nav.ced-affiliate-sidebar .content .nav.items strong::before {
+  content    : "";
+  font-family: FontAwesome;
+  left       : 10px;
+  position   : absolute;
+  transition : 300ms all;
+}
+
+.block-collapsible-nav.ced-affiliate-sidebar .item a:hover::before {
+  left: 15px!important;
+}
+
+.block-collapsible-nav.ced-affiliate-sidebar .item a:hover {
+  background: #323338 none repeat scroll 0 0;
+  box-shadow: 0 -4px 1px -3px #000000 inset;
+  color     :#fff!important;
+}
+.block-collapsible-nav.ced-affiliate-sidebar .nav.current strong {
+  background  : #323338 none repeat scroll 0 0;
+  border-color: #00AE55!important;
+  color       : #ffffff!important;
+}
+
+.ced-affiliate-sidebar .account-nav li.nav {
+  border-bottom: 1px solid #d1d5d8;
+  margin       : 0;
+}
+/*=====  End of Section comment block Sidebar design  ======*/
+
+
+
+/*========================================================
+=            Section comment dashboard design            =
+========================================================*/
+
+.columns .block .block-title {
+  background   : #4c515f none repeat scroll 0 0;
+  border       : medium none!important;
+  color        : #ffffff;
+  font-weight  : bold;
+  margin-bottom: 0!important;
+  padding      : 10px!important;
+}
+.columns .block .block-title strong {
+  font-family: arial;
+  font-size  :18px!important;
+}
+.columns .block .block-content {
+  background: #eeeeee none repeat scroll 0 0;
+  padding   : 10px;
+}
+.block-dashboard-info .block-content .box.box-information,
+.block-dashboard-info .box.box-newsletter,
+.block-dashboard-addresses .block-content .box-billing-address,
+.block-dashboard-addresses .block-content .box-shipping-address {
+  background: #ffffff none repeat scroll 0 0;
+  box-shadow: 0 0 10px 0 #d1d1d1;
+  margin    : 20px 0;
+  min-height: 125px;
+  padding   : 10px;
+  width     : 46%!important;
+  box-sizing: border-box;
+}
+.columns .block .block-title .action {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors  : none;
+	-moz-border-right-colors : none;
+	-moz-border-top-colors   : none;
+	background               : #00ae55 none repeat scroll 0 0;
+	border-color             : #ffffff;
+	border-image             : none;
+	border-style             : solid;
+	border-width             : 2px 1px 1px;
+	color                    : #ffffff;
+	float                    : right;
+	margin-top               : -3px;
+	padding                  : 5px;
+}
+
+
+.block-dashboard-orders .orders-recent {
+  margin-top: 0!important;
+}
+.orders-recent table {
+  border: 1px solid #f5f5f5;
+}
+.orders-recent table tbody tr:nth-child(2n+1) {
+  background: #f5f5f5 none repeat scroll 0 0;
+}
+.orders-recent table tbody tr:nth-child(2n):hover {
+  background: #f0f0f0 none repeat scroll 0 0;
+}
+
+.my-account.ced-affiliate-wallet.ced-affiliate-amount {
+  border-radius: 0;
+  box-shadow   : none;
+  padding      : 0;
+}
+.ced-affiliate-amount > .block {
+  margin-bottom: 0!important;
+}
+.ced-affiliate-amount .affiliate-account-summary {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: none;
+  padding   : 10px;
+  text-align: center;
+}
+
+.ced-affiliate-amount .affiliate-account-summary .credit-limit {
+  display       : inline-block;
+  margin        : 20px 10px;
+  padding       : 10px;
+  text-align    : left;
+  vertical-align: top;
+  width         : 28%;
+}
+
+.ced-affiliate-wallet.ced-affiliate-amount .credit-limit > div {
+  padding-left: 0;
+  padding-top : 55px;
+  position    : relative;
+  text-align  : center!important;
+  top: 8px;
+}
+.ced-affiliate-wallet.ced-affiliate-amount .credit-limit > div::before {
+  border       : 2px solid #ffffff;
+  border-radius: 50%;
+  content      : "";
+  font-family  : FontAwesome;
+  font-size    : 20px;
+  height       : 30px;
+  left         : 41%;
+  line-height  : 30px;
+  padding      : 5px;
+  position     : absolute;
+  text-align   : center;
+  top          : 0;
+  width        : 30px;
+}
+.ced-affiliate-amount .credit-limit .title {
+  text-align: center!important;
+}
+.ced-affiliate-wallet.ced-affiliate-amount .credit-limit .price {
+	background   : #00ae55 none repeat scroll 0 0;
+	border       : 1px solid #ffffff;
+	border-radius: 25px;
+	display      : block;
+	margin       : 15px auto;
+	max-width    : 110px;
+	padding      : 10px;
+	position     : static;
+	text-align   : center;
+}
+/*=====  End of Section comment dashboard design  ======*/
+
+
+
+
+/*===============================================================
+=            Section comment Dashboard Banner design            =
+===============================================================*/
+
+.aff-title h2 {
+  background : #3c3f48 none repeat scroll 0 0;
+  box-shadow : 0 2px 5px -2px #5a5a5a;
+  color      : #ffffff;
+  font-family: arial;
+  padding    : 10px;
+}
+
+.banner_wrapper .affiliate-link {
+  background : #00ae55 none repeat scroll 0 0;
+  color      : #ffffff;
+  font-weight: bold;
+  padding    : 10px;
+}
+.banner_wrapper .affiliate-link span {
+  margin-right: 20px;
+}
+
+.banner_wrapper .affiliate-link > a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.banner_data dl {
+  margin-top  : 15px;
+  padding-left: 15px;
+  position    : relative;
+}
+.banner_data dl::before {
+  background: #00ae55 none repeat scroll 0 0;
+  content   : "";
+  height    : 100%;
+  left      : 0;
+  position  : absolute;
+  top       : 0;
+  width     : 5px;
+}
+.banner_data dt {
+  float: left;
+}
+
+.banner_data dd {
+  padding-left: 120px;
+}
+
+.banner_wrapper .field.required .control {
+  margin: 15px 0;
+}
+.banner_wrapper .field.required .control div {
+  display       : table-cell;
+  padding       : 0 5px;
+  vertical-align: middle;
+}
+.banner_wrapper .field.required label {
+  border-bottom : 1px solid #c2c2c2;
+  display       : block;
+  font-weight   : bold;
+  margin-top    : 30px;
+  padding-bottom: 10px;
+}
+
+.banner-share > p:first-child {
+  font-weight: bold;
+  margin-top : 30px;
+}
+.banner_wrapper .baneer_content_wrapper {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+  margin    : 20px 0;
+}
+
+.banner_wrapper .baneer_content_wrapper h2 {
+  background : #4c515f none repeat scroll 0 0;
+  color      : #ffffff;
+  font-family: arial;
+  font-size  : 18px;
+  margin     : 0;
+  padding    : 10px;
+}
+.banner_wrapper .baneer_content_wrapper .banner-inner-wrapper {
+  padding: 10px;
+}
+.banner-inner-wrapper .banner-image {
+  background: #ffffff none repeat scroll 0 0;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  text-align: center;
+}
+.banner-video.banner-image {
+  padding: 0;
+}
+.banner-video.banner-image video {
+  display: block;
+}
+/*=====  End of Section comment Dashboard Banner design  ======*/
+
+/*=========================================================
+=            Section comment referral page css            =
+=========================================================*/
+
+.referral-form::after {
+  clear  : both;
+  content: "";
+  display: table;
+}
+
+.referral-form .fieldset.form-left {
+  float: left;
+}
+.referral-form .fieldset.form-right {
+  float: right;
+}
+.referral-form .fieldset {
+  border        : 0 none;
+  box-shadow    : 0 2px 3px 0 #aaaaaa;
+  letter-spacing: -0.31em;
+  margin        : 0 0 40px;
+  width         : 48%;
+}
+.referral-form > h2 {
+  background : #3c3f48 none repeat scroll 0 0;
+  box-shadow : 0 2px 5px -2px #5a5a5a;
+  color      : #ffffff;
+  font-family: arial;
+  padding    : 10px;
+}
+.referral-form .fieldset .legend {
+  background   : #4C515F none repeat scroll 0 0;
+  border-bottom: medium none;
+  color        : #ffffff;
+  font-size    : 18px;
+  margin       : 0;
+  padding      : 10px;
+}
+.referral-form .fieldset .legend span {
+  font-family: arial;
+  font-size  : 18px;
+}
+
+.referral-form .referral-url-wrapper-left {
+  background : #eee none repeat scroll 0 0;
+  line-height: 30px;
+  padding    : 10px 15px;
+}
+
+.referral-form .field .label > span {
+  font-weight: bold;
+}
+.referral-form .referral-url-wrapper-right {
+  background : #eee none repeat scroll 0 0;
+  line-height: 30px;
+  padding    : 10px 15px;
+}
+.referral-form .field.required .label {
+  display: block;
+  margin : 5px 0 15px;
+}
+
+.referral-url-wrapper-right .actions-toolbar {
+  margin: 10px 0;
+}
+.referral-url-wrapper-left .field.required:last-child {
+  margin-top: 40px;
+}
+
+.referral-url-wrapper-left .control div {
+  display       : table-cell!important;
+  padding       : 0 10px;
+  vertical-align: middle!important;
+  width         : 80px!important;
+}
+
+.referral-source-wrap {
+  box-shadow: 0 2px 5px -2px #5a5a5a;
+}
+
+.referral-source-wrap .source-heading > h1 {
+  background   : #4c515f none repeat scroll 0 0;
+  color        : #ffffff;
+  font-family  : arial;
+  font-size    : 18px;
+  margin-bottom: 0;
+  margin-top   : 0;
+  padding      : 10px;
+}
+
+.referral-source-wrap .social-referrel {
+  background: #eeeeee none repeat scroll 0 0;
+  padding   : 10px;
+}
+.referral-source-wrap .social-referrel > ul {
+  list-style: outside none none;
+  margin    : 10px 0;
+  position  : relative;
+}
+.referral-source-wrap .social-referrel > ul li {
+  font-weight:600;
+}
+
+.referral-source-wrap .social-referrel > ul::before {
+  background: #00ae55 none repeat scroll 0 0;
+  content   : "";
+  height    : 100%;
+  left      : 20px;
+  position  : absolute;
+  top       : 0;
+  width     : 5px;
+}
+.referral-section-wrapper {
+  margin-bottom: 50px;
+}
+.referral-section-wrapper::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.referral-section-wrapper .referral-pending,
+.referral-section-wrapper .referral-acknowledged {
+  background: #008f81 none repeat scroll 0 0;
+  border-radius: 5px;
+  color: #ffffff;
+  float: left;
+  font-weight: bold;
+  padding: 20px 13px;
+  width: 45%;
+}
+.referral-section-wrapper .referral-acknowledged {
+  background: #5c486f none repeat scroll 0 0;
+  float: right;
+}
+/*=====  End of Section comment referral page css  ======*/
+
+
+/*=====================================================
+=            Section comment Page discount            =
+=====================================================*/
+
+.ced-discount-title-wrap .panel-heading {
+  margin-bottom: 20px;
+  padding      : 10px;
+}
+.ced-discount-form-wrap .fieldset .legend {
+  background   : #4c515f none repeat scroll 0 0;
+  border-bottom: medium none;
+  color        : #ffffff;
+  font-family  : arial;
+  font-size    : 18px;
+  margin-bottom: 0;
+  padding      : 10px;
+}
+.ced-discount-form-wrap .ced-affiliate-coupon-wrap {
+  background: #eeeeee none repeat scroll 0 0;
+  padding   : 10px;
+}
+.ced-discount-form-wrap .ced-affiliate-coupon-wrap::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.ced-affiliate-coupon-wrap .field.firstname.required {
+  float: left;
+  width: 30%;
+}
+.ced-discount-form-wrap .ced-affiliate-coupon-wrap label {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.ced-affiliate-coupon-wrap .actions-toolbar {
+  float: right;
+  padding-left: 10px;
+  width: 68%;
+}
+.ced-affiliate-coupon-wrap .actions-toolbar button {
+  background: #00ae55 none repeat scroll 0 0;
+  border: medium none;
+  float: none;
+  margin-top: 29px;
+  padding: 7px 30px;
+}
+.ced-affiliate-coupon-wrap .actions-toolbar button:hover{
+  background: #00ae55 none repeat scroll 0 0;
+  border: medium none;
+}
+.ced-discount-form-wrap .fieldset {
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+}
+
+/*=====  End of Section comment Page discount  ======*/
+
+/*==================================================
+=            Section comment Commission            =
+==================================================*/
+.affiliate_withdrawl_request .block {
+  margin: 0!important;
+}
+.affiliate_withdrawl_request {
+  background   : #eeeeee none repeat scroll 0 0;
+  box-shadow   : 0 2px 3px 0 #aaaaaa;
+  margin-bottom: 60px;
+}
+.affiliate_withdrawl_request .ced-balance {
+  border-radius: 5px;
+  display      : inline-block;
+  margin-bottom: 30px;
+  margin-top   : 30px;
+  padding      : 20px;
+  text-align   : center;
+  width        : 27%;
+}
+.affiliate-balance-wrapper {
+  background: #ffffff none repeat scroll 0 0;
+  box-shadow: 0 0 2px 0 #d1d1d1;
+  margin    : 20px 0 30px;
+  padding   : 10px;
+  text-align: center;
+}
+
+.affiliate_withdrawl_request .total-balance:first-child {
+  background: #008F81 none repeat scroll 0 0;
+  color     : #ffffff;
+}
+.affiliate_withdrawl_request .earned-balance {
+  background: #5C486F none repeat scroll 0 0;
+  color     : #ffffff;
+  margin    : 0 20px 20px;
+}
+
+.affiliate_withdrawl_request .remaining-balance {
+  background: #008F81 none repeat scroll 0 0;
+  color     : #ffffff;
+}
+
+.affiliate_withdrawl_request .remaining-balance {
+  background: #CB4939 none repeat scroll 0 0;
+  color     : #ffffff;
+}
+
+
+.affiliate_withdrawl_request .withdrwal-form .amount-value,
+.affiliate_withdrawl_request .withdrwal-form .payment-methods,
+.affiliate_withdrawl_request .withdrwal-form .request-withrawal {
+  display       : inline-block;
+  margin        : 10px 5px;
+  width         : 30%;
+  vertical-align:top;
+}
+
+.affiliate_withdrawl_request .withdrwal-form {
+  background: #ffffff none repeat scroll 0 0;
+  box-shadow: 0 0 2px 0 #d1d1d1;
+  margin    : 50px 0 30px;
+  padding   : 15px;
+  text-align: center;
+}
+
+.affiliate-grid-wrapper {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+}
+.columns .affiliate-grid-wrapper .block {
+  margin: 0!important;
+}
+.affiliate-grid-wrapper > *:not(.block) {
+  padding: 10px;
+}
+.affiliate_withdrawl_request .ced-aff-commission-wrap {
+  padding: 10px;
+}
+.affiliate-withdrawl-view-wrapper {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: 0 2px 3px #aaaaaa;
+  margin-bottom: 50px;
+}
+.affiliate-withdrawl-view-wrapper .block {
+  margin: 0!important;
+}
+.affiliate-withdrawl-view-wrapper .affiliate-withdrawl-policy {
+  padding: 10px;
+}
+.affiliate-withdrawl-view-wrapper .affiliate-withdrawl-policy ul {
+  list-style: outside none none;
+  margin: 10px 0;
+}
+.affiliate-withdrawl-view-wrapper .affiliate-withdrawl-policy ul li {
+  position: relative;
+}
+.affiliate-withdrawl-view-wrapper .affiliate-withdrawl-policy ul li::before {
+  background: #00ae55 none repeat scroll 0 0;
+  border-radius: 50%;
+  content: "";
+  height: 8px;
+  left: -20px;
+  position: absolute;
+  top: 6px;
+  width: 8px;
+}
+/*=====  End of Section comment Commission  ======*/
+
+
+
+/*====================================================
+=            Section comment Payment page            =
+====================================================*/
+
+.ced-payment-affiliate .panel_product_heading {
+  background   : #3c3f48 none repeat scroll 0 0;
+  box-shadow   : 0 2px 5px -2px #5a5a5a;
+  color        : #ffffff;
+  font-family  : arial;
+  font-size    : 26px;
+  line-height  : 30px;
+  margin-bottom: 20px;
+  padding      : 10px;
+}
+.ced-payment-affiliate button {
+  background: #00AE55 none repeat scroll 0 0;
+  color: #ffffff;
+}
+.ced-payment-affiliate .buttons-set {
+  float: right;
+}
+.ced-payment-affiliate select {
+  -moz-appearance: none!important;
+}
+.ced-payment-affiliate h3.legend {
+  background   : #00AE55 none repeat scroll 0 0;
+  border-bottom: medium none;
+  box-shadow   : 2px 3px 3px 0 #5a5a5a;
+  color        : #ffffff!important;
+  padding      : 10px;
+}
+
+h2.legend.ced_shipping {
+  float      : none;
+  margin-left: 0;
+}
+
+.ced-payment-affiliate .fieldset .wide {
+  height: 32px;
+  margin: 20px 0;
+}
+
+.ced-payment-affiliate .fieldset .wide > label {
+  display    : block;
+  float      : left;
+  font-family: arial;
+  font-weight: bold;
+  text-align : right;
+  width      : 23%;
+}
+
+.ced-payment-affiliate .fieldset .wide > div {
+  float: right;
+  width: 70%;
+}
+.ced-payment-affiliate .wide select {
+  width: 100%;
+}
+.ced-payment-affiliate .fieldset h2 {
+  background : #4c515f none repeat scroll 0 0;
+  color      : #ffffff;
+  font-family: arial;
+  margin     : 0;
+  padding    : 10px;
+}
+.ced-payment-affiliate .fieldset {
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+}
+.ced-payment-affiliate .fieldset ul {
+  background: #eeeeee none repeat scroll 0 0;
+  list-style: outside none none;
+  padding   : 10px;
+}
+/*=====  End of Section comment Payment page  ======*/
+
+
+
+/*==============================================
+=            Section comment Wallet            =
+==============================================*/
+
+.withdrawl-request-checkbox {
+  margin: 20px 0;
+}
+.ced-affiliate-wallet .credit-limit {
+  border-radius: 15px;
+  color        : #ffffff;
+  font-size    : 10px;
+  margin       : 15px auto;
+  padding      : 15px 10px;
+  width        : 80%;
+}
+.affiliate-withdrwal-form .affiliate_withdrawl_request {
+  margin-bottom: 20px;
+  box-shadow:unset;
+  background:unset;
+}
+.total_creditlimit.credit-limit {
+  background-color: #cb4939;
+}
+
+.uesd_creditlimit.credit-limit {
+  background-color: #008f81;
+}
+
+.remaining_creditlimit.credit-limit {
+  background-color: #5c486f;
+}
+
+.ced-affiliate-wallet .credit-limit .title {
+  font-family  : arial;
+  font-size    : 18px;
+  margin-bottom: 5px;
+  text-align   : left;
+}
+
+.ced-affiliate-wallet .credit-limit > div {
+  padding-left: 60px;
+  position    : relative;
+}
+.ced-affiliate-wallet .credit-limit > div::before {
+  border       : 2px solid #ffffff;
+  border-radius: 50%;
+  content      : "";
+  font-family  : FontAwesome;
+  font-size    : 20px;
+  height       : 30px;
+  left         : 5px;
+  line-height  : 30px;
+  padding      : 5px;
+  position     : absolute;
+  text-align   : center;
+  top          : 0;
+  width        : 30px;
+}
+.my-account.ced-affiliate-wallet {
+  background   : #eeeeee none repeat scroll 0 0;
+  box-shadow   : 0 2px 3px 0 rgba(170, 170, 170, 0.667);
+  margin-bottom: 50px;
+}
+.ced-affiliate-wallet > .block,
+.withdrawl_form .block {
+  margin-bottom: 0!important;
+}
+.withdrawl_form {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+}
+.affiliate-withdrwal-form,
+.ced-affiliate-wallet .ced-affiliate-wallet-wrap {
+  padding: 10px;
+}
+.ced-affiliate-wallet .uesd_creditlimit.credit-limit > div::before{
+content: "";
+}
+.ced-affiliate-wallet .remaining_creditlimit.credit-limit > div::before{
+content: "";
+}
+.ced-affiliate-wallet .credit-limit span {
+  font-size : 13px;
+  text-align: left;
+}
+.withdrawl_form .affiliate_withdrawl_request .total-balance {
+  background: #009933 none repeat scroll 0 0;
+  color     : #ffffff;
+  margin-top: 10px;
+  padding   : 10px;
+}
+.affiliate-wallet-index .affiliate_withdrawl_request .withdrwal-form {
+  box-shadow: 0 0 2px 0 #d1d1d1;
+  margin    : 30px 0 0;
+  padding   : 15px;
+  text-align: center;
+}
+.ced-affiliate-wallet .credit-limit .price {
+  background   : #00AE55 none repeat scroll 0 0;
+  border       : 1px solid #ffffff;
+  border-radius: 25px;
+  padding      : 10px;
+  position     : absolute;
+  right        : 10px;
+  top          : 0;
+}
+
+/*=====  End of Section comment Wallet  ======*/
+
+
+/*=======================================================
+=            Section comment block Withdrawl            =
+=======================================================*/
+
+.affiliate-withdrawl-wrap {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+}
+.affiliate-withdrawl-wrap .ced-aff-withdraw .control {
+  float: right;
+  width: 75%;
+}
+.affiliate-withdrawl-wrap .ced-aff-withdraw label {
+  float: left;
+  font-family: arial;
+  font-weight: bold;
+  width: 25%;
+}
+.affiliate-withdrawl-wrap .ced-aff-withdraw {
+  margin: 20px 0;
+}
+.affiliate-withdrawl-wrap .block {
+  margin: 0!important;
+}
+.affiliate-withdrawl-wrap .ced-aff-withdrawl-wrap {
+  padding: 10px;
+}
+.affiliate-withdrawl-wrap .ced-aff-withdraw::after {
+  clear  : both;
+  content: "";
+  display: table;
+}
+
+.affiliate-withdrawl-view .block-title > form {
+  float: right;
+}
+.affiliate-withdrawl-view .block-title > form button {
+  float: none;
+}
+/*=====  End of Section comment block Withdrawl  ======*/
+
+
+/*================================================================
+=            Section comment Edit Account information            =
+================================================================*/
+
+.affiliate-account-edit .fieldset {
+  box-shadow: 0 2px 3px 0 #aaaaaa;
+  width     : 48%!important;
+}
+.affiliate-account-edit .fieldset .field .control {
+  word-break: break-all;
+}
+.affiliate-account-edit .fieldset legend {
+  background   : #4c515f none repeat scroll 0 0;
+  border-bottom: 0 none;
+  color        : #ffffff;
+  margin       : 0;
+  padding      : 10px;
+}
+.affiliate-account-edit .fieldset legend > span {
+  font-family: arial;
+  font-size  : 18px;
+}
+
+.affiliate-account-edit .fieldset .ced-account-edit-wrap {
+  background : #eeeeee none repeat scroll 0 0;
+  line-height: 30px;
+  padding    : 10px;
+}
+.affiliate-account-edit .fieldset .field .control > input {
+  display: block;
+  margin : 10px 0 0;
+}
+.affiliate-account-edit .fieldset .field .control > a {
+  color          : #008f81;
+  text-decoration: underline;
+}
+.affiliate-account-edit .fieldset .field.choice > .label {
+  display: inline-block!important;
+}
+.affiliate-account-edit .fieldset .ced-account-edit-wrap .field .label {
+  display    : block;
+  font-weight: bold;
+}
+.affiliate-account-edit .fieldset .ced-account-edit-wrap .field {
+  margin-bottom: 20px;
+}
+.referral-form .referral-url-wrapper-right .primary button,
+.affiliate-account-edit .actions-toolbar button,
+.ced-aff-commission-wrap .request-withrawal button,
+.affiliate_withdrawl_request .withdrwal-form button,
+.ced-aff-commission-wrap .request-withrawal button:hover,
+.affiliate_withdrawl_request .withdrwal-form button:hover,
+.affiliate-account-edit .actions-toolbar button:hover  {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors  : none;
+  -moz-border-right-colors : none;
+  -moz-border-top-colors   : none;
+  background               : #00AE55 none repeat scroll 0 0;
+  border-color             : #ffffff;
+  border-image             : none;
+  border-style             : solid;
+  border-width             : 2px 1px 1px;
+}
+
+.affiliate-account-edit .ced-account-edit-wrap .actions-toolbar {
+  margin: 10px 0;
+}
+/*=====  End of Section comment Edit Account information  ======*/
+
+
+
+/*======================================================
+=            Section comment Login page css            =
+======================================================*/
+
+
+.affiliate-account-login main.page-main {
+  background    : #fff none repeat scroll 0 0;
+  color         : #ffffff;
+  font-family   : Arial;
+  max-width     : 100%;
+  padding       : 40px 20px;
+  text-align    : center;
+  text-transform: uppercase;
+  width         : 100%;
+}
+
+.affiliate-login-container .block-customer-login .block-title strong {
+  font-size     : 20px;
+  text-align    : left;
+  text-transform: capitalize;
+}
+.affiliate-login-container .block-customer-login .block-title {
+  position: relative;
+}
+.affiliate-login-container .block-customer-login .block-title::after {
+  content    : "";
+  font-family: fontawesome;
+  position   : absolute;
+  right      : 10px;
+}
+
+.affiliate-account-login main.page-main h1 {
+  font-size: 35px;
+  margin   : 30px 0;
+  display  :none!important;
+}
+.affiliate-login-container.login-container {
+  box-shadow: 0 0 17px -3px #3c3f48;
+  margin    : 50px auto;
+  max-width : 450px;
+  width     : 100%;
+}
+.affiliate-login-container .block.block-customer-login,
+.affiliate-login-container .block.block-new-customer  {
+  float : none;
+  margin: 0;
+  width : 100%;
+}
+
+.affiliate-login-container .block-customer-login .block-title {
+  background: #3c3f48 none repeat scroll 0 0;
+  color     : #ffffff;
+  text-align: left;
+}
+ .affiliate-login-container.login-container .block-content {
+  background: #4C515F none repeat scroll 0 0;
+  color     : #ffffff;
+  padding   : 10px 30px;
+  text-align: center;
+}
+.affiliate-login-container .fieldset.login {
+  color   : #d1d1d1;
+  margin  : 20px 0 0;
+  position: relative;
+}
+.affiliate-login-container .fieldset .field .control {
+  position: relative;
+  width   : 100%;
+}
+.affiliate-login-container .fieldset .field.email .control::before,
+.affiliate-login-container .fieldset .field.password .control::before {
+  color      : #aaaaaa;
+  content    : "";
+  font-family: FontAwesome;
+  left       : 8px;
+  position   : absolute;
+  top        : 11px;
+}
+.affiliate-login-container .fieldset .field.password .control::before {
+  content: "";
+}
+.affiliate-login-container  .field .control input {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors  : none;
+  -moz-border-right-colors : none;
+  -moz-border-top-colors   : none;
+  background               : #3c3f48 none repeat scroll 0 0;
+  border-color             : currentcolor currentcolor #d1d1d1;
+  border-image             : none;
+  border-style             : none none solid;
+  border-width             : medium medium 1px;
+  color                    : #d1d1d1;
+  height                   : 40px;
+  padding-left             : 30px;
+}
+ .affiliate-login-container .actions-toolbar {
+  margin: 10px auto 0;
+}
+.affiliate-register-container.register-container .ced-reg-wrap .field.terms-condition {
+  margin: 0;
+}
+ .affiliate-login-container.login-container .primary {
+  float : none;
+  margin: 0 auto;
+  width : 100%;
+}
+.affiliate-login-container .fieldset .field .control {
+  position: relative;
+  width   : 100%!important;
+}
+.affiliate-login-container.login-container .primary button {
+  background    : #00ae55 none repeat scroll 0 0;
+  border        : medium none;
+  height        : 40px;
+  margin        : 0;
+  text-transform: capitalize;
+  width         : 100%;
+}
+ .affiliate-login-container.login-container .secondary {
+  float     : none;
+  margin    : 20px 0;
+  text-align: center;
+}
+.affiliate-login-container .block-new-customer .block-content {
+  background : #3C3F48 none repeat scroll 0 0;
+  padding-top: 30px;
+}
+.affiliate-login-container .block-new-customer .block-content p {
+  color : #d1d1d1;
+  margin: 0;
+}
+.affiliate-login-container .block-new-customer .actions-toolbar {
+  margin: 24px 0;
+}
+.affiliate-login-container .block-new-customer .actions-toolbar a {
+  background    : #00ae55 none repeat scroll 0 0;
+  border        : medium none;
+  border-radius : 0;
+  height        : 40px;
+  margin        : 0;
+  text-transform: capitalize;
+  width         : 100%;
+}
+
+.affiliate-login-container  .field .control input:focus {
+  box-shadow: none;
+}
+.affiliate-login-container.login-container .fieldset::after {
+  bottom   : 10px;
+  color    : #00AE55;
+  font-size: 13px;
+  margin   : 10px;
+  position : absolute;
+  right    : 0;
+}
+
+/*=====  End of Section comment Login page css  ======*/
+
+
+/*=================================================
+=            Section Register page css            =
+=================================================*/
+
+.affiliate-account-create main.page-main {
+  background: #ffffff none repeat scroll 0 0;
+  color     : #d1d1d1;
+  max-width : 100%;
+  padding   : 40px 20px;
+  width     : 100%;
+}
+
+.affiliate-register-container.register-container .form.create.account {
+  min-width: unset;
+  width    : 100%;
+}
+.affiliate-register-container.register-container .block-content {
+  padding: 0!important;
+}
+.affiliate-register-container .fieldset legend {
+  background : #3c3f48 none repeat scroll 0 0;
+  border     : medium none;
+  color      : #ffffff;
+  cursor     : pointer;
+  font-family: arial;
+  padding    : 10px;
+  transition :300ms ease;
+  text-align :left;
+  position   :relative;
+}
+.affiliate-register-container .fieldset legend::after {
+  content    : "";
+  font-family: FontAwesome;
+  position   : absolute;
+  right      : 10px;
+  top        : 11px;
+}
+
+.affiliate-register-container .field legend span {
+  font-size: 20px;
+}
+.affiliate-register-container .field legend:hover{
+	background-color:#30333C;
+}
+.affiliate-register-container .fieldset {
+  margin: 0;
+}
+.affiliate-register-container.register-container .ced-reg-wrap .field {
+  margin: 0 0 20px;
+}
+.affiliate-register-container.register-container .ced-reg-wrap {
+  padding: 10px 30px;
+  display:none;
+}
+
+.affiliate-register-container .field .control input {
+  padding-left: 10px;
+}
+
+.affiliate-register-container .password-strength-meter {
+  background: #4c515f none repeat scroll 0 0;
+}
+.password-strength-meter-0 .password-strength-meter::before {
+  background-color: #4c515f;
+  color           : #ffffff;
+  width           : 100%;
+}
+.affiliate-register-container .password-strength-meter-4 .password-strength-meter::before {
+  background-color: #00ae55;
+}
+.affiliate-register-container select {
+  -moz-appearance          : none;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors  : none;
+  -moz-border-right-colors : none;
+  -moz-border-top-colors   : none;
+  background               : #3c3f48 url("../images/select-bg-2.svg") no-repeat scroll 100% center;
+  border-color             : currentcolor currentcolor #d1d1d1;
+  border-image             : none;
+  border-style             : none none solid;
+  border-width             : medium medium 1px;
+  color                    : #d1d1d1;
+  height                   : 40px;
+  margin                   : 25px 0;
+  padding-right            : 25px;
+  text-indent              : 0.01em;
+  text-overflow            : "";
+}
+.affiliate-register-container select:focus{
+  box-shadow:none;
+}
+.affiliate-register-container.register-container input[type="file"] {
+  box-sizing  : border-box;
+  margin      : 5px 0;
+  opacity     : 0;
+  padding-left: 0;
+  position    : relative;
+  width       : 100%;
+  z-index     : 1;
+}
+
+
+.affiliate-register-container .field.checkbox .required.required-entry,
+.affiliate-register-container .field.checkbox span {
+  height: unset!important;
+}
+.affiliate-register-container .terms-and-condition p {
+  color     : #00ae55;
+  display   : inline-block;
+  position  : relative;
+  word-break: break-all;
+}
+.affiliate-register-container .terms-and-condition p::before {
+  color   : #fff;
+  content : "*";
+  left    : -10px;
+  position: absolute;
+}
+.affiliate-account-create .page-title-wrapper h1 {
+  display: none!important;
+}
+.affiliate-register-container.register-container .ced-reg-wrap .field.checkbox {
+  margin: 0;
+}
+.affiliate-register-container .actions-toolbar .checkbox {
+  margin: 20px 0;
+  text-align: center;
+}
+.affiliate-register-container .actions-toolbar {
+  background: #3c3f48 none repeat scroll 0 0;
+  padding   : 10px 30px;
+}
+
+.affiliate-register-container .accordion .legend.ced-accordion {
+  background   : #3c3f48 none repeat scroll 0 0;
+  border-bottom: medium none;
+  box-sizing   : border-box;
+  cursor       : pointer;
+  margin-bottom: 10px;
+  padding      : 10px;
+  position     : relative;
+  text-align   : left;
+  width        : 100%;
+}
+.affiliate-register-container .accordion .legend.ced-accordion::after {
+  content    : "";
+  font-family: fontawesome;
+  font-size  : 18px;
+  position   : absolute;
+  right      : 10px;
+  top        : 11px;
+}
+.affiliate-register-container .accordion .legend.ced-accordion span {
+  font-family: arial;
+  font-size  : 20px;
+}
+.affiliate-register-container .accordion .legend.ced-accordion.ui-accordion-header-active::after {
+  content: "";
+}
+.affiliate-register-container .ced-file-upload {
+  position: relative;
+}
+.affiliate-register-container .ced-file-upload .file-btn {
+  background: #00ae55 none repeat scroll 0 0;
+  left      : 10px;
+  padding   : 5px;
+  position  : absolute;
+  top       : 10px;
+  z-index   : 0;
+}
+.affiliate-register-container .ced-file-upload .file-wrapper {
+  border       : 1px dashed #aaaaaa;
+  bottom       : 5px;
+  color        : #aaaaaa;
+  left         : 0;
+  line-height  : 34px;
+  padding-right: 20px;
+  position     : absolute;
+  right        : 0;
+  text-align   : right;
+  top          : 5px;
+  z-index      : 0;
+}
+.affiliate-register-container .secondary {
+  margin: 0!important;
+}
+.affiliate-register-container .primary {
+  margin: 15px auto 5px!important;
+}
+.affiliate-register-container .control.customer-dob {
+  position: relative;
+}
+.affiliate-register-container .control.customer-dob input {
+  margin: 0;
+  width: 100%;
+}
+.affiliate-register-container .control.customer-dob button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+/*=====  End of Section Register page css  ======*/
+
+/*===============================================
+=            Section Forgot password            =
+===============================================*/
+
+.affiliate-forgot-password .block.block-forgot-password {
+  width: 100%;
+}
+.affiliate-forgot-password .block.block-forgot-password .form.password.forget {
+  min-width: unset;
+  width    : 100%;
+}
+.affiliate-login-container .block-forgot-password .block-title::after {
+  content    : "";
+  font-family: fontawesome;
+  position   : absolute;
+  right      : 10px;
+}
+
+.affiliate-account-forgotpassword main.page-main {
+  max-width: 100%;
+  padding: 40px 20px;
+  width: 100%;
+}
+.affiliate-account-forgotpassword .page-title-wrapper h1 {
+  display: none!important;
+}
+
+/*=====  End of Section Forgot password  ======*/
+
+/*===============================================
+=            Section Logout page css            =
+===============================================*/
+
+.affiliate-account-logoutsuccess main.page-main {
+  max-width: 100%;
+  padding: 40px 20px;
+  width: 100%;
+}
+.affiliate-login-container.login-container {
+  box-shadow: 0 0 17px -3px #3c3f48;
+  margin: 50px auto;
+  max-width: 450px;
+  width: 100%;
+}
+.affiliate-logout .block-title {
+  background: #3c3f48 none repeat scroll 0 0;
+  color: #ffffff;
+  font-family: arial;
+  font-size: 18px;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+}
+.affiliate-logout .block-title::after {
+  content: "";
+  font-family: fontawesome;
+  position: absolute;
+  right: 10px;
+}
+
+/*=====  End of Section Logout page css  ======*/
+
+
+
+
+
+/*===================================================
+=            Section comment Media query            =
+===================================================*/
+@media screen and (max-width:1200px){
+  .ced-affiliate-amount .affiliate-account-summary .credit-limit {
+  width: 23%;
+}
+}
+
+@media screen and (max-width: 991px){
+	.ced-work-coupon-wrap .ced-work-wrap {
+  float  : none;
+  margin : 10 auto;
+  padding: 10px;
+  width  : 100%;
+}
+.ced-work-coupon-wrap .ced-coupon-wrap {
+  float  : none;
+  margin : 10px auto;
+  padding: 10px;
+  width  : 100%;
+}
+.affiliate_withdrawl_request .ced-balance {
+  margin    : 10px 0!important;
+  padding   : 10px;
+  width     : 96%;
+  box-sizing:border-box;
+}
+}
+
+@media screen and (max-width:768px){
+  .admin__data-grid-header-row .admin__data-grid-pager-wrap {
+  margin: 0!important;
+}
+.admin__data-grid-pager-wrap .admin__control-select {
+  min-width    : 65px;
+  padding-left : 5px;
+  padding-right: 33px;
+  width        : 20px;
+}
+
+.admin__data-grid-pager-wrap .admin__control-support-text {
+  margin: 0!important;
+}
+
+.admin__data-grid-pager-wrap .admin__data-grid-pager {
+  margin: 0;
+}
+
+.admin__data-grid-pager-wrap .admin__data-grid-pager button,
+.admin__data-grid-pager-wrap .admin__data-grid-pager .admin__control-text {
+  margin       : 0;
+  max-width    : 33px;
+  min-width    : 32px;
+  padding-left : 5px;
+  padding-right: 5px;
+  width        : 35px;
+}
+.ced-payment-affiliate .fieldset .wide > label {
+  float        : left;
+  margin-bottom: 10px;
+  width        : 100%;
+}
+.ced-payment-affiliate .fieldset .wide > div {
+  float        : right;
+  margin-bottom: 20px;
+  width        : 100%;
+}
+.referral-form .fieldset.form-left {
+  float: left;
+  width: 100%;
+}
+.referral-form .fieldset.form-right {
+  float: right;
+  width: 100%;
+}
+
+.referral-url-wrapper-left .control div {
+  display       : block!important;
+  margin        : 10px 0;
+  padding       : 0;
+  vertical-align: middle;
+  width         : 80px;
+}
+.affiliate_withdrawl_request .withdrwal-form .payment-methods select,
+.affiliate_withdrawl_request .withdrwal-form .payment-methods span {
+  width: 100%;
+}
+
+.block-dashboard-addresses .block-content .box-billing-address,
+.block-dashboard-addresses .block-content .box-shipping-address,
+.block-dashboard-info .box.box-newsletter,
+.block-dashboard-info .block-content .box.box-information  {
+  width: 100%!important;
+}
+
+.ced-affiliate-amount .affiliate-account-summary .credit-limit {
+  display       : block;
+  margin        : 15px 0;
+  padding       : 10px;
+  text-align    : left;
+  vertical-align: top;
+  width         : 97%;
+}
+.ced-affiliate-wallet.ced-affiliate-amount .credit-limit > div {
+  padding-left: 60px;
+  padding-top : 0;
+  position    : relative;
+  text-align  : left!important;
+}
+.ced-affiliate-amount .credit-limit .title {
+  text-align: left!important;
+}
+.ced-affiliate-wallet.ced-affiliate-amount .credit-limit .price {
+  background   : #00AE55 none repeat scroll 0 0;
+  border       : 1px solid #ffffff;
+  border-radius: 25px;
+  margin       : 0;
+  max-width    : 110px;
+  padding      : 10px;
+  position     : absolute;
+  text-align   : center;
+}
+.ced-affiliate-wallet.ced-affiliate-amount .credit-limit > div::before {
+  border       : 2px solid #ffffff;
+  border-radius: 50%;
+  content      : "";
+  font-family  : FontAwesome;
+  font-size    : 20px;
+  height       : 30px;
+  left         : 5px;
+  line-height  : 30px;
+  padding      : 5px;
+  position     : absolute;
+  text-align   : center;
+  top          : 0;
+  width        : 30px;
+}
+.affiliate-withdrawl-wrap .ced-aff-withdraw label,
+.affiliate-withdrawl-wrap .ced-aff-withdraw .control {
+  width: 100%;
+}
+
+.affiliate-login-container.login-container .fieldset::after {
+  position: static;
+}
+.ced-payment-affiliate .panel_product_heading,
+.aff-title h2,
+.affiliate-content .ced-affiliate-account-info .affiiate-title h1 {
+  font-size: 22px;
+}
+.ced-program-foo-two dt {
+  float: none;
+}
+.ced-program-foo-two dd {
+  margin-bottom: 25px;
+  padding-left: 0;
+}
+.ced-affiliate-coupon-wrap .field.firstname.required {
+  float: left;
+  width: 100%;
+}
+.ced-affiliate-coupon-wrap .actions-toolbar {
+  float: right;
+  width: 100%;
+}
+.referral-section-wrapper .referral-pending, .referral-section-wrapper .referral-acknowledged {
+  box-sizing: border-box;
+  margin: 10px 0;
+  width: 100%;
+}
+}
+@media screen and (max-width:500px){
+.ced-affiliate-wallet .credit-limit .price ,
+.ced-affiliate-wallet.ced-affiliate-amount .credit-limit .price{
+  background   : #00AE55 none repeat scroll 0 0;
+  border       : 1px solid #ffffff;
+  border-radius: 25px;
+  display      : block;
+  margin-top   : 5px;
+  padding      : 10px;
+  position     : static;
+  right        : 10px;
+  text-align   : center;
+  top          : 0;
+  max-width    : 110px;
+  width        :auto;
+}
+.ced-affiliate-amount .affiliate-account-summary .credit-limit {
+  width: 95%;
+}
+.affiliate_withdrawl_request .withdrwal-form .amount-value,
+.affiliate_withdrawl_request .withdrwal-form .payment-methods,
+.affiliate_withdrawl_request .withdrwal-form .request-withrawal {
+  display: block;
+  width: 100%;
+}
+.data-table-wrapper + .toolbar.bottom .toolbar-amount {
+  float: none;
+  margin-bottom: 10px;
+  position: static;
+}
+.data-table-wrapper + .toolbar.bottom .pages {
+  position: static;
+  width: 100%;
+}
+}
+
+@media screen and (max-width:400px){
+  .admin__data-grid-pager-wrap .admin__control-select {
+  min-width    : 60px;
+  padding-left : 0;
+  padding-right: 33px;
+  width        : 20px;
+}
+
+.admin__data-grid-pager-wrap .admin__data-grid-pager button, .admin__data-grid-pager-wrap .admin__data-grid-pager .admin__control-text {
+  margin       : 0;
+  max-width    : 29px;
+  min-width    : 29px;
+  padding-left : 5px;
+  padding-right: 5px;
+  width        : 35px;
+}
+.page-title-wrapper .page-title .base {
+  font-size: 20px;
+}
+.referral-form .fieldset .legend span {
+  font-family: arial;
+  font-size  : 20px;
+}
+}
+
+/*=====  End of Section comment Media query  ======*/
+
+
+
+
+
+
+/*======================================================
+=            Section comment Admin Grid css            =
+======================================================*/
+
+[class*="admin__"] + label, [class*="admin__"] + label::after, [class*="admin__"] + label::before, [class*="admin__"]::before, [class*="admin__"]::after {
+  box-sizing: border-box;
+}
+
+.admin__data-grid-header {
+  font-size: 1.4rem;
+}
+.abs-clearfix::before, .abs-clearfix::after, .admin__control-table-pagination::before, .admin__control-table-pagination::after, .admin__field-complex::before, .admin__field-complex::after, .fieldset-wrapper-title::before, .fieldset-wrapper-title::after, .admin__fieldset-wrapper-title::before, .admin__fieldset-wrapper-title::after, .actions-split::before, .actions-split::after, .action-multicheck-wrap::before, .action-multicheck-wrap::after, .tabs-horiz::before, .tabs-horiz::after, .page-content::before, .page-content::after, .ui-dialog .ui-dialog-buttonset::before, .ui-dialog .ui-dialog-buttonset::after, .ui-dialog .main-col .insert-title-inner::before, .ui-dialog .main-col .insert-title-inner::after, .ui-dialog .magento-message .insert-title-inner::before, .ui-dialog .magento-message .insert-title-inner::after, .ui-dialog .main-col #contents-uploader::before, .ui-dialog .main-col #contents-uploader::after, .ui-dialog .magento-message #contents-uploader::before, .ui-dialog .magento-message #contents-uploader::after, .attribute-popup-actions::before, .attribute-popup-actions::after, .popup-window .magento_buttons::before, .popup-window .magento_buttons::after, .fade .popup-content::before, .fade .popup-content::after, .fade .actions::before, .fade .actions::after, .modal-slide .main-col .insert-title-inner::before, .modal-slide .main-col .insert-title-inner::after, .modal-slide .magento-message .insert-title-inner::before, .modal-slide .magento-message .insert-title-inner::after, .gallery::before, .gallery::after, .data-slider::before, .data-slider::after, .message-system-inner::before, .message-system-inner::after, .page-header-actions::before, .page-header-actions::after, .page-main-actions:not(._hidden)::before, .page-main-actions:not(._hidden)::after, .page-actions._fixed::before, .page-actions._fixed::after, .dashboard-totals-list::before, .dashboard-totals-list::after, .dashboard-store-stats .ui-tabs::before, .dashboard-store-stats .ui-tabs::after, .hosted-date-wrap::before, .hosted-date-wrap::after, .product-create-configuration::before, .product-create-configuration::after, .product-create-configuration .product-create-configuration-actions::before, .product-create-configuration .product-create-configuration-actions::after, .steps-wizard .steps-wizard-navigation::before, .steps-wizard .steps-wizard-navigation::after, .nav::before, .nav::after, .steps-wizard .select-attributes-block::before, .steps-wizard .select-attributes-block::after, .steps-wizard .attribute-entity-top::before, .steps-wizard .attribute-entity-top::after, .form-sharing-info .admin__legend::before, .form-sharing-info .admin__legend::after, .order-create-gift-wrapping .gift-wrapping-design::before, .order-create-gift-wrapping .gift-wrapping-design::after, .order-gift-options .gift-wrapping-design::before, .order-gift-options .gift-wrapping-design::after, .gift-options-popup .gift-wrapping-design::before, .gift-options-popup .gift-wrapping-design::after, .adminhtml-reward-rate-edit .field-rate .admin__field-control::before, .adminhtml-reward-rate-edit .field-rate .admin__field-control::after, .order-discounts::before, .order-discounts::after, .order-gift-options::before, .order-gift-options::after, .abs-order-tables .item-options::before, .abs-order-tables .item-options::after, .order-account-information .admin__fieldset::before, .order-account-information .admin__fieldset::after, .admin__page-section-title::before, .admin__page-section-title::after, .admin__page-section-content::before, .admin__page-section-content::after, .block-schedule .block-title::before, .block-schedule .block-title::after, .staging-preview-options::before, .staging-preview-options::after, .staging-events-summary::before, .staging-events-summary::after, .admin__data-grid-filters::before, .admin__data-grid-filters::after, .admin__data-grid-filters-footer::before, .admin__data-grid-filters-footer::after, .admin__data-grid-action-columns-menu .admin__action-dropdown-menu-content::before, .admin__data-grid-action-columns-menu .admin__action-dropdown-menu-content::after, .admin__data-grid-header-row::before, .admin__data-grid-header-row::after, .cms-hierarchy::before, .cms-hierarchy::after, .merchandiser-app::before, .merchandiser-app::after, .merchandiser-app .tabs::before, .merchandiser-app .tabs::after, .regular-category-settings::before, .regular-category-settings::after, .smart-category-switcher::before, .smart-category-switcher::after, .merchandiser-tabs::before, .merchandiser-tabs::after, .order-creditmemo-tables .item-options::before, .order-creditmemo-tables .item-options::after, .order-tables .item-options::before, .order-tables .item-options::after, .order-invoice-tables .item-options::before, .order-invoice-tables .item-options::after, .edit-order-table .item-options::before, .edit-order-table .item-options::after, .order-shipment-table .item-options::before, .order-shipment-table .item-options::after {
+  content: "";
+  display: table;
+}
+.abs-clearfix::after, .admin__control-table-pagination::after, .admin__field-complex::after, .fieldset-wrapper-title::after, .admin__fieldset-wrapper-title::after, .actions-split::after, .action-multicheck-wrap::after, .tabs-horiz::after, .page-content::after, .ui-dialog .ui-dialog-buttonset::after, .ui-dialog .main-col .insert-title-inner::after, .ui-dialog .magento-message .insert-title-inner::after, .ui-dialog .main-col #contents-uploader::after, .ui-dialog .magento-message #contents-uploader::after, .attribute-popup-actions::after, .popup-window .magento_buttons::after, .fade .popup-content::after, .fade .actions::after, .modal-slide .main-col .insert-title-inner::after, .modal-slide .magento-message .insert-title-inner::after, .gallery::after, .data-slider::after, .message-system-inner::after, .page-header-actions::after, .page-main-actions:not(._hidden)::after, .page-actions._fixed::after, .dashboard-totals-list::after, .dashboard-store-stats .ui-tabs::after, .hosted-date-wrap::after, .product-create-configuration::after, .product-create-configuration .product-create-configuration-actions::after, .steps-wizard .steps-wizard-navigation::after, .nav::after, .steps-wizard .select-attributes-block::after, .steps-wizard .attribute-entity-top::after, .form-sharing-info .admin__legend::after, .order-create-gift-wrapping .gift-wrapping-design::after, .order-gift-options .gift-wrapping-design::after, .gift-options-popup .gift-wrapping-design::after, .adminhtml-reward-rate-edit .field-rate .admin__field-control::after, .order-discounts::after, .order-gift-options::after, .abs-order-tables .item-options::after, .order-account-information .admin__fieldset::after, .admin__page-section-title::after, .admin__page-section-content::after, .block-schedule .block-title::after, .staging-preview-options::after, .staging-events-summary::after, .admin__data-grid-filters::after, .admin__data-grid-filters-footer::after, .admin__data-grid-action-columns-menu .admin__action-dropdown-menu-content::after, .admin__data-grid-header-row::after, .cms-hierarchy::after, .merchandiser-app::after, .merchandiser-app .tabs::after, .regular-category-settings::after, .smart-category-switcher::after, .merchandiser-tabs::after, .order-creditmemo-tables .item-options::after, .order-tables .item-options::after, .order-invoice-tables .item-options::after, .edit-order-table .item-options::after, .order-shipment-table .item-options::after {
+  clear: both;
+}
+.admin__data-grid-header-row + .admin__data-grid-header-row {
+  margin-top: 1.1rem;
+}
+.admin__data-grid-toolbar .admin__data-grid-header-row > div:first-child {
+  margin-left: 0;
+}
+.admin__data-grid-toolbar .admin__data-grid-header-row > div {
+  margin-left: 30px;
+}
+.admin__data-grid-toolbar .admin__filter-actions {
+  float: left;
+}
+.admin__data-grid-toolbar .admin__data-grid-header-row button, .admin__data-grid-toolbar .admin__data-grid-header-row .block-footer .action-add {
+  vertical-align: top;
+}
+button:not(.primary) {
+  box-shadow: 0 1px 0 0 #ffffff inset, 0 -1px 0 0 rgba(204, 204, 204, 0.3) inset;
+}
+.action-secondary {
+  background-color: #514943;
+  border-color: #514943;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+.action-default, button, .block-footer .action-add, .block-footer .action-add {
+  background: #e3e3e3 none repeat scroll 0 0;
+  border-color: #adadad;
+  color: #514943;
+}
+.abs-action-pattern, .abs-action-default, .abs-action-primary, .abs-action-secondary, .abs-action-tertiary, .abs-action-quaternary, .action-default, button, .action-primary, .action-secondary, .action-tertiary, .action-quaternary, .mass-select-wrap select + label, button, button.primary, button.secondary, button.tertiary, .ui-dialog .action-close, .ui-dialog .ui-button, .ui-dialog .action-primary, .attribute-popup-actions .action-default.reset, .attribute-popup-actions .page-actions-buttons > button.action-default.primary, .modal-popup .modal-footer .action-primary, .modal-popup .modal-footer .action-secondary, .page-actions > button, .page-actions .page-actions-buttons > button, .page-actions > button.action-primary, .page-actions .page-actions-buttons > button.action-primary, .page-actions > button.primary, .page-actions .page-actions-buttons > button.primary, .page-actions > button.action-secondary, .page-actions .page-actions-buttons > button.action-secondary, .steps-wizard .select-attributes-actions .action-default, .downloadable-form .action-add, .rma-items .col-actions .action-item-details, .rma-items .col-actions .action-item-split-line, .rma-items-block .col-actions a, .field-vat-number .action-default, .order-shipping-method-summary .action-default, .order-shipping-method-info .action-default, .block-footer .action-add, .block-footer .action-add, .popup-window .magento_buttons .ok_button, .popup-window .magento_buttons .cancel_button, .fade .actions .primary, .fade .actions .cancel, .block-footer .action-add, .block-footer .action-add.primary, .block-footer .action-add.secondary, .block-footer .action-add.tertiary, .attribute-popup-actions .page-actions-buttons > .block-footer .action-add.action-default.primary, .page-actions > .block-footer .action-add, .page-actions .page-actions-buttons > .block-footer .action-add, .page-actions > .block-footer .action-add.action-primary, .page-actions .page-actions-buttons > .block-footer .action-add.action-primary, .page-actions > .block-footer .action-add.primary, .page-actions .page-actions-buttons > .block-footer .action-add.primary, .page-actions > .block-footer .action-add.action-secondary, .page-actions .page-actions-buttons > .block-footer .action-add.action-secondary {
+  border: 1px solid;
+  border-radius: 0;
+  display: inline-block;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.36;
+  padding: 0.6rem 1em;
+  text-align: center;
+  vertical-align: baseline;
+}
+button, html input[type="button"], input[type="reset"], input[type="submit"], .block-footer .action-add {
+  cursor: pointer;
+}
+.admin__data-grid-toolbar .admin__data-grid-header-row > div {
+  margin-left: 30px;
+}
+.admin__control-support-text {
+  border: 1px solid rgba(0, 0, 0, 0);
+  display: inline-block;
+  font-size: 1.4rem;
+  line-height: 1.36;
+  padding-bottom: 0.6rem;
+  padding-top: 0.6rem;
+}
+.mass-select-info._empty {
+  display: none;
+}
+.admin__data-grid-toolbar .admin__data-grid-pager-wrap {
+  float: right;
+}
+.admin__data-grid-pager-wrap {
+  float: right;
+  text-align: right;
+}
+.admin__data-grid-wrap {
+  margin-bottom: 2rem;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  padding-top: 2rem;
+}
+.admin__data-grid-wrap-static .data-grid {
+  box-sizing: border-box;
+}
+.admin__data-grid-wrap-static .data-grid thead {
+  color: #41362f;
+}
+.data-grid thead {
+  background-color: rgba(0, 0, 0, 0);
+}
+.data-grid .data-grid-th._sortable {
+  cursor: pointer;
+  transition: background-color 0.1s linear 0s;
+  z-index: 1;
+}
+.data-grid th:first-child {
+  border-left-color: #8a837f;
+}
+.data-grid .data-grid-th {
+  background-clip: padding-box;
+  color: #333333;
+  padding: 1rem;
+  position: relative;
+  vertical-align: middle;
+}
+.data-grid th {
+  background-color: rgba(0, 0, 0, 0);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0;
+}
+.data-grid tr:last-child:not(.data-grid-editable-row) td {
+  border-bottom: 0.1rem solid #d6d6d6;
+}
+.admin__data-grid-wrap-static .data-grid tr:nth-child(2n) td {
+  background-color: #f5f5f5;
+}
+.data-grid th, .data-grid td {
+  font-size: 1.3rem;
+  line-height: 1.36;
+  transition: background-color 0.1s linear 0s;
+  vertical-align: top;
+}
+.data-grid td {
+  background-color: #ffffff;
+  border-left: 0.1rem dashed #d6d6d6;
+  border-right: 0.1rem dashed #d6d6d6;
+  color: #303030;
+  padding: 1rem;
+}
+.data-grid tr._clickable, .data-grid tr ._clickable {
+  cursor: pointer;
+}
+.data-grid tr:last-child:not(.data-grid-editable-row) td {
+  border-bottom: 0.1rem solid #d6d6d6;
+}
+.data-grid td:first-child {
+  border-left-style: solid;
+}
+.admin__control-select, .ui-datepicker .ui-datepicker-title select {
+  -moz-appearance: none;
+  background-image: url("../images/arrows-bg.svg"), linear-gradient(#e3e3e3, #e3e3e3), linear-gradient(#adadad, #adadad);
+  background-position: calc(100% - 12px) -34px, 100% center, calc(100% - 3.2rem) 0;
+  background-repeat: no-repeat;
+  background-size: auto auto, 3.2rem 100%, 1px 100%;
+  max-width: 100%;
+  min-width: 8.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 4.4rem;
+  padding-top: 0.5rem;
+  transition: border-color 0.1s linear 0s;
+}
+.admin__control-text, .admin__control-select, .admin__control-multiselect, .admin__control-file-label::before, .admin__control-textarea, .admin__control-addon [class*="admin__control-"][class] ~ [class*="admin__addon-"]:last-child::before, .selectmenu, .ui-datepicker .ui-datepicker-title select {
+  background-color: #ffffff;
+  border: 1px solid #adadad;
+  border-radius: 1px;
+  box-shadow: none;
+  color: #303030;
+  font-size: 1.4rem;
+  font-weight: 400;
+  height: auto;
+  line-height: 1.36;
+  padding: 0.6rem 1rem;
+  transition: border-color 0.1s linear 0s;
+  vertical-align: baseline;
+  width: auto;
+}
+.action-secondary {
+  background-color: #514943!important;
+  border-color: #514943!important;
+  color: #ffffff!important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3)!important;
+}
+.admin__data-grid-toolbar .admin__data-grid-header-row > div {
+  margin-left: 30px;
+}
+.admin__control-support-text {
+  border: 1px solid rgba(0, 0, 0, 0);
+  display: inline-block;
+  font-size: 1.4rem;
+  line-height: 1.36;
+  padding-bottom: 0.6rem;
+  padding-top: 0.6rem;
+}
+.admin__data-grid-pager {
+  display: inline-block;
+  margin-left: 3rem;
+}
+.action-previous::before {
+  content: "";
+  font-family: FontAwesome!important;
+}
+.action-previous::before, .action-next::before {
+  font-weight: 700;
+}
+.admin__control-checkbox + label::before, .admin__control-collapsible .admin__collapsible-block-wrapper .fieldset-wrapper-title .action-delete::before, .admin__control-table .action-delete::before, .admin__field-fallback-reset::before, .selectmenu .action-save::before, .selectmenu .action-edit::before, .selectmenu .action-delete::before, .admin__action-multiselect-search-label::before, .admin__action-multiselect-dropdown::before, .abs-action-delete, .action-close::before, .timeline-action::before, .admin__menu .level-0 > a::before, .admin-user .admin__action-dropdown::before, .search-global-label::before, .notifications-action::before, .notifications-close::before, .copyright .link-copyright::before, .store-switcher .dropdown-menu .dropdown-toolbar a::before, .tooltip .help span::before, .tooltip .help a::before, .page-actions > button.back::before, .page-actions .page-actions-buttons > button.back::before, .page-actions > button.action-back::before, .page-actions .page-actions-buttons > button.action-back::before, .admin__page-nav-title._collapsible::after, .admin__page-nav-item-message .admin__page-nav-item-message-icon, .admin__collapsible-block-wrapper .admin__collapsible-title::before, .modal-slide .fieldset-wrapper .admin__collapsible-title::before, .section-config > .admin__collapsible-block > a::before, .accordion > dt a::before, .accordion .admin__collapsible-block > a::before, .section-config.complex .section-config.with-button.enabled > .entry-edit-head::before, .section-config .config td.label label.enabled::before, .steps-wizard .attribute-option .action-save::before, .steps-wizard .attribute-option .action-remove::before, .partners-search::before, .order-discounts .admin__field .action-default::before, .order-discounts .action-remove::before, .order-sidebar .admin__table-primary .icon, .order-sidebar .action-refresh, .add-by-sku-wrapper .action-reset, .abs-staging-events-count-icon::before, .data-grid-search-control-wrap .action-submit::before, .data-grid-filters-action-wrap .action-default::before, .admin__current-filters-list .action-remove::before, .action-previous::before, .action-next::before, .admin__data-grid-action-bookmarks .admin__action-dropdown::before, .admin__data-grid-action-bookmarks .action-submit::before, .admin__data-grid-action-bookmarks .action-delete::before, .admin__data-grid-action-bookmarks .action-edit::before, .admin__data-grid-action-columns .admin__action-dropdown::before, .admin__data-grid-action-export .admin__action-dropdown::before, .sticky-header .data-grid-search-control-wrap .data-grid-search-label::before, .data-grid-row-parent > td .data-grid-checkbox-cell-inner::before, .data-grid-row-changed::after, .manage-rules-panel .smart-category-table .action-delete::before, .mass-select-wrap select + label::before, .rma-items .col-actions .action-item-delete-line, .staging-events-campaign-objects-count::before, .page-actions > .block-footer .action-add.back::before, .page-actions .page-actions-buttons > .block-footer .action-add.back::before, .page-actions > .block-footer .action-add.action-back::before, .page-actions .page-actions-buttons > .block-footer .action-add.action-back::before {
+  font-family: "Admin Icons";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+}
+.abs-action-pattern[disabled], .abs-action-pattern.disabled, .abs-action-default[disabled], .abs-action-default.disabled, .abs-action-primary[disabled], .abs-action-primary.disabled, .abs-action-secondary[disabled], .abs-action-secondary.disabled, .abs-action-tertiary[disabled], .abs-action-tertiary.disabled, .abs-action-quaternary[disabled], .abs-action-quaternary.disabled, .action-default[disabled], .action-default.disabled, button[disabled], button.disabled, .action-primary[disabled], .action-primary.disabled, .action-secondary[disabled], .action-secondary.disabled, .action-tertiary[disabled], .action-tertiary.disabled, .action-quaternary[disabled], .action-quaternary.disabled, .mass-select-wrap select + label[disabled], .mass-select-wrap select + label.disabled, button[disabled], button.disabled, button.primary[disabled], button.primary.disabled, button.secondary[disabled], button.secondary.disabled, button.tertiary[disabled], button.tertiary.disabled, .ui-dialog .action-close[disabled], .ui-dialog .action-close.disabled, .ui-dialog .ui-button[disabled], .ui-dialog .ui-button.disabled, .ui-dialog .action-primary[disabled], .ui-dialog .action-primary.disabled, .attribute-popup-actions .action-default.reset[disabled], .attribute-popup-actions .action-default.reset.disabled, .attribute-popup-actions .page-actions-buttons > button.action-default.primary[disabled], .attribute-popup-actions .page-actions-buttons > button.action-default.primary.disabled, .modal-popup .modal-footer .action-primary[disabled], .modal-popup .modal-footer .action-primary.disabled, .modal-popup .modal-footer .action-secondary[disabled], .modal-popup .modal-footer .action-secondary.disabled, .page-actions > button[disabled], .page-actions > button.disabled, .page-actions .page-actions-buttons > button[disabled], .page-actions .page-actions-buttons > button.disabled, .page-actions > button.action-primary[disabled], .page-actions > button.action-primary.disabled, .page-actions .page-actions-buttons > button.action-primary[disabled], .page-actions .page-actions-buttons > button.action-primary.disabled, .page-actions > button.primary[disabled], .page-actions > button.primary.disabled, .page-actions .page-actions-buttons > button.primary[disabled], .page-actions .page-actions-buttons > button.primary.disabled, .page-actions > button.action-secondary[disabled], .page-actions > button.action-secondary.disabled, .page-actions .page-actions-buttons > button.action-secondary[disabled], .page-actions .page-actions-buttons > button.action-secondary.disabled, .steps-wizard .select-attributes-actions .action-default[disabled], .steps-wizard .select-attributes-actions .action-default.disabled, .downloadable-form .action-add[disabled], .downloadable-form .action-add.disabled, .rma-items .col-actions .action-item-details[disabled], .rma-items .col-actions .action-item-details.disabled, .rma-items .col-actions .action-item-split-line[disabled], .rma-items .col-actions .action-item-split-line.disabled, .rma-items-block .col-actions a[disabled], .rma-items-block .col-actions a.disabled, .field-vat-number .action-default[disabled], .field-vat-number .action-default.disabled, .order-shipping-method-summary .action-default[disabled], .order-shipping-method-summary .action-default.disabled, .order-shipping-method-info .action-default[disabled], .order-shipping-method-info .action-default.disabled, .block-footer .action-add[disabled], .block-footer .action-add.disabled, .block-footer .action-add[disabled], .block-footer .action-add.disabled, .popup-window .magento_buttons .ok_button[disabled], .popup-window .magento_buttons .ok_button.disabled, .popup-window .magento_buttons .cancel_button[disabled], .popup-window .magento_buttons .cancel_button.disabled, .fade .actions .primary[disabled], .fade .actions .primary.disabled, .fade .actions .cancel[disabled], .fade .actions .cancel.disabled, .block-footer .action-add[disabled], .block-footer .action-add.disabled, .block-footer .action-add.primary[disabled], .block-footer .action-add.primary.disabled, .block-footer .action-add.secondary[disabled], .block-footer .action-add.secondary.disabled, .block-footer .action-add.tertiary[disabled], .block-footer .action-add.tertiary.disabled, .attribute-popup-actions .page-actions-buttons > .block-footer .action-add.action-default.primary[disabled], .attribute-popup-actions .page-actions-buttons > .block-footer .action-add.action-default.primary.disabled, .page-actions > .block-footer .action-add[disabled], .page-actions > .block-footer .action-add.disabled, .page-actions .page-actions-buttons > .block-footer .action-add[disabled], .page-actions .page-actions-buttons > .block-footer .action-add.disabled, .page-actions > .block-footer .action-add.action-primary[disabled], .page-actions > .block-footer .action-add.action-primary.disabled, .page-actions .page-actions-buttons > .block-footer .action-add.action-primary[disabled], .page-actions .page-actions-buttons > .block-footer .action-add.action-primary.disabled, .page-actions > .block-footer .action-add.primary[disabled], .page-actions > .block-footer .action-add.primary.disabled, .page-actions .page-actions-buttons > .block-footer .action-add.primary[disabled], .page-actions .page-actions-buttons > .block-footer .action-add.primary.disabled, .page-actions > .block-footer .action-add.action-secondary[disabled], .page-actions > .block-footer .action-add.action-secondary.disabled, .page-actions .page-actions-buttons > .block-footer .action-add.action-secondary[disabled], .page-actions .page-actions-buttons > .block-footer .action-add.action-secondary.disabled {
+  cursor: default;
+  opacity: 0.5;
+  pointer-events: none;
+}
+button:not(.primary) {
+  box-shadow: 0 1px 0 0 #ffffff inset, 0 -1px 0 0 rgba(204, 204, 204, 0.3) inset;
+}
+.action-previous {
+  margin-right: 2.5rem;
+  text-indent: -0.25em;
+}
+.action-previous, .action-next {
+  width: 4.4rem;
+}
+.action-default, button, .block-footer .action-add, .block-footer .action-add {
+  background: #e3e3e3 none repeat scroll 0 0;
+  border-color: #adadad;
+  color: #514943;
+}
+button, .block-footer .action-add {
+  overflow: visible;
+}
+.action-previous > span, .action-next > span {
+  clip: rect(0px, 0px, 0px, 0px);
+  display: none;
+  overflow: hidden;
+  position: absolute;
+  visibility: hidden;
+}
+.admin__data-grid-pager .admin__control-text {
+  -moz-appearance: textfield;
+  text-align: center;
+  width: 4.4rem;
+}
+[class*="admin__control-"] + .admin__control-support-text {
+  margin-left: 0.7rem;
+}
+.action-next::before {
+  content: "";
+  font-family: FontAwesome;
+}
+.action-previous::before, .action-next::before {
+  font-weight: 700;
+}
+.action-secondary:hover, .action-secondary:active, .action-secondary:focus {
+  background-color: #35302c;
+  border-color: #35302c;
+  box-shadow: 0 0 0 1px #007bdb;
+  color: #ffffff;
+  text-decoration: none;
+}
+.admin__data-grid-header-row .action-reset:hover {
+  background: #f1c40f none repeat scroll 0 0;
+  color: #ffffff;
+  text-decoration: none;
+}
+/*=====  End of Section comment Admin Grid css  ======*/
+
+/*======================================================
+=            revised css for issues in form            =
+======================================================*/
+.columns .block .block-title strong{
+  color: #fff !important;
+}
+.affiliate-login-container .block-content .field .control input.input-text::placeholder{
+  color: #fff !important;
+  opacity: 1;
+}
+.affiliate-login-container .fieldset .field.password .control::before{
+  content: "\f13e";
+  z-index: 9;
+  color: #fff;
+}
+.affiliate-login-container .fieldset .field.email .control::before{
+  color: #fff;
+  z-index: 9;
+}
+.actions-toolbar .secondary a.action {
+  color: #fff;
+}
+.affiliate-login-container.login-container .secondary {
+  float: left;
+}
+.affiliate-login-container.login-container .fieldset::after{
+  color: #f75505;
+}
+.affiliate-login-container.login-container .fieldset::after{
+  position: absolute;
+  right: -10px;
+}
+.affiliate-register-container .password-strength-meter {
+  color: #4c515f;
+  background: #f1f1f1 none repeat scroll 0 0;
+}
+.affiliate-register-container select {
+  color: #fff;
+}
+.affiliate-register-container.register-container .ced-reg-wrap .field .label.required span{
+  color: #fff;
+}
+.actions-toolbar .secondary-action .action.back span{
+  color: #f75505;
+}
+.affiliate-register-container .ced-file-upload .file-wrapper{
+  bottom: unset;
+  padding-bottom: 5px;
+}
+.affiliate-register-container .field .control input {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.affiliate-register-container.register-container .ced-reg-wrap .field {
+    margin: 0px;
+}
+/* css for dashboard issues */
+.block-collapsible-nav.ced-affiliate-sidebar .content .nav strong {
+  width: 100%;
+  box-sizing: border-box;
+}
+.ced-affiliate-sidebar .account-nav li.nav {
+  display: block;
+}
+.ced-affiliate-wallet.ced-affiliate-amount .credit-limit > div::before {
+  font-size: 17px;
+  height: 34px;
+  width: 34px;
+  line-height: 35px;
+}
+/*css issue in referal section */
+.referral-form > h2 {
+  margin-bottom: 15px;
+}
+.referral-source-wrap .social-referrel > ul::before {
+  display: none;
+}
+.social-referrel ul li span.referral-counter {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px solid #cecece;
+  margin-left: 10px;
+}
+.social-referrel ul li{
+  margin-bottom: 5px;
+}
+.social-referrel ul li.google span.referral-counter {
+  background: #b33e3e;
+  border-color: #b33e3e;
+  color: #fff;
+  border-radius: 4px;
+}
+.social-referrel ul li.fb span.referral-counter {
+  background: #3b5998;
+  border-color: #3b5998;
+  color: #fff;
+  border-radius: 4px;
+}
+.social-referrel ul li.twitter span.referral-counter {
+  background: #1DA1F3;
+  border-color: #1DA1F3;
+  color: #fff;
+  border-radius: 4px;
+}
+.social-referrel ul li.email span.referral-counter {
+  background: #ee1666;
+  border-color: #ee1666;
+  color: #fff;
+  border-radius: 4px;
+}
+/* css for save button in payment setting */
+.ced-payment-affiliate .panel_product_heading .buttons-set.buttons_scb{
+  font-size: 16px;
+}
+.ced-payment-affiliate .buttons-set {
+  float: none !important;
+  margin-top: 5px;
+}
+.ced-payment-affiliate .buttons-set .required {
+  float: right;
+}
+.ced-payment-affiliate .buttons-set .back-link {
+  float: left;
+}
+/* css for my wallet */
+.ced-affiliate-wallet .credit-limit > div::before {
+  font-size: 17px;
+  height: 34px;
+  width: 34px;
+  line-height: 19px;
+}
+/* css for issue in affiliate account view */
+.ced-program-foo-two dt {
+    float: none ;
+}
+.ced-program-foo-two dd {
+  padding-left: 0px;
+}
+.affiliate-withdrawl-view-wrapper .affiliate-withdrawl-policy {
+  padding-left: 20px;
+}
+.affiliate-withdrawl-view-wrapper .affiliate-withdrawl-policy ul li::before {
+  content: "";
+  left: -13px
+}
+.affiliate-register-container .block-content .form.create.account.form-create-account .field .control button::before{
+ color: #fff !important;
+ opacity: 1;
+}
+.affiliate-login-container .fieldset .field.password .control::before{
+  content: "\f13e";
+  z-index: 9;
+  color: #fff;
+}
+/*=====  End of revised css for issues in form  ======*/
+.account .sidebar-additional {
+  margin-top: 0;
+}
+.sidebar.sidebar-additional .block.block-compare .empty {
+  margin-top: 15px;
+  padding: 10px;
+}
+.sidebar-additional .block {
+  padding: 0 !important;
+}

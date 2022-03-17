@@ -1,0 +1,96 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsAdvTransaction
+ * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php 
+$description = $this->getData();
+$keys =[];
+foreach ($description as $k=>$v)
+{
+	foreach ($v as $k1=>$v1)
+	{
+		$keys[] = $k1;
+	}
+}
+$keys = array_unique($keys);
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+
+$fees = $om->create('Ced\CsAdvTransaction\Model\Fee')->getCollection()->addFieldToFilter('field_code',['in'=>$keys])->addFieldToFilter('status',1);
+?>
+<b> <label class="desc" style="float:left"><?php echo __('Order Description')?></label></b>
+<table>
+<tr>
+<th><?php echo __('OrderId');?></th>
+   <th><?php echo __('Grand Total');?></th>
+  <th><?php echo __('Commission Fee');?></th>
+  <th><?php echo __('Payment Mode');?></th>
+<?php $feeOrders =[];
+foreach ($fees as $fee)
+    	{
+    	$feeOrders[] = $fee->getFieldCode();
+    		?><?php 
+    		
+    	} ?>
+
+ <th><?php echo __('Total Payment');?></th>
+  <tr>
+ 
+  <?php
+ 
+
+ 
+  foreach ($description as $des)
+  {
+  	$j= 0;
+
+  	?> <tr><td><a href="<?php echo $this->getUrl('csadvtransaction/pay/view',['order_id'=>$des['order_id'],'vendor_id'=>$row['vendor_id'],'vpayment_id'=>$rowId]);?>"><?php echo $des['order_id']; ?></a></td><?php 
+  	?><td><?php echo $om->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($des['order_total'],false,2,null,$currencyCode);?></td><?php
+  	?><td><?php echo $om->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($des['commission_fee'],false,2,null,$currencyCode);?></td><?php
+  	?><td><?php echo $om->get('Ced\CsAdvTransaction\Helper\Data')->getOrderPaymentType($des['order_id']);?></td><?php 
+  	for ($k=0;$k<count($feeOrders);$k++)
+  	{
+  	
+  	?><!-- <td> --><?php //if(isset($des[$feeOrders[$j]])) {echo $this->_objectManager->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($des[$feeOrders[$j]],false,2,null,$currencyCode);}?><!-- </td> --><?php
+  	  		$j++;
+  	}
+  	?><td><?php echo $om->get('Magento\Framework\Pricing\PriceCurrencyInterface')->format($des['vendor_payment'],false,2,null,$currencyCode);$j++;?></td></tr><?php
+
+  }
+  	
+  	?>
+  
+   
+ 
+</table>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin-left: 178px;
+    width: 53%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>

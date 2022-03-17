@@ -1,0 +1,142 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsOrder
+ * @author       CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+$vorder = $this->getVorder();
+$_order  = $this->getOrder();
+$_source = $this->getSource();
+$_fullInfo  = $this->getFullTaxInfo();
+$order =$vorder;
+
+$currencyCode = $this->storeManager->getStore(null)->getBaseCurrencyCode();
+if($order->getPaymentState() == 1 || $order->getPaymentState() == 3 || $order->getPaymentState() == 4 )
+{
+    if($this->advHelper->getOrderPaymentType($order->getOrderId()) == __('PrePaid'))
+    {
+
+        $vendorPay = $this->advHelper->vendorPay($order->getVendorId(),$order->getId());
+        if ($vendorPay < 0){
+            $vendorPay = 0;
+        }
+        $vearn =  $this->priceCurrency->format($vendorPay,false,2,null,$currencyCode);
+    }
+    else{
+        $vendorPay = $this->advHelper->vendorPay($order->getVendorId(),$order->getId());
+        $postpaidAmount = $this->advHelper->getPostPaidAmount($order);
+
+        $payment = (float)$postpaidAmount['post_paid']+(float)$vendorPay;
+        if ($payment < 0){
+            $payment = 0;
+        }
+        $vearn = $this->priceCurrency->format($payment,false,2,null,$currencyCode);
+
+    }
+}
+else{
+    $amount = $order->getVendorEarn();
+    if ($amount < 0){
+        $amount = 0;
+    }
+    $vearn = $this->priceCurrency->format($amount,false,2,null,$currencyCode);
+}
+$orderFees = $this->orderfeeFactory->create()->getCollection()->addFieldToFilter('order_id',$order->getOrderId())->addFieldToFilter('vendor_id',$order->getVendorId())->getData();
+
+$fees = 0;
+foreach ($orderFees as $Ofees)
+{
+    $fees  = $fees+$Ofees['amount'];
+}
+$fees = $this->priceCurrency->format($fees,false,2,null,$currencyCode);
+$ServiceTax = $this->advHelper->getServiceTaxforOrder([$order->getOrderId()],$order->getVendorId());
+$ServiceTax = $this->priceCurrency->format($ServiceTax,false,2,null,$currencyCode);
+?>
+<div class="order-totals">
+    <table width="100%" cellspacing="0">
+        <tr>
+            <td class="a-right" colspan="7">
+                <div class="summary-collapse">
+                    <strong>
+                        <?php echo  __('Grand Total (Earned)')?>
+                    </strong>
+                </div>
+            </td>
+            <td class="a-right last">
+                <strong>
+                    <?php echo  $this->currency->getCurrency($vorder->getCurrency())->toCurrency($vorder->getOrderTotal()); ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td class="a-right" colspan="7">
+                <div class="summary-collapse">
+                    <strong>
+                        <?php echo  __('Commission Fee')?>
+                    </strong>
+                </div>
+            </td>
+            <td class="a-right last">
+                <strong>
+                    <?php echo $this->currency->getCurrency($vorder->getCurrency())->toCurrency($vorder->getShopCommissionFee());  ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+
+            <td class="a-right" colspan="7">
+                <div class="summary-collapse">
+                    <strong>
+                        <?php echo  __('Marketplace Fees')?>
+                    </strong>
+                </div>
+            </td>
+            <td class="a-right last">
+                <strong>
+                    <?php echo $fees; ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td class="a-right" colspan="7">
+                <div class="summary-collapse">
+                    <strong>
+                        <?php echo  __('Service Tax')?>
+                    </strong>
+                </div>
+            </td>
+            <td class="a-right last">
+                <strong>
+                    <?php echo $ServiceTax; ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td class="a-right" colspan="7">
+                <div class="summary-collapse">
+                    <strong>
+                        <?php echo  __('Net Earned')?>
+                    </strong>
+                </div>
+            </td>
+            <td class="a-right last">
+                <strong>
+                    <?php echo $vearn; ?>
+                </strong>
+            </td>
+        </tr>
+    </table>
+</div>

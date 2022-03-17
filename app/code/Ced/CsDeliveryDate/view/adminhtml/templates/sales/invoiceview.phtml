@@ -1,0 +1,199 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsDeliveryDate
+ * @author        CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license     https://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_invoice = $block->getInvoice() ?>
+<?php $_order = $_invoice->getOrder() ?>
+<?php echo $block->getChildHtml('order_info') ?>
+
+<section class="admin__page-section order-view-billing-shipping">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Payment &amp; Shipping Method') ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-payment-method<?php if ($_order->getIsVirtual()): ?> order-payment-method-virtual<?php endif; ?> admin__fieldset-wrapper">
+            <?php /*Billing Address */ ?>
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo __('Payment Information') ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <div class="order-payment-method-title"><?php echo $block->getChildHtml('order_payment') ?></div>
+                <div class="order-payment-currency">
+                    <?php echo __('The order was placed using %1.', $_order->getOrderCurrencyCode()) ?>
+                </div>
+                <div class="order-payment-additional"><?php echo $block->getChildHtml('order_payment_additional'); ?></div>
+            </div>
+        </div>
+
+        <?php if (!$_order->getIsVirtual()): ?>
+            <div class="admin__page-section-item order-shipping-address">
+                <?php /*Shipping Address */ ?>
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo __('Shipping Information') ?></span>
+                </div>
+                <div class="admin__page-section-item-content shipping-description-wrapper">
+                    <div class="shipping-description-title">
+                        <?php echo $block->escapeHtml($_order->getShippingDescription()) ?>
+                    </div>
+                    <div class="shipping-description-content">
+                        <?php echo __('Total Shipping Charges'); ?>:
+
+                        <?php if ($this->helper('Magento\Tax\Helper\Data')->displayShippingPriceIncludingTax()): ?>
+                            <?php $_excl = $block->displayShippingPriceInclTax($_order); ?>
+                        <?php else: ?>
+                            <?php $_excl = $block->displayPriceAttribute('shipping_amount', false, ' '); ?>
+                        <?php endif; ?>
+                        <?php $_incl = $block->displayShippingPriceInclTax($_order); ?>
+
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('Magento\Tax\Helper\Data')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo __('Incl. Tax'); ?><?php echo $_incl; ?>)
+                        <?php endif; ?>
+                        <div><?php echo $block->getChildHtml('shipment_tracking') ?></div>
+                    </div>
+                </div>
+            </div>
+            <?php /* Delivery Date Method */
+            if ($this->helper('Ced\DeliveryDate\Helper\ConfigData')->ddShowOn('invoice') && ($this->helper('Ced\CsDeliveryDate\Helper\ConfigData')->moduleEnabled() != 1)):
+                ?>
+                <div class="admin__page-section-item order-shipping-method">
+
+                    <?php
+
+                    $deliveryComment = $_order->getData('cedDeliveryComment');
+                    $deliveryTimestamp = $_order->getData('cedTimestamp');
+                    if ($_order->getData('cedDeliveryDate') != '0000-00-00 00:00:00') {
+                        $deliveryDate = $block->formatDate(
+                            $_order->getData('cedDeliveryDate'),
+                            \IntlDateFormatter::MEDIUM,
+                            true
+                        );
+                    }
+                    ?>
+                    <div class="admin__page-section-item-content">
+
+                        <?php if (isset($deliveryDate)): ?>
+                            <p>
+                                <strong><?php echo(__('Delivery Date : ')); ?></strong>
+                                <span><?php echo(__($deliveryDate)); ?></span>
+                            </p>
+                        <?php endif; ?>
+                        <?php if (isset($deliveryTimestamp)): ?>
+                            <p>
+                                <strong><?php echo(__('Delivery Timestamp : ')); ?></strong>
+                                <span><?php echo(__($deliveryTimestamp)); ?></span>
+                            </p>
+                        <?php endif; ?>
+                        <?php if (isset($deliveryComment) && $deliveryComment != ''): ?>
+                            <p>
+                                <strong><?php echo(__('Delivery Comment : ')); ?></strong>
+                                <span><?php echo(__($deliveryComment)); ?></span>
+                            </p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</section>
+
+<?php /*Vendor Delivery Date Method */ ?>
+<?php
+$orderId = $_order->getData('entity_id');
+$data = $this->itemCollectionFactory->create()
+    ->addFieldToFilter('order_id', $orderId);
+$orderData = [];
+if (!empty($data->getData())):
+
+    foreach ($data->getData() as $key => $value) {
+        if ($value['product_type'] == 'simple') {
+            $orderData[$key]['name'] = $value['name'];
+            $orderData[$key]['cs_deliverydate'] = isset($value['cs_deliverydate']) ? $value['cs_deliverydate'] : 'NA';
+            $orderData[$key]['cs_deliverycomment'] = isset($value['cs_deliverycomment']) ? $value['cs_deliverycomment'] : 'NA';
+            $orderData[$key]['cs_timestamp'] = isset($value['cs_timestamp']) ? $value['cs_timestamp'] : 'NA';
+        }
+    }
+
+    ?>
+    <div class="admin__page-section-item  " style="width:100%;">
+        <div class="admin__page-section-item-title">
+            <span class="title"><?php /* @escapeNotVerified */
+                echo __('Delivery Date Information') ?></span>
+        </div>
+        <table class="data-table admin__table-primary edit-order-table">
+            <thead>
+            <tr class="headings">
+                <th class="col-product"><span>Product Name</span></th>
+                <th class="col-status"><span>DeliveryDate</span></th>
+                <th class="col-price"><span>Timestamp</span></th>
+                <th class="col-price-original"><span>Delivery Comment</span></th>
+            </tr>
+            </thead>
+            <tbody class="even">
+
+            <?php foreach ($orderData as $key => $value): ?>
+                <tr>
+                    <td class="col-product"><?php echo __($value['name']); ?></td>
+                    <td class="col-product"><?php echo __($value['cs_deliverydate']); ?></td>
+                    <td class="col-product"><?php echo __($value['cs_timestamp']); ?></td>
+                    <td class="col-product"><?php echo __($value['cs_deliverycomment']); ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+
+<?php endif; ?>
+
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Items Invoiced') ?></span>
+    </div>
+
+    <div id="invoice_item_container" class="admin__page-section-content">
+        <?php echo $block->getChildHtml('invoice_items') ?>
+    </div>
+</section>
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Order Total') ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-comments-history">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo __('Invoice History') ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <?php echo $block->getChildHtml('order_comments') ?>
+            </div>
+        </div>
+
+        <div id="history_form" class="admin__page-section-item order-totals">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo __('Invoice Totals') ?></span>
+            </div>
+            <?php echo $block->getChildHtml('invoice_totals') ?>
+        </div>
+    </div>
+</section>

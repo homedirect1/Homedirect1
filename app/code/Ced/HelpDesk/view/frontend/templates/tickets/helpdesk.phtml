@@ -1,0 +1,254 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_HelpDesk
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<style>
+    em {
+        color: red;
+    }
+</style>
+<script type="text/javascript">
+    bkLib.onDomLoaded(function () {
+        new nicEditor({fullPanel: true}).panelInstance('message');
+    });
+</script>
+<?php
+$configValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/show_attribute');
+
+$data = (explode(",", $configValue));
+$priorityValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/allow_priority');
+$deptValue = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/select_dept');
+$deptModel = $this->deptModel();
+$priority = $this->priorityModel();
+$ticketModel = $block->getTicket();
+$count = 0;
+if (!empty($ticketModel)) {
+    $count = $ticketModel->count();
+}
+$ext = $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/allow_extensions');
+$extension = explode(',', $ext);
+?>
+<?php if ($count > 0) { ?>
+    <div class="page-title">
+        <h1><?php echo __('My Tickets'); ?></h1>
+    </div>
+    <?php echo $this->getPagerHtml(); ?>
+    <table class="data-table" id="my-orders-table">
+        <tr>
+            <th><?php echo __('Ticket Id'); ?></th>
+            <th><?php echo __('Department'); ?></th>
+            <th><?php echo __('Created Time'); ?></th>
+            <th><?php echo __('Subject'); ?></th>
+            <th><?php echo __('Status'); ?></th>
+            <th><?php echo __('Action'); ?></th>
+        </tr>
+
+        <?php foreach ($ticketModel as $value) {?>
+            <tr>
+                <td><?php echo $value['ticket_id']; ?></td>
+                <td><?php echo $block->departmentName($value['department']); ?></td>
+                <td><?php echo $value['created_time']; ?></td>
+                <td><?php echo $value['subject']; ?></td>
+                <td><?php $bg = $this->statusColor($value['status']); ?>
+                    <span id='pri' style=" background-color:<?php echo $bg; ?>;">
+					     <?php echo $value['status']; ?>
+				     </span>
+                </td>
+                <td>
+                    <a href="<?php echo $this->getUrl('helpdesk/tickets/form/', array('id' => $value['ticket_id'])); ?>">View</a>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+    <?php $count = count($ticketModel);
+    ?>
+<?php } ?>
+
+<?php $collection = $this->salesModel(); ?>
+<br/>
+<form action="<?php echo $this->getUrl('helpdesk/tickets/save'); ?>" id="helpdesk-form" method="post"
+      enctype="multipart/form-data" id="form">
+    <div class="fieldset user-create-ticket">
+        <h2 class="legend"><?php echo __('Create Ticket'); ?></h2>
+        <ul class="form-list">
+            <?php if ($deptValue) { ?>
+                <li class="required"><label for="department" class="required"><em>* </em><?php echo __('Department') ?>
+                    </label>
+                    <div class="input-box">
+                        <select class="validate-select" name="dept">
+                            <?php foreach ($deptModel as $value) { ?>
+                                <option name="dept"
+                                        value="<?php echo $value['code'] ?>"><?php echo $value['name'] ?></option><?php } ?>
+                        </select>
+                    </div>
+                </li>
+            <?php } ?>
+            <?php if ($priorityValue) { ?>
+                <li><label for="priority" class="required"><em>* </em><?php echo __('Priority') ?></label>
+                    <div class="input-box">
+                        <select class="validate-select" name="priority">
+                            <?php foreach ($priority
+
+                            as $value){ ?>
+                            <option name="priority"
+                                    value="<?php echo $value['code'] ?>"><?php echo $value['title'] ?><?php } ?></option>
+                        </select>
+                    </div>
+                </li>
+            <?php } ?>
+
+            <li>
+                <label for="subject" class="required"><em>* </em><?php echo __('Subject') ?></label>
+                <div class="input-box">
+                    <input type="text" name="subject" class="input-text required-entry"/>
+                </div>
+            </li>
+
+            <?php foreach ($data as $value) {
+                if ($value == 'order') { ?>
+                    <li><label for="order"><?php echo __('Order') ?></label>
+                        <div class="input-box">
+                            <select name="order">
+                                <option name="order" value="N/A"><?php echo __('N/A') ?></option>
+                                <?php if (isset($collection) && !empty($collection)) { ?>
+                                    <?php foreach ($collection as $order) { ?>
+                                        <option name="order"
+                                        value="<?php echo $order->getIncrementId() ?>"><?php echo $order->getIncrementId() ?><?php } ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </li>
+                <?php }
+            } ?>
+
+            <li>
+                <label for="message" class="required"><em>* </em><?php echo __('Message') ?></label>
+                <div class="input-box" id='mess'>
+                    <textarea class="required-entry" name="message" class="message" id="message"></textarea>
+                </div>
+            </li>
+            <input type="hidden" name='image_count' value="" id="hidden">
+            <input type="hidden" name='upload_image' value="" id="upload_image">
+            <input type="hidden" name='unupload_image' value="" id="unupload_image">
+            <?php foreach ($data as $value) {
+                if ($value == 'attachment') { ?>
+                    <a href="javascript:void(0)" id="new_attach"><b><?php echo __('Add Attachment') ?></b></a>
+                    <br/>
+                    <p style="display: inline-block;"><?php echo __('Allowed File Types are ') . '<b>' . $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/allow_extensions') . '</b>';
+                        echo " and maximum uploaded size is " . '<b>' . $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/max_upload') . 'MB</b>'; ?></p>
+                    <br/>
+                    <div name="attachment" id="attactments"></div>
+                <?php }
+            } ?>
+            <li>
+                <div class="input-box">
+                    <div class="actions">
+                        <button class="button btn-cart" style="background-color:#f2703e; color:#fff;" title="Submit Ticket"
+                                type="submit">
+								<span> <span><?php echo __('Submit Ticket'); ?></span>
+								</span>
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    counter = 0;
+    img_count = 0;
+
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+        var dataForm = $('#helpdesk-form');
+        dataForm.mage('validation', {}).find('input:text').attr('autocomplete', 'off');
+    });
+    require(["jquery"], function ($) {
+        $("#new_attach").click(function () {
+            var inc_counter = ++img_count;
+            var a = $('#upload_image').val();
+            $('#upload_image').val(a + ',' + inc_counter);
+            $("#attactments").append("<p id='test_" + (inc_counter) + "'><input data-validate='{required:true}' class='required-entry validate-fileUploadsize validate-extensions' type='file' id='files_" + inc_counter + "' name='file" + (inc_counter) + "' ><a class='shikha' id='deleteImage_" + inc_counter + "' onclick='fun(" + inc_counter + ");'>delete</a></p>")
+            $('#hidden').val(++counter);
+        });
+    });
+</script>
+<script>
+    function fun(id) {
+        require(["jquery"], function ($) {
+            var a = $('#unupload_image').val();
+            $('#unupload_image').val(a + ',' + id);
+            $("#test_" + id).remove();
+            $('#hidden').val(--counter);
+        });
+    }
+
+    require([
+        'jquery',
+        'jquery/ui',
+        'jquery/validate',
+        'mage/translate'
+    ], function ($) {
+
+
+        $.validator.addMethod(
+            'validate-fileUploadsize', function (v, elm) {
+                var maxSize = <?php echo $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/max_upload'); ?>;
+                maxSize = maxSize * 102400;
+                if (navigator.appName == "Microsoft Internet Explorer") {
+                    if (elm.value) {
+                        var oas = new ActiveXObject("Scripting.FileSystemObject");
+                        var e = oas.getFile(elm.value);
+                        var size = e.size;
+                    }
+                } else {
+                    if (elm.files[0] != undefined) {
+                        size = elm.files[0].size;
+                    }
+                }
+                if (size != undefined && size > maxSize) {
+                    return false;
+                }
+
+                return true;
+            }, $.mage.__('The file size should not exceed the limit'));
+
+
+        $.validator.addMethod(
+            'validate-extensions', function (v, elm) {
+
+                var extn = '<?php echo $this->helper('Ced\HelpDesk\Helper\Data')->getStoreConfig('helpdesk/frontend/allow_extensions'); ?>';
+                var extensions = extn.split(",");
+                if (!v) {
+                    return true;
+                }
+                with (elm) {
+                    var ext = value.substring(value.lastIndexOf('.') + 1);
+                    for (i = 0; i < extensions.length; i++) {
+                        if (ext == extensions[i]) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }, $.mage.__('Disallowed file type.'));
+    });
+</script>

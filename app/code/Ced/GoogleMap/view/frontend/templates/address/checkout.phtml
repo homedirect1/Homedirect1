@@ -1,0 +1,177 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GoogleMap
+ * @author 	    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license     https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+/** @var \Ced\GoogleMap\Block\Address\Checkout $block */
+?>
+
+<script>
+    require([
+        'jquery',
+        'uiRegistry'
+    ], function ($, uiRegistry) {
+        $(function () {
+            let bodySelector =  $('body');
+            let region = '';
+
+            bodySelector.on("click", "input[name='street[0]']",function() {
+                let streetAddressSelector = $(this);
+                let street1Selector = bodySelector.find('input[name="street[1]"]');
+//                 let street2Selector = bodySelector.find('input[name="street[2]"]');
+                let citySelector = bodySelector.find('input[name="city"]');
+                let postCodeSelector =  bodySelector.find('input[name="postcode"]');
+                let regionIdSelector =  bodySelector.find('select[name="region_id"]');
+                let regionSelector =  bodySelector.find('input[name="region"]');
+                let countryIdSelector =  bodySelector.find('select[name="country_id"]');
+                let latitudeSelector =  bodySelector.find('input[name="custom_attributes[longitude]"]');
+                let longitudeSelector =  bodySelector.find('input[name="custom_attributes[latitude]"]');
+                let regionShipId = '';
+                let billFieldName = '';
+
+                let shipFieldName = "checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset";
+
+                let streetAddressShipSelector = uiRegistry.get(shipFieldName + ".street.0").uid;
+                //let streetAddressBillSelector = uiRegistry.get("checkout.steps.billing-step.payment.payments-list.cashondelivery-form.form-fields.street.0").uid;
+
+
+                let streetElement = uiRegistry.get("uid = " + $(this).attr('id'));
+                let streetParent = streetElement.parentName;
+                console.log('streetBill');
+                console.log(streetElement);
+
+                if ($(this).attr('id') == streetAddressShipSelector) {
+                    console.log('in');
+                    street1Selector = $("#" + uiRegistry.get(shipFieldName + ".street.1").uid);
+//                     street2Selector = $("#" + uiRegistry.get(shipFieldName + ".street.2").uid);
+                    longitudeSelector = $("#" + uiRegistry.get(shipFieldName + ".longitude").uid);
+                    latitudeSelector = $("#" + uiRegistry.get(shipFieldName + ".latitude").uid);
+                    citySelector = $("#" + uiRegistry.get(shipFieldName + ".city").uid);
+                    regionShipId = uiRegistry.get(shipFieldName + ".region_id").uid;
+                    regionSelector = $("#" + uiRegistry.get(shipFieldName + ".region_id_input").uid);
+                    postCodeSelector = $("#" + uiRegistry.get(shipFieldName + ".postcode").uid);
+                    countryIdSelector = $("#" + uiRegistry.get(shipFieldName + ".country_id").uid);
+                } else {
+                    billFieldName = streetParent.replace(".street", "");
+                    console.log(billFieldName);
+                    street1Selector = $("#" + uiRegistry.get(streetParent + ".1").uid);
+//                     street2Selector = $("#" + uiRegistry.get(streetParent + ".2").uid);
+                    longitudeSelector = $("#" + uiRegistry.get(billFieldName + ".longitude").uid);
+                    latitudeSelector = $("#" + uiRegistry.get(billFieldName + ".latitude").uid);
+                    citySelector = $("#" + uiRegistry.get(billFieldName + ".city").uid);
+                    regionShipId = uiRegistry.get(billFieldName + ".region_id").uid;
+                    regionSelector = $("#" + uiRegistry.get(billFieldName + ".region_id_input").uid);
+                    postCodeSelector = $("#" + uiRegistry.get(billFieldName + ".postcode").uid);
+                    countryIdSelector = $("#" + uiRegistry.get(billFieldName + ".country_id").uid);
+                }
+
+                regionIdSelector = $("#" + regionShipId);
+                console.log(latitudeSelector);
+                console.log(citySelector);
+
+                let selectedLocation = false;
+                streetAddressSelector.on('focus change input paste keyup', function () {
+                    let autocomplete = new google.maps.places.Autocomplete(streetAddressSelector[0]);
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        selectedLocation = true;
+
+                        let place = autocomplete.getPlace();
+                        console.log('place');
+                        console.log(place);
+                        let latitude = (place.geometry) ? place.geometry.location.lat() : '26.8517244';
+                        let longitude = (place.geometry) ? place.geometry.location.lng() : '81.0173191';
+
+                        latitudeSelector.val(latitude).change();
+                        longitudeSelector.val(longitude).change();
+
+                        let arrAddress = place.address_components;
+                        /*citySelector.val('').change();
+                        regionSelector.val('').change();
+                        regionIdSelector.val('').change();
+                        countryIdSelector.val('').change();
+                        postCodeSelector.val('').change();*/
+
+                        console.log('address_component');
+                        console.log(arrAddress);
+                        streetAddressSelector.val(place.formatted_address).change();
+                        console.log(streetAddressSelector.val());
+                        $.each(arrAddress, function (i, address_component) {
+                            switch (address_component.types[0]) {
+                                /*case "route":
+                                    streetAddressSelector.val(address_component.long_name).change();
+                                    break;
+
+                                case "sublocality_level_2":
+                                    street1Selector.val(address_component.long_name).change();
+                                    break;
+
+                                case "sublocality_level_1":
+                                    street2Selector.val(address_component.long_name).change();
+                                    break;*/
+
+                                case "locality":
+                                case "administrative_area_level_2":
+                                    citySelector.val(address_component.long_name).change();
+                                    citySelector.attr('readonly', true);
+                                    break;
+
+                                case "country":
+                                    countryIdSelector.val(address_component.short_name).change();
+                                    countryIdSelector.attr('readonly', true);
+                                    console.log('countryIdSelector');
+                                    console.log(countryIdSelector.val());
+                                    break;
+
+                                case "postal_code":
+                                    postCodeSelector.val(address_component.long_name).change();
+                                    postCodeSelector.attr('readonly', true);
+                                    console.log('postCodeSelector');
+                                    console.log(postCodeSelector.val());
+                                    break;
+
+                                case "administrative_area_level_1":
+                                    console.log('address_component.area');
+                                    console.log(address_component.long_name);
+                                    region = address_component.long_name;
+                                    console.log(region);
+                                    console.log(regionIdSelector);
+                                    setTimeout(function () {
+                                        if (regionIdSelector) {
+                                            //search for and select region using text
+                                            $('#' + regionShipId + ' option').each(function (i, e) {
+                                                console.log('inside .each');
+                                                console.log(region);
+                                                if ($.trim($(this).text()) == region) {
+                                                    console.log(e);
+                                                    $(this).prop('selected', true).change();
+                                                    return false;
+                                                }
+                                            });
+                                        }
+                                    }, 100);
+                                    regionSelector.val(region).change();
+                                    regionSelector.attr('readonly', true);
+                                    break;
+
+                            }
+                        });
+                    });
+                });
+            });
+        });
+    });
+</script>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<head>
+        <title>Agents</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ced\HelpDesk\Block\Adminhtml\Agents\Edit" name="agents_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+       	    <block class="Ced\HelpDesk\Block\Adminhtml\Agents\Edit\Tabs" name="agents_edit_tabs">
+            </block> 
+        </referenceContainer>
+    </body>
+</page>

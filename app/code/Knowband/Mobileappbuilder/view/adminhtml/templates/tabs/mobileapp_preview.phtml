@@ -1,0 +1,40 @@
+<?php 
+    $settings = $this->getSettings();
+    $logo_data = $this->getSettings("knowband/mobileappbuilder/logo");
+?>
+<div id="general_settings_mobile_preview" class="general_settings_mobile_preview" style="display:block">
+    <div>
+        <div class="front_preview">
+                    <div class="layout_gallery">
+                            
+                            <div class="topHeader" style="background: <?php echo isset($settings["general_settings"]["app_theme_color"])?$settings["general_settings"]["app_theme_color"]:'#ffa620'; ?>;">
+                                    <div class="leftmenu">
+                                            <span class="toggleMenu"><i class="glyphicon glyphicon-align-justify"></i></span>
+                                    </div>
+                                    <div class="logo">
+                                        <?php if(isset($settings["general_settings"]["enablelogo"]) && $settings["general_settings"]["enablelogo"] && isset($logo_data['image'])){ ?>
+                                            <img src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$logo_data['image']; ?>"> 
+                                        <?php } ?>
+                                    </div>
+                                    <div class="cartSection">
+                                            <span class="cartIcon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
+                                    </div>
+                                    <div class="searchBar">
+                                            <span class="searchicon"><i class="glyphicon glyphicon-search"></i></span>
+                                    </div>	
+
+                            </div>
+                            
+                            <img src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/General_Settings_GIF.gif'); ?>">
+                            <div class="chatBoxIcon" style="background: <?php echo isset($settings["general_settings"]["app_theme_color"])?$settings["general_settings"]["app_theme_color"]:'#ffa620'; ?>;">
+                                <img src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/chat_icon.png'); ?>">
+                            </div>
+                    </div>
+            </div>			
+    </div>
+</div>
+<style>
+#general_settings_mobile_preview .front_preview {
+    background: url(<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/general_Settings_Mobile.png'); ?>);
+}
+</style>

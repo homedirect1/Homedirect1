@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Rewardsystem
+ * @author    CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license     https://cedcommerce.com/license-agreement.txt
+ */
+?>
+
+<?php
+
+$point = $block->getSaleableItem()->getData();
+$collection = $this->helper('Ced\Rewardsystem\Helper\Data')->getProduct()->load($point['entity_id']);
+// print_r(json_encode($collection->getData()));
+// print_r($collection->getFinalPrice());
+// die;
+$purchaseEnable = $this->helper('Ced\Rewardsystem\Helper\Data')->getStoreConfig('reward/purchase/purchase_enable', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$rewardCalculateBy = $this->helper('Ced\Rewardsystem\Helper\Data')->getStoreConfig('reward/purchase/reward_calculate_by', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$showProduct = $this->helper('Ced\Rewardsystem\Helper\Data')->getStoreConfig('reward/purchase/product_page_active', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+
+$initializePoint = $this->helper('Ced\Rewardsystem\Helper\Data')->getStoreConfig('reward/purchase/initial_product_point', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+if ($initializePoint) {
+    $pointApplyBy = $this->helper('Ced\Rewardsystem\Helper\Data')->getStoreConfig('reward/purchase/initial_point_option', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    $samepoint = $this->helper('Ced\Rewardsystem\Helper\Data')->getStoreConfig('reward/purchase/initial_point_value', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    if ($pointApplyBy == 'fixed') {
+        $sameProductPoint = $samepoint;
+    } elseif ($pointApplyBy == 'percentage') {
+        $sameProductPoint = floor(($collection->getFinalPrice() * $samepoint) / 100);
+    }
+} else {
+    $sameProductPoint = 0;
+}
+
+$rewardLabel = $this->helper('Ced\Rewardsystem\Helper\Data')->getStoreConfig('reward/purchase/reward_label', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$rewardColor = $this->helper('Ced\Rewardsystem\Helper\Data')->getStoreConfig('reward/purchase/reward_color', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+?>
+<span class="price-container <?= /* @noEscape */
+                                $block->getAdjustmentCssClasses() ?>" <?= /* @noEscape */ $block->getSchema() ? ' itemprop="offers" itemscope itemtype="http://schema.org/Offer"' : '' ?>>
+    <?php if ($block->getDisplayLabel()) : ?>
+        <span class="price-label"><?= /* @noEscape */
+                                    $block->getDisplayLabel(); ?></span>
+
+    <?php endif; ?>
+    <span <?php if ($block->getPriceId()) : ?> id="<?= /* @noEscape */
+                                                    $block->getPriceId() ?>" <?php endif; ?> <?= /* @noEscape */ ($block->getPriceDisplayLabel()) ? 'data-label="' . $block->getPriceDisplayLabel() . $block->getPriceDisplayInclExclTaxes() . '"' : '' ?> data-price-amount="<?= /* @noEscape */
+                                                                                                                                                                                                                                                                                $block->getDisplayValue(); ?>" data-price-type="<?= /* @noEscape */
+                                                                                                                                                                                                                                                                                                                                $block->getPriceType(); ?>" class="price-wrapper <?= /* @noEscape */
+                                                                                                                                                                                                                                                                                                                                                                                    $block->getPriceWrapperCss(); ?>" <?= /* @noEscape */ $block->getSchema() ? ' itemprop="price"' : '' ?>>
+        <?= /* @noEscape */
+        $block->formatCurrency($block->getDisplayValue(), (bool)$block->getIncludeContainer()) ?>
+
+    </span>
+    <?php if ($block->hasAdjustmentsHtml()) : ?>
+        <?= /* @noEscape */ $block->getAdjustmentsHtml() ?>
+    <?php endif; ?>
+    <?php if ($block->getSchema()) : ?>
+        <meta itemprop="priceCurrency" content="<?= /* @noEscape */
+                                                $block->getDisplayCurrencyCode() ?>" />
+    <?php endif; ?>
+</span>
+
+<?php
+if ($block->getPriceType() == __('finalPrice') || $block->getPriceType() == '') :
+    if ($purchaseEnable && $rewardCalculateBy == 'catalog') :
+        if ($showProduct) : ?>
+            <div>
+                <span id="rewardpoints" style="color: #<?= /* @noEscape */ $rewardColor ?>">
+                    <?php if ($collection->getCedRpoint() !== '0') : ?>
+                        <?php if ($collection->getCedRpoint()) : ?>
+                            <?= /* @noEscape */ __($rewardLabel) ?> :<?= /* @noEscape */ $collection->getCedRpoint(); ?>
+                        <?php else : ?>
+                            <?php if ($sameProductPoint) : ?>
+                                <?= /* @noEscape */ __($rewardLabel) ?> :<?= /* @noEscape */ $sameProductPoint; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </span>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

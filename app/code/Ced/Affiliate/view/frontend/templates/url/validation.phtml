@@ -1,0 +1,61 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+$block->setSession();
+if($block->IsurlParams()):
+if($block->getAffiliateUrl()->getData()):
+$urlTime = $block->getAffiliateUrl()->getValidity();
+if(($block->getCurrentTimestamp() > strtotime($urlTime)) || ($block->checkAffiliate() && $block->checkAffiliate()->getStatus()!=1)):?>
+
+<div id="popup-mpdal" style="display:none">
+<?php echo __('Affiliate Url Seems To Be Expired or not exist..')?>
+</div>
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Affiliate Url Info',
+                buttons: [{
+                    text: $.mage.__('OK'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+            var popup = modal(options, $('#popup-mpdal'));
+
+            $('#popup-mpdal').modal('openModal');
+        }
+    );
+</script>
+<?php $block->unsetSession();?>
+<?php endif; ?>
+
+<?php endif;?>
+<?php endif;?>

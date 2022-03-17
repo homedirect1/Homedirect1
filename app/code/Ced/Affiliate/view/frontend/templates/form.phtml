@@ -1,0 +1,34 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+/**
+ * @var $block \Magento\OfflinePayments\Block\Form\Purchaseorder
+ */
+$methodCode = $block->escapeHtml($block->getMethodCode());
+?>
+<fieldset class="fieldset items <?php /* @noEscape */ echo $methodCode ?>" id="payment_form_<?php /* @noEscape */ echo $methodCode ?>" style="display: none">
+    <div class="field number required">
+        <label for="po_number" class="label"><span><?php echo $block->escapeHtml(__('Purchase Order Number')) ?></span></label>
+        <div class="control">
+            <input type="text" id="po_number" name="payment[po_number]" title="<?php echo $block->escapeHtml(__('Purchase Order Number')) ?>"
+                   class="input-text required-entry"
+                   value="<?php echo $block->escapeHtml($block->getInfoData('po_number')) ?>" />
+        </div>
+    </div>
+</fieldset>

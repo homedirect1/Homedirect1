@@ -1,0 +1,586 @@
+<?php 
+$settings = $this->getSettings();
+$logo_data = $this->getSettings("knowband/mobileappbuilder/logo");
+?>
+<?php echo $this->getChildHtml('mobileappbuilder_mobileapp_preview'); ?>
+<div class="fieldset-wrapper" id="general-settings">
+    <div class="admin__fieldset-wrapper-content">
+        <h1 class="mobileappbuilder-h1"><?php echo __("General Settings")?></h1>
+        <fieldset class="admin__fieldset">
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_enable">
+                    <span><?php echo __("Enable the Extension")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will enable/disable entire mobile app functionality.")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_enable" name="vss_mobileappbuilder[general_settings][enable]" value="1" <?php echo isset($settings["general_settings"]["enable"])?$settings["general_settings"]["enable"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_enable">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_enabledcartredirect">
+                    <span>
+                        <?php echo __("Redirect on Cart Page when Add To Cart")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will redirect to cart page or keep on the product page when add to cart is clicked.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_enabledcartredirect" name="vss_mobileappbuilder[general_settings][enabledcartredirect]" value="1" <?php echo isset($settings["general_settings"]["enabledcartredirect"])?$settings["general_settings"]["enabledcartredirect"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_enabledcartredirect">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_shortdescription">
+                    <span>
+                        <?php echo __("Display Short Description")?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_shortdescription" name="vss_mobileappbuilder[general_settings][shortdescription]" value="1" <?php echo isset($settings["general_settings"]["shortdescription"])?$settings["general_settings"]["shortdescription"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_shortdescription">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_enabledlog">
+                    <span>
+                        <?php echo __("Enable Request Log Reporting")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will enable/disable error log reporting for every request to Web Services of the module.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_enabledlog" name="vss_mobileappbuilder[general_settings][enabledlog]" value="1" <?php echo isset($settings["general_settings"]["enabledlog"])?$settings["general_settings"]["enabledlog"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_enabledlog">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_show_app_preview">
+                    <span>
+                        <?php echo __("Show App Preview")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will show/hide the app preview.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_show_app_preview" name="vss_mobileappbuilder[general_settings][show_app_preview]" value="1" <?php echo isset($settings["general_settings"]["show_app_preview"])?$settings["general_settings"]["show_app_preview"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_show_app_preview">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_is_tab_bar_enabled">
+                    <span>
+                        <?php echo __("Enable Tab Bar")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will enable/disable the tab bar in the app.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_is_tab_bar_enabled" name="vss_mobileappbuilder[general_settings][is_tab_bar_enabled]" value="1" <?php echo isset($settings["general_settings"]["is_tab_bar_enabled"])?$settings["general_settings"]["is_tab_bar_enabled"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_is_tab_bar_enabled">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <?php if($this->isSpinWinEnabled()) { ?>
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_show_spinandwin">
+                    <span>
+                        <?php echo __("Show Spin and Win")?>
+                        <div class="vss_info">
+                            <?php echo __("Show spin and win popup on the mobile App.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_show_spinandwin" name="vss_mobileappbuilder[general_settings][show_spinandwin]" value="1" <?php echo isset($settings["general_settings"]["show_spinandwin"])?$settings["general_settings"]["show_spinandwin"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_show_spinandwin">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <?php } ?>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_fingerprint_login">
+                    <span>
+                        <?php echo __("Enable/Disable Fingerprint Login")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will enable/disable Fingerprint login in Mobile App.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_fingerprint_login" name="vss_mobileappbuilder[general_settings][fingerprint_login]" value="1" <?php echo isset($settings["general_settings"]["fingerprint_login"])?$settings["general_settings"]["fingerprint_login"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_fingerprint_login">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_phone_number_registration">
+                    <span>
+                        <?php echo __("Enable/Disable Phone Number Registration")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will enable/disable customer registration and login via phone number verification.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_phone_number_registration" name="vss_mobileappbuilder[general_settings][phone_number_registration]" value="1" <?php echo isset($settings["general_settings"]["phone_number_registration"])?$settings["general_settings"]["phone_number_registration"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_phone_number_registration">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field" id="phoneregistration" style="display:none;">
+                <label class="admin__field-label" for="mobileappbuilder_phone_number_mandatory">
+                    <span>
+                        <?php echo __("Mandatory Phone number at registration")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will set the Phone number field as optional or required.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_phone_number_mandatory" name="vss_mobileappbuilder[general_settings][phone_number_mandatory]" value="1" <?php echo isset($settings["general_settings"]["phone_number_mandatory"])?$settings["general_settings"]["phone_number_mandatory"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_phone_number_mandatory">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_home_page_layout">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Select layout for home page");?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <select name="vss_mobileappbuilder[general_settings][home_page_layout]" class="admin__control-select" id="mobileappbuilder_home_page_layout" data-placeholder='<?php echo __("Select layout for home page"); ?>' style="width:250px">
+                        <option value=""><?php echo __("Please select"); ?></option>
+                            <?php foreach ($this->getHomePageLayout() as $key => $val) { ?>
+                                        <option value="<?php echo $key; ?>" <?php if (isset($settings["general_settings"]['home_page_layout']) && $key == $settings["general_settings"]['home_page_layout']) echo 'selected="selected"'; ?>><?php echo $val; ?></option>
+                            <?php } ?>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_disabled_shipping_methods">
+                    <span>
+                        <?php echo __("Disabled Shippping Sethods");?>
+                        <div class="vss_info">
+                            <?php echo __("Select shipping methods from the list for which you want to disable this module.You can leave it to empty if you want to enable this module for all shipping methods.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <select name="vss_mobileappbuilder[general_settings][disabled_shipping_methods][]" class="admin__control-multiselect" multiple="" id="mobileappbuilder_disabled_shipping_methods" data-placeholder='<?php echo __("Select shipping methods"); ?>' style="width:250px">
+                            <?php foreach ($this->getShippingMethods() as $key => $val) { ?>
+                        <option value="<?php echo $key; ?>" <?php if (isset($settings["general_settings"]['disabled_shipping_methods']) && in_array($key, $settings["general_settings"]['disabled_shipping_methods'])) echo 'selected="selected"'; ?>><?php echo $val; ?></option>
+                            <?php } ?>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_enabledwhatsappchat">
+                    <span>
+                        <?php echo __("Enable Whatsapp Chat Support")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will enable/disable WHATSAPP chat support option in mobile app.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_enabledwhatsappchat" name="vss_mobileappbuilder[general_settings][enabledwhatsappchat]" value="1" <?php echo isset($settings["general_settings"]["enabledwhatsappchat"])?$settings["general_settings"]["enabledwhatsappchat"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_enabledwhatsappchat">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field" id="whatsappchatnumber" style="display: none;">
+                <label class="admin__field-label" for="mobileappbuilder_whatsappchatnumber">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Chat Number")?>
+                        <div class="vss_info">
+                            <?php echo __("Enter Chat number with Country code as well.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["general_settings"]["whatsappchatnumber"])?$settings["general_settings"]["whatsappchatnumber"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[general_settings][whatsappchatnumber]" id="mobileappbuilder_whatsappchatnumber">                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_enabledlivechat">
+                    <span>
+                        <?php echo __("Enable Live Chat Support")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will enable/disable live chat support option in mobile app.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_enabledlivechat" name="vss_mobileappbuilder[general_settings][enabledlivechat]" value="1" <?php echo isset($settings["general_settings"]["enabledlivechat"])?$settings["general_settings"]["enabledlivechat"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_enabledlivechat">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field livechatkey">
+                <label class="admin__field-label" for="mobileappbuilder_livechatkey">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Chat API Key")?>
+                        <div class="vss_info">
+                            <?php echo __("Enter API Key for Live chat")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["general_settings"]["livechatkey"])?$settings["general_settings"]["livechatkey"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[general_settings][livechatkey]" id="mobileappbuilder_livechatkey">                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_url_encoding">
+                    <span>
+                        <?php echo __("Enable Url Encoding Of Image Links")?>
+                        <div class="vss_info">
+                            <?php echo __("This setting will enable/disable Url encoding of all image links.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_url_encoding" name="vss_mobileappbuilder[general_settings][url_encoding]" value="1" <?php echo isset($settings["general_settings"]["url_encoding"])?$settings["general_settings"]["url_encoding"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_url_encoding">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Look And Feel")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_enablelogo">
+                    <span>
+                        <?php echo __("Enable Logo")?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="mobileappbuilder_enablelogo" name="vss_mobileappbuilder[general_settings][enablelogo]" value="1" <?php echo isset($settings["general_settings"]["enablelogo"])?$settings["general_settings"]["enablelogo"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="mobileappbuilder_enablelogo">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field" id="logo_image_holder" style="display:none;">
+                <label class="admin__field-label" for="logo_image">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Upload logo")?>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch">
+                        <div class="banner_block"><?php if(isset($logo_data['image'])){ ?>
+                            <img id="logo_image_preview" src="<?php echo $this->getMediaUrl().'Knowband_Mobileappbuilder/'.$logo_data['image'].'?'.time(); ?>" style="margin: 0px 2px 3px 0px;width: 200px;border: 1px solid whitesmoke;" align="absmiddle">
+                            <input id="remove-button" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button" value="<?php echo __('Remove logo'); ?>">
+                        <?php }else{ ?>
+                            <img id="logo_image_preview" src="<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>" style="margin: 0px 2px 3px 0px;width: 200px;border: 1px solid whitesmoke;" align="absmiddle">
+                        <?php } ?>
+                            
+                        </div>
+                        <input name="vss_mobileappbuilder[general_settings][logo_image]" id="logo_image" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_app_button_color">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("App Button Color")?>
+                        <div class="vss_info">
+                            <?php echo __("Select button color of the app.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control" style="width: auto;">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["general_settings"]["app_button_color"])?$settings["general_settings"]["app_button_color"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[general_settings][app_button_color]" id="mobileappbuilder_app_button_color" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_app_button_text_color">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("App Button Text Color")?>
+                        <div class="vss_info">
+                            <?php echo __("Select button text color of the app.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control" style="width: auto;">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["general_settings"]["app_button_text_color"])?$settings["general_settings"]["app_button_text_color"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[general_settings][app_button_text_color]" id="mobileappbuilder_app_button_text_color" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_app_theme_color">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("App Theme Color")?>
+                        <div class="vss_info">
+                            <?php echo __("Select theme color of the app.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control" style="width: auto;">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["general_settings"]["app_theme_color"])?$settings["general_settings"]["app_theme_color"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[general_settings][app_theme_color]" id="mobileappbuilder_app_theme_color" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_app_background_color">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("App Background Color")?>
+                        <div class="vss_info">
+                            <?php echo __("Select background color of the app.")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control" style="width: auto;">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["general_settings"]["app_background_color"])?$settings["general_settings"]["app_background_color"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[general_settings][app_background_color]" id="mobileappbuilder_app_background_color" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field">
+                <label class="admin__field-label" for="mobileappbuilder_customcss">
+                    <span>
+                        <?php echo __("Custom CSS")?>
+                        <div class="vss_info">
+                            <?php echo __("Add custom CSS code that you want to be executed on the app")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <textarea name="vss_mobileappbuilder[general_settings][customcss]" id="mobileappbuilder_customcss" class="admin__control-textarea"><?php echo isset($settings["general_settings"]["customcss"])?$settings["general_settings"]["customcss"]:""?></textarea>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<script>
+    require(["jquery", 'jquery/colorpicker/js/colorpicker'], function (jQuery) {
+        jQuery(document).ready(function () {
+            var el = jQuery("#mobileappbuilder_app_button_color");
+            var value = '<?php echo isset($settings["general_settings"]["app_button_color"])?$settings["general_settings"]["app_button_color"]:""?>';
+            el.css("backgroundColor", value);
+
+            // Attach the color picker
+            el.ColorPicker({
+                color: value,
+                onChange: function (hsb, hex, rgb) {
+                    el.css("backgroundColor", "#" + hex).val("#" + hex);
+                }
+            });
+            if (jQuery("#mobileappbuilder_app_theme_color").length) {
+            var el1 = jQuery("#mobileappbuilder_app_theme_color");
+            var value1 = '<?php echo isset($settings["general_settings"]["app_theme_color"])?$settings["general_settings"]["app_theme_color"]:""?>';
+            el1.css("backgroundColor", value1);
+
+            // Attach the color picker
+            el1.ColorPicker({
+                color: value1,
+                onChange: function (hsb, hex, rgb) {
+                    el1.css("backgroundColor", "#" + hex).val("#" + hex);
+                    jQuery(".topHeader").css("backgroundColor", "#" + hex);
+                    jQuery(".chatBoxIcon").css("backgroundColor", "#" + hex);
+                }
+            });
+        }
+        if (jQuery("#mobileappbuilder_app_button_text_color").length) {
+            var el2 = jQuery("#mobileappbuilder_app_button_text_color");
+            var value2 = '<?php echo isset($settings["general_settings"]["app_button_text_color"])?$settings["general_settings"]["app_button_text_color"]:""?>';
+            el2.css("backgroundColor", value2);
+            // Attach the color picker
+            el2.ColorPicker({
+                color: value2,
+                onChange: function (hsb, hex, rgb) {
+                    el2.css("backgroundColor", "#" + hex).val("#" + hex);
+                }
+            });
+        }
+            if (jQuery("#mobileappbuilder_app_background_color").length) {
+            var el3 = jQuery("#mobileappbuilder_app_background_color");
+            var value3 = '<?php echo isset($settings["general_settings"]["app_background_color"])?$settings["general_settings"]["app_background_color"]:""?>';
+            el3.css("backgroundColor", value3);
+            // Attach the color picker
+            el3.ColorPicker({
+                color: value3,
+                onChange: function (hsb, hex, rgb) {
+                    el3.css("backgroundColor", "#" + hex).val("#" + hex);
+                }
+            });
+        }
+            jQuery("#remove-button").click(function(){
+                var confirm_msg = '<?php echo __("Are your sure?"); ?>';
+                if(confirm(confirm_msg)){
+                    var default_image = '<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>';
+                    jQuery('#logo_image_preview').attr('src', default_image);
+                    jQuery('#logo_image_preview').hide();
+                    jQuery('#logo_image_preview').fadeIn(650);
+                    jQuery('#remove-button').hide();
+                }
+            });
+        });
+        jQuery(window).load(function(){
+//            jQuery('#home_product_list').chosen({ width:"95%" });
+            jQuery('#mobileappbuilder_enabledlivechat').trigger('change');
+            jQuery('#mobileappbuilder_phone_number_registration').trigger('change');
+            jQuery('#mobileappbuilder_enabledwhatsappchat').trigger('change');
+            jQuery('#mobileappbuilder_show_app_preview').trigger('change');
+            jQuery('#mobileappbuilder_enablelogo').trigger('change');
+        });
+        jQuery('#mobileappbuilder_enabledlivechat').on('change', function(){
+           if(this.checked){
+               jQuery('.livechatkey').show('slow');
+               jQuery('#mobileappbuilder_enabledwhatsappchat').prop("checked", false);
+               jQuery('#mobileappbuilder_enabledwhatsappchat').trigger("change");
+           }else{
+               jQuery('.livechatkey').hide('slow');
+           }
+        });
+        
+        jQuery('#mobileappbuilder_phone_number_registration').on('change', function(){
+           if(this.checked){
+               jQuery('#phoneregistration').show('slow');
+           }else{
+               jQuery('#phoneregistration').hide('slow');
+           }
+        });
+        
+        jQuery('#mobileappbuilder_enabledwhatsappchat').on('change', function(){
+           if(this.checked){
+               jQuery('#whatsappchatnumber').show('slow');
+               jQuery('.chatBoxIcon').show('slow');
+               jQuery('#mobileappbuilder_enabledlivechat').prop("checked", false);
+               jQuery('#mobileappbuilder_enabledlivechat').trigger("change");
+           }else{
+               jQuery('#whatsappchatnumber').hide('slow');
+               jQuery('.chatBoxIcon').hide();
+           }
+        });
+        
+         jQuery('#mobileappbuilder_show_app_preview').on('change', function(){
+           if(this.checked){
+               jQuery('#general_settings_mobile_preview').show('slow');
+           }else{
+               jQuery('#general_settings_mobile_preview').hide();
+           }
+        });
+        
+        jQuery('#mobileappbuilder_enablelogo').on('change', function(){
+           if(this.checked){
+               jQuery('#logo_image_holder').show('slow');
+           }else{
+               jQuery('#logo_image_holder').hide('slow');
+           }
+        });
+        
+        jQuery("#logo_image").change(function() {
+            readURL(this);
+        });
+    });
+    
+    function readURL(input) {
+        require(['jquery'], function(jQuery){
+           if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function(e) {
+               jQuery('#logo_image_preview').attr('src', e.target.result);
+
+               jQuery('#logo_image_preview').hide();
+               jQuery('#logo_image_preview').fadeIn(650);
+             }
+             reader.readAsDataURL(input.files[0]);
+           }
+        });
+    }
+</script>

@@ -1,0 +1,89 @@
+<?php $settings = $this->getSettings(); $keys = $this->getSettings('knowband/mobileappbuilder/google_credentials'); ?>
+<div class="fieldset-wrapper" id="google-settings">
+    <h1 class="mobileappbuilder-h1"><?php echo __("Google Login Settings")?></h1>
+    <div class="admin__fieldset-wrapper-content">
+        <fieldset class="admin__fieldset">
+            <div class="admin__field">
+                <label class="admin__field-label" for="google_login_status">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Status")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="google_login_status" name="vss_mobileappbuilder[google_login_settings][google_login_status]" value="1" <?php echo isset($settings["google_login_settings"]["google_login_status"])?$settings["google_login_settings"]["google_login_status"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="google_login_status">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin__field json_div" >
+                <label class="admin__field-label" for="google_json">
+                    <span><span class="vss_required">*</span><?php echo __("Upload Google JSON file")?>
+                        </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch">
+                        <input onchange="validateFile(this);" name="vss_mobileappbuilder[google_login_settings][google_json]" id="google_json" type="file" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only banner-upload-btn" style="padding: 10px;background: whitesmoke;display: block;"/>
+                    </div>
+                    <?php if(isset($keys['google_app_id'])){ ?>
+                        <input type="hidden" value="1" id="check_json">
+                   <?php  } else{?>
+                        <input type="hidden" value="0" id="check_json">
+                   <?php  }?>
+                    <div class="vss_info">
+                            <?php echo __("Only .json file format accepted. File size should not be more than 1 MB.")?>
+                        </div>
+                </div>
+            </div>
+            <?php if(isset($keys['google_app_id'])){ ?>
+            <div class="admin__field json_div" >
+                <label class="admin__field-label">
+                    <span><?php echo __("Uploaded App Id")?>
+                        </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch">
+                        <span><?= $keys['google_app_id'] ?></span>
+                    </div>
+                </div>
+            </div>
+            <?php  }?>
+            <?php if(isset($keys['google_api_key'])){ ?>
+            <div class="admin__field json_div" >
+                <label class="admin__field-label">
+                    <span><?php echo __("Uploaded Api Key")?>
+                        </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch">
+                        <span><?= $keys['google_api_key'] ?></span>
+                    </div>
+                </div>
+            </div>
+            <?php  }?>
+            
+        </fieldset>
+    </div>
+</div>
+<script  type="text/javascript">
+    require(['jquery'], function(jQuery){
+        jQuery(window).load(function(){
+            jQuery('#google_login_status').trigger('change');
+        });
+
+        jQuery('#google_login_status').change(function() {
+            if(this.checked) {
+                jQuery('.json_div').css('display', 'block');
+            }else {
+                jQuery('.json_div').css('display', 'none');
+            }
+        });
+    });
+</script>

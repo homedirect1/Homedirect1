@@ -1,0 +1,103 @@
+<?php
+/**
+ * CedCommerce
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End User License Agreement (EULA)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* https://cedcommerce.com/license-agreement.txt
+*
+* @category    Ced
+* @package     Ced_ReferralSystem
+* @author 		CedCommerce Core Team <connect@cedcommerce.com>
+* @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+* @license      https://cedcommerce.com/license-agreement.txt
+*/
+    $defaultMessage = $block->getDefaultMessage();
+    $defaultSubject = $block->getDefaultSubject();
+    
+?>
+
+<form class="form" method="post" autocomplete="off"
+      action="<?= /* @noEscape */ $block->getUrl('referralsystem/referral/sendinviteemail') ?>" data-mage-init='{"validation": {}}'>
+   <fieldset class="refer fieldset">
+       <legend class="legend"><span><?= /* @noEscape */ __('Referral URL and Code') ?></span></legend>
+        <div class="field required">
+            <label for="referral_url" class="label">
+                <span><?= /* @noEscape */ __('Referral URL') ?></span>
+            </label>
+            <div class="control">
+                <input type="text" name="referral_url" id="referral_url"
+                       value="<?= /* @noEscape */ $block->generateReferralLink(); ?>" title="<?= /* @noEscape */ __('Referral Url') ?>"
+                       class="input-text" data-validate="{required:true}" readonly />
+            </div>
+        </div>
+        <div class="field required">
+            <label for="referral_code" class="label"><span><?= /* @noEscape */ __('Referral Code') ?></span></label>
+            <div class="control">
+                <input type="text" name="code" id="referral_code" value="<?= /* @noEscape */ $block->getInvitationCode(); ?>"
+                       title="<?= /* @noEscape */ __('Referral Code') ?>"
+                       class="input-text" data-validate="{required:true}" readonly />
+            </div>
+        </div>
+        <div class="field required">
+            <label for="social_network" class="label">
+                <span><?= /* @noEscape */ __('Share Referral URL on Social Network') ?></span>
+            </label>
+            <div class="control">
+            	<ul>
+            		<li class="fb">
+            			<a class="fb-xfbml-parse-ignore" target="_blank"
+                           href="https://www.facebook.com/sharer/sharer.php?u=<?= /* @noEscape */ $block->generateFBReferralLink() ?>">
+                            <?= /* @noEscape */ __('Facebook');?></a></li>
+            		<li class="twitter">
+            			<a class="fb-xfbml-parse-ignore" target="_blank"
+                           href="https://twitter.com/intent/tweet?text=<?= /* @noEscape */ $block->generateTwitterReferralLink() ?>">
+                            <?= /* @noEscape */ __('Twitter'); ?>
+                        </a>
+            		</li>
+            		<?php if($block->checkDevice()): ?>
+            		<li class="whatsapp">
+            		    <a class="whatsapp-share-button"
+                           href="whatsapp://send?text=<?= /* @noEscape */ $block->generateWatsappReferralLink() ?>"
+                           data-action="share/whatsapp/share"><?= /* @noEscape */ __('Whatsapp'); ?></a>
+            		<li>
+            		<?php endif; ?>
+            	</ul>
+            </div>
+        </div>
+   </fieldset>
+   <fieldset class="refer fieldset">
+       <legend class="legend"><span><?= /* @noEscape */ __('Send Invitation Email') ?></span></legend>
+
+        <div class="field emails required">
+            <label class="label" for="email_address"><span><?= $block->escapeHtml(__('Enter Email addresses, separated by commas')) ?></span></label>
+            <div class="control">
+                <textarea name="emails" cols="60" rows="5" id="email_address" data-validate="{required:true,'validate-emails':true}"></textarea>
+            </div>
+        </div>
+        
+        <div class="field required">
+            <label for="subject" class="label"><span><?= /* @noEscape */ __('Subject') ?></span></label>
+            <div class="control">
+                <input type="text" name="subject" id="subject" title="<?= /* @noEscape */ __('Subject') ?>"
+                       value ="<?= /* @noEscape */ $defaultSubject; ?>" class="input-text" data-validate="{required:true}" />
+            </div>
+        </div>
+        <div class="field text required">
+            <label class="label" for="message"><span><?= $block->escapeHtml(__('Message')) ?></span></label>
+            <div class="control">
+                <textarea id="message" name="message" cols="60" rows="5" data-validate="{required:true}"><?= /* @noEscape */ $defaultMessage; ?></textarea>
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" class="action submit primary" title="<?= /* @noEscape */ __('Send') ?>">
+                    <span><?= /* @noEscape */ __('Send') ?></span>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>

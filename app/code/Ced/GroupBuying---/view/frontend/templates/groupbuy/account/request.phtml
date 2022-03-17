@@ -1,0 +1,158 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GroupBuying
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+use Ced\GroupBuying\Block\Account\Request;
+use Ced\GroupBuying\Model\Guest;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Exception\LocalizedException;
+
+// @codingStandardsIgnoreFile
+/**
+ * @var Request $block
+ */
+
+$_gifts = $block->getOrders();
+foreach ($_gifts as $_gift) {
+    $objectManager = ObjectManager::getInstance();
+    $_last = $block->getlastOrders($_gift)->getFirstItem();
+    $group_data = $block->customized($_gift);
+    $user = $block->guestuser($_gift);
+    if ($group_data == 1) {
+
+        foreach ($user->getData() as $value) {
+
+            try {
+                $model = $objectManager->get(Guest::class)->load($value['id']);
+                if ($model->getRequestApproval() != 1) {
+                    $model->setData('request_approval', 4);
+                    $model->save();
+                }
+            } catch (LocalizedException $e) {
+                echo $e->getMessage();
+            }
+        }
+    }
+}
+?>
+<?= $block->getChildHtml('info');?>
+<?php if ($_gifts && count($_gifts)): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-groupgifts-table">
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Group Gifts') ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?php /* @escapeNotVerified */ echo __('Group Id#') ?></th>
+                    <th scope="col" class="col reciever_email"><?php /* @escapeNotVerified */ echo __('Request From') ?></th>
+                    <th scope="col" class="col gift_status"><?php /* @escapeNotVerified */ echo __('Request Status') ?></th>
+                    <th scope="col" class="col actions">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($_gifts as $_gift): ?>
+                    <?php
+                    $_lastone = $block->getlastoneOrders($_gift['groupgift_id']);
+                    $tierPrice = $block->getProductTierPrice($_lastone["original_product_id"]);
+                    $array = array_reverse($tierPrice);
+                    $minPurchaseQuantity = array_pop($array)["price_qty"];
+                    $groupPurchaseQuantity = $block->getTotalQuantityPurchasedByGroup($_gift['groupgift_id'])["total_purchase_quantity"];
+                    ?>
+                    <tr>
+                        <td data-th="<?php echo $block->escapeHtml(__('Group Id #')) ?>" class="col id"><?php /* @escapeNotVerified */ echo $_gift['groupgift_id'] ?></td>
+                        <?php if ($_gift->getGuestEmail() != $_lastone['gift_receiver_email']): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Sender Email')) ?>" class="col date"><?php /* @escapeNotVerified */ echo $_lastone['gift_receiver_email'] ?></td>
+                        <?php endif ?>
+                        <?php if ($_gift->getGuestEmail() == $_lastone['gift_receiver_email']): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Sender Email')) ?>" class="col date"><?php /* @escapeNotVerified */ echo "Admin" ?></td>
+                        <?php endif ?>
+                        <?php if (($_gift->getRequestApproval() == 0) && ($_gift->getGuestEmail() != $_lastone['gift_receiver_email'])): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <span class="nobr">
+                                    <a  href="<?php echo $this->getEditUrl($_gift) ?>"><?php echo __('Accept') ?></a>
+                                    <span> / </span>
+                                    <a  href="<?php echo $this->getViewUrl($_gift) ?>"><?php echo __('Deny') ?></a>
+                                </span>
+                            </td>
+                        <?php endif ?>
+                        <?php if (($_gift->getRequestApproval() == 0) && ($_gift->getGuestEmail() == $_lastone['gift_receiver_email'])): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <span class="nobr">
+                                    <a href="<?php echo $this->getPurchaseUrl($_gift) ?>"><?php echo __('Purchase Request') ?></a>
+                                </span>
+                            </td>
+                        <?php endif ?>
+
+                        <!-- Customer has denied the group request -->
+                        <?php if ($_gift->getRequestApproval() == 1): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <span class="nobr">
+                                    <?php echo __('Denied') ?>
+                                </span>
+                            </td>
+                        <?php endif ?>
+
+                        <!-- Customer Accepted the group request but hasn't purchased the product yet -->
+                        <?php if ($_gift->getRequestApproval() == 2): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <span class="nobr">
+                                    <a href="<?php echo $this->getPurchaseUrl($_gift) ?>"><?php echo __('Purchase Request') ?></a>
+                                </span>
+                            </td>
+                        <?php endif ?>
+
+                        <!-- Customer has purchased the product now waiting for other group members to buy -->
+                        <?php if ($_gift->getRequestApproval() == 3): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <span class="nobr">
+                                    <?php echo __('Wait until gather requirement!') ?>
+                                </span>
+                            </td>
+                        <?php endif ?>
+
+                        <!-- All the members has purchased the product, they can pay now -->
+                        <?php if (($_gift->getRequestApproval() == 4) && ($_gift->getPayStatus() == 0) && ($minPurchaseQuantity <= $groupPurchaseQuantity)): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <span class="nobr">
+                                    <a href="<?php echo $this->getPaid($_gift) ?>"><?php echo __('Pay Now') ?></a>
+                                </span>
+                            </td>
+                        <?php elseif (($_gift->getRequestApproval() == 4) && ($_gift->getPayStatus() == 0) && ($minPurchaseQuantity > $groupPurchaseQuantity)): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <span class="nobr">
+                                    <?php echo __('Group\'s purchase quantity hasn\'t reached required amount yet.') ?>
+                                </span>
+                            </td>
+                        <?php endif;?>
+                        <?php if ($_gift->getPayStatus() == 1): ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <span class="nobr">
+                                    <?php echo __('Paid') ?>
+                                </span>
+                            </td>
+                        <?php endif ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?php /* @escapeNotVerified */ echo __('You have no Request !.'); ?></span></div>
+<?php endif ?>
+

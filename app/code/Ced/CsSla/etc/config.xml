@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!-- /**
+ * CedCommerce
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the End User License Agreement (EULA)
+  * that is bundled with this package in the file LICENSE.txt.
+  * It is also available through the world-wide-web at this URL:
+  * http://cedcommerce.com/license-agreement.txt
+  *
+  * @category    Ced
+  * @package     Ced_CsAdvTransaction
+  * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+  * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+  * @license      http://cedcommerce.com/license-agreement.txt
+  */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+   	<default>
+   	   <ced_csmarketplace>
+   	      <general>
+   	          <cssla>1</cssla>
+   	      </general>
+   	      <vsla>
+   	         <auto_cancel>10</auto_cancel>
+   	         <dispath_fee>10</dispath_fee>
+   	         <max_dispatch_time>20</max_dispatch_time>
+               <send_disapatch_email_template>ced_csmarketplace_vsla_send_disapatch_email_template</send_disapatch_email_template>
+               <send_cancel_email_template>ced_csmarketplace_vsla_send_cancel_email_template</send_cancel_email_template>
+               <send_confirm_email_template>ced_csmarketplace_vsla_send_confirm_email_template</send_confirm_email_template>
+   	      </vsla>
+   	   </ced_csmarketplace>
+   	</default>
+</config>
+   	

@@ -1,0 +1,292 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+
+/**
+ * Create account form template
+ *
+ * @var $block \Magento\Customer\Block\Form\Register
+ */
+?>
+<?php /* Extensions placeholder */ ?>
+<div
+	class="affiliate-register-container register-container affiliate-login-container login-container">
+	<div class="block-content">
+		<form class="form create account form-create-account"
+			action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>"
+			method="post" id="form-validate" enctype="multipart/form-data"
+			autocomplete="off">
+
+			<div class="accordion" id="accordion">
+				<!--  <fieldset class="fieldset create info"> -->
+				<legend class="legend ced-accordion">
+					<span><?php echo __('Personal Information')?></span>
+				</legend>
+
+				<div class="ced-reg-wrap ced-accordion-content">
+					<input name="success_url" value="" type="hidden"> <input
+						name="error_url" value="" type="hidden">
+
+
+					<div class="field field-name-firstname required">
+						<!-- <label class="label" for="firstname">
+			                <span><?php //echo __('First Name')?></span>
+			            </label>-->
+
+						<div class="control">
+							<input id="firstname" name="firstname" value=""
+								title="First Name" class="input-text required-entry"
+								data-validate="{required:true}" autocomplete="off"
+								aria-required="true" type="text"
+								placeholder="<?php echo __('First Name')?>">
+						</div>
+					</div>
+					<div class="field field-name-lastname required">
+						<!--  <label class="label" for="lastname">
+			                <span><?php //echo __('Last Name')?></span>
+			            </label>-->
+
+						<div class="control">
+							<input id="lastname" name="lastname" value="" title="Last Name"
+								class="input-text required-entry"
+								data-validate="{required:true}" autocomplete="off"
+								aria-required="true" type="text"
+								placeholder="<?php echo __('Last Name')?>">
+						</div>
+					</div>
+					
+					<?php $_dob = $block->getLayout()->createBlock('Ced\Affiliate\Block\Widget\Dob') ?>
+			        <?php if ($_dob->isEnabled()): ?>
+			            <?php echo $_dob->setDate($block->getFormData()->getDob())->toHtml() ?>
+			        <?php endif ?>
+								
+					<?php $_taxvat = $block->getLayout()->createBlock('Ced\Affiliate\Block\Widget\Taxvat') ?>
+			        <?php if ($_taxvat->isEnabled()): ?>
+			            <?php echo $_taxvat->setTaxvat($block->getFormData()->getTaxvat())->toHtml() ?>
+			        <?php endif ?>
+			
+			        <?php $_gender = $block->getLayout()->createBlock('Ced\Affiliate\Block\Widget\Gender') ?>
+			        <?php if ($_gender->isEnabled()): ?>
+			            <?php echo $_gender->setGender($block->getFormData()->getGender())->toHtml() ?>
+			        <?php endif ?>
+				</div>
+				<!-- </fieldset> -->
+
+
+				<!-- <fieldset class="fieldset create account"> -->
+				<legend class="legend ced-accordion">
+					<span><?php /* @escapeNotVerified */ echo __('Sign-in Information') ?></span>
+				</legend>
+				<div class="ced-reg-wrap ced-accordion-content">
+					<div class="field email required">
+						<!--   <label for="email_address" class="label"><span><?php /* @escapeNotVerified */ //echo __('Email') ?></span></label>-->
+						<div class="control">
+							<input type="email" name="email" autocomplete="email"
+								id="email_address"
+								value="<?php //echo $block->escapeHtml($block->getFormData()->getEmail()) ?>"
+								title="<?php /* @escapeNotVerified */ echo __('Email') ?>"
+								class="input-text"
+								data-validate="{required:true, 'validate-email':true}"
+								placeholder="<?php echo __('Email')?>">
+						</div>
+					</div>
+					<div class="field password required"
+						data-mage-init='{"passwordStrengthIndicator": {}}'>
+						<!-- <label for="password" class="label"><span><?php /* @escapeNotVerified */ //echo __('Password') ?></span></label>-->
+						<div class="control">
+							<input type="password" name="password" id="password"
+								title="<?php /* @escapeNotVerified */ echo __('Password') ?>"
+								class="input-text"
+								data-password-min-length="<?php echo $block->escapeHtml($block->getMinimumPasswordLength()) ?>"
+								data-password-min-character-sets="<?php echo $block->escapeHtml($block->getRequiredCharacterClassesNumber()) ?>"
+								data-validate="{required:true, 'validate-customer-password':true}"
+								autocomplete="off" placeholder="<?php echo __('Password')?>">
+							<div id="password-strength-meter-container"
+								data-role="password-strength-meter">
+								<div id="password-strength-meter"
+									class="password-strength-meter">
+				                        <?php /* @escapeNotVerified */ echo __('Password Strength'); ?>:
+				                        <span id="password-strength-meter-label"
+										data-role="password-strength-meter-label">
+				                            <?php /* @escapeNotVerified */ echo __('No Password'); ?>
+				                        </span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="field confirmation required">
+						<!--  <label for="password-confirmation" class="label"><span><?php /* @escapeNotVerified */// echo __('Confirm Password') ?></span></label> -->
+						<div class="control">
+							<input type="password" name="password_confirmation"
+								title="<?php /* @escapeNotVerified */ echo __('Confirm Password') ?>"
+								id="password-confirmation" class="input-text"
+								data-validate="{required:true, equalTo:'#password'}"
+								autocomplete="off"
+								placeholder="<?php echo __('Confirm Password')?>">
+						</div>
+					</div>
+				</div>
+				<!--  </fieldset> -->
+				<!-- <fieldset class="fieldset create info"> -->
+				<legend class="legend ced-accordion">
+					<span><?php echo __('Document Information')?></span>
+				</legend>
+				<div class="ced-reg-wrap ced-accordion-content">
+					<div class="field identity-document required">
+
+						<label for="identity-document" class="label required"><span><?php /* @escapeNotVerified */ echo __('Upload Identity Information') ?></span></label>
+						<div class="control required">
+							<select class="identity required required-entry" name="identity">
+								<option value=""><?php echo __('Select Document Type')?></option>
+								<option value="driving"><?php echo __('Driving License')?></option>
+								<option value="pan"><?php echo __('Pan Card')?></option>
+								<option value="passport"><?php echo __('Passport')?></option>
+								<option value="other"><?php echo __('Other')?></option>
+							</select>
+							<div class="control required ced-file-upload">
+								<input type="file" name="identityfile"
+									class="required required-entry ced-affiliate-file"> <span
+									class="file-wrapper"><?php echo __('Choose Identity file')?></span> <span
+									class="file-btn"><?php echo __('Upload')?></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="field address-wrapper required">
+						<!-- <label for="address-document" class="label"><?php //echo __('Upload Address Document')?></label>-->
+						<div class="control required ced-file-upload">
+							<input type="file" name="addressfile"
+								class="required required-entry ced-affiliate-file"> <span
+								class="file-wrapper"><?php echo __('Choose Address file')?></span> <span
+								class="file-btn"><?php echo __('Upload')?></span>
+						</div>
+					</div>
+
+					<div class="field compoany-wrapper">
+						<!-- <label for="company-document" class="label required"><?php //echo __('Upload Company Document(if you own the company)')?></label>-->
+						<div class="control ced-file-upload">
+							<input type="file" name="companyfile"
+								class="company_file ced-affiliate-file"> <span
+								class="file-wrapper"><?php echo __('Choose Company file')?></span> <span
+								class="file-btn"><?php echo __('Upload')?></span>
+						</div>
+					</div>
+
+					<div class="field refering-website">
+						<!--   <label for="password-confirmation" class="label"><span><?php /* @escapeNotVerified */ //echo __('Referring Website') ?></span></label>-->
+						<div class="control">
+							<input type="text" name="referring_website"
+								title="<?php /* @escapeNotVerified */ echo __('Referring Website') ?>"
+								id="referring-website" class="input-text" autocomplete="off"
+								placeholder="<?php echo __('Referring Website')?>">
+						</div>
+					</div>
+			
+			        <?php echo $block->getChildHtml('form_additional_info'); ?>
+			        
+			       
+			        </div>
+ 					<?php if($block->isTermsAndConditionEnable()):?>
+			        <legend class="legend ced-accordion">
+					<span><?php echo __('Terms & Conditions')?></span>
+					</legend>
+			        <div class="form-group required ced-reg-wrap">
+						<div class="field terms-condition required">
+							<!-- <label class="required" for="terms-condition"><span>Terms and Conditions</span><em>*</em></label> -->
+							<div class="terms-and-condition">
+								<p><?php echo $block->getTermsAndCondition()?></p>
+							</div>
+						</div>
+						<div class="field checkbox control required">
+							<div class="control">
+								<input class="required required-entry"
+									placeholder="Terms and Conditions" name="accept-terms"
+									id="accept-terms" type="checkbox"> <span><?php echo __('I agree to the terms and conditions')?></span>
+							</div>
+						</div>
+					</div>
+			       
+			        
+			        <?php endif;?>
+				<!--  </fieldset> -->
+			</div>
+			<div class="actions-toolbar">
+
+				<div class="primary">
+					<button type="submit" class="action submit primary"
+						title="<?php /* @escapeNotVerified */ echo __('Create an Account') ?>">
+						<span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span>
+					</button>
+				</div>
+				<div class="secondary-action">
+					<a class="action back"
+						href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>"><span><?php /* @escapeNotVerified */ echo __('<< Back To Login') ?></span></a>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+<script>
+
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+         var dataForm = $('#form-validate');
+         var ignore = null;
+         dataForm.mage('validation', {
+        	 ignore:false
+             }).find('input:text').attr('autocomplete', 'off');
+
+     });
+</script>
+
+<script>
+require([
+         'jquery',
+         'jquery/ui',
+         
+     ], function($){
+	$( "#accordion" ).accordion({
+		heightStyle:"content",
+		collapsible: true
+	});
+     });
+</script>
+<script>
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+       $(".ced-accordion").click(function(){
+       		$(this).toggleClass("clicked");
+       });
+
+        $(".ced-affiliate-file").change(function(e){
+       		var fileName = e.target.files[0].name;
+       		$(this).siblings('.file-wrapper').html(fileName);
+       });
+
+     });
+</script>

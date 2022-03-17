@@ -1,0 +1,17 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_Recurring
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <htmlContent name="recurring_subscription" sortOrder="22">
+        <block name="subscription-hidden-field" class="Webkul\Recurring\Block\Adminhtml\Catalog\Product\PlanTab">
+        </block>
+    </htmlContent>
+</form>

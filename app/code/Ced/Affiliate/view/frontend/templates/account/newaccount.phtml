@@ -1,0 +1,81 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<div class="affiliate-content">
+	<div class="ced-affiliate-account-info">
+		<!--<div class="affiiate-title">
+			<h1><?php echo __('Welcome to our Affiliate') ?></h1>
+		</div>-->
+		<img src="<?php echo $block->getViewFileUrl('Ced_Affiliate/images/affiliate.png');?>" alt="Affiliate_banner"/>
+		<div class="ced-aff-account-wrap">
+			<p style="margin-top:20px;"><?php
+			
+echo __ ( "Anyone with a good network can register to become part of our affiliate program. 
+				Our affiliate program rewards affiliates with attractive commissions.
+				Affiliates can reach out their network through social media using a unique link or unique coupon codes.
+				Affiliates can monitor and track their transactions through affiliate panel. Be part of our program to spread the word of goodness and get rewarded." );
+			?></p>
+			<p><b>For more details Click <a href="https://homedirect.in/hdaffiliate">Here</a>&nbsp;&nbsp;&nbsp;<a href="https://homedirect.in/index.php/default/affiliate/account/newSignup/">Sign Up</a></b></p>
+			<div class="ced-work-coupon-wrap">
+				<div class="ced-work-wrap">
+					<h3><?php echo __('How Does It Work?') ?></h3>
+					<p><?php
+					
+echo __ ( "When you register yourself with our affiliate system, you will be
+						given with numerous banners and links, which you will place at your
+						website. When a customers clicks one of those links or banners and he
+						makes purchase on our website, you will earn commission on that!" )?></p>
+				</div>
+				<div class="ced-coupon-wrap">
+					<h3><?php echo __('Affiliate by coupon') ?></h3>
+					<p><?php
+					
+echo __ ( "You will get a unique coupon code which you can send to your
+							friends. As your friends use this unique code to place orders in our
+							store, you will receive commission !" )?></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ced-affiliate-program">
+		<!--<div class="ced-program-foo-one">
+			<h3><?php echo __('Affiliate Program') ?></h3>
+		</div>-->
+		<div class="ced-program-foo-two">
+			<!--<dl>
+				<dt><?php echo __('Commission Type:-')?></dt>
+				<dd><?php echo __('Pay per sale- Commission will be rewarded for each purchase by the customers redirected through  your website')?></dd>
+				<dt><?php echo __('Affiliate Url:-')?></dt>
+				<dd><?php echo __('Unique Affiliate url will be generated')?></dd>
+				<dt><?php echo __('Monitor Transactions:-')?></dt>
+				<dd><?php echo __('You can easily track and monitor your transactions through your affiliate panel')?></dd>
+			</dl>-->
+		</div>
+	</div>
+
+	<div class="affiliateplus-account-bottom">
+		<div class="col-button" style="margin-left:-570px;">
+			<button
+				onclick="location.href='<?php echo $this->getUrl('affiliate/account/newSignup')?>'"
+				class="form-button btn-contact" style="background-color:#f2703e;">
+				<span style="background-color:#f2703e; color:white;"><?php echo __('Signup')?></span>
+			</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,72 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="aff-title">
+        <h2><?php echo __("My Account") ?></h2>
+</div>
+<div class="block block-dashboard-orders">
+<?php $_orders = $block->getOrders(); ?>
+    <div class="block-title order">
+        <strong><?php /* @escapeNotVerified */ echo __('Recent Orders') ?></strong>
+        <?php if (sizeof($_orders->getItems()) > 0): ?>
+            <a class="action view" href="<?php /* @escapeNotVerified */ echo $block->getUrl('affiliate/comission/index') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('View All') ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+    <div class="block-content">
+    <?php echo $block->getChildHtml()?>
+    <?php if (sizeof($_orders->getItems()) > 0): ?>
+        <div class="table-wrapper orders-recent">
+            <table class="data table table-order-items recent" id="my-orders-table">
+                <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Recent Orders') ?></caption>
+                <thead>
+                    <tr>
+                        <th scope="col" class="col id"><?php /* @escapeNotVerified */ echo __('Order #') ?></th>
+                        <th scope="col" class="col date"><?php /* @escapeNotVerified */ echo __('Date') ?></th>
+                        <th scope="col" class="col shipping"><?php /* @escapeNotVerified */ echo __('Customer Email') ?></th>
+                        <th scope="col" class="col total"><?php /* @escapeNotVerified */ echo __('Commission') ?></th>
+                        <th scope="col" class="col status"><?php /* @escapeNotVerified */ echo __('Commission Mode') ?></th>
+                        <th scope="col" class="col actions"><?php /* @escapeNotVerified */ echo __('Status') ?></th>
+                        <th scope="col" class="col actions"><?php /* @escapeNotVerified */ echo __('IGST') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($_orders as $_order): ?>
+                        <tr>
+                        	<?php //echo '<pre>'; print_r($_order->getFullTaxInfo()); ?>
+                            <td data-th="<?php echo $block->escapeHtml(__('Order #')) ?>" class="col id"><?php /* @escapeNotVerified */ echo $_order->getIncrementId() ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Date')) ?>" class="col date"><?php /* @escapeNotVerified */ echo $block->formatDate($_order->getCreateAt()) ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Ship To')) ?>" class="col shipping"><?php echo $_order->getCustomerEmail() ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Order Total')) ?>" class="col total"><?php /* @escapeNotVerified */ echo $block->getFormattedPrice($_order->getComission()) ?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Status')) ?>" class="col status"><?php /* @escapeNotVerified */ echo $_order->getComissionMode()?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions"><?php /* @escapeNotVerified */ echo $_order->getStatus()?></td>
+                            <td data-th="<?php echo $block->escapeHtml(__('IGST')) ?>" class="col actions"><?php /* @escapeNotVerified */ echo $_order->getIgst()?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php else: ?>
+        <div class="message info empty"><span><?php /* @escapeNotVerified */ echo __('You have placed Affiliate Orders.'); ?></span></div>
+    <?php endif; ?>
+    </div>
+</div>

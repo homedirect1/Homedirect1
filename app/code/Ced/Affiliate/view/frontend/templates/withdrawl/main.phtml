@@ -1,0 +1,99 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<form id="withdrawl_request_form"
+	action="<?php echo $this->getUrl('affiliate/withdrawl/save') ?>"
+	method="post" enctype="multipart/form-data">
+	<div class="fieldset">
+		<div class="title">
+			<h2 class="legend">Withdrawal Request Information</h2>
+		</div>
+		<div class="form-group">
+			<div class="request-amount">
+				<label for="amount" class="required"><span><?php echo __('Request Amount')?></span><em>*</em></label>
+				<input id="amount" name="amount" class="input-text" value=""
+					type="text">
+			</div>
+			<div class="">
+				<label for="balance"><?php echo __('Net Earn Amount');?></label> <strong
+					id="balance"><span class="price">$30.00</span></strong>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="">
+				<input id="payment_method_offline" value="offline"
+					name="payment_mode" title="Offline Payment" class="radio"
+					type="radio"> <label for="payment_method_offline"
+					style="float: center;"><?php echo __('Offline Payment')?></label>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="bank-transfer">
+				<input id="payment_bank" value="bank" name="payment_mode"
+					title="Bank Transfer Payment" class="radio" checked="" type="radio">
+				<label for="payment_method_bank" style="float: center;">Bank
+					Transfer Payment</label>
+			</div>
+		</div>
+		<div class="form-group payment_method_form"
+			id="payment_method_bank_form" style="">
+			<div>
+				<div class="">
+					<label for="bank_name" class="required"><span><?php echo __('Bank name')?></span><em>*</em></label>
+					<input title="Bank name" name="bank_name" id="bank_name"
+						class="input-text required-entry form-control bank_name" value=""
+						type="text">
+				</div>
+				<div class="">
+					<label for="bank_account_name" class="required"><span>Bank account
+							name</span><em>*</em></label> <input title="Bank account name"
+						name="bank_account_name" id="bank_account_name"
+						class="input-text required-entry form-control" value=""
+						type="text">
+				</div>
+				<div class="">
+					<label for="account_number" class="required"><span>Bank account
+							number</span><em>*</em></label> <input
+						title="Bank account number" name="account_number"
+						id="account_number" class="input-text required-entry form-control"
+						value="" type="text">
+				</div>
+				<div class="">
+					<label for="ifsc_code">Bank Ifsc code</label> <input
+						title="Bank Ifsc code" name="ifsc_code" id="ifsc_code"
+						class="form-control" value="" type="text">
+				</div>
+				<div class="">
+					<label for="swift_code">Bank SWIFT code</label> <input
+						title="Bank SWIFT code" name="swift_code" id="swift_code"
+						class="form-control" value="" type="text">
+				</div>
+				<div class="">
+					<label for="bank_address">Bank address</label>
+					<textarea class="form-control" title="Bank address"
+						name="bank_address" id="bank_address"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button style="float:right;" title="Send Request" class="button button-config action primary" type="submit">
+                <span>
+                    Send Request                </span>
+            </button>
+</form>

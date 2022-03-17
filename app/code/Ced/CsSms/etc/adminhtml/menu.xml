@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Ced_CsSms::config" title="Sms Integration" module="Ced_CsSms" sortOrder="30" resource="Ced_CsSms::config"/>
+        <add id="Ced_CsSms::config_elements" title="Sms Notification " module="Ced_CsSms" sortOrder="10" parent="Ced_CsSms::config" action="adminhtml/system_config/edit/section/sms_notification/" resource="Ced_CsSms::config"/>
+        <add id="Ced_CsSms::config_elements_smsaddon" title="Sms Extension" module="Ced_CsSms" sortOrder="10" parent="Ced_CsSms::config_elements" action="adminhtml/system_config/edit/section/sms_extensions/" resource="Ced_CsSms::config"/>
+    </menu>
+</config>

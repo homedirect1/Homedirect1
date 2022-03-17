@@ -1,0 +1,100 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GroupBuying
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+use Ced\GroupBuying\Helper\Data;
+use Ced\GroupBuying\Block\ExistingGroupList;
+
+/**
+ * @var ExistingGroupList $block
+ */
+$groupList = $block->getGroupList();
+$helper = $this->helper(Data::class);
+?>
+<strong style="margin-bottom: 20px; display: inline-block"><?= $helper->getConfig(Data::CONFIG_GROUP_INFO)?></strong>
+<?php
+if((empty($groupList->getData()) === true) && $block->isLoggedIn() === false): //Group list is empty and customer is not logged in.
+    ?>
+    <strong>No groups found. Please login to create a new group.</strong>
+<?php
+elseif((empty($groupList->getData()) === true)):
+    ?>
+    <strong>No groups found for this product.</strong>
+    <?php
+else:
+foreach ($groupList as $group): ?>
+    <fieldset>
+        <legend>
+            <strong>Group #<?= $group->getGroupId() ?></strong>
+        </legend>
+        <table>
+            <tr>
+                <th>Created By</th>
+                <td><?= $block->getGroupAdminName($group->getOwnerCustomerId()) ?></td>
+            </tr>
+
+            <tr>
+                <th>Group start date</th>
+                <td><?= $group->getStartDate() ?></td>
+            </tr>
+
+            <tr>
+                <th>Group end date</th>
+                <td><?= $group->getEndDate() ?></td>
+            </tr>
+
+            <tr>
+                <th>Group Vacancy</th>
+                <td><?= $helper->getGroupVacancy($group->getGroupId()) ?></td>
+            </tr>
+
+            <tr>
+                <th>Group Message</th>
+                <td><?= $group->getGiftMsg() ?></td>
+            </tr>
+
+            <?php
+            if (
+                    ($group->getOwnerCustomerId() == $block->getCurrentCustomerId()) ||
+                    ($block->isCustomerAlreadyJoined($group->getGroupId()))
+            ):
+                ?>
+                <tr>
+                    <td><button class="action secondary" onclick="window.location.href = '<?= $block->getViewUrl($group) ?>'">View Group</button></td>
+                </tr>
+            <?php //endif; ?>
+            <?php
+            elseif (
+                    ($helper->getGroupVacancy($group->getGroupId()) > 0) &&
+                    ($group->getOwnerCustomerId() != $block->getCurrentCustomerId()) &&
+                    (!$block->isCustomerAlreadyJoined($group->getGroupId()))
+            ):
+                ?>
+                <tr>
+                    <td><button class="action primary" onclick="window.location.href = '<?= $block->getApproveUrl($group) ?>'">Join Now</button></td>
+                </tr>
+            <?php else:?>
+            <tr>
+                <td><button class="action primary" onclick="window.location.href = '<?= $block->getApproveUrl($group) ?>'" disabled="disabled">Join Now</button></td>
+            </tr>
+            <?php endif; ?>
+        </table>
+    </fieldset>
+<?php endforeach;
+endif; ?>
+
+

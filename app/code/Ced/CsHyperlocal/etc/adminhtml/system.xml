@@ -1,0 +1,101 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author 	CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ced_cshyperlocal" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <tab>csmarketplace</tab>
+            <label>Hyperlocal System</label>
+            <resource>Ced_CsMarketplace::ced_csmarketplace</resource>
+
+            <!-- General Configuration -->
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="activation" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Hyperlocal System</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="popup_title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Title</label>
+                </field>
+                <!-- field for filter by distance/state,city&country-->
+                <field id="filter_type" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Filter Type</label>
+                    <source_model>Ced\CsHyperlocal\Model\System\Config\Source\Type</source_model>
+                    <comment>In case of distance type filter it will take the vendor origin address</comment>
+                </field>
+                <field id="radius" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Radius</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <depends><field id="filter_type">distance</field></depends>
+                </field>
+                <field id="distance_type" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Distance Type</label>
+                    <source_model>Ced\CsHyperlocal\Model\System\Config\Source\DistanceType</source_model>
+                    <depends><field id="filter_type">distance</field></depends>
+                </field>
+                <!-- Field for filter products by vendor/products location-->
+                <field id="filter_products_location" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Filter Products By</label>
+                    <source_model>Ced\CsHyperlocal\Model\System\Config\Source\Location</source_model>
+                    <comment>If select product then allows the vendor to add locations for each product</comment>
+                    <depends>
+                        <field id="filter_type" separator=",">city_state_country,zipcode</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="admin_default_address" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Admin Default Address</label>
+                <field id="location" translate="label" type="text" sortOrder="0" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Location</label>
+                    <frontend_model>Ced\CsHyperlocal\Block\Adminhtml\System\Config\Form\Field\Location</frontend_model>
+                </field>
+                <field id="latitude" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Latitude</label>
+                    <frontend_model>Ced\CsHyperlocal\Block\Adminhtml\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+                <field id="longitude" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Longitude</label>
+                    <frontend_model>Ced\CsHyperlocal\Block\Adminhtml\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+                <field id="city" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>City</label>
+                    <frontend_model>Ced\CsHyperlocal\Block\Adminhtml\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+                <field id="state" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>State</label>
+                    <frontend_model>Ced\CsHyperlocal\Block\Adminhtml\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+                <field id="country" translate="label" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Country</label>
+                    <frontend_model>Ced\CsHyperlocal\Block\Adminhtml\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+                <field id="zipcode" translate="label" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Zipcode</label>
+                    <frontend_model>Ced\CsHyperlocal\Block\Adminhtml\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

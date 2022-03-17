@@ -1,0 +1,128 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<div class="aff-title">
+        <h2><?php echo __('My Wallet') ?></h2>
+</div>
+<div class="my-account ced-affiliate-wallet">
+	<div class="block">
+		 <div class="block-title"><strong><?php echo __('Wallet Balance ')?></strong></div>
+	</div>
+	<div class="ced-affiliate-wallet-wrap">
+		<div class="total_creditlimit credit-limit">
+			<div>
+				<h2 class="title"><?php echo __('Total Wallet Amount')?></h2>
+				<span><?php echo __('Your Total Credit Limit is: ')?></span>
+		 		<span class="price"><?php echo $block->getFormattedPrice($block->getAmount()->getCreditAmount());?></span>
+			</div>
+		</div>
+		<div class="uesd_creditlimit credit-limit">
+			<div>
+				<h2 class="title"><?php echo __('Used Amount')?></h2>
+				<span><?php echo __('Your used credit limit is: ')?></span>
+				<span class="price"><?php echo $block->getFormattedPrice($block->getAmount()->getUsedAmount());?></span>
+			</div>
+		</div>
+		<div class="remaining_creditlimit credit-limit">
+			<div>
+				<h2 class="title"><?php echo __('Available Amount')?></h2>
+				<span><?php echo __('Your available credit limit is: ')?></span>
+				<span class="price"><?php echo $block->getFormattedPrice($block->getAmount()->getRemainingAmount());?></span>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<div class="withdrawl-request-checkbox">
+	<input type="checkbox" class="checkbox wallet-checkbox" name="checkbox"></input>
+	<span> <label><?php echo __('Request For Withdrawal')?></label>
+	</span>
+</div>
+<div class="withdrawl_form" style="display: none;">
+	<div class="block">
+		 <div class="block-title"><strong><?php echo __('Balance Withdrawal ')?></strong></div>
+	</div>
+	<div class="affiliate-withdrwal-form">
+		<form id="form_edit" class="form_edit" method="post"
+			action="<?php echo $this->getUrl('affiliate/withdrawl/request',array('affiliateId'=>$block->getAffiliateId())) ?>">
+			<div class="affiliate_withdrawl_request">
+				<div class="total-balance">
+					<strong><?php echo __('Total ')?></strong> <span class="price"><?php  echo $block->getFormattedPrice($block->getAmount()->getRemainingAmount())?></span>
+				</div>
+				<input type ="hidden" value ="<?php echo $block->getAmount()->getRemainingAmount()?>" name="totalamount">
+				<input type ="hidden" value ="1" name="iscredit">
+				<input type ="hidden" value ="1" name="redemmedformwallet">
+				<div class="withdrwal-form">
+					<div class="amount-value">
+						<input id="request_amount" class="required required-entry" name="amount" value=""
+							placeholder="<?php echo __('Enter Amount')?>"
+							data-validate="{'required-number':true, 'validate-greater-than-zero':true}"
+							type="text">
+					</div>
+					<div class="payment-methods">
+						<!-- <span>
+							<?php //echo __('Select payment Method')?>
+						</span>  -->
+						<select id="active-payment" class="active-payment required required-entry"
+									name="payment_method">
+							<?php foreach($block->getActivePayment() as $methodCode=> $_paymentmethod):?>
+							<?php if($methodCode=='storecredit')continue;?>
+							<option value="<?php echo $methodCode?>"><?php echo $_paymentmethod;?></option>
+							<?php endforeach;?>
+						</select>
+					</div>
+					<div class="request-withrawal">
+						<button class="button button-config request-amount action primary"
+							title="Request Withdrawal" type="submit">
+							<span><?php echo __('Request Withdrawal')?></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+         var dataForm = $('#form_edit');
+         var ignore = null;
+         dataForm.mage('validation', {
+                 ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+             }).find('input:text').attr('autocomplete', 'off');
+
+     });
+</script>
+<script>
+require([
+         'jquery',
+         'mage/mage'
+     ], function($){
+
+	$(".withdrawl-request-checkbox").on('click', '.wallet-checkbox',function(){	
+	if($(this).is(':checked')){
+		$('.withdrawl_form').show();
+	} else {
+		$('.withdrawl_form').hide();
+	}  
+	});
+ });
+</script>

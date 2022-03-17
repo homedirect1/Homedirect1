@@ -1,0 +1,124 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_Recurring
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php
+$_product               = $block->getProduct();
+$quantityValidators     = $block->getQuantityValidators();
+$dataModel              = $block->getData("dataModel");
+$recurringHelper        = $dataModel->getRecurringHelper();
+$currentData            = $recurringHelper->getCartData();
+$recurringData          = $recurringHelper->getRecurring($_product->getId());
+$configData             = $recurringHelper->getConfigData($_product->getId());
+$enabled                = $configData['enable'];
+if ($enabled) {
+    $enabled            = $recurringData['subscription'] ? $recurringData['subscription'] : $enabled;
+    $enabled            = (!$_product->getData('subscription')) ? $_product->getData('subscription') : $enabled;
+}
+$allSubscriptionData    = $recurringHelper->getSubscriptionContent();
+$buttonTitleSubscribe   = __('Update Subscription');
+$dateRequired           = "<span class='wkrequired' >".__('Please select valid Date.')."</span>";
+$isCustomerloggedIn     = $recurringHelper->getIsCustomerloggedIn();
+$buttonTitle = __('Update Cart');
+$termId                 = isset($currentData["termId"]) ? $currentData["termId"] : "";
+$planId                 = isset($currentData["planId"]) ? $currentData["planId"] : "";
+$startDate              = isset($currentData["startDate"]) ? $currentData["startDate"] : "";
+$initialFee             = isset($currentData["initialFee"]) ? $currentData["initialFee"] : "";
+$subscriptionsCharge    = isset($currentData["subscriptionsCharge"]) ? $currentData["subscriptionsCharge"] : "";
+if ($_product->isSaleable()): ?>
+    <div class="box-tocart update">
+        <fieldset class="fieldset">
+            <?php if ($block->shouldRenderQuantity()): ?>
+            <div class="field qty">
+                <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+                <div class="control">
+                    <input type="number"
+                           name="qty"
+                           id="qty"
+                           value=""
+                           title="<?= $block->escapeHtml(__('Qty')) ?>"
+                           class="input-text qty"
+                           data-validate="<?= $block->escapeHtml(\Zend_Json::encode($quantityValidators)) ?>"/>
+                </div>
+            </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit"
+                        title="<?= $block->escapeHtml($buttonTitle) ?>"
+                        class="action primary tocart"
+                        id="product-updatecart-button">
+                    <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                </button>
+                <?php
+                if ($enabled) {
+                    if (count($allSubscriptionData)) {
+                        if ($isCustomerloggedIn) {
+                            ?>
+                        <button type="button"
+                                title="<?= $block->escapeHtml($buttonTitleSubscribe) ?>"
+                                class="action primary subscribetocart"
+                                id="product-subscribe-button">
+                            <span><?= $block->escapeHtml($buttonTitleSubscribe) ?></span>
+                        </button>
+                            <?php
+                        } else {
+                            $buttonTitleLogin   = __('Login To Subscribe');
+                            $url = $block->getUrl("recurring/customer/redirect");
+                            $url .= "?url=".$block->getRequest()->getUriString();
+                            ?>
+                            <button data-url="<?= /* @noEscape */ $url ?>" type="button"
+                                    title="<?= $block->escapeHtml($buttonTitleSubscribe) ?>"
+                                    class="action primary login-to-subscribe subscribetocart"
+                                    id="login-to-subscribe">
+                                <span><?= $block->escapeHtml($buttonTitleLogin) ?></span>
+                            </button>
+                            <?php
+                        }
+                    }
+                }
+                ?>
+                <?= $block->getChildHtml('', true) ?>
+            </div>
+        </fieldset>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form": {
+                "validation": {},
+                "addToCart": {
+                    "cartButtonId": "#product-updatecart-button",
+                    "cartForm": "#product_addtocart_form"
+                }
+            }
+        }
+    </script>
+<?php endif; ?>
+<script>
+    window.subscription = <?= /* @noEscape */ \Zend_Json::encode($allSubscriptionData); ?>;
+    window.requiredTitle = <?= /* @noEscape */ \Zend_Json::encode($dateRequired); ?>;
+    window.termId              = <?= /* @noEscape */ \Zend_Json::encode($termId); ?>;
+    window.planId              = <?= /* @noEscape */ \Zend_Json::encode($planId); ?>;
+    window.startDate           = <?= /* @noEscape */ \Zend_Json::encode($startDate); ?>;
+    window.initialFee          = <?= /* @noEscape */ \Zend_Json::encode($initialFee); ?>;
+    window.subscriptionsCharge = <?= /* @noEscape */ \Zend_Json::encode($subscriptionsCharge); ?>;
+</script>
+
+<div id="subscription-component" data-bind="scope:'subscription-content'" class="field">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+    {
+        "#subscription-component": {
+            "Magento_Ui/js/core/app":  <?= /* @noEscape */ $block->getJsLayout();?>
+        }
+    }
+    </script>
+</div>

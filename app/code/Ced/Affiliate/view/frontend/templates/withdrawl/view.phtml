@@ -1,0 +1,130 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Affiliate
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+?>
+<div class="affiliate-withdrawl-wrap">
+    <div class="block">
+        <div class="block-title">
+            <strong><?php echo __('Withdrawal Detail') ?></strong>
+            <?php if($block->checkCancel()):?>
+            <form action="<?php echo $block->escapeUrl($block->getUrl('affiliate/withdrawl/cancel',array('id'=>$this->getRequest()->getParam('id')))); ?>" method="post">
+            <button type="submit" class="action save primary"data-mage-init='{
+                                    "Ced_Affiliate/js/affiliate_account/cancelWidget":{
+                                        "type": "popup",
+                                        "modalClass": "my-credit-cards-popup",
+                                        "toggleEvent": "click",
+                                        "title": "<?php echo $block->escapeHtml(__('Cancel Request')) ?>",
+                                        "content": "Are you sure you want to cancel this request"
+                                    }
+                                }' ><?php echo __('Cancel Request')?></button>
+                                </form>
+            <?php endif;?>
+        </div>
+    </div>
+    <div class="ced-aff-withdrawl-wrap">
+        <div class="field-affiliate-name ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Affiliate Name')?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php echo $this->_customerSession->getCustomer()->getFirstname()?></div>
+        	     </div>                            
+             </div>
+         </div>     
+         
+         
+         <div class="field-affiliate-email ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Affiliate Email')?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php echo $block->getWithdrawlInformation()->getCustomerEmail()?></div>
+        	     </div>                            
+             </div>
+         </div> 
+         
+         <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Requested Amount')?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php echo $block->getFormattedPrice($block->getWithdrawlInformation()->getRequestAmount())?></div>
+        	     </div>                            
+             </div>
+         </div> 
+         
+         
+         <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Service Tax')?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php echo $block->getFormattedPrice($block->getWithdrawlInformation()->getServiceTax())?></div>
+        	     </div>                            
+             </div>
+         </div> 
+         
+          <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Service Tax Mode')?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php echo $block->getWithdrawlInformation()->getServiceTaxMode()?></div>
+        	     </div>                            
+             </div>
+         </div>
+         
+          <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Payable Amount')?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php echo $block->getFormattedPrice($block->getWithdrawlInformation()->getPayableAmount())?></div>
+        	     </div>                            
+             </div>
+         </div>
+         
+          <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Amount Paid')?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php echo $block->getFormattedPrice($block->getWithdrawlInformation()->getAmountPaid())?></div>
+        	     </div>                            
+             </div>
+         </div>
+         
+         <div class="field-affiliate-amount ced-aff-withdraw">
+            <label class="label field-label" for="field-product-name">
+            	<span><?php echo __('Status')?></span>
+            </label>
+             <div class="field-control control">
+        	     <div id="field-affiliate-name" class="control-value field-value">
+        	     	<div id="product_detail"><?php  if($block->getWithdrawlInformation()->getStatus()==0)echo "Pending";elseif($block->getWithdrawlInformation()->getStatus()==1)echo "Complete";else echo "Cancelled";?></div>
+        	     </div>                            
+             </div>
+         </div>
+     </div>
+ </div>

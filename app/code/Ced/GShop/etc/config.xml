@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement(EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+  * @package  Ced_GShop
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright Copyright CEDCOMMERCE(http://cedcommerce.com/)
+ * @license   http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+        <system>
+            <license>
+                <use_https>0</use_https>
+                <license_url>gxpress/main/license</license_url>
+                <activate_url>cedcommerce.com/licensing/validate/</activate_url>
+                <validate_url>cedcommerce.com/licensing/validate/auto</validate_url>
+            </license>
+        </system>
+        <cedcore>
+            <feeds_group>
+                <feeds>INFO,PROMO,UPDATE_RELEASE,NEW_RELEASE,INSTALLED_UPDATE</feeds>
+            </feeds_group>
+        </cedcore>
+		<gxpress_config>
+			<gxpress_setting>
+				<environment>sandbox</environment>
+				<location>0</location>
+				<dev_acc>0</dev_acc>
+				<storeid>1</storeid>
+			</gxpress_setting>
+			<product_upload>
+				<chunk_size>5</chunk_size>
+			</product_upload>
+		</gxpress_config>
+  </default> 
+</config>

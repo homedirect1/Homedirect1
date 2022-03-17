@@ -1,0 +1,77 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GroupBuying
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+/**
+ * @var ListGroups $block
+ */
+
+use Ced\GroupBuying\Block\Account\ListGroups;
+
+// @codingStandardsIgnoreFile
+?>
+<?php $_gifts = $block->getOrders();
+?>
+<?php echo $block->getChildHtml('info'); ?>
+<?php if ($_gifts && count($_gifts)): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-groupgifts-table">
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Group Gifts') ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?php /* @escapeNotVerified */ echo __('Gift Id#') ?></th>
+                    <th scope="col" class="col reciever_email"><?php /* @escapeNotVerified */ echo __('Receiver Email') ?></th>
+                    <th scope="col" class="col gift_status"><?php /* @escapeNotVerified */ echo __('Group Status') ?></th>
+                    <th scope="col" class="col total_members"><?php /* @escapeNotVerified */ echo __('Total members') ?></th>
+                    <th scope="col" class="col actions">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+    <?php foreach ($_gifts as $_gift): ?>
+                    <tr>
+                        <td data-th="<?php echo $block->escapeHtml(__('Gift Id #')) ?>" class="col id"><?php /* @escapeNotVerified */ echo $_gift->getId() ?></td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Reciever Email')) ?>" class="col date"><?php /* @escapeNotVerified */ echo $_gift->getGiftReceiverEmail(); ?></td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+        <?php if ($block->getGroupApprovalStatus($_gift->getId()) == 1): ?>
+                                <span class="nobr">
+                                    <span>Approved (</span><a href="<?php echo $this->getViewUrl($_gift) ?>"><?= __('View') ?></a><span>)</span>
+                                </span>
+        <?php endif ?>
+                            <?php if ($block->getGroupApprovalStatus($_gift->getId()) == 2): ?>
+                                <span class="nobr">
+                                <?php echo __('Pending') ?>
+                                </span>
+                                <?php endif ?>
+
+                            <?php if ($block->getGroupApprovalStatus($_gift->getId()) == 0): ?>
+                                <span class="nobr">
+                                <?php echo __('Disapproved by admin') ?>
+                                </span>
+                                <?php endif ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Total members')) ?>" class="col date"><?php /* @escapeNotVerified */ echo $block->getTotalMembers($_gift->getId()); ?></td>
+
+                    </tr>
+    <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?php /* @escapeNotVerified */ echo __('You have no groups !.'); ?></span></div>
+<?php endif ?>

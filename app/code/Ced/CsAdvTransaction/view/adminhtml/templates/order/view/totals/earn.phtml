@@ -1,0 +1,140 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsOrder
+ * @author   	 CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+
+?>
+<?php
+$vorder = $this->getVorder();
+$_order  = $this->getOrder();
+$_source = $this->getSource();
+$_fullInfo  = $this->getFullTaxInfo();
+$order =$vorder;
+
+
+$currencyCode = $this->storeManager->getStore(null)->getBaseCurrencyCode();
+if($order->getPaymentState() == 1 || $order->getPaymentState() == 3 || $order->getPaymentState() == 4 )
+{
+    if($this->advHelper->getOrderPaymentType($order->getOrderId()) == __('PrePaid'))
+    {
+
+        $vendorPay = $this->advHelper->vendorPay($order->getVendorId(),$order->getId());
+        $vearn =  $this->priceCurrency->format($vendorPay,false,2,null,$currencyCode);
+    }
+    else{
+        $vendorPay = $this->advHelper->vendorPay($order->getVendorId(),$order->getId());
+        $postpaidAmount = $this->advHelper->getPostPaidAmount($order);
+
+        $payment = (float)$postpaidAmount['post_paid']+(float)$vendorPay;
+        $vearn = $this->priceCurrency->format($payment,false,2,null,$currencyCode);
+
+    }
+}
+else{
+    $vearn = $this->priceCurrency->format($order->getVendorEarn(),false,2,null,$currencyCode);
+}
+$orderFees = $this->orderfeeFactory->create()->getCollection()->addFieldToFilter('order_id',$order->getOrderId())->addFieldToFilter('vendor_id',$order->getVendorId())->getData();
+
+$fees = 0;
+foreach ($orderFees as $Ofees)
+{
+    $fees  = $fees+$Ofees['amount'];
+}
+$fees = $this->priceCurrency->format($fees,false,2,null,$currencyCode);
+$ServiceTax = $this->advHelper->getServiceTaxforOrder([$order->getOrderId()],$order->getVendorId());
+$ServiceTax = $this->priceCurrency->format($ServiceTax,false,2,null,$currencyCode);
+
+?>
+<div class="order-totals"><table width="100%" cellspacing="0">
+        <colgroup><col>
+            <col width="1">
+        </colgroup><tfoot>
+        <tr class="0">
+            <td class="label">
+                <strong><?php echo  __('SubTotal')?></strong>
+            </td>
+            <td class="emph">
+                <strong><span class="price"><?php echo  $this->currency->getCurrency($vorder->getCurrency())->toCurrency($vorder->getOrderTotal()); ?></span></strong>
+            </td>
+        </tr>
+        <?php if($this->csorderHelper->canShowShipmentBlock($vorder)){ ?>
+            <tr class="1">
+                <td class="label">
+                    <?php echo  __('Shipping & Handling')?>
+                </td>
+                <td class="emph">
+                    <strong><span class="price"><?php echo  $this->currency->getCurrency($vorder->getCurrency())->toCurrency($vorder->getBaseShippingAmount()); ?></span></strong>
+                </td>
+            </tr>
+            <tr class="2">
+                <td class="label">
+                    <strong><?php echo  __('Grand Total (Earned)')?></strong>
+                </td>
+                <td class="emph">
+                    <strong><span class="price"><?php echo $this->currency->getCurrency($vorder->getCurrency())->toCurrency($vorder->getOrderTotal()+$vorder->getBaseShippingAmount()); ?></span></strong>
+                </td>
+            </tr>
+        <?php }else{ ?>
+            <tr class="2">
+                <td class="label">
+                    <strong><?php echo  __('Grand Total (Earned)')?></strong>
+                </td>
+                <td class="emph">
+                    <strong><span class="price"><?php echo $this->currency->getCurrency($vorder->getCurrency())->toCurrency($vorder->getOrderTotal()); ?></span></strong>
+                </td>
+            </tr>
+        <?php    } ?>
+
+
+
+
+
+        <tr class="3">
+            <td class="label">
+                <strong> <?php echo  __('Commission Fee')?></strong>
+            </td>
+            <td class="emph">
+                <strong><span class="price"><?php echo $this->currency->getCurrency($vorder->getCurrency())->toCurrency($vorder->getShopCommissionFee());  ?></span></strong>
+            </td>
+        </tr>
+
+        <tr class="4">
+            <td class="label">
+                <strong><?php echo  __('Marketplace Fees')?></strong>
+            </td>
+            <td class="emph">
+                <strong><span class="price"><?php echo $fees; ?></span></strong>
+            </td>
+        </tr>
+        <tr class="5">
+            <td class="label">
+                <strong><?php echo  __('Service Tax ')?></strong>
+            </td>
+            <td class="emph">
+                <strong><span class="price"><?php echo $ServiceTax ?></span></strong>
+            </td>
+        </tr>
+        <tr class="6">
+            <td class="label">
+                <strong><?php echo  __('Net Earned')?></strong>
+            </td>
+            <td class="emph">
+                <strong><span class="price"><?php echo $vearn;?></span></strong>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

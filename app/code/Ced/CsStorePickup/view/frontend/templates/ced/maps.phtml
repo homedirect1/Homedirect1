@@ -1,0 +1,90 @@
+<?php 
+
+	$storesCollection = $this->getAllStores();
+	$markers = array();
+	$i = 1;
+    $totalStoreCount = count($storesCollection);
+
+	foreach($storesCollection as $stores) {  
+
+		$storeName = $stores->getStoreName();
+		$storeLat =  $stores->getLatitude();
+		$storeLong = $stores->getLongitude();
+		$storeRadius = '0';
+		$storeZoomLevel ='15';
+	 
+		$markers[$i]['name'] = $storeName;
+        $markers[$i]['lat'] =$stores->getLatitude();
+        $markers[$i]['long'] =$stores->getLongitude();
+        $markers[$i]['storeid'] = $stores->getPickupId();
+        $markers[$i]['storemgrname'] = $stores->getStoreManagerName();
+		$i++;
+		}	
+?>
+
+<div id="googleMap" style="width:100%;height:400px;"></div>
+<input type="hidden" id="baseurl" value="<?php echo $block->getBaseUrl(); ?>">
+<input type="hidden" id="map_vendor_id" value="<?php echo $this->getRequest()->getParam('vendor_id'); ?>" class="map_vendor_id">
+<script type="text/javascript">
+	var markers = [
+	<?php foreach ($markers as $marker) : ?>
+	['<?php echo $marker['name'];?>',<?php echo $marker['lat'];?>,<?php echo $marker['long'];?>,<?php echo $marker['storeid'];?>,'<?php echo $marker['storemgrname'];?>'],
+	<?php endforeach ?>
+	];
+</script>
+<script>
+function myMap(markers) {
+
+	var map;
+    var bounds = new google.maps.LatLngBounds();
+    var mapOptions = {
+        mapTypeId: 'roadmap'
+    };
+    
+    map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+    map.setTilt(45);
+                        
+    
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+    for( i = 0; i < markers.length; i++ ) {
+        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: markers[i][0]
+        });
+        
+          
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent('<h4>Store Name:</h4>' +markers[i][0]+ '<p><span><b>Store Manager Name: </b>' +markers[i][4]+ '</span></p>');
+                infoWindow.open(map, marker);
+
+                 jQuery("#carrier-store-list").val(markers[i][3]);
+                 var selectfield = jQuery("#ced_stores_list_"+'<?php echo $this->getRequest()->getParam('vendor_id')?>');
+            	var ele = jQuery("#ced_stores_list_"+'<?php echo $this->getRequest()->getParam('vendor_id')?>').siblings("#oneValues_<?php echo $this->getRequest()->getParam('vendor_id')?>");
+                var getUrl = '<?php echo $this->getUrl('csstorepickup/getmap/view')?>'+'storeId/'+markers[i][3]+'/vendor_id/<?php echo $this->getRequest()->getParam('vendor_id')?>';
+            	var newUrl = getUrl;
+             jQuery.ajax({
+                            method: 'GET',
+                            dataType: 'html',
+                            url: newUrl,
+                            showLoader:true,
+                        }).success(function (result) {
+                            if(ele.length){
+                            	ele.empty();
+                            }
+                            ele.append(result);
+                            selectfield.val(markers[i][3]);
+                        });
+            }
+        })(marker, i));
+
+        map.fitBounds(bounds);
+	}
+}
+myMap(markers);
+</script>
+
+<?php die();?>

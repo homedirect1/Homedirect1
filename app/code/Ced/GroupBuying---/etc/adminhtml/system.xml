@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+
+ CedCommerce
+
+ NOTICE OF LICENSE
+
+ This source file is subject to the End User License Agreement (EULA)
+ that is bundled with this package in the file LICENSE.txt.
+ It is also available through the world-wide-web at this URL:
+ https://cedcommerce.com/license-agreement.txt
+
+ @author    CedCommerce Core Team <connect@cedcommerce.com>
+ @copyright Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ @license   https://cedcommerce.com/license-agreement.txt
+
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <!-- payment-group -->
+        </section>
+        <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <!-- carrier-group -->
+        </section>
+
+        <tab id="groupbuying" translate="label" sortOrder="10">
+            <label>Group Buying</label>
+        </tab>
+
+        <section id="groupbuyingsection" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Configuration</label>
+            <tab>groupbuying</tab>
+            <resource>Ced_Groupbuying::groupbuying_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Group Buying Configuration</label>
+                <field id="groupSize" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Group Limit</label>
+                    <validate>validate-number</validate>
+                    <comment>Maximum number of groups creation allowed to a customer</comment>
+                </field>
+                <field id="groupInfo" translate="label" type="textarea" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Group Information</label>
+                    <comment>This information will be visible on the product page which will help the customers to know how Group buying works.</comment>
+                </field>
+                <field id="groupApproval" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Group Approval</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Groups created will be approved first by the admin.</comment>
+                </field>
+            </group>
+
+            <group id="emailConfig" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Mass Email Configuration</label>
+                <field id="groupMassEmail" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable mailing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>All customers on your website will receive an email whenever a new group is created.</comment>
+                </field>
+                <field id="emailTemplate" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>Email template is chosen based on theme fallback when "Default" option is selected.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

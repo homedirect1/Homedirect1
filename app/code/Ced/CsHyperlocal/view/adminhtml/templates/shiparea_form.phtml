@@ -1,0 +1,159 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */ 
+
+?>
+<?php
+$filterType = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::FILTER_TYPE);?>
+<?php $locationData = $block->getCurrentLocation(); ?>
+<?php if ($filterType == 'zipcode') : ?>
+<div id="export-zipcode-csv" class="admin__field" style="display: none">
+    <label class="admin__field-label">
+        <span><?php echo __('Export Zipcode CSV'); ?></span>
+    </label>
+    <div class="admin__field-control">
+        <input type="button"
+               onclick="location.href = '<?php echo $this->getUrl('*/zipcode/export', ['id' => $this->getRequest()->getParam('id')]); ?>';"
+               value="<?php echo __('Export Zipcode CSV'); ?>"/>
+    </div>
+</div>
+<?php endif; ?>
+
+<!-- autocomplete location -->
+<script type="text/javascript">
+    require([
+            'jquery',
+            'mage/validation'
+        ],
+        function ($) {
+
+            /** hide import zipcode csv field**/
+            <?php  if ($filterType == 'zipcode') : ?>
+                <?php if ($locationData && $locationData->getZipcodeType() == 'multiple' && $filterType == 'zipcode') : ?>
+                    $('[data-index="zipcode_import_csv"]').show();
+                    $('[data-index="zipcode"]').hide();
+                    $('#export-zipcode-csv').show();
+                <?php else: ?>
+                    $('[data-index="zipcode_import_csv"]').hide();
+                    $('[data-index="zipcode"]').show();
+                    $('#export-zipcode-csv').hide();
+                <?php endif; ?>
+            <?php else : ?>
+                $('[data-index="zipcode_import_csv"]').hide();
+                $('[data-index="zipcode"]').hide();
+            <?php endif; ?>
+
+
+            var locationfield = setInterval(function(){
+                if ($('[data-index="location"]').length > 0)
+                {
+
+                    /** autocomplete search input **/
+                    var selectedLocation = false;
+
+
+                    $("input[name='shiparea_form[location]']").trigger('change');
+                    var input = $('[data-index="location"]').find('input')[0];
+
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        selectedLocation = true;
+                        var place = autocomplete.getPlace();
+                        var latitude = place.geometry.location.lat();
+                        var longitude = place.geometry.location.lng();
+                        var zipcode = 0;
+                       document.getElementsByName('shiparea_form[latitude]')[0].value = latitude;
+                       document.getElementsByName('shiparea_form[longitude]')[0].value = longitude;
+
+                        /** trigger change event */
+                        $("input[name='shiparea_form[latitude]']").trigger('change');
+                        $("input[name='shiparea_form[longitude]']").trigger('change');
+                        $("input[name='shiparea_form[location]']").trigger('change');
+
+
+                        var arrAddress = place.address_components;
+                        document.getElementsByName('shiparea_form[city]')[0].value = '';
+                        document.getElementsByName('shiparea_form[state]')[0].value = '';
+                        document.getElementsByName('shiparea_form[country]')[0].value = '';
+                        document.getElementsByName('shiparea_form[zipcode]')[0].value = '';
+
+                        jQuery.each(arrAddress, function (i, address_component) {
+                            if (address_component.types[0] == "locality" || address_component.types[0] == "administrative_area_level_2") {
+                                document.getElementsByName('shiparea_form[city]')[0].value = address_component.long_name;
+
+
+                            }
+                            if (address_component.types[0] == "administrative_area_level_1") {
+                                document.getElementsByName('shiparea_form[state]')[0].value = address_component.long_name;
+
+
+                            }
+                            if (address_component.types[0] == "country") {
+                                document.getElementsByName('shiparea_form[country]')[0].value = address_component.long_name;
+                            }
+
+                            <?php if ($filterType == 'zipcode') : ?>
+                                if (address_component.types[0] == "postal_code") {
+                                    zipcode = 1;
+                                    $('[data-index="zipcode_import_csv"]').hide();
+                                    $('[data-index="zipcode"]').show();
+                                    $("input[name='shiparea_form[zipcode_type]']").val('single');
+                                    document.getElementsByName('shiparea_form[zipcode]')[0].value = address_component.long_name;
+                                    $('#export-zipcode-csv').hide();
+
+                                }
+                            <?php endif; ?>
+                        });
+
+                        <?php if ($filterType == 'zipcode') : ?>
+                            if (!zipcode) {
+                                $('[data-index="zipcode_import_csv"]').show();
+                                $('[data-index="zipcode"]').hide();
+                                $("input[name='shiparea_form[zipcode_type]']").val('multiple');
+                                $('#export-zipcode-csv').show();
+                            }
+                        <?php endif; ?>
+
+                        /** trigger change event */
+                        $("input[name='shiparea_form[city]']").trigger('change');
+                        $("input[name='shiparea_form[state]']").trigger('change');
+                        $("input[name='shiparea_form[country]']").trigger('change');
+                        $("input[name='shiparea_form[zipcode]']").trigger('change');
+                        $("input[name='shiparea_form[zipcode_type]']").trigger('change');
+                    });
+                    clearInterval(locationfield);
+                }
+            },3000);
+        });
+    /** end of autocomplete search input **/
+</script>
+<style type="text/css">
+    .admin__scope-old .admin__field .admin__field-label {
+        width: 200px;
+        float: left;
+    }
+
+    .admin__scope-old .admin__field .admin__field-control {
+        width: calc(100% - 229px);
+        margin: 0px 0px 0px 10px;
+        float: right;
+    }
+
+    .admin__scope-old .admin__field:after {
+        clear: both;
+    }
+</style>

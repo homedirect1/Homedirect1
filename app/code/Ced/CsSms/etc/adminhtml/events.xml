@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--event for vendor product status changed-->
+    <event name="csmarketplace_vendor_product_status_changed">
+        <observer name="Ced_CsSms_vendor_product_status_changed" instance="Ced\CsSms\Observer\VendorProductStatusChanged" />
+    </event>
+    <!--codes for when vendor status changed-->
+    <event name="csmarketplace_vendor_status_changed">
+        <observer name="Ced_CsSms_vendor_status_changed" instance="Ced\CsSms\Observer\VendorStatusChanged" />
+    </event>
+    <!--send sms on product order status changed-->
+    <event name="sales_order_save_after">
+        <observer name="Ced_CsSms_Order_Status_Change" instance="Ced\CsSms\Observer\SendSmsOnOrderStatusChange" />
+    </event>
+    <!--codes for vendor delete notification-->
+    <event name="ced_csmarketplace_vendor_delete_before">
+        <observer name="Ced_CsSms_vendor_account_delete" instance="Ced\CsSms\Observer\VendorDelete" />
+    </event>
+</config>

@@ -1,0 +1,22 @@
+{
+    "name": "ced/module-groupbuying",
+    "description": "Group Buying Module",
+    "type": "magento2-module",
+    "license": [
+        "EULA"
+    ],
+    "require": {
+        "php": "~7.4.0",
+        "magento/magento-composer-installer": "*"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    }, 
+    "version": "1.0.0",
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Ced\\GroupBuying\\": ""
+        }
+    }
+ }

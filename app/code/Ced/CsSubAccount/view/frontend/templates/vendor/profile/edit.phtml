@@ -1,0 +1,186 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsSubAccount
+ * @author      CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+$subVendor = $block->getSubVendor();
+$pub_path = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+?>
+<div class="row">
+    <div class="col-md-12" style="margin-top:10px;">
+        <div class="panel panel-default">
+            <div class="panel-heading col-md-12 uptransform" style="font-weight:bold;padding:4px 15px;font-size:17px;">
+                <div class="col-md-10 col-sm-10 col-xs-9 button_sec_font" style="line-height:31px;font-size:17px;">
+                    <?php echo __('Edit') . " " . __('Profile Information') ?>
+                </div>
+                <div class="buttons-set col-md-2 col-sm-2 col-xs-3" style="text-align:right;">
+                    <button type="submit" onClick="profileEdit();" title="<?php echo __('Save') ?>"
+                            class="uptransform button btn btn-success">
+                        <span><span><?php echo __('Save') ?></span></span>
+                    </button>
+                </div>
+                <div class="clear_both"></div>
+            </div>
+
+            <div class="panel-body">
+                <div class="col-md-12" style="margin-top:10px;">
+                    <div class="fieldset">
+                        <ul class="form-list" style="padding-left:0;">
+                            <form id="edit_form"
+                                  action="<?php echo $this->getUrl('cssubaccount/customer/profilesave') ?>"
+                                  method="post" enctype="multipart/form-data" novalidate="novalidate">
+                                <!-- <div>
+                                    <input name="form_key" value="9DXZFWfKeOIghSSw" type="hidden">
+                                </div> -->
+                                <li class="wide">
+                                    <label class="label admin__field-label" for="first_name"
+                                           data-ui-id="widget-form-renderer-element-0-text-vendor-first-name-label"><span>* First Name</span></label>
+                                    <div class="input-box">
+                                        <input id="first_name" name="first_name"
+                                               data-ui-id="widget-form-renderer-element-0-text-vendor-first-name"
+                                               value="<?php if ($subVendor['first_name']) echo $subVendor['first_name'] ?>"
+                                               class="validate-no-html-tags required-entry input-text admin__control-text required-entry _required"
+                                               type="text">
+                                    </div>
+                                </li>
+                                <li class="wide">
+                                    <label class="label admin__field-label" for="name"
+                                           data-ui-id="widget-form-renderer-element-0-text-vendor-name-label"><span>* Last Name</span></label>
+                                    <div class="input-box">
+                                        <input id="last_name" name="last_name"
+                                               data-ui-id="widget-form-renderer-element-0-text-vendor-last-name"
+                                               value="<?php if ($subVendor['last_name']) echo $subVendor['last_name'] ?>"
+                                               class="validate-no-html-tags required-entry input-text admin__control-text required-entry _required"
+                                               type="text">
+                                    </div>
+                                </li>
+                                <li class="wide">
+                                    <label class="label admin__field-label" for="profile_picture"
+                                           data-ui-id="widget-form-renderer-element-0-file-vendor-profile-picture-label"><span> Profile Picture</span></label>
+                                    <div class="input-box">
+                                        <?php if ($subVendor['profile_image']) { ?>
+                                            <a href="<?php echo $pub_path . $subVendor['profile_image'] ?>"
+                                               onclick="imagePreview('profile_picture_image'); return false;"
+                                               data-ui-id="widget-form-renderer-element-0-file-vendor-profile-picture-link">
+                                                <img src="<?php echo $pub_path . $subVendor['profile_image'] ?>"
+                                                     id="profile_picture_image"
+                                                     title="<?php echo $subVendor['profile_image'] ?>"
+                                                     alt="<?php echo $subVendor['profile_image'] ?>"
+                                                     class="small-image-preview v-middle"
+                                                     data-ui-id="widget-form-renderer-element-0-file-vendor-profile-picture"
+                                                     width="22" height="22">
+                                            </a>
+                                        <?php } ?>
+                                        <input id="profile_picture" name="image"
+                                               data-ui-id="widget-form-renderer-element-0-file-vendor-profile-picture"
+                                               value="<?php if ($subVendor['profile_image']) echo $subVendor['profile_image'] ?>"
+                                               class="input-file" type="file">
+                                        <?php if ($subVendor['profile_image']) { ?>
+                                            <label for="profile_picture_delete">Delete Image</label>
+                                            <input name="image_delete" value="1" class="checkbox"
+                                                   id="profile_picture_delete" type="checkbox" style="width: 1%">
+                                        <?php } ?>
+
+
+                                    </div>
+
+
+                                </li>
+                                <!-- <li class="wide">
+                                    <label class="label admin__field-label" for="password" data-ui-id="widget-form-renderer-element-0-text-vendor-password-label"><span>* Change password</span></label>
+                                    <div class="input-box">
+                                        <input name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="Change Password" class="checkbox" type="checkbox">
+                                    </div>
+                                </li>
+                                <li class="wide" style="display: none;">
+                                    <label class="label admin__field-label" for="current_password" data-ui-id="widget-form-renderer-element-0-text-vendor-password-label"><span>* Current Password</span></label>
+                                    <div class="input-box">
+                                        <input name="current_password" id="current_password" title="Current Password" class="form-control input-text validate-cpassword" type="password">
+                                    </div>
+                                </li>
+                                <li class="wide" style="display: none;">
+                                    <label class="label admin__field-label" for="new_password" data-ui-id="widget-form-renderer-element-0-text-vendor-password-label"><span>* New Password</span></label>
+                                    <div class="input-box">
+                                        <input name="password" id="password" title="Current Password" class="form-control input-text validate-cpassword" type="password">
+                                    </div>
+                                </li>
+                                <li class="wide" style="display: none;">
+                                    <label class="label admin__field-label" for="confirmation" data-ui-id="widget-form-renderer-element-0-text-vendor-password-label"><span>* Confirm New Password</span></label>
+                                    <div class="input-box">
+                                        <input name="confirmation" id="confirmation" title="Confirm New Password" class="form-control input-text validate-cpassword" type="password">
+                                    </div>
+                                </li>
+                 -->
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding:0;">
+                    <p class="back-link col-md-6"><a
+                                href="<?php echo $this->getUrl('cssubaccount/customer/profile') ?>">
+                            <small>&laquo;</small><?php echo __('Back') ?></a></p>
+
+                    <p class="required col-md-6" style="text-align: right;"><?php echo __('* Required Fields') ?></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    /* require([
+        "jquery",
+        "mage/mage",
+        "mage/validation"
+    ], function($){
+            $('#edit_form').mage('validation', {
+
+           });
+    }); */
+    require(["jquery", "mage/mage"], function ($) {
+        $('#edit_form').mage('validation', {});
+    });
+
+    function setPasswordForm(arg) {
+        if (arg) {
+            jQuery('current_password').up(3).show();
+            jquery('current_password').addClassName('required-entry');
+            jquery('password').addClassName('required-entry');
+            jquery('confirmation').addClassName('required-entry');
+
+        } else {
+            $('current_password').up(3).hide();
+            $('current_password').removeClassName('required-entry');
+            $('password').removeClassName('required-entry');
+            $('confirmation').removeClassName('required-entry');
+        }
+    }
+
+    function profileEdit() {
+        require(["jquery"], function ($) {
+            var ret = $('#edit_form').valid();
+
+            if (ret == true) {
+                $('#edit_form').submit();
+            }
+
+        });
+
+    }
+
+</script>

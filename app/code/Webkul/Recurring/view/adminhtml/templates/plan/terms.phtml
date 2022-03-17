@@ -1,0 +1,116 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Recurring
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<script>
+    window.termsData  = <?= /* @noEscape */ \Zend_Json::encode($block->getTermsData()) ?>;
+    window.termConfig = <?= /* @noEscape */ \Zend_Json::encode($block->getTermsData()) ?>;
+</script>
+<div id="plans_tabs_terms_content" style="display: block;"
+     data-ui-id="adminhtml-plans-edit-tabs-0-tab-content-plan"
+     aria-labelledby="plans_tabs_terms"
+     class="ui-tabs-panel ui-widget-content ui-corner-bottom"
+     role="tabpanel" aria-expanded="true" aria-hidden="false">
+    <div class="entry-edit form-inline">
+        <fieldset class="fieldset admin__fieldset fieldset-wide" id="terms_base_fieldset">
+            <legend class="admin__legend legend">
+                <span><?= $block->escapeHtml(__('Terms Information')) ?></span>
+            </legend>
+            <div id="termlist-component" data-bind="scope:'termlist-content'" class="field">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                    <script type="text/x-magento-template" id="addfields-template">
+                    <tr class="wk-pricebody" >
+                        <td>
+                            <div class="control">                                
+                                <input class="input-text required-entry admin__control-text"
+                                       type="text" name="terms[<%= data.id %>][title]">
+                                <input class="input-text " type="hidden" name="terms[<%= data.id %>][id]">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control repeat-each">
+                                <input class="input-text repeat-txt required-entry validate-number
+                                              validate-zero-or-greater admin__control-text"
+                                       type="text" name="terms[<%= data.id %>][repeat]">
+                                <select class="input-text required-entry repeat-slt" 
+                                            type="text" 
+                                            name="terms[<%= data.id %>][time_span]">
+                                    <option value="1" >Weekly</option>
+                                    <option value="2" >Monthly</option>
+                                    <option value="3" >Yearly</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control">
+                                <select class="input-text required-entry" 
+                                            type="text" 
+                                            name="terms[<%= data.id %>][payment_before_days]">
+                                    <option value="1" >1</option>
+                                    <option value="2" >2</option>
+                                    <option value="3" >3</option>
+                                    <option value="4" >4</option>
+                                    <option value="5" >5</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control"> 
+                                <input class="input-text required-entry validate-number
+                                              validate-zero-or-greater repeat-txt"
+                                       type="text" name="terms[<%= data.id %>][price_per_term]">
+                                <select name="terms[<%= data.id %>][type]" class="input-text required-entry repeat-txt">
+                                    <option value="0">Fixed
+                                    </option>
+                                    <option value="1">Percent
+                                    </option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control">
+                                <input class="input-text required-entry "
+                                       type="text" name="terms[<%= data.id %>][no_of_term]">
+                                <span>set 0 for infinity</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control">
+                                <input class="input-text required-entry "
+                                       type="text" name="terms[<%= data.id %>][sort_order]">
+                            </div>
+                        </td>
+                        <td>
+                            <button class="button delete"  title="Delete" type="button" >
+                                <span>
+                                    <span>Delete</span>
+                                </span>
+                            </button>
+                        </td>        
+                    </tr>
+                    </script>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#termlist-component": {
+            "Magento_Ui/js/core/app": {
+            "components": {
+                    "termlist-content": {
+                        "component": "Webkul_Recurring/js/term-price",
+                        "template": "Webkul_Recurring/term-price"
+                    }
+                }
+            }
+        }
+    }
+</script>

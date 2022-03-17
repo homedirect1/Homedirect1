@@ -1,0 +1,155 @@
+<?php echo $this->getLayout()
+    ->createBlock("Knowband\Mobileappbuilder\Block\Adminhtml\Tab\SliderSettings")
+    ->toHtml();
+?>
+<div id="banner_popup"></div>
+<script>
+function editBannerSlider(url)
+{
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '<?php echo __("Edit Settings");?>',
+                buttons: [
+                    {
+                        text: '<?php echo __('Save'); ?>',
+                        class: 'button_submit_form_banner btn btn-success',
+                        id: 'save_banner',
+                        click: function () {
+                            validateBannerForm();
+                        }
+                    },
+                    {
+                        text: '<?php echo __('Close'); ?>',
+                        class: 'hidden_element btn btn-warning banner_popup_close',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }
+                ]
+            };
+            $.ajax({
+                type: "POST",
+                showLoader: true,
+                url: url,
+                data:
+                {
+                    form_key : window.FORM_KEY, method : 'edit'
+                },
+                success: function (output) {
+                    
+                    if(output == "0")
+                    {
+                        alert("<?php echo __("Something went wrong. Please try again.");?>");;
+                    }
+                    else
+                    {
+                        var popup = modal(options, $('#banner_popup'));
+                        $("#banner_popup").html(output).modal("openModal");
+                    }
+                }
+
+            });
+        }
+    );
+}
+var save_banner_ajax_url = '<?php echo $this->getUrl('*/*/bannerAjax'); ?>';
+</script>
+<script>
+    require(['jquery'], function(jQuery){
+    jQuery('#banner_popup').on('change', "#image_type", function(){
+        jQuery('#banner_popup .image_upload_sec').hide();
+        jQuery('#banner_popup .image_url_sec').hide();
+        if(this.value == 'url'){
+            jQuery('#banner_popup .image_url_sec').css('display', 'block');
+        }else if(this.value == 'image'){
+            jQuery('#banner_popup .image_upload_sec').show('slow');
+        }
+    });
+    jQuery("#redirect_activity").on('change', function() {
+        jQuery('#banner_popup .product_sec').hide('slow');
+        jQuery('#banner_popup .category_sec').hide('slow');
+        if(this.value == 'product'){
+            jQuery('#banner_popup .product_sec').show('slow');
+        }else if(this.value == 'category'){
+            jQuery('#banner_popup .category_sec').show('slow');
+        }
+    });
+    
+    
+    jQuery('#banner_popup').on('change', '#product_id', function(){
+        jQuery('#banner_popup #product_name').val(jQuery('#banner_popup #product_id option:selected').text());
+    });
+    jQuery('#banner_popup').on('change', '#category_id', function(){
+        jQuery('#banner_popup #category_name').val(jQuery('#banner_popup #category_id option:selected').text());
+    });
+    jQuery("#banner_popup .image_upload_sec #image_upload").on('change', function() {
+        readURL(this);
+    });
+    jQuery("#banner_popup").on('blur', '#image_url', function() {
+        check_url = velovalidation.checkUrl(jQuery('#banner_popup #image_url'));
+        if (check_url != true) {
+            is_error = true;
+            jQuery('#banner_popup #image_url').addClass('kb_error_field');
+            jQuery('#banner_popup #image_url').after('<span class="kb_error_message">' + check_url + '</span>');
+        }else
+        {
+                jQuery('#banner_popup .image_url_sec #url_image_preview').attr('src', jQuery(this).val());
+                jQuery('#banner_popup .image_url_sec #remove-button').show();
+        }
+    });
+    });
+    function readURL(input) {
+        require(['jquery'], function(jQuery){
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function(e) {
+                jQuery('#banner_popup #upload_image_preview').attr('src', e.target.result);
+
+                jQuery('#banner_popup #upload_image_preview').hide();
+                jQuery('#banner_popup #upload_image_preview').fadeIn(650);
+                jQuery('#banner_popup .image_upload_sec #remove-button').show();
+                jQuery('#banner_popup #is_uploaded').val('1');
+
+              }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        });
+    }
+
+    function removeImage(ele) {
+        require(['jquery'], function(jQuery){
+            if(confirm('<?php echo __("Are your sure?"); ?>')){
+                var default_image = '<?php echo $this->getViewFileUrl('Knowband_Mobileappbuilder::images/no_image.jpg'); ?>';
+
+
+                if(ele == 'image_url_sec'){
+                    jQuery('#banner_popup #image_url').val("");
+                    ele1 = 'url_image_preview';
+                }else{
+                    jQuery('#banner_popup #is_removed').val('1');
+                    jQuery('#banner_popup #is_uploaded').val('0');
+                    jQuery('#banner_popup #image_upload').val('');
+                    ele1 = 'upload_image_preview';
+                }
+                jQuery('#banner_popup .'+ele+' #'+ele1).attr('src', default_image);
+                jQuery('#banner_popup .'+ele+' #'+ele1).hide();
+                jQuery('#banner_popup .'+ele+' #'+ele1).fadeIn(650);
+                jQuery('#banner_popup .'+ele+' #remove-button').hide();
+            }
+        });
+    }
+</script>
+    

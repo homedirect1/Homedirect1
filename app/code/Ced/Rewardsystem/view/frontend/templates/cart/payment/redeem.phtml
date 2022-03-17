@@ -1,0 +1,91 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Rewardsystem
+ * @author   	CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<?php
+$point = $this->TotalPoint();
+$customerLogIn = $point['customerLogin'];
+$totalPoints = $point['actualtotalPoint'];
+$currusedPoints = $point['currusedPoints'];
+
+if ($customerLogIn) :
+    if ($totalPoints > 0) :
+?>
+
+        <div class="payment-option _collapsible opc-payment-additional rewardpoint block discount" data-mage-init='{"collapsible":{"openedState": "active", "active": true, "saveState": false}}'>
+            <div class="title" data-role="title">
+                <strong id="block-discount-heading-point" role="heading" aria-level="2" style="color: #006bb4;font-weight:400;font-size: 1.6rem"><?= /* @escapeNotVerified */ __('Apply Point for discount') ?></strong>
+            </div>
+            <div class="payment-option-content reward-point-content content" data-role="content" aria-labelledby="block-discount-heading-point">
+                <form class="form form-discount" id="discount-form" action="<?php echo $this->getUrl('rewardsystem/rewardpoint/updateSubtotal'); ?>" method="post" onsubmit="return validateRewardPoint()">
+                    <div class="block fieldset">
+                        <div class="block-content">
+                            <input type="hidden" name="defaultpoint" id="defaultpoint" value="<?= $totalPoints ?>" />
+                        </div>
+
+                        <div class="block-content field">
+                            <div class="control">
+                                <input type="text" name="enterpoint" class="input-text" id="enterpoint"
+                                       placeholder="<?= __('Available Points : ' . $totalPoints); ?>" value="<?php if ($currusedPoints) {
+                                                                                                                                                            echo $currusedPoints;
+                                                                                                                                                        } ?>" />
+                            </div>
+                            <span id="message"></span>
+                            <span id="price"></span>
+                        </div>
+                        <div class="actions-toolbar">
+                            <div class="primary">
+
+                                <button class="action action-apply" type="submit" id="applypoint" name="apply">
+                                    <span>
+                                        <?= __('Apply Point'); ?>
+                                    </span>
+                                </button>
+                                <button style="display:none" class="action action-remove" type="submit" id="removepoint" name="remove">
+                                    <span>
+                                        <?= __(' Remove Point'); ?>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            var defaultpoint = parseInt(document.getElementById('defaultpoint').value);
+            var enterpoint = document.getElementById('enterpoint').value;
+            if (enterpoint > 0) {
+                document.getElementById("removepoint").style.display = "block";
+            }
+
+            function validateRewardPoint() {
+                $valid = true;
+                var enterpoint = document.getElementById('enterpoint').value;
+
+                if (enterpoint > defaultpoint) {
+                    document.getElementById('message').innerHTML = 'Enter point must be less than or equal to Total point';
+                    return false;
+                }
+                return $valid;
+            }
+        </script>
+<?php
+    endif;
+endif;
+?>

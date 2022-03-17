@@ -1,0 +1,116 @@
+<?php
+
+$post = $this->getRequest()->getPost();
+$helper = $this->helper('Ced\CsReport\Helper\Data');
+?>
+<form action='<?php echo $block->getUrl("csreport/product/sales/", ["_use_rewrite" => true]) ?>' method="post"
+      id='filter_form'>
+    <div id="base_fieldset" class="fieldset ">
+        <div class="hor-scroll">
+
+            <?php
+            $from = $block->getRequest()->getParam('from');
+            $to = $block->getRequest()->getParam('to');
+            ?>
+
+            <div class="advance-report-form-filter">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="input-box">
+                        <div class="">
+                            <label class="label">
+                                <?php echo __('From'); ?>
+                            </label>
+                            <input type="text" onkeydown="return false" class="text-box validate-date calendarInput" title="From"
+                                   value="<?= $from ?>" id="from" name="from">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="input-box">
+                        <div class="">
+                            <label class="label">
+                                <?php echo __('To'); ?>
+                            </label>
+                            <input type="hidden" name="form_key" value="<?php echo $helper->getKey() ?>"/>
+                            <input type="text" onkeydown="return false" class="text-box validate-date calendarInput" title="To"
+                                   value="<?php echo $to; ?>" id="to" name="to">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="content-header">
+    <table cellspacing="0" width='100%'>
+        <tr>
+            <td class="form-buttons" style='float:right'><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+
+
+<div>
+    <?php echo $this->getGridHtml() ?>
+</div>
+
+
+<script type="text/javascript">
+    function filter() {
+        var action = '<?php echo $this->getFilterActionUrl(); ?>';
+        var from = document.getElementById('from').value;
+        var to = document.getElementById('to').value;
+        window.location.href = action + 'from/' + from + '/to/' + to;
+    }
+
+    function exportCsv() {
+        var action = '<?php echo $this->getExportCsvAction(); ?>';
+        var from = '<?= $block->getRequest()->getParam("from")?>';
+        var to = '<?= $block->getRequest()->getParam("to")?>';
+        window.location.href = action + 'from/' + from + '/to/' + to + '/vendor_id/' + '<?= $helper->getVendorId() ?>';
+    }
+</script>
+
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+        $("#to").calendar({
+            buttonText: "<?php echo __('Select Date') ?>",
+            dateFormat: 'yy-mm-dd',
+        });
+    });
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+        $("#from").calendar({
+            buttonText: "<?php echo __('Select Date') ?>",
+            dateFormat: 'yy-mm-dd',
+        });
+    });
+</script>
+<style>
+    .form-list {
+        width: 100%;
+    }
+
+    .text-box {
+        width: 220px;
+        height: 37px;
+    }
+
+    #vendor-name {
+        height: 37px;
+    }
+
+    .select {
+        width: 220px;
+        height: 37px;
+    }
+
+    .label {
+        color: black;
+    }
+</style>

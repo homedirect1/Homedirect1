@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_Rewardsystem
+ * @author   	CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+$helper = $this->helper('Ced\Rewardsystem\Helper\Data');
+$rewardEnable = $helper->getStoreConfig('reward/setting/enable', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+if ($rewardEnable) {
+    $reviewEnable = $helper->getStoreConfig('reward/review/review_enable', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    $reviewPoints = $helper->getStoreConfig('reward/review/review_points', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    if ($reviewEnable) { ?>
+    <div class="review">
+        <span><?= /* @noEscape */ __('Earn ' . $reviewPoints . ' points on writing review for this product.') ?></span>
+    </div>
+<?php
+    }
+}
+?>

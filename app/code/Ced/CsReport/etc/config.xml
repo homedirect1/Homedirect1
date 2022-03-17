@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+	  <ced_csmarketplace>
+	      <csreport>
+	          <activation>1</activation>
+	      </csreport>
+	    </ced_csmarketplace>
+	   <vendor_acl>
+	       	<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all> 
+				<vendor>
+					<title>Advance Report</title>
+					<path>#</path>
+					<sort_order>1</sort_order>
+					<children>
+						<vendor_reports_addon>
+							<title>Dashboard and Profile</title>
+							<sort_order>10</sort_order>
+							<path>csmarketplace/vendor/index</path>
+							<children>
+								<out_of_stock>
+									<title>Out Stock Products</title>
+									<sort_order>10</sort_order>
+									<path>csreport/product/outStock</path>
+								</out_of_stock>
+								<sold_product>
+									<title>Sold Products</title>
+									<sort_order>10</sort_order>
+									<path>csreport/product/sold</path>
+								</sold_product>
+								<sales>
+									<title>Sales</title>
+									<sort_order>10</sort_order>
+									<path>csreport/product/sales</path>
+								</sales>
+								<payment>
+									<title>Return</title>
+									<sort_order>10</sort_order>
+									<path>csreport/product/payment</path>
+								</payment>
+							</children>
+						</vendor_reports_addon>
+					</children>
+				</vendor>
+			</resources>
+		</vendor_acl>
+	</default>
+</config>

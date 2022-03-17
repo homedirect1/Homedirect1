@@ -1,0 +1,319 @@
+<!--  * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_CsStorePickup
+ * @author    CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */  -->
+<?php
+$id = $this->getRequest()->getParam('pickup_id');
+$stores = $block->getStores($id);
+$isActive = isset($stores['is_active']) ? $stores['is_active'] : null;
+$countries = $block->getCountryOptions();
+?>
+
+
+<fieldset class="fieldset admin__fieldset custom-store-info" id="page_storepickup_data">
+    <legend class="admin__legend legend">
+        <span><?php echo __('Store Pickup Information')?></span>
+    </legend>
+    <div class="messages"></div>
+    <input id="page_pickup_id" name="pickup_id"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-hidden-pickup-id"
+        value="<?= isset($stores['pickup_id']) ? $stores['pickup_id'] : null;?>" type="hidden">
+    <div class="admin__field field field-store_name  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-store-name">
+        <label class="label admin__field-label" for="page_store_name"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-name-label">
+        <span><?php echo __('Store Name')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <input id="page_store_name" name="store_name"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-name"
+                value="<?= isset($stores['store_name']) ? $stores['store_name'] : null;?>" title="Store Name"
+                class="input-text admin__control-text required-entry _required"
+                aria-required="true" type="text">
+        </div>
+    </div>
+    <div
+        class="admin__field field field-store_manager_name  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-store-manager-name">
+        <label class="label admin__field-label" for="page_store_manager_name"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-manager-name-label">
+        <span><?php echo __('Store Manager Name')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <input id="page_store_manager_name" name="store_manager_name"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-manager-name"
+                value="<?= isset($stores['store_manager_name']) ? $stores['store_manager_name'] : null;?>"
+                title="Store Manager Name"
+                class=" input-text admin__control-text required-entry _required"
+                aria-required="true" type="text">
+        </div>
+    </div>
+    <div
+        class="admin__field field field-store_manager_email  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-store-manager-email">
+        <label class="label admin__field-label" for="page_store_manager_email"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-manager-email-label">
+        <span><?php echo __('Store Manager Email')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <input id="page_store_manager_email" name="store_manager_email"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-manager-email"
+                value="<?= isset($stores['store_manager_email']) ? $stores['store_manager_email'] : null;?>"
+                title="Store Manager Email"
+                class="validate-email input-text admin__control-text required-entry _required"
+                aria-required="true" type="text">
+        </div>
+    </div>
+    <div class="admin__field field field-country  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-country">
+        <label class="label admin__field-label" for="page_country"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-select-country-label">
+        <span><?php echo __('Country')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="page_country" name="store_country" title="country"
+                class="validate-select required-entry _required select admin__control-select"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-select-country"
+                aria-required="true">
+                <?php foreach ($countries as $key => $value): ?>
+                <option value="<?php echo $key ?>"
+                    <?php if ($key==(isset($stores['store_country']) ? $stores['store_country'] : null)) {
+                        echo 'selected';
+                        } ?>><?php echo $value;?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+    </div>
+    <div class="admin__field field field-is_active  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-is-active">
+        <label class="label admin__field-label" for="page_is_active"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-select-is-active-label">
+        <span><?php echo __('Status')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="page_is_active" name="is_active" title="Status"
+                class="validate-select required-entry _required select admin__control-select"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-select-is-active"
+                aria-required="true">
+                <option value="0"
+                    <?php if ($isActive=="0") {
+                        echo 'selected';
+                        } ?>>Disable</option>
+                <option value="1"
+                    <?php if ($isActive=="1") {
+                        echo 'selected';
+                        } ?>>Enable</option>
+            </select>
+        </div>
+    </div>
+    <div class="admin__field field field-store_address  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-store-address">
+        <label class="label admin__field-label" for="page_store_address"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-address-label"><span>Store
+        <?php echo __('Address')?></span></label>
+        <div class="admin__field-control control">
+            <input id="page_store_address" name="store_address"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-address"
+                value="<?= isset($stores['store_address']) ? $stores['store_address'] : null;?>" title="Store Address"
+                class="input-text admin__control-text required-entry _required"
+                aria-required="true" type="text">
+        </div>
+    </div>
+    <div class="admin__field field field-latitude  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-latitude">
+        <label class="label admin__field-label" for="page_latitude"><span>
+        <?php echo __('Store Latitude')?></span></label>
+        <div class="admin__field-control control">
+            <input id="page_latitude" name="latitude"
+                value="<?= isset($stores['latitude']) ? $stores['latitude'] : null;?>" title="Store Latitude"
+                class=" input-text admin__control-text"
+                aria-required="true" type="text" readonly>
+        </div>
+    </div>
+    <div class="admin__field field field-longitude  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-longitude">
+        <label class="label admin__field-label" for="page_longitude"><span>
+        <?php echo __('Store Longitude')?></span></label>
+        <div class="admin__field-control control">
+            <input id="page_longitude" name="longitude"
+                value="<?= isset($stores['longitude']) ? $stores['longitude'] : null?>" title="Store Longitude"
+                class=" input-text admin__control-text"
+                aria-required="true" type="text" readonly>
+        </div>
+    </div>
+    <div class="admin__field field field-store_city  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-store-city">
+        <label class="label admin__field-label" for="page_store_city"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-city-label">
+        <span><?php echo __('Store City')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <input id="page_store_city" name="store_city"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-city"
+                value="<?= isset($stores['store_city']) ? $stores['store_city'] : null;?>" title="Store City"
+                class="input-text admin__control-text required-entry _required"
+                aria-required="true" type="text">
+        </div>
+    </div>
+    <div class="admin__field field field-store_state "
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-store-state">
+        <label class="label admin__field-label" for="page_store_state"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-state-label">
+        <span><?php echo __('Store State')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <input id="page_store_state" name="store_state"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-state"
+                value="<?= isset($stores['store_state']) ? $stores['store_state'] : null;?>" title="Store State"
+                class="input-text admin__control-text" type="text">
+        </div>
+    </div>
+    <div class="admin__field field field-store_zcode  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-store-zcode">
+        <label class="label admin__field-label" for="page_store_zcode"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-zcode-label">
+        <span><?php echo __('Postal Code')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <input id="page_store_zcode" name="store_zcode"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-zcode"
+                value="<?= isset($stores['store_zcode']) ? $stores['store_zcode'] : null;?>" title="Postal Code"
+                class="validate-number input-text admin__control-text required-entry _required"
+                aria-required="true" type="text">
+        </div>
+    </div>
+    <div class="admin__field field field-store_phone  required _required"
+        data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-form-field-store-phone">
+        <label class="label admin__field-label" for="page_store_phone"
+            data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-phone-label">
+        <span><?php echo __('Contact Number')?></span>
+        </label>
+        <div class="admin__field-control control">
+            <input id="page_store_phone" name="store_phone"
+                data-ui-id="adminhtml-stores-edit-tab-main-0-fieldset-element-text-store-phone"
+                value="<?= isset($stores['store_phone']) ? $stores['store_phone'] : null;?>" title="Contact Number"
+                class="validate-number input-text admin__control-text required-entry _required"
+                aria-required="true" type="text">
+        </div>
+    </div>
+</fieldset>
+
+
+
+<style type="text/css">
+    label {
+        width: 21% !important;
+    }
+</style>
+<script
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&key=<?= $block->getMapKey(); ?>"
+    type="text/javascript"></script>
+<script>
+    require([
+        'jquery',
+        'mage/mage'
+    ], function($){
+        $('#page_store_address').after($('<div class="maplocation" id ="loactaiononmap"><span><?php echo __('If Not found location')?></span><a id="location" onclick="showMap()" href="#"> Click Here </a><span><?php echo __('to get it on map')?></span></div>'))
+    });
+</script>
+<script type="text/javascript">
+    function initialize() {
+        var input = document.getElementById('page_store_address');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            document.getElementById('page_latitude').value = place.geometry.location.lat();
+            document.getElementById('page_longitude').value = place.geometry.location.lng();
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    function initializeMap() {
+        var mapOptions = {
+            center: new google.maps.LatLng(18.9300, 72.8200),
+            zoom: 3,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var infoWindow = new google.maps.InfoWindow();
+        var latlngbounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+        map.setOptions({ minZoom: 2 });
+        google.maps.event.addListener(map, 'click', function (e) {
+            document.getElementById('page_latitude').value = e.latLng.lat();
+            document.getElementById('page_longitude').value = e.latLng.lng();
+            jQuery('.search_form').hide();
+            jQuery('.search_form_overlay').hide();
+        });
+    }
+    function showMap(){
+        jQuery(".search_form").show();
+        initializeMap();
+        jQuery('.search_form_overlay').show();
+    }
+    function closeSearch(){
+        jQuery(".search_form").hide();
+        jQuery('.search_form_overlay').hide();
+    }
+</script>
+<div class="search_form" style="display: none;">
+    <div id="dvMap" style="width: 1000px; height: 500px;"></div>
+    <span class="close_search" onclick="closeSearch()"
+          style="cursor: pointer;">X</span>
+</div>
+<div class="search_form_overlay" style="display: none"></div>
+<style>
+    .search_form_overlay {
+        background-color: #000;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 9;
+    }
+
+    .search_form {
+        clear: both;
+        left: 16%;
+        position: fixed;
+        top: 9%;
+        width: 65%;
+        z-index: 99;
+    }
+
+    #dvMap {
+        background: #fff none repeat scroll 0 0;
+        padding: 10px 15px;
+    }
+
+    .close_search {
+        font-weight: bold;
+        position: absolute;
+        right: -118px;
+        top: 4px;
+    }
+
+    .close_search {
+        background: #000;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        text-align: center;
+        display: inline-block;
+        font-size: 11px;
+        line-height: 30px;
+    }
+</style>

@@ -1,0 +1,71 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsHyperlocal
+ * @author    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+
+<?php
+
+$savedLocationFromSession = $this->helper('Ced\CsHyperlocal\Helper\Data')->getShippingLocationFromSession();
+$filterType = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::FILTER_TYPE);
+$popupTitle = $this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::POPUP_TITLE);
+
+if ($this->helper('Ced\CsMarketplace\Helper\Data')->getStoreConfig(\Ced\CsHyperlocal\Helper\Data::MODULE_ENABLE)): ?>
+    <li id="cedhyperlocalheaderdata" class="nav item location-nav">
+        <div class="location-wrap ced-cshyperlocal-edit-location">
+        <span class="location-icon">
+            <div class="open-location-popup">
+                <?php 
+                    if ($filterType == 'zipcode')
+                    {
+                        if (isset($savedLocationFromSession['filterZipcode']))
+                        {
+                            $location = $this->helper('Ced\CsHyperlocal\Helper\Data')->getLimitedText($savedLocationFromSession['filterZipcode']);
+                        } else {
+                            $location = __('Enter Pincode');
+                        }
+                    } else {
+                        if (isset($savedLocationFromSession['location']))
+                        {
+                            $location = $this->helper('Ced\CsHyperlocal\Helper\Data')->getLimitedText($savedLocationFromSession['location']);
+                        } else {
+                            $location = __('choose location');
+                        }
+                    }
+
+                    echo $location;
+
+                ?>
+            </div>
+        </span>
+        </div>
+    </li>
+  
+    <script>
+        require(
+            [
+                'jquery'
+            ],
+            function ($
+                      ) {
+
+                $('.location-nav').on('click','.open-location-popup',function () {
+                    $(".location-popup-wrapper").addClass('active');
+                });
+            }
+        );
+    </script>
+    <?php endif; ?>

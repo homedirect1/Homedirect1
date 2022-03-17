@@ -1,0 +1,129 @@
+<form id="mobileappbuilder_view" enctype="multipart/form-data" method="POST" action="">
+    <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+</form>
+<script type="text/javascript">
+    require(['jquery', 'jquery/ui', 
+        'jquery/jquery.cookie', "mage/backend/tabs", 
+        "Knowband_Mobileappbuilder/js/velovalidation", 
+        "Knowband_Mobileappbuilder/js/customScript"], function (jQuery) {
+        jQuery(document).ready(function () {
+            jQuery("#save-mobileappbuilder").click(function () {
+                var mobileappbuilder_tab = "";
+                mobileappbuilder_tab = jQuery.cookie('mobileappbuilder-admin-tab');
+                jQuery.cookie('mobileappbuilder-admin-tab', "");
+                var active_tab = "general";
+                if (mobileappbuilder_tab == "general-settings") {
+                    active_tab = "general";
+                }
+                if (mobileappbuilder_tab == "menu-settings") {
+                    active_tab = "menu";
+                }
+                if (mobileappbuilder_tab == "text-settings") {
+                    active_tab = "text";
+                }
+                if (mobileappbuilder_tab == "email-settings") {
+                    active_tab = "email";
+                }
+                if (mobileappbuilder_tab == "slice-settings") {
+                    active_tab = "slice";
+                }
+                if (mobileappbuilder_tab == "email-marketing") {
+                    active_tab = "marketing";
+                }
+                if (mobileappbuilder_tab == "statistics-settings") {
+                    active_tab = "stats";
+                }
+                if (mobileappbuilder_tab == "look-and-feel") {
+                    active_tab = "look-and-feel";
+                }
+                jQuery('#mobileappbuilder_view_tabs').tabs({
+                    active: 'mobileappbuilder_view_tabs_mobileappbuilder_' + active_tab,
+                    destination: '#mobileappbuilder_view',
+                    shadowTabs: [],
+                    tabsBlockPrefix: 'mobileappbuilder_view_tabs',
+                    tabIdArgument: 'active_tab'
+                });
+                jQuery("#mobileappbuilder_view .fieldset-wrapper").each(function (i, ele) {
+                    jQuery(ele).click(function () {
+                        jQuery.cookie("mobileappbuilder-admin-tab", jQuery(this).prop("id"));
+                    });
+                });
+                if (validateConfigurationsForm()) {
+                    jQuery("#mobileappbuilder_view").submit();
+                }
+                
+            });
+            //error messages for velovalidation.js
+            velovalidation.setErrorLanguage({
+                empty_field: "<?php echo __("Field cannot be empty."); ?>",
+                select_field: "<?php echo __("Please select an option from dropdown."); ?>",
+                number_field: "<?php echo __("You can enter only numbers."); ?>",
+                positive_number: "<?php echo __("Number should be greater than 0."); ?>",
+                maxchar_field: "<?php echo __("Field cannot be greater than {#} characters."); ?>",
+                minchar_field: "<?php echo __("Field cannot be less than {#} character(s)."); ?>",
+                empty_email: "<?php echo __("Please enter Email."); ?>",
+                validate_email: "<?php echo __("Please enter a valid Email."); ?>",
+                invalid_date: "<?php echo __("Invalid date format."); ?>",
+                validate_range: "<?php echo __("Number is not in the valid range. It should be between {1} and {100}"); ?>",
+                valid_amount: "<?php echo __("Field should be numeric."); ?>",
+                valid_decimal: "<?php echo __("Field can have only upto two decimal values."); ?>",
+                max_email: "<?php echo __("Email cannot be greater than {#} characters."); ?>",
+                specialchar_zip: "<?php echo __("Zip should not have special characters."); ?>",
+                valid_percentage: "<?php echo __("Percentage should be in number."); ?>",
+                between_percentage: "<?php echo __("Percentage should be between 0 and 100."); ?>",
+                maxchar_size: "<?php echo __("Size cannot be greater than {#} characters."); ?>",
+                maxchar_color: "<?php echo __("Color could not be greater than {#} characters."); ?>",
+                invalid_color: "<?php echo __("Color is not valid."); ?>",
+                specialchar: "<?php echo __("Special characters are not allowed."); ?>",
+                script: "<?php echo __("Script tags are not allowed."); ?>",
+                style: "<?php echo __("Style tags are not allowed."); ?>",
+                iframe: "<?php echo __("Iframe tags are not allowed."); ?>",
+                not_image: "<?php echo __("Uploaded file is not an image."); ?>",
+                image_size: "<?php echo __("Uploaded file size must be less than #."); ?>",
+                html_tags: "<?php echo __("Field should not contain HTML tags."); ?>",
+                number_pos: "<?php echo __("You can enter only positive numbers."); ?>",
+            });
+        });
+        /*
+        * changes by rishabh jain 
+        * Code moved from custom_script.js to fix the js error jquery not defined
+         */
+        jQuery(document).scroll(function(){
+            if(jQuery(this).scrollTop() >= 1350){
+                jQuery('#general_settings_mobile_preview').addClass('itsBottom');
+            }
+            else{
+                jQuery('#general_settings_mobile_preview').removeClass('itsBottom');
+            }
+        });
+    });
+    multiple_select_message = '<?php __('Please select atleast one country') ?>';
+    enter_text_color_check = '<?php __('Please enter a valid color code') ?>';
+    current_date_time = "<?php echo date('Y-m-d H:i:s', time()); ?>";
+    var datetime_greterthan_current_time = "<?php echo __('Date & Time should be greater than current date time.'); ?>";
+    var selected_country_error = "<?php echo __('Please select atleast one country'); ?>";
+    var empty_field = "<?php echo __('Field cannot be empty'); ?>";
+    var c_g_label = "<?php echo __('Total Coupons Generated'); ?>";
+    var c_un_label = "<?php echo __('Total Coupons Unused'); ?>";
+    var c_u_label = "<?php echo __('Total Coupons Used'); ?>";
+    var date_range_error = "<?php echo __('`Active Date` cannot be greater than `Expire Date`'); ?>";
+    var stats_date_range_error = "<?php echo __('`From` Date cannot be greater than `To` Date'); ?>";
+    var gravity_range_error = "<?php echo __('The sum of Gravity is not in the valid range. It should be betwen 1 and 100. The total is: '); ?>";
+    var no_list_mailchimp = "<?php echo __('No list exists for this API key.'); ?>";
+    var number_times = "<?php echo __('No. of times'); ?>";
+    var text_date = "<?php echo __('Date'); ?>";
+    var image_empty = "<?php echo __("Please upload an image file."); ?>";
+    var minmaxqty_err = "<?php echo __("To percentage should be greater than From percentage."); ?>";
+    var zero_error = "<?php echo __("Value must be greater than 0"); ?>";
+    var extensionString = "<?php echo __('Allowed extension is ') ?>";
+    var correct_format = "<?php echo __('Please provide correct format. Maximum allowed file size is ') ?>";
+    var fb_vailadte_success = "<?php echo __('Validated successfully') ?>";
+    var fb_vailadte_error = "<?php echo __('Invalid Api Key') ?>";
+
+</script>
+<style>
+    .page-header.row{
+        margin-right: 0;
+        margin-left: 0;
+    }
+</style>

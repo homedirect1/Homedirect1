@@ -1,0 +1,114 @@
+<?php
+
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_DeliveryDate
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var $block \Magento\Sales\Block\Order\Info */ ?>
+<?php $_order = $block->getOrder() ?>
+<div class="block block-order-details-view">
+    <div class="block-title">
+        <strong><?php /* @escapeNotVerified */ echo __('Order Information') ?></strong>
+    </div>
+    <div class="block-content">
+        <?php if (!$_order->getIsVirtual()): ?>
+            <div class="box box-order-shipping-address">
+                <strong class="box-title"><span><?php /* @escapeNotVerified */ echo __('Shipping Address') ?></span></strong>
+                <div class="box-content">
+                    <address><?php /* @escapeNotVerified */ echo $block->getFormattedAddress($_order->getShippingAddress()); ?></address>
+                </div>
+            </div>
+            <?php
+            $deliveryComment = $_order->getData('cedDeliveryComment');
+            $deliveryTimestamp = $_order->getData('cedTimestamp');
+            if ($_order->getData('cedDeliveryDate') != '0000-00-00 00:00:00'){
+                $deliveryDate = $block->formatDate(
+                    $_order->getData('cedDeliveryDate'),
+                    \IntlDateFormatter::MEDIUM,
+                    true
+                );
+            }
+            ?>
+            <?php if ($_order->getData('cedDeliveryDate')): ?>
+                <?php if(isset($deliveryDate) || isset($deliveryTimestamp) ||(isset($deliveryComment)  && $deliveryComment != '') ):?>
+                    <div class="box box-order-shipping-method">
+                        <strong class="box-title">
+                            <span><?php /* @escapeNotVerified */ echo __('Delivery Date Method') ?></span>
+                        </strong>
+
+                        <div class="box-content">
+
+                            <div class="admin__page-section-item-content">
+                                <?php if(isset($deliveryDate)):?>
+                                    <p>
+                                        <strong><?php echo(__('Date : ')); ?></strong>
+                                        <span><?php echo(__($deliveryDate)); ?></span>
+                                    </p>
+                                <?php endif; ?>
+                                <?php if(isset($deliveryTimestamp)):?>
+                                    <p>
+                                        <strong><?php echo(__('Timestamp : ')); ?></strong>
+                                        <span><?php echo(__($deliveryTimestamp)); ?></span>
+                                    </p>
+                                <?php endif; ?>
+                                <?php if(isset($deliveryComment)  && $deliveryComment != ''):?>
+                                    <p>
+                                        <strong><?php echo(__('Comment : ')); ?></strong>
+                                        <span><?php echo(__($deliveryComment)); ?></span>
+                                    </p>
+                                <?php endif; ?>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endif;?>
+            <div class="box box-order-shipping-method">
+                <strong class="box-title">
+                    <span><?php /* @escapeNotVerified */ echo __('Shipping Method') ?></span>
+                </strong>
+                <div class="box-content">
+                    <?php if ($_order->getShippingDescription()): ?>
+                        <?php echo $block->escapeHtml($_order->getShippingDescription()) ?>
+                    <?php else: ?>
+                        <?php /* @escapeNotVerified */ echo __('No shipping information available'); ?>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <div class="box box-order-billing-address">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Billing Address') ?></span>
+            </strong>
+            <div class="box-content">
+                <address><?php /* @escapeNotVerified */ echo $block->getFormattedAddress($_order->getBillingAddress()); ?></address>
+            </div>
+        </div>
+        <div class="box box-order-billing-method">
+            <strong class="box-title">
+                <span><?php /* @escapeNotVerified */ echo __('Payment Method') ?></span>
+            </strong>
+            <div class="box-content">
+                <?php echo $block->getPaymentInfoHtml() ?>
+            </div>
+        </div>
+    </div>
+</div>

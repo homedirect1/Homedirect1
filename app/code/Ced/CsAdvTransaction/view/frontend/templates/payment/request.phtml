@@ -1,0 +1,86 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsAdvTransaction
+ * @author     CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (https://cedcommerce.com/)
+ * @license      https://cedcommerce.com/license-agreement.txt
+ */
+?>
+<?php
+$vid = $this->customerSession->getVendorId();
+$currencyCode = $this->storeManager->getStore(null)->getBaseCurrencyCode();
+$pendingAmount = $this->priceCurrency->format($block->getPendingPayAmount(), false, 2, null, $currencyCode);
+
+if ($block->getPendingPayAmount() > 0) {
+    ?>
+    <button class="pay_request" id="pay_requests"><?php echo __("Request For Payment") ?></button>
+    <div id="submitmsg">
+
+    </div>
+    <style>
+        .pay_request {
+            background-color: rgb(0, 150, 136);
+            color: rgb(255, 255, 255);
+            margin-left: 15px;
+        }
+    </style>
+    <script>
+        require(["jquery"], function ($) {
+            $("#pay_requests").click(function () {
+                jQuery('#msg').remove();
+                var vid = "<?php echo $vid; ?>";
+                var baseUrl = "<?php echo $this->getUrl('csadvtransaction/pay/sendrequest');?>";
+                jQuery.ajax({
+                    url: baseUrl,
+                    type: "POST",
+                    showLoader: true,
+                    async: false,
+                    data: {
+                        vid: vid
+                    },
+                    dataType: 'html',
+                    success: function (datas) {
+                        if (datas == 1) {
+                            var data = "Request Sent";
+                            jQuery('#submitmsg').after('<ul id="msg" class="messages"><li class="success-msg"><ul><li><span>' + data + '</span></li></ul></li></ul>');
+                            $(".requestedpay").text("<?php echo $pendingAmount ?>");
+                        } else {
+                            var data = "Something went Wrong";
+                            jQuery('#submitmsg').after('<ul id="msg" class="messages"><li class="error-msg"><ul><li><span>' + data + '</span></li></ul></li></ul>');
+                        }
+
+
+                    },
+                    error: function (request, error) {
+                        jQuery('#submitmsg').after('<ul id="msg" class="messages"><li class="error-msg"><ul><li><span>' + data + '</span></li></ul></li></ul>');
+                    }
+                });
+
+            });
+        });
+    </script>
+<?php } else {
+    ?>
+    <div id="submitmsg">
+    </div>
+    <button class="pay_request" id="pay_requests"><?php echo __("Request For Payment") ?></button>
+    <style>
+        .pay_request {
+
+            cursor: auto;
+            margin-left: 15px;
+            background: #dddddd;
+        }
+    </style>
+    <?php
+} ?>

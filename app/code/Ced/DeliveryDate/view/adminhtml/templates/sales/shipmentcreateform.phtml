@@ -1,0 +1,116 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<form id="edit_form" method="post" action="<?php /* @escapeNotVerified */ echo $block->getSaveUrl() ?>">
+    <?php echo $block->getBlockHtml('formkey')?>
+    <?php  $_order = $block->getShipment()->getOrder() ?>
+    <?php echo $block->getChildHtml('order_info') ?>
+    <div class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?php /* @escapeNotVerified */ echo __('Payment &amp; Shipping Method') ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item order-payment-method">
+                <?php /* Billing Address */ ?>
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php /* @escapeNotVerified */ echo __('Payment Information') ?></span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <div><?php echo $block->getPaymentHtml() ?></div>
+                    <div class="order-payment-currency"><?php /* @escapeNotVerified */ echo __('The order was placed using %1.', $_order->getOrderCurrencyCode()) ?></div>
+                </div>
+
+
+                <?php /* Delivery Date Method */
+                if ($this->helper('Ced\DeliveryDate\Helper\ConfigData')->ddShowOn('order')):
+                    ?>
+                    <div class="admin__page-section-item order-shipping-method">
+                        <!--    <hr>-->
+                        <div class="admin__page-section-item-title">
+                            <!--            <strong class="title">--><?php ///* @escapeNotVerified */ echo __('Delivery Date Information') ?><!--</strong>-->
+                        </div>
+                        <?php
+                        $deliveryComment = $_order->getData('cedDeliveryComment');
+                        $deliveryTimestamp = $_order->getData('cedTimestamp');
+                        if ($_order->getData('cedDeliveryDate') != '0000-00-00 00:00:00'){
+                            $deliveryDate = $block->formatDate(
+                                $_order->getData('cedDeliveryDate'),
+                                \IntlDateFormatter::MEDIUM,
+                                true
+                            );
+                        }
+                        ?>
+                        <div class="admin__page-section-item-content">
+
+                            <?php if(isset($deliveryDate) ):?>
+                                <p>
+                                    <strong><?php echo(__('Delivery Date : ')); ?></strong>
+                                    <span><?php echo(__($deliveryDate)); ?></span>
+                                </p>
+                            <?php endif; ?>
+                            <?php if(isset($deliveryTimestamp)):?>
+                                <p>
+                                    <strong><?php echo(__('Delivery Timestamp : ')); ?></strong>
+                                    <span><?php echo(__($deliveryTimestamp)); ?></span>
+                                </p>
+                            <?php endif; ?>
+                            <?php if(isset($deliveryComment)  && $deliveryComment != ''):?>
+                                <p>
+                                    <strong><?php echo(__('Delivery Comment : ')); ?></strong>
+                                    <span><?php echo(__($deliveryComment)); ?></span>
+                                </p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
+
+            <div class="admin__page-section-item order-shipping-address">
+                <?php /* Shipping Address */ ?>
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php /* @escapeNotVerified */ echo __('Shipping Information') ?></span>
+                </div>
+                <div class="admin__page-section-item-content shipping-description-wrapper">
+                    <div class="shipping-description-title"><?php echo $block->escapeHtml($_order->getShippingDescription()) ?></div>
+                    <div class="shipping-description-content">
+                        <?php /* @escapeNotVerified */ echo __('Total Shipping Charges'); ?>:
+
+                        <?php if ($this->helper('Magento\Tax\Helper\Data')->displayShippingPriceIncludingTax()): ?>
+                            <?php $_excl = $block->displayShippingPriceInclTax($_order); ?>
+                        <?php else: ?>
+                            <?php $_excl = $block->displayPriceAttribute('shipping_amount', false, ' '); ?>
+                        <?php endif; ?>
+                        <?php $_incl = $block->displayShippingPriceInclTax($_order); ?>
+                        <?php /* @escapeNotVerified */ echo $_excl; ?>
+                        <?php if ($this->helper('Magento\Tax\Helper\Data')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                        (<?php /* @escapeNotVerified */ echo __('Incl. Tax'); ?> <?php /* @escapeNotVerified */ echo $_incl; ?>)
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div><?php echo $block->getChildHtml('shipment_tracking') ?></div>
+            </div>
+        </div>
+    </div>
+    <div id="ship_items_container">
+        <?php echo $block->getItemsHtml() ?>
+    </div>
+</form>
+<script>
+require([
+    "jquery",
+    "mage/mage",
+    "prototype"
+], function(jQuery){
+    jQuery('#edit_form').mage('form').mage('validation');
+
+});
+</script>
+<?php echo $block->getChildHtml('shipment_packaging');

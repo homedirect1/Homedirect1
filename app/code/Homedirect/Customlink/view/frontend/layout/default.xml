@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="//www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="header.links">
+            <block class="Homedirect\Customlink\Block\Link" name="some_link" >
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">About Us</argument>
+                    <argument name="path" xsi:type="string">about-us</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <!--<referenceBlock name="header.links">
+            <block class="Homedirect\Customlink\Block\Link" name="colaborate" >
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Collaborate</argument>
+                    <argument name="path" xsi:type="string">gnanashale</argument>
+                </arguments>
+        </block>
+        </referenceBlock>-->
+        <referenceBlock name="catalog.compare.link" remove="true" />
+        <referenceBlock name="catalogsearch.product.addto.compare" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="category.product.addto.compare" remove="true"/>
+        <referenceBlock name="crosssell.product.addto.compare" remove="true" />
+        <referenceBlock name="related.product.addto.compare" remove="true" />
+        <referenceBlock name="upsell.product.addto.compare" remove="true" />
+        <referenceBlock name="view.addto.compare" remove="true" />
+        
+    </body>
+</page>

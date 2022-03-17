@@ -1,0 +1,267 @@
+<?php $settings = $this->getSettings(); ?>
+<div class="fieldset-wrapper" id="notification-settings">
+    <h1 class="mobileappbuilder-h1"><?php echo __("Push Notification Settings")?></h1>
+    <div class="admin__fieldset-wrapper-content">
+        <fieldset class="admin__fieldset">
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Firebase Server Setting")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="firebase_server_key">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Server Key")?>
+                        <div class="vss_info">
+                            <?php echo __("Enter firebase server key")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["push_notification_settings"]["firebase_server_key"])?$settings["push_notification_settings"]["firebase_server_key"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[push_notification_settings][firebase_server_key]" id="firebase_server_key">                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("New Order Settings")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="order_create_enable">
+                    <span><?php echo __("Enable")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable new order push notification")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="order_create_enable" name="vss_mobileappbuilder[push_notification_settings][order_create_enable]" value="1" <?php echo isset($settings["push_notification_settings"]["order_create_enable"])?$settings["push_notification_settings"]["order_create_enable"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="order_create_enable">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field order_create">
+                <label class="admin__field-label" for="order_create_title">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Title")?>
+                        <div class="vss_info">
+                            <?php echo __("Title for new order push notification")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["push_notification_settings"]["order_create_title"])?$settings["push_notification_settings"]["order_create_title"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[push_notification_settings][order_create_title]" id="order_create_title">                        
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field order_create">
+                <label class="admin__field-label" for="order_create_message">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Message");?>
+                        <div class="vss_info">
+                            <?php echo __("Message for new order push notification")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <textarea name="vss_mobileappbuilder[push_notification_settings][order_create_message]" id="mobileappbuilder_order_create_message" class="admin__control-textarea"><?php echo isset($settings["push_notification_settings"]["order_create_message"])?$settings["push_notification_settings"]["order_create_message"]:""?></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Order Status Change Settings")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="order_status_change_enable">
+                    <span><?php echo __("Enable")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable order status change push notification")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="order_status_change_enable" name="vss_mobileappbuilder[push_notification_settings][order_status_change_enable]" value="1" <?php echo isset($settings["push_notification_settings"]["order_status_change_enable"])?$settings["push_notification_settings"]["order_status_change_enable"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="order_status_change_enable">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field order_status_change">
+                <label class="admin__field-label" for="order_status_change_title">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Title")?>
+                        <div class="vss_info">
+                            <?php echo __("Title for order status change push notification")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["push_notification_settings"]["order_status_change_title"])?$settings["push_notification_settings"]["order_status_change_title"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[push_notification_settings][order_status_change_title]" id="order_status_change_title">                        
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field order_status_change">
+                <label class="admin__field-label" for="order_status_change_message">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Message");?>
+                        <div class="vss_info">
+                            <?php echo __("Message for order status change push notification")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <textarea name="vss_mobileappbuilder[push_notification_settings][order_status_change_message]" id="mobileappbuilder_order_status_change_message" class="admin__control-textarea"><?php echo isset($settings["push_notification_settings"]["order_status_change_message"])?$settings["push_notification_settings"]["order_status_change_message"]:""?></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Abandoned Cart Settings")?></h3>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for=abandoned_cart_enable">
+                    <span><?php echo __("Enable")?>
+                        <div class="vss_info">
+                            <?php echo __("Enable/Disable abandoned cart push notification")?>
+                        </div></span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox" id="abandoned_cart_enable" name="vss_mobileappbuilder[push_notification_settings][abandoned_cart_enable]" value="1" <?php echo isset($settings["push_notification_settings"]["abandoned_cart_enable"])?$settings["push_notification_settings"]["abandoned_cart_enable"]?'checked="checked"':'':'';?>>
+                        <label class="admin__actions-switch-label" for="abandoned_cart_enable">
+                            <span class="admin__actions-switch-text" data-text-on="<?php echo __('Yes'); ?>" data-text-off="<?php echo __('No'); ?>"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field abandoned_cart">
+                <label class="admin__field-label" for="abandoned_cart_title">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Title")?>
+                        <div class="vss_info">
+                            <?php echo __("Title for abandoned cart push notification")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["push_notification_settings"]["abandoned_cart_title"])?$settings["push_notification_settings"]["abandoned_cart_title"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[push_notification_settings][abandoned_cart_title]" id="abandoned_cart_title">                        
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field abandoned_cart">
+                <label class="admin__field-label" for="abandoned_cart_message">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Message");?>
+                        <div class="vss_info">
+                            <?php echo __("Message for abandoned cart push notification")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <textarea name="vss_mobileappbuilder[push_notification_settings][abandoned_cart_message]" id="mobileappbuilder_abandoned_cart_message" class="admin__control-textarea"><?php echo isset($settings["push_notification_settings"]["abandoned_cart_message"])?$settings["push_notification_settings"]["abandoned_cart_message"]:""?></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="admin__field abandoned_cart">
+                <label class="admin__field-label" for="abandoned_cart_interval">
+                    <span>
+                        <span class="vss_required">*</span>
+                        <?php echo __("Time Interval")?>
+                        <div class="vss_info">
+                            <?php echo __("Time interval to check Abandoned cart(In Hours)")?>
+                        </div>
+                    </span>
+                </label>
+                <div class="admin__field-control">
+                    <div class="admin__control">
+                        <input value="<?php echo isset($settings["push_notification_settings"]["abandoned_cart_interval"])?$settings["push_notification_settings"]["abandoned_cart_interval"]:""?>" class="admin__control-text" type="text" placeholder="" name="vss_mobileappbuilder[push_notification_settings][abandoned_cart_interval]" id="abandoned_cart_interval">                        
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div class="block">
+    <div class="vss_block">
+        <div class="vss_block">        
+            <div class="vss_head">
+                <h3 class="heading"><?php echo __("Cron Instructions"); ?></h3>
+            </div>
+            <div class="vss_block_body">
+                <h5 class="heading"><?php echo __("Add the cron to your store via control panel/putty to send Abandoned cart push notifications according to your settings above. Find below the Instruction to add the cron."); ?></h5>
+                <ul>                    
+                    <li>
+                        <div class="col-md-12">
+                            <label><?php echo __("URL to Add Cron via Control Panel"); ?></label>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-12 well">
+                                <?php echo $this->getFrontEndUrl('mobileappbuilder/api/sendAbandonedCartNotification', ['_secure' => $this->getRequest()->isSecure()]); ?>
+                                <br><br>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="last">
+                        <div class="col-md-12">
+                            <label><?php echo __("Cron setup via SSH"); ?></label>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-12 well">
+                                0/30 * * * 0 curl -O /dev/null <?php echo $this->getFrontEndUrl('mobileappbuilder/api/sendAbandonedCartNotification', ['_secure' => $this->getRequest()->isSecure()]); ?>
+                                <br><br>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script  type="text/javascript">
+    require(['jquery'], function(jQuery){
+        jQuery(window).load(function(){
+            jQuery('#order_create_enable').trigger('change');
+            jQuery('#order_status_change_enable').trigger('change');
+            jQuery('#abandoned_cart_enable').trigger('change');
+        });
+
+        jQuery('#order_create_enable').change(function() {
+            if(this.checked) {
+                jQuery('.order_create').css('display', 'block');
+            }else {
+                jQuery('.order_create').css('display', 'none');
+            }
+        });
+        jQuery('#order_status_change_enable').change(function() {
+            if(this.checked) {
+                jQuery('.order_status_change').css('display', 'block');
+            }else {
+                jQuery('.order_status_change').css('display', 'none');
+            }
+        });
+        jQuery('#abandoned_cart_enable').change(function() {
+            if(this.checked) {
+                jQuery('.abandoned_cart').css('display', 'block');
+            }else {
+                jQuery('.abandoned_cart').css('display', 'none');
+            }
+        });
+    });
+</script>

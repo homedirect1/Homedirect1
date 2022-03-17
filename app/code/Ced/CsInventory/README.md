@@ -1,0 +1,1 @@
+# m2-vendor-inventory-management

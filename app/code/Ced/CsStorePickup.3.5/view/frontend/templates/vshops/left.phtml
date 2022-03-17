@@ -1,0 +1,28 @@
+<?php
+/* * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category  Ced
+ * @package   Ced_CsStorePickup
+ * @author    CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+ $shopUrl = $this->getUrl('csstorepickup/stores/index', ['shop_id'=>$this->getshopurl()]);
+?>
+
+<div class="block block-seller">
+	<div class="block-title">
+			<strong><span><?php echo __('Our Stores')?></span></strong>
+	</div>
+	<div class="block-content" style="padding: 20px;">
+			<a href="<?php echo $shopUrl ?>" class="button"><?php echo __('See Our Stores')?> 
+			</a>
+   </div>
+</div>

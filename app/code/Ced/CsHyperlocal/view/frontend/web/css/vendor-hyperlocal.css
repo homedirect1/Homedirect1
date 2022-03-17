@@ -1,0 +1,41 @@
+/*manage zipcode*/
+.page-actions .page-actions-inner .page-actions-buttons .action-default:hover {
+	box-shadow: unset;
+}
+.vendor-profile-edit .panel-heading .buttons-set a.button {
+	float: none !important;
+	margin-bottom: 5px;
+}
+/*END manage zipcode*/
+.vendor-profile-edit .shiparea-location-error-msg::before,
+.vendor-profile-edit .shiparea-location-success-msg::before {
+	font-size: 15px;
+	top: 64%;
+	left: 0px;
+}
+.vendor-profile-edit .shiparea-location-error-msg::before{
+	font-size: 11px!important;
+}
+.vendor-profile-edit .shiparea-location-error-msg::before{
+	color: #e22626;
+}
+.vendor-profile-edit .shiparea-location-success-msg::before {
+	color: #007300;
+}
+.vendor-profile-edit .shiparea-location-error-msg,
+.vendor-profile-edit .shiparea-location-success-msg {
+	width: 217px;
+	padding: 10px 35px;
+	font-size: 12px;
+}
+.vendor-profile-edit .shiparea-location-success-msg,
+.vendor-profile-edit .shiparea-location-error-msg {
+	background: transparent!important;
+	padding: 0px 25px;
+}
+.vendor-profile-edit .shiparea-location-success-msg{
+	color: #007300;
+}
+.shiparea-message .input-box {
+	margin-top: 0px !important;
+}

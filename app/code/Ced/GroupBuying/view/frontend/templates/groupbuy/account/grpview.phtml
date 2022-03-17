@@ -1,0 +1,137 @@
+<?php
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GroupBuying
+ * @author 		CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license     http://cedcommerce.com/license-agreement.txt
+ */
+
+use Ced\GroupBuying\Block\Account\Grpview;
+use Magento\Framework\Escaper;
+use Magento\Store\Model\StoreManagerInterface;
+/**
+ * @var Grpview $block
+ * @var Escaper $escaper
+ */
+$_gift = $block->getGift();
+$data = $block->getAllGuest();
+$guest = $data->getData();
+$product = $block->getImages();
+$des = $block->getImageUrl();
+$_helper = $block->gethelper();
+$allowed_guest = 5;
+
+
+?>
+<style>
+    ul {
+        list-style-type: none;
+    }
+
+    em {
+        color: red;
+    }
+</style>
+<div class="page-title">
+    <h1><?= $block->escapeHtml(__('Group #' . $_gift->getId())) ?></h1>
+    <h2><?= $block->escapeHtml(__($product->getName())) ?></h2>
+</div>
+<div>
+    <div class="product media" style="border: 2px solid;padding: 20px;
+    width: 300px;resize: both;overflow: auto;">
+        <div class="gallery-placeholder" data-gallery-role="gallery-placeholder">
+            <a href="<?= /** @escapeNotVerified */ $des ?>">
+                <p class="product-image">
+                    <?php
+                    $store = $block->getStore();
+
+                    $imageUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
+
+
+                    /** @escapeNotVerified */ $_img = '<img src="' . $imageUrl . '" />';
+                    echo /** @escapeNotVerified */ $_helper->productAttribute($product, $_img, 'image');
+                    ?>
+                </p>
+            </a>
+        </div>
+    </div>
+    <div style="border: 2px solid;padding: 20px; width: 300px;resize: both;overflow: auto;">
+        <?php $cnt = 1; ?>
+        <table border="2">
+            <tr>
+                <td><?= $block->escapeHtml(__('Sl No ')) ?></td>
+                <td><?= $block->escapeHtml(__('Name ')) ?></td>
+                <td><?= $block->escapeHtml(__('Quantity')) ?></td>
+                <td><?= $block->escapeHtml(__('Member Status')) ?></td>
+            </tr>
+            <?php foreach ($guest as $key => $value): ?>
+
+                <tr>
+                    <td><?= $block->escapeHtml($cnt) ?></td>
+                    <td><?= $block->escapeHtml($value['guest_name']) ?></td>
+                    <td><?= $block->escapeHtml($value['quantity']) ?></td>
+                    <?php if ($value['request_approval'] == 1): ?>
+                        <td><?= $block->escapeHtml("Left") ?></td>
+                    <?php endif ?>
+                    <?php if ($value['request_approval'] >= 2): ?>
+                        <td><?= $block->escapeHtml("Joined") ?></td>
+                    <?php endif ?>
+                    <?php if ($value['request_approval'] == 0): ?>
+                        <td><?= $block->escapeHtml("In Progress..") ?></td>
+                    <?php endif ?>
+
+                </tr>
+                <?php $cnt++; ?>
+
+            <?php endforeach; ?>
+
+        </table>
+    </div>
+</div>
+<?php
+// @codingStandardsIgnoreStart
+
+?>
+<script type="text/x-magento-init">
+    {
+    "#myform": {
+    "validation": {}
+    }
+    }
+
+</script>
+
+<?php
+// @codingStandardsIgnoreEnd
+?>
+<script>
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+
+        var dataForm = $('#myform');
+        var ignore = null;
+
+        dataForm.mage('validation', {
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+        }).find('input:text').attr('autocomplete', 'off');
+
+
+    });
+</script>
+
+
+
+
+

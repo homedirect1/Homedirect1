@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <update handle="sales_order_item_renderers"/>
+    <update handle="sales_order_item_price"/>
+    <update handle="sales_order_info_links"/>
+    <body>
+        <referenceBlock name="sales.order.info" >
+            <action method="setTemplate" ifconfig="deliverydate/deliverydate_general/deliverydate_config">
+                <argument name="template" xsi:type="string">Ced_DeliveryDate::summary/info.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

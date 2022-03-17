@@ -1,0 +1,59 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Recurring
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$blockData = $block->getPlansData();
+$helper = $block->getRecurringHelper();
+$recurrScope = $helper->getConfig('general_settings/price_scope');
+$storeId = 0;
+if ($recurrScope == 0) {
+    $storeId = (int)$block->getRequest()->getParam('store', 0);
+}
+?>
+<script>
+    window.plansData  = <?= /* @noEscape */  \Zend_Json::encode($blockData); ?>;
+    window.storeId    = <?= /* @noEscape */  $storeId; ?>;
+</script>
+<div id="plans_tabs_plans_content" style="display: none;"
+     data-ui-id="adminhtml-plans-edit-tabs-0-tab-content-plan"
+     aria-labelledby="plans_tabs_plans"
+     class="ui-tabs-panel ui-widget-content ui-corner-bottom"
+     role="tabpanel" aria-expanded="true" aria-hidden="false">
+    <div class="entry-edit form-inline">
+                <button id="planButton" class="action-basic">
+                    <span>
+                        <?php
+                        if (isset($blockData['selected']) && $blockData['selected'] == "") {
+                            echo $block->escapeHtml(__("Create Configuration"));
+                        } else {
+                            echo $block->escapeHtml(__("Edit Configuration"));
+                        } ?>
+                    </span>
+                </button>
+            <div id="planlist-component" data-bind="scope:'planlist-content'" class="field">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+        </fieldset>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#planlist-component": {
+            "Magento_Ui/js/core/app": {
+            "components": {
+                    "planlist-content": {
+                        "component": "Webkul_Recurring/js/plan-list",
+                        "template": "Webkul_Recurring/plan-list"
+                    }
+                }
+            }
+        }
+    }
+</script>

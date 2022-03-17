@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_CsPromotions
+ * @author      CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (http://cedcommerce.com/)
+ * @license      http://cedcommerce.com/license-agreement.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd"  layout="vendor-2columns-left">
+    
+    <update handle="csmarketplace_vendor"/>
+    <head>
+        <link src="Ced_CsPromotions::css/category.css"/>
+        <link src="Ced_CsPromotions::css/ext-all.css"/>
+       <!--  <link src="Magento_Sales::js/bootstrap/order-create-index.js"/>
+        <link src="Magento_Sales::js/bootstrap/order-post-action.js"/> -->
+    </head>
+
+    <body>
+    <block name="require.js" class="Ced\CsMarketplace\Block\Page\RequireJs" template="Ced_CsPromotions::page/js/require_js.phtml"/>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Framework\View\Element\Template" name="page.actions.toolbar" template="Magento_Backend::pageactions.phtml" after="-"/>
+        </referenceContainer>
+        <referenceContainer name="admin.scope.col.wrap" htmlClass="admin__old" />  <!-- ToDo UI: remove this wrapper with old styles removal. The class name "admin__old" is for tests only, we shouldn't use it in any way -->
+
+        <referenceContainer name="vendor.dashboard.wrapper">
+            <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit" name="cart_rule_edit" template="promo/quote/view/form.phtml">
+           </block>
+        </referenceContainer>
+        <referenceContainer name="vendor.panel.left">
+            <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit\Tabs" name="promo_quote_edit_tabs" template="widget/tabs.phtml" >
+                <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit\Tab\Main" name="vendor_promo_quote_edit_tab_main"/>
+                <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit\Tab\Conditions" name="vendor_promo_quote_edit_tab_conditions"/>
+                <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit\Tab\Actions" name="vendor_promo_quote_edit_tab_actions"/>
+                <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit\Tab\Labels" name="vendor_promo_quote_edit_tab_labels"/>
+                <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit\Tab\Coupons" name="vendor_promo_quote_edit_tab_coupons">
+                    <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit\Tab\Coupons\Form" name="vendor_promo_quote_edit_tab_coupons_form"/>
+                    <block class="Ced\CsPromotions\Block\Adminhtml\Promo\Quote\Edit\Tab\Coupons\Grid" name="vendor_promo_quote_edit_tab_coupons_grid"/>
+                </block>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">vendor_promo_quote_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">conditions_section</argument>
+                    <argument name="block" xsi:type="string">vendor_promo_quote_edit_tab_conditions</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">actions_section</argument>
+                    <argument name="block" xsi:type="string">vendor_promo_quote_edit_tab_actions</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">labels_section</argument>
+                    <argument name="block" xsi:type="string">vendor_promo_quote_edit_tab_labels</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">coupons_section</argument>
+                    <argument name="block" xsi:type="string">vendor_promo_quote_edit_tab_coupons</argument>
+                </action>
+                
+            </block>
+        </referenceContainer>
+        <referenceBlock name="head.components">
+            <block class="Magento\Backend\Block\Template" template="Ced_CsPromotions::promo/quote/salesrulejs.phtml" name="vendor_promo_quote_edit_jsinit"/>
+        </referenceBlock>
+    </body>
+</page>
+

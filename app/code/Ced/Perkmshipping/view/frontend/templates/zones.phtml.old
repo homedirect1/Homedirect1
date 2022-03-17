@@ -1,0 +1,98 @@
+<?php 
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * You can check the licence at this URL: http://cedcommerce.com/license-agreement.txt
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ *
+ * @category    Ced
+ * @package     Ced_Perkmshipping
+ * @author   CedCommerce Core Team <connect@cedcommerce.com >
+ * @copyright   Copyright CEDCOMMERCE (http://cedcommerce.com/)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<?php 
+ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+ $helper = $objectManager->get('Ced\CsMarketplace\Helper\Data');
+ $vendorId = $objectManager->get('Magento\Customer\Model\Session')->getData('vendor_id');
+ $vsetting_model = $objectManager->get('Ced\CsMarketplace\Model\Vsettings')->getCollection()->addFieldToFilter('vendor_id',$vendorId)->getData();
+ 
+ ?>
+  <div id="TextBoxesGroup">
+  <div id="user" class="grid">
+  </div>
+ </div>
+ 
+ <br>
+ <input type='button' value='Add Zone' id='add'>
+
+  <script type="text/javascript">
+     require(['jquery'],
+         function($){
+             $(document).ready(function(){
+                 $('body').on('click', '.remove_div_anchor', function(e) {
+                     let id = $(this).data('count');
+                     $("#user" + id).remove();
+                 });
+
+                 var val = '' ;
+                 <?php
+                 foreach($vsetting_model as $key=>$val){
+                 foreach($val as $v){
+                 if($v=='shipping/perkmshipping/shipping_zones'){?>
+                 val = <?= (is_array(json_decode($val['value'])))?count(json_decode($val['value'])):0 ?>;
+                 <?php }}}?>
+
+                 if(val){
+                     var counter = val;
+                 }else{
+                     var counter = 0;
+                 }
+                 $("#add").click(function () {
+                     var newTextBoxDiv = $(document.createElement('div'))
+                         .attr("id", 'user' + counter);
+                     newTextBoxDiv.html('<br>'+'<span><?php echo __('From');?></span> ' +
+                         '<input onkeyup="myfun(this);" class="required-entry" type="text" name="group[perkmshipping][shipping_zones]['+counter+'][from]" size="4" >' +
+                         ' <span><?php echo __('To');?></span> ' + '<input class="required-entry" type="text" name="group[perkmshipping][shipping_zones]['+counter+'][to]" size="4">'+
+                         ' <span><?php echo __('Price');?></span> ' + '<input class="required-entry" type="text" name="group[perkmshipping][shipping_zones]['+counter+'][price]" size="4">'+
+                         ' <span><?php echo __('Type');?></span> ' + '<select class="" style="width:100px" name="group[perkmshipping][shipping_zones]['+counter+'][type]"><option selected="true" value=""><?php echo __('Per /metric'); ?></option><option selected="true" value="fixed"><?php echo __('Fixed'); ?></option></select>'+
+                         '<a class="remove_div_anchor" data-count="' + counter + '"> <?php echo __('Remove');?></a>'+'<br>');
+
+                     newTextBoxDiv.appendTo("#TextBoxesGroup");
+                     counter += 1;
+
+                 });
+             });
+             var count = 0;
+
+             <?php
+             $key = 'shipping/'.'perkmshipping'.'/shipping_zones';
+             $key_tmp=$helper->getTableKey('key');
+             $vendor_id_tmp=$helper->getTableKey('vendor_id');
+             $vsetting_model = $objectManager->get('Ced\CsMarketplace\Model\Vsettings');
+             $setting = $vsetting_model->loadByField(array($key_tmp,$vendor_id_tmp),array($key,$vendorId));
+
+             $data = json_decode($setting->getValue());
+             if(isset($data)){
+             foreach($data as $key=>$value){?>	
+
+             var newTextBoxDiv = $(document.createElement('div'))
+                 .attr("id", 'user' + count);
+             newTextBoxDiv.html('<br>'+'<span><?php echo __('From');?></span> ' +
+                 '<input value="<?php echo isset($value->from) ? $value->from : ''?>" class="required-entry" type="text" name="group[perkmshipping][shipping_zones]['+count+'][from]" size="4" >' +
+                 ' <span><?php echo __('To');?></span> ' + '<input value="<?php echo isset($value->to) ? $value->to : '' ?>" class="required-entry" type="text" name="group[perkmshipping][shipping_zones]['+count+'][to]" size="4">'+
+                 ' <span><?php echo __('Price');?></span> ' + '<input value="<?php echo isset($value->price) ? $value->price : '' ?>"  class="required-entry" type="text" name="group[perkmshipping][shipping_zones]['+count+'][price]" size="4">'+
+                 ' <span><?php echo __('Type');?></span> ' + '<select class="" style="width:100px" name="group[perkmshipping][shipping_zones]['+count+'][type]"><option <?php if($value->type){?>selected="selected"<?php }?> value="<?php if($value->type){echo $value->type;} ?>"><?php echo __('Per /metric')?></option><option <?php if($value->type){?>selected="selected"<?php }?> value="<?php if($value->type){echo $value->type;} ?>"><?php echo __('Fixed'); ?></option></select>'+
+                 '<a class="remove_div_anchor" data-count="' + count + '"> <?php echo __('Remove');?></a>'+'<br>');
+             newTextBoxDiv.appendTo("#TextBoxesGroup");
+             count++;
+             <?php }}?>
+         }
+     );
+ </script>

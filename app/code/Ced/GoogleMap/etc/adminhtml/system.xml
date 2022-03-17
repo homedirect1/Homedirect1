@@ -1,0 +1,60 @@
+<!--
+/**
+ * CedCommerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User License Agreement (EULA)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://cedcommerce.com/license-agreement.txt
+ *
+ * @category    Ced
+ * @package     Ced_GoogleMap
+ * @author 	    CedCommerce Core Team <connect@cedcommerce.com>
+ * @copyright   Copyright CedCommerce (https://cedcommerce.com/)
+ * @license     https://cedcommerce.com/license-agreement.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ced_google" sortOrder="1">
+            <label>Google Map</label>
+        </tab>
+        <section id="ced_google_map" translate="label" type="text" sortOrder="10"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <tab>ced_google</tab>
+            <label>General</label>
+            <resource>Ced_GoogleMap::ced_google_map</resource>
+            <!-- General Configuration -->
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="google_map_api_key" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>API Key</label>
+                </field>
+            </group>
+        </section>
+        <section id="shipping">
+            <group id="origin">
+                <field id="location" translate="label" type="text" sortOrder="0" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Location</label>
+                    <frontend_model>Ced\GoogleMap\Block\Adminhtml\System\Config\Form\Field\Location</frontend_model>
+                </field>
+                <field id="latitude" translate="label" type="text" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Latitude</label>
+                    <frontend_model>Ced\GoogleMap\Block\Adminhtml\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+                <field id="longitude" translate="label" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Longitude</label>
+                    <frontend_model>Ced\GoogleMap\Block\Adminhtml\System\Config\Form\Field\Disable</frontend_model>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

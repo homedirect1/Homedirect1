@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="formkey"/>
+    <head>
+        <css src="Knowband_Mobileappbuilder::css/admin.css" />
+        <css src="Knowband_Mobileappbuilder::layout/layout.css" />
+        <css src="Knowband_Mobileappbuilder::layout/layout_preview.css" />
+        <css src="Knowband_Mobileappbuilder::css/chosen.min.css" />
+	<css src="Knowband_Mobileappbuilder::css/bootstrap/bootstrap.css" />
+	<css src="Knowband_Mobileappbuilder::css/bootstrap/justified-nav.css" />
+        <css src="jquery/colorpicker/css/colorpicker.css"/>
+<!--        <script src="Knowband_Mobileappbuilder::js/jquery-1.7.1.min.js"/>
+        <script src="Knowband_Mobileappbuilder::js/velovalidation.js"/>
+        <script src="Knowband_Mobileappbuilder::js/customScript.js"/>
+        <script src="Knowband_Mobileappbuilder::js/chosen.jquery.js"/>-->
+    </head>
+    <body>
+    	<referenceBlock name="menu">
+    	    <action method="setActive">
+    	        <argument name="itemId" xsi:type="string">Knowband_Mobileappbuilder::spinwin_backend</argument>
+    	    </action>
+    	</referenceBlock>
+        <referenceContainer name="content">
+            <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Mobileappbuilder" name="mobileappbuilder" template="mobileappbuilder.phtml"/>				
+    	</referenceContainer>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="adminhtml.system.config.switcher" template="Magento_Backend::store/switcher.phtml">
+                <arguments>
+                    <argument name="switch_websites" xsi:type="string">1</argument>
+                    <argument name="switch_store_groups" xsi:type="string">0</argument>
+                    <argument name="switch_store_views" xsi:type="string">1</argument>
+                    <argument name="default_selection_name" xsi:type="string" translate="true">Default Config</argument>
+                    <argument name="show_manage_stores_link" xsi:type="string">1</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tabs" name="mobileappbuilder_tabs">
+                <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\General" name="mobileappbuilder_tab_general" template="tabs/general.phtml" >
+                    <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\General" name="mobileappbuilder_mobileapp_preview" template="tabs/mobileapp_preview.phtml" />
+                </block>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mobileappbuilder_general</argument>
+                    <argument name="block" xsi:type="string">mobileappbuilder_tab_general</argument>
+                </action>
+                <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\MobileMenuSettings" name="mobileappbuilder_tab_mobile_menu_settings" template="tabs/mobile_menu_settings.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mobileappbuilder_mobile_menu_settings</argument>
+                    <argument name="block" xsi:type="string">mobileappbuilder_tab_mobile_menu_settings</argument>
+                </action>
+                <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\PushNotificationSettings" name="mobileappbuilder_tab_push_notification_settings" template="tabs/push_notification_settings.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mobileappbuilder_push_notification_settings</argument>
+                    <argument name="block" xsi:type="string">mobileappbuilder_tab_push_notification_settings</argument>
+                </action>
+                <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\PushNotificationHistory" name="mobileappbuilder_tab_push_notification_history" template="tabs/push_notification_history.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mobileappbuilder_push_notification_history</argument>
+                    <argument name="block" xsi:type="string">mobileappbuilder_tab_push_notification_history</argument>
+                </action>
+<!--                <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\SliderSettings" name="mobileappbuilder_tab_slider_settings" template="tabs/slider_settings.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mobileappbuilder_slider_settings</argument>
+                    <argument name="block" xsi:type="string">mobileappbuilder_tab_slider_settings</argument>
+                </action>
+                <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\BannerSettings" name="mobileappbuilder_tab_banner_settings" template="tabs/banner_settings.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mobileappbuilder_banner_settings</argument>
+                    <argument name="block" xsi:type="string">mobileappbuilder_tab_banner_settings</argument>
+                </action>-->
+                <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\PaymentMethods" name="mobileappbuilder_tab_payment_methods" template="tabs/payment_methods.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mobileappbuilder_payment_methods</argument>
+                    <argument name="block" xsi:type="string">mobileappbuilder_tab_payment_methods</argument>
+                </action>
+                
+                <block class="Knowband\Mobileappbuilder\Block\Adminhtml\Tab\LayoutSettings" name="mobileappbuilder_tab_layout_settings" template="tabs/layout_settings.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">mobileappbuilder_layout_settings</argument>
+                    <argument name="block" xsi:type="string">mobileappbuilder_tab_layout_settings</argument>
+                </action>
+                
+            </block>
+        </referenceContainer>
+    </body>
+</page>
