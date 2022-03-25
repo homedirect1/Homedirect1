@@ -316,7 +316,7 @@ display:none !important;
     background-color: #f3fbff;
 }
     .nav-sections{
-        background-color: #5744e8;
+        background-color: #f0f;
     }
      .header.panel > .header.links > li.welcome{
          color:#fff;
@@ -368,7 +368,7 @@ border-radius:3px;
     .nav-sections {
         border-top: 1px solid #eee;
         border-bottom: 1px solid #eee;
-        background-color:#44b5e8;
+        background-color:f0f;
     }
     .opc-wrapper .form-login, .opc-wrapper .form-shipping-address {
         margin: 20px 0px;
