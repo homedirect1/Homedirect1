@@ -265,7 +265,7 @@ position: absolute;
 .page-header .header.panel {
     padding-bottom: 10px;    
     padding-top: 10px;
-    background: #6fac1c;
+    background: #4e504b;
 }
 @media screen and (min-width: 768px){
 .home-slide-sec .owl-theme .owl-controls .owl-buttons div.lft-btn {
@@ -296,7 +296,7 @@ display:none !important;
 .page-header .header.panel {
     padding-bottom: 10px;    
     padding-top: 10px;
-    background: #6fac1c;
+    background: #f0f;
 }
 .block-search .control {
 
@@ -316,7 +316,7 @@ display:none !important;
     background-color: #f3fbff;
 }
     .nav-sections{
-        background-color: #228B22;
+        background-color: #5744e8;
     }
      .header.panel > .header.links > li.welcome{
          color:#fff;
